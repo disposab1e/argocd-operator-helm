@@ -1,0 +1,5 @@
+---
+- version: v1alpha1
+  group: argoproj.io
+  kind: ArgoCD
+  chart: /opt/helm/helm-charts/argo-cd
