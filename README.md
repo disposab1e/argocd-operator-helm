@@ -60,7 +60,7 @@ Now you can proceed with chapter 'Install Argo CD'.
 ## Install Argo CD
 This Operator manages a single Namespace installation of Argo CD. Therefore you have to install the Operator and Argo CD in the same Namespace. For simplicity we recommend creating a Namespace 'argocd' (if not already done) so all the defaults from the example work out of the box. 
 
-To install Argo CD create a new Custom Resource with your [customizations](https://xxxxxx) or use the provided example from the Web UI.
+To install Argo CD create a new Custom Resource with your [customizations](https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/crds/argoproj.io_v1alpha1_argocd_cr.yaml) or use the provided example from the Web UI.
 
 You can also use the following command to install in Argo CD in the 'argocd' namespace with defauls:
 
