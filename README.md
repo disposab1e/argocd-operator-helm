@@ -142,3 +142,4 @@ oc delete subscriptions.operators.coreos.com argocd-operators-helm -n argocd
 # Delete CRD
 oc delete crd argocds.argoproj.io
 ```
+

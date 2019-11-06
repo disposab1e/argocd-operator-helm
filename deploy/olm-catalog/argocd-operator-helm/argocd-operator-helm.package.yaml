@@ -3,3 +3,4 @@ channels:
   name: alpha
 defaultChannel: alpha
 packageName: argocd-operators-helm
+
