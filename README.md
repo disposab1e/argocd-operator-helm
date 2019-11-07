@@ -4,11 +4,21 @@
 
 
 ## Operator Features
-This **community maintained** Argo CD Operator is based on the **community maintained** stable [Helm Chart](https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd) 
-and currently installs the non-HA version of Argo CD v1.2.4 in OpenShift 4.2.
+This **community maintained** Argo CD Operator is based on the **community maintained** stable [Helm Chart](https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd) and currently installs the non-HA version of Argo CD v1.2.4 in OpenShift 4.2.
 
 * Basic Installation to a single Namespace
 * Configure through Custom Resource
+
+
+
+## Why a Operator and not just a Helm Chart?
+
+* Fully integrated in Operator Lifecycle Management
+* No need to install Helm or Tiller
+* User friendly integration in OpenShift Web Console
+* Option to integrate in Operatorhub.io or Community Operators, directly accessible form inside OpenShift OperatorHub Marketplace
+* Make it easier for the OpenShift Community to install and use Argo CD  
+
 
 
 ## Argo CD Operator (Helm) installation
