@@ -3,9 +3,8 @@
 [Argo CD](https://argoproj.github.io) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
 
-
 ## Operator Features
-This Argo CD Operator is based on the official stable [Helm Chart](https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd) 
+This **community maintained** Argo CD Operator is based on the **community maintained** stable [Helm Chart](https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd) 
 and currently installs the non-HA version of Argo CD v1.2.4 in OpenShift 4.2.
 
 * Basic Installation to a single Namespace
