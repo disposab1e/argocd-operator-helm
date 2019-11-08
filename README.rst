@@ -2,6 +2,10 @@
 Argo CD Operator (Helm)
 ***********************
 
+.. image:: https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest
+   :target: https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
+
 .. sidebar:: Argo CD
 
    `Argo CD`_ is a declarative, GitOps continuous delivery tool for Kubernetes.
