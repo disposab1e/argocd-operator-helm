@@ -64,3 +64,6 @@ html_theme_options = {
     'prev_next_buttons_location': 'none',
     'style_external_links': False,
 }
+
+master_doc = 'index'
+
