@@ -65,22 +65,23 @@ Install the operator in the ``marketplace`` and Argo CD in a new ``argocd`` name
 
     # Operator
 
-    kubectl apply -f  \
+    kubectl apply -f \
     https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/deploy/kubernetes/quickstart/quickstart.yaml
 
 .. code-block:: bash
 
     # Namespace Patch
 
-    kubectl apply -f  \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/deploy/kubernetes/quickstart/argocd.yaml
+    kubectl patch csv argocd-operator-helm.v0.0.1 -n marketplace --type=merge \
+    -p "$(curl https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/deploy/kubernetes/quickstart/patch.yaml)"
+
 
 
 .. code-block:: bash
 
     # Argo CD with defaults
 
-    kubectl apply -f  \
+    kubectl apply -f \
     https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/deploy/kubernetes/quickstart/argocd.yaml
 
 This operator shares all `configuration values`_ from the Argo CD Helm Chart.
