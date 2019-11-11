@@ -18,7 +18,7 @@ Argo CD Operator (Helm)
    :target: https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
 .. image:: https://img.shields.io/badge/latest%20release-0.0.1-yellow.svg
-   :target: https://github.com/disposab1e/argocd-operator-helm
+   :target: https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.1
    :alt: Latest Release
 
 
