@@ -1,0 +1,21 @@
+Operator Lifecycle Manager
+--------------------------
+
+The `Operator Lifecycle Manager (OLM)`_ extends Kubernetes to provide a declarative way to install, 
+manage, and upgrade Kubernetes native applications (Operators) and their dependencies in a cluster, 
+in an effective, automated and scalable way.
+
+.. code-block:: bash
+
+    kubectl apply -f \
+    https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.12.0/crds.yaml
+
+    kubectl apply -f \
+    https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.12.0/olm.yaml
+
+    kubectl rollout status -w deployment/olm-operator -n olm
+    kubectl rollout status -w deployment/catalog-operator -n olm
+    kubectl rollout status -w deployment/packageserver -n olm
+
+.. _Operator Lifecycle Manager (OLM): https://github.com/operator-framework/operator-lifecycle-manager
+

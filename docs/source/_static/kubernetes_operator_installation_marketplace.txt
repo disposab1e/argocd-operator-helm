@@ -1,0 +1,28 @@
+Marketplace
+-----------
+
+The marketplace installation method installs a `catalog source`_ with all `available operator packages`_. 
+For this method you must have the `Marketplace and Catalog Operator`_ installed. 
+
+.. _catalog source: https://quay.io/application/disposab1e/argocd-operators-helm
+.. _available operator packages: https://quay.io/application/disposab1e/argocd-operators-helm?tab=releases
+
+.. code-block:: bash
+   
+    git clone https://github.com/disposab1e/argocd-operator-helm.git
+
+    kubectl apply -f deploy/kubernetes/marketplace/namespace.yaml
+    kubectl apply -f deploy/kubernetes/marketplace/operator-source.yaml
+    kubectl apply -f deploy/kubernetes/marketplace/operator-group.yaml
+    kubectl apply -f deploy/kubernetes/marketplace/subscription.yaml
+    
+    kubectl rollout status -w deployment/argocd-operators-helm -n marketplace
+    kubectl rollout status -w deployment/argocd-operator-helm -n marketplace
+
+.. code-block:: bash
+    :caption: Patch (Hack)
+
+    kubectl patch csv argocd-operator-helm.v0.0.1 -n marketplace \
+      --type=merge -p "$(cat deploy/kubernetes/marketplace/patch.yaml)"
+
+    kubectl rollout status -w deployment/argocd-operator-helm  -n marketplace

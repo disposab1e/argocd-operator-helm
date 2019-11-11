@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Argo CD Operator (Helm)'
-copyright = ': Apache License 2.0'
+copyright = '- Disposable Zone Authors'
 author = 'Disposable Zone'
 
 # The full version, including alpha/beta/rc tags

@@ -1,0 +1,54 @@
+Cleanup
+=======
+
+`Ants`_ are very clean species too!
+
+.. _Ants: https://en.wikipedia.org/wiki/Ant
+
+
+Guestbook Example
+-----------------
+
+.. code-block:: bash
+
+    argocd app delete guestbook
+
+
+Argo CD installation
+--------------------
+
+The uninstallation process will remove the Argo CD installation (CR) but NOT the CRD's. You have to remove them manually:
+
+.. code-block:: bash
+    
+    kubectl delete ArgoCD argocd -n argocd
+
+    kubectl delete crd appprojects.argoproj.io
+    kubectl delete crd applications.argoproj.io
+
+
+
+Operator Marketplace installation
+---------------------------------
+
+.. code-block:: bash
+
+    kubectl delete csv argocd-operator-helm.v0.0.1 -n marketplace
+    kubectl delete -f deploy/kubernetes/marketplace/subscription.yaml
+    kubectl delete -f deploy/kubernetes/marketplace/operator-source.yaml
+    kubectl delete -f deploy/kubernetes/marketplace/operator-group.yaml
+    kubectl delete -f deploy/kubernetes/marketplace/namespace.yaml
+
+
+Operator Local installation
+---------------------------
+
+.. code-block:: bash
+
+    kubectl delete -f deploy/kubernetes/local/deployment.yaml
+    kubectl delete -f deploy/kubernetes/local/crd.yaml
+    kubectl delete -f deploy/kubernetes/local/role_binding.yaml
+    kubectl delete -f deploy/kubernetes/local/role.yaml
+    kubectl delete -f deploy/kubernetes/local/service_account.yaml
+    kubectl delete -f deploy/kubernetes/local/namespace.yaml
+

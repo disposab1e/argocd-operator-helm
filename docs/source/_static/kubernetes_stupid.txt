@@ -1,0 +1,5 @@
+.. Hint:: To stupid to find a way to install the operator in the :guilabel:`argocd` namespace. 
+          This must be something with the OperatorGroup? 
+          This drives me crazy! 
+          Before this will happen I install the operator in :guilabel:`marketplace` 
+          and patch it to watch on Custom Resources in the :guilabel:`argocd` namespace.

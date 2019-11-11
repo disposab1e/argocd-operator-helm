@@ -1,0 +1,32 @@
+Guestbook Example
+=================
+
+Now lets play and install the `Guestbook Example`_.
+
+.. _Guestbook Example: https://github.com/argoproj/argocd-example-apps/tree/master/helm-guestbook
+
+New Application
+---------------
+
+.. code-block:: bash
+
+    argocd app create guestbook \
+    --repo https://github.com/argoproj/argocd-example-apps.git \
+    --path helm-guestbook \
+    --dest-server https://kubernetes.default.svc \
+    --dest-namespace default
+
+.. image:: https://img.shields.io/badge/Screenshot-ArgoCD-yellowgreen
+   :target: ../_static/common_argocd_new_app.png
+   :alt: Screenshot
+
+Sync Application
+----------------
+
+.. code-block:: bash
+
+    argocd app sync guestbook
+
+.. image:: https://img.shields.io/badge/Screenshot-ArgoCD-yellowgreen
+   :target: ../_static/common_argocd_sync.png
+   :alt: Screenshot

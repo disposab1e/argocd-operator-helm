@@ -1,0 +1,10 @@
+Operator Installation
+=====================
+
+It's possible to install the operator via the `Marketplace`_ with our 
+custom `catalog source`_ or from `Local`_ resources. 
+The most convenient and best possible integration within the 
+`Operator Lifecycle Manager`_ 
+is the `Marketplace`_ method. Anyway, both methods are possible.
+
+.. _Operator Lifecycle Manager: https://github.com/operator-framework/operator-lifecycle-manager

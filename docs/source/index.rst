@@ -1,17 +1,21 @@
-.. include:: ../../README.rst
+.. include:: README.rst
 
 .. toctree::
-   :caption: OpenShift
-   :maxdepth: 2
-   :hidden:
-   
-   openshift/installation    
-
-.. toctree::
-   :caption: Kubernetes
+   :caption: Installation
    :maxdepth: 2
    :hidden:
 
-   kubernetes/installation    
+   quickstart
+
+.. toctree::
+   :caption: Guides
+   :maxdepth: 2
+   :hidden:
+
+   openshift/crc    
+   kubernetes/gcp
+   kubernetes/minikube
+
+
 
 
