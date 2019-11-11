@@ -38,4 +38,4 @@ This **community maintained** Argo CD Operator is based on the **community maint
 ## License
 
 Argo CD Operator (Helm) is released under the [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) license. 
-See the [LICENSE](https://github.com/disposab1e/argocd-operator-helm/blob/master/LICENSE) file for details.
+See the [LICENSE](https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.1master/LICENSE) file for details.

@@ -34,7 +34,7 @@ To follow the screenshots in this guide it's recommended to add the Dashboard
 to your Minikube installation.
 
 .. _Minikube: https://github.com/kubernetes/minikube
-.. _example: https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/kubernetes/examples/minikube.sh
+.. _example: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.1/deploy/kubernetes/examples/minikube.sh
 
 
 .. code-block:: bash
@@ -108,7 +108,7 @@ Argo CD
 Install Argo CD from the command line (quick) or when you have the 
 `Web Console`_ up and running through a nice web user interface. This operator shares all `configuration values`_ from the Argo CD Helm Chart.
 
-.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
+.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.1/helm-charts/argo-cd/README.md
  
 
 Command Line

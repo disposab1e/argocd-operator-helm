@@ -75,5 +75,5 @@ Argo CD Operator (Helm) is released under the `Apache 2.0`_ license.
 See the `LICENSE`_ file for details.
 
 .. _Apache 2.0: http://www.apache.org/licenses/LICENSE-2.0.html
-.. _LICENSE: https://github.com/disposab1e/argocd-operator-helm/blob/master/LICENSE
+.. _LICENSE: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.1/LICENSE
 

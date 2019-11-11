@@ -309,9 +309,9 @@ spec:
 
       This operator manages a single namespace installation of Argo CD. Therefore you have to install this operator and Argo CD in the same namespace. For simplicity we recommend creating a namespace `argocd`, so all the defaults from the example installation of Argo CD work out of the box. 
 
-      To install Argo CD create a new Custom Resource with your own [customizations](https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/openshift/examples/marketplace.yaml) or use the provided example from the Web UI.
+      To install Argo CD create a new Custom Resource with your own [customizations](https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.1/deploy/openshift/examples/marketplace.yaml) or use the provided example from the Web UI.
 
-      This operator shares all [configuration values](https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md) from the Argo CD Helm Chart.
+      This operator shares all [configuration values](https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.1/helm-charts/argo-cd/README.md) from the Argo CD Helm Chart.
 
       ### Install Operator and Argo CD in Kubernetes
 
@@ -319,11 +319,11 @@ spec:
 
       ```bash
       kubectl patch csv argocd-operator-helm.v0.0.1 -n marketplace --type=merge 
-        -p "$(curl https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/deploy/kubernetes/marketplace/patch.yaml)"
+        -p "$(curl https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.1/deploy/kubernetes/marketplace/patch.yaml)"
       ```
-      Now create a new Custom Resource with your [customizations](https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/kubernetes/examples/marketplace.yaml) or use the provided example from the Web UI and disable the OpenShift route with `server.route: false`.
+      Now create a new Custom Resource with your [customizations](https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.1/deploy/kubernetes/examples/marketplace.yaml) or use the provided example from the Web UI and disable the OpenShift route with `server.route: false`.
 
-      This operator shares all [configuration values](https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md) from the Argo CD Helm Chart.
+      This operator shares all [configuration values](https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.1/helm-charts/argo-cd/README.md) from the Argo CD Helm Chart.
 
 
       ### Documentation

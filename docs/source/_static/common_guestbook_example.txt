@@ -3,7 +3,7 @@ Guestbook Example
 
 Now lets play and install the `Guestbook Example`_.
 
-.. _Guestbook Example: https://github.com/argoproj/argocd-example-apps/tree/master/helm-guestbook
+.. _Guestbook Example: https://github.com/argoproj/argocd-example-apps/tree/release-0.0.1/helm-guestbook
 
 New Application
 ---------------

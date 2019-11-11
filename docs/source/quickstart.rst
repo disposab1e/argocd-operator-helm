@@ -45,14 +45,14 @@ Install the operator and Argo CD in a new ``argocd`` namespace.
     # Operator
 
     oc apply -f  \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/deploy/openshift/quickstart/quickstart.yaml
+    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.1/deploy/openshift/quickstart/quickstart.yaml
 
 .. code-block:: bash
 
     # Argo CD with defaults
 
     oc apply -f  \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/deploy/openshift/quickstart/argocd.yaml
+    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.1/deploy/openshift/quickstart/argocd.yaml
 
 This operator shares all `configuration values`_ from the Argo CD Helm Chart.
 
@@ -66,14 +66,14 @@ Install the operator in the ``marketplace`` and Argo CD in a new ``argocd`` name
     # Operator
 
     kubectl apply -f \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/deploy/kubernetes/quickstart/quickstart.yaml
+    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.1/deploy/kubernetes/quickstart/quickstart.yaml
 
 .. code-block:: bash
 
     # Namespace Patch
 
     kubectl patch csv argocd-operator-helm.v0.0.1 -n marketplace --type=merge \
-    -p "$(curl https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/deploy/kubernetes/quickstart/patch.yaml)"
+    -p "$(curl https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.1/deploy/kubernetes/quickstart/patch.yaml)"
 
 
 
@@ -82,8 +82,8 @@ Install the operator in the ``marketplace`` and Argo CD in a new ``argocd`` name
     # Argo CD with defaults
 
     kubectl apply -f \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/deploy/kubernetes/quickstart/argocd.yaml
+    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.1/deploy/kubernetes/quickstart/argocd.yaml
 
 This operator shares all `configuration values`_ from the Argo CD Helm Chart.
 
-.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
+.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.1/helm-charts/argo-cd/README.md

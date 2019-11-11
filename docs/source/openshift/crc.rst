@@ -27,7 +27,7 @@ As usual you need to have access to an up and running `OpenShift`_ cluster.
 If you have not yet installed a cluster, here is an example_ that we use.
 
 .. _OpenShift: https://github.com/code-ready/crc
-.. _example: https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/openshift/examples/crc.sh
+.. _example: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.1/deploy/openshift/examples/crc.sh
 
 It's recommended to open the OpenShift Console to follow the screenshots in this guide.
 
@@ -116,7 +116,7 @@ Argo CD
 Install Argo CD from the `Command Line`_ (quick) or through the 
 Web Console with a nice `Web UI`_. This operator shares all `configuration values`_ from the Argo CD Helm Chart.
 
-.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
+.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.1/helm-charts/argo-cd/README.md
 
 
 Command Line

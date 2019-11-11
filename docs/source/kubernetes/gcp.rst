@@ -26,7 +26,7 @@ Kubernetes
 As usual you need to have access to an up and running Kubernetes cluster. 
 If you have not yet installed a cluster, here is an example_ cluster that we use.
 
-.. _example: https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/kubernetes/examples/gcp.sh
+.. _example: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.1/deploy/kubernetes/examples/gcp.sh
 
 .. Caution:: We recommend adding a LoadBalancer to your cluster!
 
@@ -72,7 +72,7 @@ Argo CD
 
 This operator shares all `configuration values`_ from the Argo CD Helm Chart.
 
-.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
+.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.1/helm-charts/argo-cd/README.md
 
 .. include:: ../_static/kubernetes_argocd_installation_command_line.txt
 
