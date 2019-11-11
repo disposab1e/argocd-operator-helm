@@ -307,9 +307,11 @@ spec:
 
       ### Install Operator and Argo CD in OpenShift
 
-      This operator manages a single namespace installation of Argo CD. Therefore you have to install this operator and Argo CD in the same namespace. For simplicity we recommend creating a namespace `argocd`, so all the defaults from the example installation of Argo CD work out of the box. To install Argo CD create a new Custom Resource with your own [customizations](https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/openshift/examples/marketplace.yaml) or use the provided example from the Web UI.
+      This operator manages a single namespace installation of Argo CD. Therefore you have to install this operator and Argo CD in the same namespace. For simplicity we recommend creating a namespace `argocd`, so all the defaults from the example installation of Argo CD work out of the box. 
 
+      To install Argo CD create a new Custom Resource with your own [customizations](https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/openshift/examples/marketplace.yaml) or use the provided example from the Web UI.
 
+      This operator shares all [configuration values](https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md) from the Argo CD Helm Chart.
 
       ### Install Operator and Argo CD in Kubernetes
 
@@ -321,12 +323,12 @@ spec:
       ```
       Now create a new Custom Resource with your [customizations](https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/kubernetes/examples/marketplace.yaml) or use the provided example from the Web UI and disable the OpenShift route with `server.route: false`.
 
+      This operator shares all [configuration values](https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md) from the Argo CD Helm Chart.
 
 
       ### Documentation
 
-      Visit our comprehensive [Argo CD Operator (Helm) documentation](https://argocd-operator-helm.readthedocs.io) with detailed installation guides and proceed with installing the `Argo CD CLI` and the `Guestbook Example`.
-
+      Visit our comprehensive [Argo CD Operator (Helm) documentation](https://argocd-operator-helm.readthedocs.io) with detailed installation guides and proceed with installing the `Argo CD CLI` and `Guestbook Example`.
 
   displayName: Argo CD Operator (Helm)
   links:
