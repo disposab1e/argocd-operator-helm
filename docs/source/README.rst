@@ -54,7 +54,7 @@ opertor and `Argo CD`_ in `ContainerReady Containers`_, `Google Cloud Platform`_
 
 .. _Argo CD Helm Chart: https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd
 .. _Argo CD Operator (Helm): https://github.com/disposab1e/argocd-operator-helm
-.. _Argo CD: https://argoproj.github.io/
+.. _Argo CD: https://argoproj.github.io/argo-cd/
 .. _Quickstart: quickstart.html
 .. _ContainerReady Containers: openshift/crc.html
 .. _Google Cloud Platform: kubernetes/gcp.html

@@ -12,7 +12,7 @@ This **community maintained** Argo CD Operator is based on the **community maint
 
 ## About Argo CD
 
-[Argo CD](https://argoproj.github.io) is a declarative, GitOps continuous delivery tool for Kubernetes.
+[Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
 
 ## Operator Features
@@ -23,7 +23,7 @@ This **community maintained** Argo CD Operator is based on the **community maint
 
 ## Get started
 
-[Quickstart](https://argocd-operator-helm.readthedocs.io/en/latest/quickstart.html) or try our comprehensive guides to install this opertor and [Argo CD](https://argoproj.github.io) in [ContainerReady Containers](https://argocd-operator-helm.readthedocs.io/en/latest/openshift/crc.html), [Google Cloud Platform](https://argocd-operator-helm.readthedocs.io/en/latest/kubernetes/gcp.html) or [Minikube](https://argocd-operator-helm.readthedocs.io/en/latest/kubernetes/minikube.html).
+[Quickstart](https://argocd-operator-helm.readthedocs.io/en/latest/quickstart.html) or try our comprehensive guides to install this opertor and [Argo CD](https://argoproj.github.io/argo-cd/) in [ContainerReady Containers](https://argocd-operator-helm.readthedocs.io/en/latest/openshift/crc.html), [Google Cloud Platform](https://argocd-operator-helm.readthedocs.io/en/latest/kubernetes/gcp.html) or [Minikube](https://argocd-operator-helm.readthedocs.io/en/latest/kubernetes/minikube.html).
 
 
 ## Why an Operator and not just a Helm Chart?
