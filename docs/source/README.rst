@@ -9,8 +9,8 @@ Argo CD Operator (Helm)
    :target: https://kubernetes.io/
    :alt: Kubernetes
 .. image:: https://img.shields.io/badge/argocd-1.2.4-green.svg
-   :target: https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest
-   :alt: Documentation Status
+   :target: https://github.com/argoproj/argo-cd/releases/tag/v1.2.4
+   :alt: Argo CD
 .. image:: https://img.shields.io/badge/license-Apache%202.0-blue.svg
    :target: http://www.apache.org/licenses/LICENSE-2.0.html
    :alt: License
@@ -20,8 +20,6 @@ Argo CD Operator (Helm)
 .. image:: https://img.shields.io/badge/latest%20release-0.0.1-yellow.svg
    :target: https://github.com/disposab1e/argocd-operator-helm
    :alt: Latest Release
-
-
 
 
 The `Argo CD Operator (Helm)`_ is based on the stable `Argo CD Helm Chart`_ 
