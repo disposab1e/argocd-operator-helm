@@ -1,154 +1,41 @@
+![OpenShift Container Platform](https://img.shields.io/badge/ocp-4.2-red.svg)
+![Kubernetes](https://img.shields.io/badge/kubernetes-1.14-blue.svg)
+![Argo CD](https://img.shields.io/badge/argocd-1.2.4-green.svg)
+![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)
+![Documentation Status](https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest)
+![Latest Release](https://img.shields.io/badge/latest%20release-0.0.1-yellow.svg)
+
+
 # Argo CD Operator (Helm)
+
+This **community maintained** Argo CD Operator is based on the **community maintained** [Argo CD Helm Chart](https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd) and currently installs the non-HA version of Argo CD in OpenShift Container Platform and Kubernetes.
+
+## About Argo CD
 
 [Argo CD](https://argoproj.github.io) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
 
 ## Operator Features
-This **community maintained** Argo CD Operator is based on the **community maintained** stable [Helm Chart](https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd) and currently installs the non-HA version of Argo CD v1.2.4 in OpenShift 4.2.
 
 * Basic Installation to a single Namespace
 * Configure through Custom Resource
 
 
+## Get started
 
-## Why a Operator and not just a Helm Chart?
+[Quickstart](https://argocd-operator-helm.readthedocs.io/en/latest/quickstart.html) or try our comprehensive guides to install this opertor and [Argo CD](https://argoproj.github.io) in [ContainerReady Containers](https://argocd-operator-helm.readthedocs.io/en/latest/openshift/crc.html), [Google Cloud Platform](https://argocd-operator-helm.readthedocs.io/en/latest/kubernetes/gcp.html) or [Minikube](https://argocd-operator-helm.readthedocs.io/en/latest/kubernetes/minikube.html).
 
-* Fully integrated in Operator Lifecycle Management
+
+## Why an Operator and not just a Helm Chart?
+
 * No need to install Helm or Tiller
-* User friendly integration in OpenShift Web Console
-* Option to integrate in Operatorhub.io or Community Operators, directly accessible form inside OpenShift OperatorHub Marketplace
-* Make it easier for the OpenShift Community to install and use Argo CD  
+* Kubernetes native application
+* Integrated in Operator Lifecycle Manager and Marketplace
+* User friendly OpenShift Web Console
 
+**Make it easier for the Kubernetes and OpenShift Community to install and use Argo CD!**
 
+## License
 
-## Argo CD Operator (Helm) installation
-
-As usual there is more than one way to install this Operator:
-
-* OpenShift Marketplace
-* OpenShift local
-
-
-### OpenShift Marketplace
-Before this Operator will (hopefully) be available as Community Operator in your OpenShift OperatorHub Marketplace you have to manually add a new Catalog Source to your OpenShift installation. 
-
-```bash
-# Create a new Catalog Source
-oc apply -f deploy/olm-catalog/operator-source.yaml -n openshift-marketplace
-
-# Wait for rollout and preview result
-oc rollout status -w deployment/argocd-operators-helm -n openshift-marketplace
-oc get operatorsource  argocd-operators-helm  -n openshift-marketplace
-```
-
-You will now find the Operator with 'Provider Type: Custom' in your OpenShift OperatorHub Marketplace and you can proceed via Web UI, or just use the following commands, to install the Operator in a 'argocd' Namespace (recommended):
-
-```bash
-# Create namespace and install operator
-oc apply -f deploy/install-marketplace.yaml
-
-# Wait for rollout
-oc rollout status -w deployment/argocd-operator-helm -n argocd
-```
-
-Now you can proceed with chapter 'Install Argo CD'.
-
-
-### OpenShift local 
-Install this Operator from your local clone with:
-```bash
-# Create namespace and install operator
-oc apply -f deploy/install-local.yaml
-
-# Wait for rollout
-oc rollout status -w deployment/argocd-operator-helm -n argocd
-```
-Now you can proceed with chapter 'Install Argo CD'.
-
-
-## Install Argo CD
-This Operator manages a single Namespace installation of Argo CD. Therefore you have to install the Operator and Argo CD in the same Namespace. For simplicity we recommend creating a Namespace 'argocd' (if not already done) so all the defaults from the example work out of the box. 
-
-To install Argo CD create a new Custom Resource with your [customizations](https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/crds/argoproj.io_v1alpha1_argocd_cr.yaml) or use the provided example from the Web UI.
-
-You can also use the following command to install in Argo CD in the 'argocd' namespace with defauls:
-
-```bash
-# Install Argo CD with default values
-oc apply -f deploy/crds/argoproj.io_v1alpha1_argocd_cr.yaml -n argocd
-```
-
-
-## Install Argo CD CLI
-Download the CLI directly from your Argo CD installation and make it available in your path:
-
-```bash
-curl https://<openshift route hostname>/download/argocd-linux-amd64 -o argocd
-```
-
-
-## Get your initial Argo CD 'admin' password
-The initial 'admin' password is autogenerated to be the pod name of the Argo CD API server. This can be retrieved with the command:
-
-```bash
-oc get pods -n argocd -l app.kubernetes.io/name=argo-cd-server -o name | cut -d'/' -f 2 
-```
-
-
-## Login to Argo CD using the CLI
-
-```bash
-argocd login --insecure --username admin --password <initial admin password> <openshift route hostname>
-```
-
-
-If you like you can change your 'admin' password to e.g. 'admin' 
-
-```bash
-argocd account update-password --insecure --current-password <initial admin password> --new-password admin 
-```
-
-
-## Install guestbook App
-
-```bash
-argocd app create guestbook \
-  --repo https://github.com/argoproj/argocd-example-apps.git \
-  --path helm-guestbook \
-  --dest-server https://kubernetes.default.svc \
-  --dest-namespace default
-
-argocd app sync guestbook
-```
-
-
-## Uninstall Argo CD
-Simply remove the Custom Resource through the Web UI or use following command:
-
-```bash
-oc delete ArgoCD argocd -n argocd
-```
-
-The uninstallation process will remove the Argo CD installation (CR) but NOT the CRD's. You have to remove them manually:
-
-```bash
-# Delete Argo CD CRDs
-oc delete crd appprojects.argoproj.io
-oc delete crd applications.argoproj.io
-```
-
-
-## Uninstall Argo CD Operator (Helm)
-Simply uninstall the Operator through the Web UI and/or use following commands:
-
-```bash
-# Delete Cluster Service version
-oc delete clusterserviceversions.operators.coreos.com argocd-operator-helm.v0.0.1 -n argocd
-
-# Delete Subscription
-oc delete subscriptions.operators.coreos.com argocd-operators-helm -n argocd
-
-# Delete CRD
-oc delete crd argocds.argoproj.io
-```
-
+Argo CD Operator (Helm) is released under the [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) license. 
+See the [LICENSE](https://github.com/disposab1e/argocd-operator-helm/blob/master/LICENSE) file for details.
