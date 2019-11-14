@@ -9,21 +9,25 @@ spec:
   ## Ref: https://github.com/argoproj/argo-cd
   ##
   nameOverride: argocd
+  fullnameOverride: ""
+  
+  # Optional CRD installation for those without Helm hooks
+  installCRDs: true
   
   global:
     image:
       repository: argoproj/argocd
-      tag: v1.2.4
+      tag: v1.3.0
       imagePullPolicy: IfNotPresent
   
   ## Controller
   controller:
     name: application-controller
   
-    image: {}
-    #  repository: argoproj/argocd
-    #  tag: v1.2.1
-    #  imagePullPolicy: IfNotPresent
+    image:
+      repository: # argoproj/argocd
+      tag: # v1.3.0
+      imagePullPolicy: # IfNotPresent
   
     ## Argo controller commandline flags
     args:
@@ -34,6 +38,7 @@ spec:
     logLevel: info
   
     ## Additional command line arguments to pass to argocd-controller
+    ## - key: value
     extraArgs: []
   
     ## Annotations to be added to controller pods
@@ -79,7 +84,7 @@ spec:
     ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
     ##
     nodeSelector: {}
-    tolerations: {}
+    tolerations: []
     affinity: {}
   
     priorityClassName: ""
@@ -124,7 +129,10 @@ spec:
       repository: quay.io/dexidp/dex
       tag: v2.14.0
       imagePullPolicy: IfNotPresent
-    initImage: {}
+    initImage:
+      repository:
+      tag:
+      imagePullPolicy:
   
     serviceAccount:
       create: true
@@ -150,7 +158,7 @@ spec:
     ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
     ##
     nodeSelector: {}
-    tolerations: {}
+    tolerations: []
     affinity: {}
   
     priorityClassName: ""
@@ -180,7 +188,7 @@ spec:
     ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
     ##
     nodeSelector: {}
-    tolerations: {}
+    tolerations: []
     affinity: {}
   
     priorityClassName: ""
@@ -193,18 +201,22 @@ spec:
     #    cpu: 100m
     #    memory: 64Mi
   
+    volumeMounts: []
+    volumes: []
+  
   ## Server
   server:
     name: server
   
-    image: {}
-    #  repository: argoproj/argocd
-    #  tag: v1.2.1
-    #  imagePullPolicy: IfNotPresent
+    image:
+      repository: # argoproj/argocd
+      tag: # v1.3.0
+      imagePullPolicy: # IfNotPresent
   
     ## Additional command line arguments to pass to argocd-server
+    ## - key: value
     # extraArgs: []
-    #   - insecure
+    #   - insecure: true
     extraArgs: []
   
     ## Argo server log level
@@ -247,7 +259,7 @@ spec:
     ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
     ##
     nodeSelector: {}
-    tolerations: {}
+    tolerations: []
     affinity: {}
   
     priorityClassName: ""
@@ -302,11 +314,13 @@ spec:
       ## Hostnames must be provided if Ingress is enabled.
       ## Secrets must be manually created in the namespace
       ##
-      hosts: []
+      hosts:
+        []
         # - argocd.example.com
       paths:
-      - /
-      tls: []
+        - /
+      tls:
+        []
         # - secretName: argocd-example-tls
         #   hosts:
         #     - argocd.example.com
@@ -316,7 +330,7 @@ spec:
     # Find your domain with: kubectl describe --namespace=openshift-ingress-operator ingresscontroller/default | grep Domain:
     # If 'hostname' is an empty string "" OpenShift will create a hostname for you.
     route:
-      enabled: true
+      enabled: false
       hostname: ""
   
     ## ArgoCD config
@@ -326,10 +340,28 @@ spec:
       url: https://argocd.example.com
       # Argo CD instance label key
       application.instanceLabelKey: argocd.argoproj.io/instance
+      # repositories: |
+      #   - url: git@github.com:group/repo.git
+      #     sshPrivateKeySecret:
+      #       name: secret-name
+      #       key: sshPrivateKey
+      # oidc.config: |
+      #   name: AzureAD
+      #   issuer: https://login.microsoftonline.com/TENANT_ID/v2.0
+      #   clientID: CLIENT_ID
+      #   clientSecret: $oidc.azuread.clientSecret
+      #   requestedIDTokenClaims:
+      #     groups:
+      #       essential: true
+      #   requestedScopes:
+      #     - openid
+      #     - profile
+      #     - email
   
     ## ArgoCD rbac config
     ## reference https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/rbac.md
-    rbacConfig: {}
+    rbacConfig:
+      {}
       # policy.csv is an file containing user-defined RBAC policies and role definitions (optional).
       # Policy rules are in the form:
       #   p, subject, resource, action, object, effect
@@ -345,7 +377,6 @@ spec:
       # authorizing API requests (optional). If omitted or empty, users may be still be able to login,
       # but will see no apps, projects, etc...
       # policy.default: role:readonly
-  
       # scopes controls which OIDC scopes to examine during rbac enforcement (in addition to `sub` scope).
       # If omitted, defaults to: '[groups]'. The scope value can be a string, or a list of strings.
       # scopes: '[cognito:groups, email]'
@@ -403,13 +434,13 @@ spec:
   repoServer:
     name: repo-server
   
-    image: {}
-    #  repository: argoproj/argocd
-    #  tag: v1.2.1
-    #  imagePullPolicy: IfNotPresent
+    image:
+      repository: # argoproj/argocd
+      tag: # v1.3.0
+      imagePullPolicy: # IfNotPresent
   
     ## Additional command line arguments to pass to argocd-repo-server
-    ##
+    ## - key: value
     extraArgs: []
   
     ## Argo repoServer log level
@@ -452,7 +483,7 @@ spec:
     ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
     ##
     nodeSelector: {}
-    tolerations: {}
+    tolerations: []
     affinity: {}
   
     priorityClassName: ""
@@ -497,7 +528,8 @@ spec:
           gitlab.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsj2bNKTBSpIYDEGk9KxsGh3mySTRgMtXL583qmBpzeQ+jqCMRgBqB98u3z++J1sKlXHWfM9dyhSevkMwSbhoR8XIq/U0tCNyokEi/ueaBMCvbcTHhO7FcwzY92WK4Yt0aGROY5qX2UKSeOvuP4D6TPqKF1onrSzH9bx9XUf2lEdWT/ia1NEKjunUqu1xOB/StKDHMoX4/OKyIzuS0q/T1zOATthvasJFoPrAjkohTyaDUz2LN5JoH839hViyEG82yB+MjcFV5MU3N1l1QL3cVUCh93xSaua1N85qivl+siMkPGbO5xR/En4iEY6K2XPASUEMaieWVNTRCtJ4S8H+9
           ssh.dev.azure.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
           vs-ssh.visualstudio.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7Hr1oTWqNqOlzGJOfGJ4NakVyIzf1rXYd4d7wo6jBlkLvCA4odBlL0mDUyZ0/QUfTTqeu+tm22gOsv+VrVTMk6vwRU75gY/y9ut5Mb3bR5BV58dKXyq9A9UeB5Cakehn5Zgm6x1mKoVyf+FFn26iYqXJRgzIZZcZ5V6hrE0Qg39kZm4az48o0AUbf6Sp4SLdvnuMa2sVNwHBboS7EJkm57XQPVU3/QpyNLHbWDdzwtrlS+ez30S3AdYhLKEOxAG8weOnyrtLJAUen9mTkol8oII1edf7mWWbWVf0nBmly21+nZcmCTISQBtdcyPaEno7fFQMDD26/s0lfKob4Kw8H
-    tlsCerts: {}
+    tlsCerts:
+      {}
       # data:
       #   argocd.example.com: |
       #     -----BEGIN CERTIFICATE-----

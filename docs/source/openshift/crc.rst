@@ -24,10 +24,8 @@ OpenShift
 ---------
 
 As usual you need to have access to an up and running `OpenShift`_ cluster. 
-If you have not yet installed a cluster, here is an example_ that we use.
 
 .. _OpenShift: https://github.com/code-ready/crc
-.. _example: https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/openshift/examples/crc.sh
 
 It's recommended to open the OpenShift Console to follow the screenshots in this guide.
 
@@ -39,69 +37,63 @@ It's recommended to open the OpenShift Console to follow the screenshots in this
 Operator Installation
 =====================
 
-It's possible to install the operator via the `Marketplace`_ with our 
-custom `catalog source`_ or from `Local`_ resources. 
-The most convenient and best possible integration within the 
-`Operator Lifecycle Manager`_ 
-is the `Marketplace`_ method. Anyway, both methods are possible.
+It’s possible to install the operator using the Operator Lifecycle Manager or manually.
 
-.. _Operator Lifecycle Manager: https://github.com/operator-framework/operator-lifecycle-manager
+Operator Lifecycle Manager
+--------------------------
 
+This installation method installs the operator using an `OLM Catalog`_.
 
-Marketplace
------------
+.. _OLM Catalog: https://quay.io/repository/disposab1e/argocd-operator-helm-registry
 
-The marketplace installation method installs a `catalog source`_ 
-with all `available operator packages`_.
-
-.. _catalog source: https://quay.io/application/disposab1e/argocd-operators-helm
-.. _available operator packages: https://quay.io/application/disposab1e/argocd-operators-helm?tab=releases
+.. image:: https://img.shields.io/badge/git%20clone-https%3A%2F%2Fgithub.com%2Fdisposab1e%2Fargocd--operator--helm.git-9cf.svg
+   :target: https://github.com/disposab1e/argocd-operator-helm
+   :alt: git clone
 
 .. code-block:: bash
-   
-    git clone https://github.com/disposab1e/argocd-operator-helm.git
 
-    oc apply -f deploy/openshift/marketplace/namespace.yaml
-    oc apply -f deploy/openshift/marketplace/operator-source.yaml
-    oc apply -f deploy/openshift/marketplace/operator-group.yaml
-    oc apply -f deploy/openshift/marketplace/subscription.yaml
+    oc apply -f guides/openshift/olm/namespace.yaml
+    oc apply -f guides/openshift/olm/catalog-source.yaml
+    oc apply -f guides/openshift/olm/operator-group.yaml
+    oc apply -f guides/openshift/olm/subscription.yaml
     
-    oc rollout status -w deployment/argocd-operators-helm -n openshift-marketplace
     oc rollout status -w deployment/argocd-operator-helm -n argocd
 
 
-.. image:: https://img.shields.io/badge/Screenshot-Console-red
+.. image:: https://img.shields.io/badge/Screenshot-Console-red.svg
    :target: ../_static/crc_01.png
    :alt: Screenshot
-.. image:: https://img.shields.io/badge/Screenshot-Console-red
+.. image:: https://img.shields.io/badge/Screenshot-Console-red.svg
    :target: ../_static/crc_02.png
    :alt: Screenshot
-.. image:: https://img.shields.io/badge/Screenshot-Console-red
+.. image:: https://img.shields.io/badge/Screenshot-Console-red.svg
    :target: ../_static/crc_03.png
    :alt: Screenshot
 
 
-Local
------
+Manual
+------
 
-You can install the operator from local sources without having to install a catalog source.
+You can install the operator from local sources without having to install an OLM Catalog.
 
-.. Caution:: No channel subscription and automatic operator updates available with this method. 
+.. Note:: No channel subscription and automatic operator updates available with this method. 
+
+.. image:: https://img.shields.io/badge/git%20clone-https%3A%2F%2Fgithub.com%2Fdisposab1e%2Fargocd--operator--helm.git-9cf.svg
+   :target: https://github.com/disposab1e/argocd-operator-helm
+   :alt: git clone
 
 .. code-block:: bash
 
-    git clone https://github.com/disposab1e/argocd-operator-helm.git
-
-    oc apply -f deploy/openshift/local/namespace.yaml
-    oc apply -f deploy/openshift/local/service_account.yaml
-    oc apply -f deploy/openshift/local/role.yaml
-    oc apply -f deploy/openshift/local/role_binding.yaml
-    oc apply -f deploy/openshift/local/crd.yaml
-    oc apply -f deploy/openshift/local/deployment.yaml
+    oc apply -f guides/openshift/manual/namespace.yaml
+    oc apply -f guides/openshift/manual/service_account.yaml
+    oc apply -f guides/openshift/manual/role.yaml
+    oc apply -f guides/openshift/manual/role_binding.yaml
+    oc apply -f guides/openshift/manual/crd.yaml
+    oc apply -f guides/openshift/manual/deployment.yaml
 
     oc rollout status -w deployment/argocd-operator-helm -n argocd
 
-.. image:: https://img.shields.io/badge/Screenshot-Console-red
+.. image:: https://img.shields.io/badge/Screenshot-Console-red.svg
    :target: ../_static/crc_04.png
    :alt: Screenshot
 
@@ -114,7 +106,9 @@ Argo CD
 -------
 
 Install Argo CD from the `Command Line`_ (quick) or through the 
-Web Console with a nice `Web UI`_. This operator shares all `configuration values`_ from the Argo CD Helm Chart.
+Web Console with a nice `Web UI`_. 
+
+.. Note:: This operator shares all `configuration values`_ from the Argo CD Helm Chart.
 
 .. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
 
@@ -122,11 +116,13 @@ Web Console with a nice `Web UI`_. This operator shares all `configuration value
 Command Line
 """"""""""""
 
+.. image:: https://img.shields.io/badge/git%20clone-https%3A%2F%2Fgithub.com%2Fdisposab1e%2Fargocd--operator--helm.git-9cf.svg
+   :target: https://github.com/disposab1e/argocd-operator-helm
+   :alt: git clone
+
 .. code-block:: bash
    
-    git clone https://github.com/disposab1e/argocd-operator-helm.git
-
-    oc apply -f deploy/openshift/examples/crc.yaml
+    oc apply -f guides/openshift/examples/crc.yaml
 
     oc get ArgoCDs argocd -n argocd
 
@@ -143,10 +139,10 @@ Command Line
 Web UI
 """"""
 
+.. image:: ../_static/crc_argocd_install_webui_01.png
+.. image:: ../_static/crc_argocd_install_webui_02.png
+.. image:: ../_static/crc_argocd_install_webui_03.png
 .. image:: ../_static/crc_argocd_install_webui_04.png
-.. image:: ../_static/crc_argocd_install_webui_05.png
-.. image:: ../_static/crc_argocd_install_webui_06.png
-.. image:: ../_static/crc_argocd_install_webui_07.png
 
 .. image:: https://img.shields.io/badge/Screenshot-Console-red
    :target: ../_static/crc_05.png
@@ -157,11 +153,11 @@ Argo CD Route
 
 Argo CD web frontend is immediately accessible through an SSL passthrough route.
 
+.. image:: ../_static/crc_06.png
+
 .. image:: https://img.shields.io/badge/Browser-https%3A%2F%2Fargocd--server--argocd.apps--crc.testing%2F-9cf
    :target: https://argocd-server-argocd.apps-crc.testing
    :alt: Point your Browser to
-
-.. image:: ../_static/crc_06.png
 
 .. image:: ../_static/common_argocd_login.png
 
@@ -258,22 +254,23 @@ Operator Marketplace installation
 
 .. code-block:: bash
 
-    oc delete csv argocd-operator-helm.v0.0.1 -n argocd
-    oc delete -f deploy/openshift/marketplace/subscription.yaml
-    oc delete -f deploy/openshift/marketplace/operator-source.yaml
-    oc delete -f deploy/openshift/marketplace/operator-group.yaml
-    oc delete -f deploy/openshift/marketplace/namespace.yaml
+    oc delete -f guides/openshift/olm/subscription.yaml
+    oc delete csv argocd-operator-helm.v0.0.2 -n argocd
+    oc delete crd argocds.argoproj.io
+    oc delete -f guides/openshift/olm/catalog-source.yaml
+    oc delete -f guides/openshift/olm/operator-group.yaml
+    oc delete -f guides/openshift/olm/namespace.yaml
 
 
-Operator Local installation
----------------------------
+Manual installation
+-------------------
 
 .. code-block:: bash
 
-    oc delete -f deploy/openshift/local/deployment.yaml
-    oc delete -f deploy/openshift/local/crd.yaml
-    oc delete -f deploy/openshift/local/role_binding.yaml
-    oc delete -f deploy/openshift/local/role.yaml
-    oc delete -f deploy/openshift/local/service_account.yaml
-    oc delete -f deploy/openshift/local/namespace.yaml
+    oc delete -f guides/openshift/manual/deployment.yaml
+    oc delete -f guides/openshift/manual/crd.yaml
+    oc delete -f guides/openshift/manual/role_binding.yaml
+    oc delete -f guides/openshift/manual/role.yaml
+    oc delete -f guides/openshift/manual/service_account.yaml
+    oc delete -f guides/openshift/manual/namespace.yaml
 

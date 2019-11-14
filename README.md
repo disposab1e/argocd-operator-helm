@@ -3,7 +3,7 @@
 ![Argo CD](https://img.shields.io/badge/argocd-1.2.4-green.svg)
 ![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)
 ![Documentation Status](https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest)
-![Latest Release](https://img.shields.io/badge/latest%20release-0.0.1-yellow.svg)
+![Latest Release](https://img.shields.io/badge/latest%20release-0.0.2-yellow.svg)
 
 
 # Argo CD Operator (Helm)

@@ -28,27 +28,28 @@ The uninstallation process will remove the Argo CD installation (CR) but NOT the
 
 
 
-Operator Marketplace installation
----------------------------------
+Operator Lifecycle Manager installation
+---------------------------------------
 
 .. code-block:: bash
 
-    kubectl delete csv argocd-operator-helm.v0.0.1 -n marketplace
-    kubectl delete -f deploy/kubernetes/marketplace/subscription.yaml
-    kubectl delete -f deploy/kubernetes/marketplace/operator-source.yaml
-    kubectl delete -f deploy/kubernetes/marketplace/operator-group.yaml
-    kubectl delete -f deploy/kubernetes/marketplace/namespace.yaml
+    kubectl delete -f guides/kubernetes/olm/subscription.yaml
+    kubectl delete csv argocd-operator-helm.v0.0.2 -n argocd
+    kubectl delete crd argocds.argoproj.io
+    kubectl delete -f guides/kubernetes/olm/catalog-source.yaml
+    kubectl delete -f guides/kubernetes/olm/operator-group.yaml
+    kubectl delete -f guides/kubernetes/olm/namespace.yaml
 
 
-Operator Local installation
----------------------------
+Manual installation
+-------------------
 
 .. code-block:: bash
 
-    kubectl delete -f deploy/kubernetes/local/deployment.yaml
-    kubectl delete -f deploy/kubernetes/local/crd.yaml
-    kubectl delete -f deploy/kubernetes/local/role_binding.yaml
-    kubectl delete -f deploy/kubernetes/local/role.yaml
-    kubectl delete -f deploy/kubernetes/local/service_account.yaml
-    kubectl delete -f deploy/kubernetes/local/namespace.yaml
+    kubectl delete -f guides/kubernetes/manual/deployment.yaml
+    kubectl delete -f guides/kubernetes/manual/crd.yaml
+    kubectl delete -f guides/kubernetes/manual/role_binding.yaml
+    kubectl delete -f guides/kubernetes/manual/role.yaml
+    kubectl delete -f guides/kubernetes/manual/service_account.yaml
+    kubectl delete -f guides/kubernetes/manual/namespace.yaml
 

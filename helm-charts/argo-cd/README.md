@@ -2,7 +2,7 @@ Argo CD Chart
 ======
 A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kubernetes.
 
-Current chart version is `1.0.4`
+Current chart version is `1.1.0`
 
 Source code can be found [here](https://argoproj.github.io/argo-cd/)
 
@@ -51,7 +51,7 @@ $ helm install --name my-release argo/argo-cd
 | controller.args.statusProcessors | define the controller `--status-processors` | `"20"` |
 | controller.clusterAdminAccess.enabled | Enable RBAC for local cluster deployments. | `true` |
 | controller.containerPort | Controller listening port. | `8082` |
-| controller.extraArgs | Additional arguments for the controller. | `[]` |
+| controller.extraArgs | Additional arguments for the controller. A list of key:value pairs | `[]` |
 | controller.image.repository | Repository to use for the controller | `global.image.repository` |
 | controller.image.imagePullPolicy | Image pull policy for the controller | `global.image.imagePullPolicy` |
 | controller.image.tag | Tag to use for the controller | `global.image.tag` |
@@ -83,7 +83,7 @@ $ helm install --name my-release argo/argo-cd
 | controller.service.port | Controller service port. | `8082` |
 | controller.serviceAccount.create | Create a service account for the controller | `true` |
 | controller.serviceAccount.name | Service account name. | `"argocd-application-controller"` |
-| controller.tolerations | Tolerations for use with node taints https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ | `{}` |
+| controller.tolerations | Tolerations for use with node taints https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ | `[]` |
 | controller.volumeMounts | Controller volume mounts | `[]` |
 | controller.volumes | Controller volumes | `[]` |
 
@@ -93,7 +93,7 @@ $ helm install --name my-release argo/argo-cd
 |-----|------|---------|-------------|
 | repoServer.affinity | Assign custom affinity rules to the deployment https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ | `{}` |
 | repoServer.containerPort | Repo server port | `8081` |
-| repoServer.extraArgs | Additional arguments for the repo server | `[]` |
+| repoServer.extraArgs | Additional arguments for the repo server. A  list of key:value pairs. | `[]` |
 | repoServer.image.repository | Repository to use for the repo server | `global.image.repository` |
 | repoServer.image.imagePullPolicy | Image pull policy for the repo server | `global.image.imagePullPolicy` |
 | repoServer.image.tag | Tag to use for the repo server | `global.image.tag` |
@@ -123,7 +123,7 @@ $ helm install --name my-release argo/argo-cd
 | repoServer.service.annotations | Repo server service annotations. | `{}` |
 | repoServer.service.labels | Repo server service labels. | `{}` |
 | repoServer.service.port | Repo server service port. | `8081` |
-| repoServer.tolerations | Tolerations for use with node taints https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ | `{}` |
+| repoServer.tolerations | Tolerations for use with node taints https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ | `[]` |
 | repoServer.volumeMounts | Repo server volume mounts | `[]` |
 | repoServer.volumes | Repo server volumes | `[]` |
 
@@ -138,7 +138,7 @@ $ helm install --name my-release argo/argo-cd
 | server.certificate.issuer | Certificate manager issuer | `{}` |
 | server.config | URL for Argo CD | `{}` |
 | server.containerPort | Server container port. | `8080` |
-| server.extraArgs | Additional arguments for the server | `[]` |
+| server.extraArgs | Additional arguments for the server. A list of key:value pairs. | `[]` |
 | server.image.repository | Repository to use for the server | `global.image.repository` |
 | server.image.imagePullPolicy | Image pull policy for the server | `global.image.imagePullPolicy` |
 | server.image.tag | Tag to use for the repo server | `global.image.tag` |
@@ -180,7 +180,7 @@ $ helm install --name my-release argo/argo-cd
 | server.service.type | Server service type | `"ClusterIP"` |
 | server.serviceAccount.create | Create server service account | `true` |
 | server.serviceAccount.name | Server service account name | `"argocd-server"` |
-| server.tolerations | Tolerations for use with node taints https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ | `{}` |
+| server.tolerations | Tolerations for use with node taints https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ | `[]` |
 | server.volumeMounts | Server volume mounts | `[]` |
 | server.volumes | Server volumes | `[]` |
 
@@ -206,7 +206,7 @@ $ helm install --name my-release argo/argo-cd
 | dex.serviceAccount.name | Dex service account name | `"argocd-dex-server"` |
 | dex.servicePortGrpc | Server GRPC port | `5557` |
 | dex.servicePortHttp | Server HTTP port | `5556` |
-| dex.tolerations | Tolerations for use with node taints https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ | `{}` |
+| dex.tolerations | Tolerations for use with node taints https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ | `[]` |
 | dex.volumeMounts | Dex volume mounts | `"/shared"` |
 | dex.volumes | Dex volumes | `{}` |
 
@@ -216,7 +216,7 @@ $ helm install --name my-release argo/argo-cd
 |-----|------|---------|-------------|
 | redis.affinity | Assign custom affinity rules to the deployment https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ | `{}` |
 | redis.containerPort | Redis container port | `6379` |
-| redis.enabled | Enable redis | `false` |
+| redis.enabled | Enable redis | `true` |
 | redis.image.imagePullPolicy | Redis imagePullPolicy | `"IfNotPresent"` |
 | redis.image.repository | Redis repository | `"redis"` |
 | redis.image.tag | Redis tag | `"5.0.3"` |
@@ -225,4 +225,4 @@ $ helm install --name my-release argo/argo-cd
 | redis.priorityClassName | Priority class for redis | `""` |
 | redis.resources | Resource limits and requests for redis | `{}` |
 | redis.servicePort | Redis service port | `6379` |
-| redis.tolerations | Tolerations for use with node taints https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ | `{}` |
+| redis.tolerations | Tolerations for use with node taints https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ | `[]` |
