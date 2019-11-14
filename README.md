@@ -1,6 +1,6 @@
 ![OpenShift Container Platform](https://img.shields.io/badge/ocp-4.2-red.svg)
 ![Kubernetes](https://img.shields.io/badge/kubernetes-1.14-blue.svg)
-![Argo CD](https://img.shields.io/badge/argocd-1.2.4-green.svg)
+![Argo CD](https://img.shields.io/badge/argocd-1.3.0-green.svg)
 ![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)
 ![Documentation Status](https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest)
 ![Latest Release](https://img.shields.io/badge/latest%20release-0.0.2-yellow.svg)
