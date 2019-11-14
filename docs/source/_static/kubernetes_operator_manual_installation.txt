@@ -1,0 +1,21 @@
+Manual
+------
+
+You can install the operator from local sources without having to install an OLM Catalog.
+
+.. Note:: No channel subscription and automatic operator updates available with this method. 
+
+.. image:: https://img.shields.io/badge/git%20clone-https%3A%2F%2Fgithub.com%2Fdisposab1e%2Fargocd--operator--helm.git-9cf.svg
+   :target: https://github.com/disposab1e/argocd-operator-helm
+   :alt: git clone
+
+.. code-block:: bash
+
+    kubectl apply -f guides/kubernetes/manual/namespace.yaml
+    kubectl apply -f guides/kubernetes/manual/service_account.yaml
+    kubectl apply -f guides/kubernetes/manual/role.yaml
+    kubectl apply -f guides/kubernetes/manual/role_binding.yaml
+    kubectl apply -f guides/kubernetes/manual/crd.yaml
+    kubectl apply -f guides/kubernetes/manual/deployment.yaml
+
+    kubectl rollout status -w deployment/argocd-operator-helm -n argocd

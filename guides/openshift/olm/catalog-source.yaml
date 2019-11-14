@@ -1,0 +1,10 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: argocd-catalog
+  namespace: openshift-marketplace
+spec:
+  sourceType: grpc
+  image: quay.io/disposab1e/argocd-operator-helm-registry:0.0.2
+  displayName: Argo CD Operators
+  publisher: Argo CD

@@ -1,0 +1,20 @@
+Operator Lifecycle Manager
+--------------------------
+
+This installation method installs the operator using an `OLM Catalog`_.
+
+.. _OLM Catalog: https://quay.io/repository/disposab1e/argocd-operator-helm-registry
+
+.. image:: https://img.shields.io/badge/git%20clone-https%3A%2F%2Fgithub.com%2Fdisposab1e%2Fargocd--operator--helm.git-9cf.svg
+   :target: https://github.com/disposab1e/argocd-operator-helm
+   :alt: git clone
+
+.. code-block:: bash
+   
+    kubectl apply -f guides/kubernetes/olm/namespace.yaml
+    kubectl apply -f guides/kubernetes/olm/catalog-source.yaml
+    kubectl apply -f guides/kubernetes/olm/operator-group.yaml
+    kubectl apply -f guides/kubernetes/olm/subscription.yaml
+    
+    kubectl rollout status -w deployment/argocd-operator-helm -n argocd
+
