@@ -25,8 +25,6 @@ Kubernetes
 
 As usual you need to have access to an up and running Kubernetes cluster. 
 
-.. _example: https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/kubernetes/examples/gcp.sh
-
 .. Caution:: We recommend adding a LoadBalancer to your cluster!
 
 .. include:: ../_static/kubernetes_olm.txt

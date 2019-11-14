@@ -34,7 +34,7 @@ Install the operator and Argo CD in a new ``argocd`` namespace.
 
 .. Note:: This operator shares all `configuration values`_ from the Argo CD Helm Chart.
 
-.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
+.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.2/helm-charts/argo-cd/README.md
 
 
 OpenShift
@@ -46,14 +46,14 @@ OpenShift
     # Operator
 
     oc apply -f  \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/quickstart/openshift/quickstart.yaml
+    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.2/quickstart/openshift/quickstart.yaml
 
 .. code-block:: bash
 
     # Argo CD with defaults
 
     oc apply -f  \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/quickstart/openshift/argocd.yaml
+    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.2/quickstart/openshift/argocd.yaml
 
 
 Kubernetes
@@ -64,7 +64,7 @@ Kubernetes
     # Operator
 
     kubectl apply -f \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/quickstart/kubernetes/quickstart.yaml
+    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.2/quickstart/kubernetes/quickstart.yaml
 
 
 .. code-block:: bash
@@ -72,5 +72,5 @@ Kubernetes
     # Argo CD with defaults
 
     kubectl apply -f \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/quickstart/kubernetes/argocd.yaml
+    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.2/quickstart/kubernetes/argocd.yaml
 
