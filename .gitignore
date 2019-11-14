@@ -1,4 +1,5 @@
 work.md
 decription.md
-build/
+/docs/build/
+/build/_output
 .DS_Store
