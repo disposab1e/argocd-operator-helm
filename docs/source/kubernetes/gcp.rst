@@ -3,7 +3,7 @@
 Google Cloud Platform
 *********************
 
-A installation guide for Operator Lifecycle Manager, Operator Marketplace, 
+A installation guide for Operator Lifecycle Manager, 
 Argo CD Operator (Helm), Argo CD, 
 Argo CD CLI and the Guestbook Example in Google Cloud Platform Kubernetes Engine.
 
@@ -12,10 +12,10 @@ Argo CD CLI and the Guestbook Example in Google Cloud Platform Kubernetes Engine
 Prerequisites
 =============
 
-.. image:: https://img.shields.io/badge/Kubernetes-1.14-blue
+.. image:: https://img.shields.io/badge/kubernetes-1.14-blue.svg
    :target: https://v1-14.docs.kubernetes.io/
    :alt: Kubernetes
-.. image:: https://img.shields.io/badge/OLM-0.12.0-red
+.. image:: https://img.shields.io/badge/olm-0.12.0-blue.svg
    :target: https://github.com/operator-framework/operator-lifecycle-manager
    :alt: Operator Lifecycle Manager
 
@@ -24,7 +24,6 @@ Kubernetes
 ----------
 
 As usual you need to have access to an up and running Kubernetes cluster. 
-If you have not yet installed a cluster, here is an example_ cluster that we use.
 
 .. _example: https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/kubernetes/examples/gcp.sh
 
@@ -36,26 +35,18 @@ If you have not yet installed a cluster, here is an example_ cluster that we use
    :target: ../_static/gcp_01.png
    :alt: Screenshot
 
-.. include:: ../_static/kubernetes_mo.txt
+.. include:: ../_static/kubernetes_operator_installation.txt
 
-.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue
+.. include:: ../_static/kubernetes_operator_olm_installation.txt
+
+.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue.svg
    :target: ../_static/gcp_02.png
    :alt: Screenshot
 
-.. include:: ../_static/kubernetes_operator_installation.txt
+.. include:: ../_static/kubernetes_operator_manual_installation.txt
 
-.. include:: ../_static/kubernetes_operator_installation_marketplace.txt
-
-.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue
+.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue.svg
    :target: ../_static/gcp_03.png
-   :alt: Screenshot
-
-.. include:: ../_static/kubernetes_stupid.txt
-
-.. include:: ../_static/kubernetes_operator_installation_local.txt
-
-.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue
-   :target: ../_static/gcp_04.png
    :alt: Screenshot
 
 
@@ -68,16 +59,28 @@ Install Argo CD server components and Argo CD command line interface.
 Argo CD
 -------
 
+Install Argo CD from the command line.
+
 .. Attention:: This example installation assumes you have a Load Balancer available in your GCP cluster!
 
-This operator shares all `configuration values`_ from the Argo CD Helm Chart.
+.. Note:: This operator shares all `configuration values`_ from the Argo CD Helm Chart.
 
 .. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
 
-.. include:: ../_static/kubernetes_argocd_installation_command_line.txt
+.. image:: https://img.shields.io/badge/git%20clone-https%3A%2F%2Fgithub.com%2Fdisposab1e%2Fargocd--operator--helm.git-9cf.svg
+   :target: https://github.com/disposab1e/argocd-operator-helm
+   :alt: git clone
 
-.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue
-   :target: ../_static/gcp_05.png
+
+
+.. code-block:: bash
+   
+    kubectl apply -f guides/kubernetes/examples/gcp.yaml
+
+.. include:: ../_static/kubernetes_argocd_installation.txt
+
+.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue.svg
+   :target: ../_static/gcp_04.png
    :alt: Screenshot
 
 Argo CD Ingress
@@ -85,7 +88,7 @@ Argo CD Ingress
 
 You will find your Load Balancer IP in the section ``Services & Ingress``.
 
-.. image:: ../_static/gcp_06.png
+.. image:: ../_static/gcp_05.png
 
 .. Hint:: 
     Now point your browser to: :guilabel:`https://<LoadBalancer Endpoint>:443`

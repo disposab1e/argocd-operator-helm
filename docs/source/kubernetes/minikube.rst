@@ -2,7 +2,7 @@
 Minikube
 ********
 
-A installation guide for Operator Lifecycle Manager, Operator Marketplace, 
+A installation guide for Operator Lifecycle Manager, 
 Argo CD Operator (Helm), Argo CD, 
 Argo CD CLI and the Guestbook Example in Minikube.
 
@@ -13,27 +13,26 @@ Argo CD CLI and the Guestbook Example in Minikube.
 Prerequisites
 =============
 
-.. image:: https://img.shields.io/badge/minikube-v1.5.2-blue
+.. image:: https://img.shields.io/badge/minikube-v1.5.2-blue.svg
    :target: https://github.com/kubernetes/minikube
    :alt: minikube
-.. image:: https://img.shields.io/badge/Kubernetes-1.14-blue
+.. image:: https://img.shields.io/badge/kubernetes-1.14-blue.svg
    :target: https://v1-14.docs.kubernetes.io/
    :alt: Kubernetes
-.. image:: https://img.shields.io/badge/OLM-0.12.0-red
+.. image:: https://img.shields.io/badge/olm-0.12.0-blue.svg
    :target: https://github.com/operator-framework/operator-lifecycle-manager
    :alt: Operator Lifecycle Manager
 
 
-Kubernetes
-----------
+Cluster Setup
+-------------
 
-As usual you need to have access to an up and running Minikube_ Kubernetes cluster. 
-If you have not yet installed a cluster, here is an example_ that we use.
+As usual you need to have access to an up and running Kubernetes_ cluster. 
 
 To follow the screenshots in this guide it's recommended to add the Dashboard 
 to your Minikube installation.
 
-.. _Minikube: https://github.com/kubernetes/minikube
+.. _Kubernetes: https://github.com/kubernetes/minikube
 .. _example: https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/kubernetes/examples/minikube.sh
 
 
@@ -48,51 +47,51 @@ to your Minikube installation.
    :target: ../_static/minikube_01.png
    :alt: Screenshot
 
-.. include:: ../_static/kubernetes_mo.txt
 
-    
-.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue
-   :target: ../_static/minikube_02.png
-   :alt: Screenshot
+Administrator Console
+"""""""""""""""""""""
 
-Web Console
-"""""""""""
+The OKD Administrator Console  for upstream Kubernetes provides a nice user 
+interface to visualize and interact with the Operator Lifecycle Manager. 
+To follow the screenshots in this guide it's recommended to install it.
 
-.. Caution:: You need a local (not inside Minikube!) Docker or Podman installation!
+.. Note:: You need a local (not inside Minikube!) Docker or Podman installation!
 
-To follow the screenshots in this guide it's recommended to install the Marketplace Web Console.
+.. image:: https://img.shields.io/badge/git%20clone-https%3A%2F%2Fgithub.com%2Foperator--framework%2Foperator--lifecycle--manager.git-9cf.svg
+   :target: https://github.com/operator-framework/operator-lifecycle-manager.git
+   :alt: git clone
 
 .. code-block:: bash
 
-    git clone https://github.com/operator-framework/operator-lifecycle-manager.git
-    
-    ./scripts/run_console_local.sh
+    make run-console-local
 
-.. image:: https://img.shields.io/badge/Browser-http%3A%2F%2Flocalhost%3A9000-9cf
+.. image:: https://img.shields.io/badge/Browser-http%3A%2F%2Flocalhost%3A9000-orange.svg
    :target: http://localhost:9000
    :alt: Point your Browser to
 
-.. image:: https://img.shields.io/badge/Screenshot-Console-red
-   :target: ../_static/minikube_03.png
+.. image:: https://img.shields.io/badge/Screenshot-Console-red.svg
+   :target: ../_static/minikube_02.png
    :alt: Screenshot
 
 .. include:: ../_static/kubernetes_operator_installation.txt
 
-.. include:: ../_static/kubernetes_operator_installation_marketplace.txt
+.. include:: ../_static/kubernetes_operator_olm_installation.txt
 
 
-.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue
+.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue.svg
+   :target: ../_static/minikube_03.png
+   :alt: Screenshot
+.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue.svg
    :target: ../_static/minikube_04.png
    :alt: Screenshot
-.. image:: https://img.shields.io/badge/Screenshot-Console-red
+.. image:: https://img.shields.io/badge/Screenshot-Console-red.svg
    :target: ../_static/minikube_05.png
    :alt: Screenshot
 
-.. include:: ../_static/kubernetes_stupid.txt
 
-.. include:: ../_static/kubernetes_operator_installation_local.txt
+.. include:: ../_static/kubernetes_operator_manual_installation.txt
 
-.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue
+.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue.svg
    :target: ../_static/minikube_06.png
    :alt: Screenshot
 
@@ -106,17 +105,29 @@ Argo CD
 -------
 
 Install Argo CD from the command line (quick) or when you have the 
-`Web Console`_ up and running through a nice web user interface. This operator shares all `configuration values`_ from the Argo CD Helm Chart.
+`Administrator Console`_ up and running through a nice web user interface. 
+
+.. Note:: This operator shares all `configuration values`_ from the Argo CD Helm Chart.
 
 .. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
- 
+
+.. image:: https://img.shields.io/badge/git%20clone-https%3A%2F%2Fgithub.com%2Fdisposab1e%2Fargocd--operator--helm.git-9cf.svg
+   :target: https://github.com/disposab1e/argocd-operator-helm
+   :alt: git clone
+
+
+
 
 Command Line
 """"""""""""
 
-.. include:: ../_static/kubernetes_argocd_installation_command_line.txt
+.. code-block:: bash
+   
+    kubectl apply -f guides/kubernetes/examples/minikube.yaml
 
-.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue
+.. include:: ../_static/kubernetes_argocd_installation.txt
+
+.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue.svg
    :target: ../_static/minikube_07.png
    :alt: Screenshot
 
@@ -124,10 +135,10 @@ Command Line
 Web UI
 """"""
 
+.. image:: ../_static/minikube_argocd_install_webui_01.png
+.. image:: ../_static/minikube_argocd_install_webui_02.png
+.. image:: ../_static/minikube_argocd_install_webui_03.png
 .. image:: ../_static/minikube_argocd_install_webui_04.png
-.. image:: ../_static/minikube_argocd_install_webui_05.png
-.. image:: ../_static/minikube_argocd_install_webui_06.png
-.. image:: ../_static/minikube_argocd_install_webui_07.png
 
 .. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue
    :target: ../_static/minikube_07.png
@@ -143,7 +154,7 @@ For simplicity we use port forwarding.
    
     kubectl port-forward svc/argocd-server -n argocd 9001:443
 
-.. image:: https://img.shields.io/badge/Browser-http%3A%2F%2Flocalhost%3A9001-9cf
+.. image:: https://img.shields.io/badge/Browser-http%3A%2F%2Flocalhost%3A9001-orange.svg
    :target: http://localhost:9001
    :alt: Point your Browser to
 

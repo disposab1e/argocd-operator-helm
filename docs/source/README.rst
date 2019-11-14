@@ -8,7 +8,7 @@ Argo CD Operator (Helm)
 .. image:: https://img.shields.io/badge/kubernetes-1.14-blue.svg
    :target: https://kubernetes.io/
    :alt: Kubernetes
-.. image:: https://img.shields.io/badge/argocd-1.2.4-green.svg
+.. image:: https://img.shields.io/badge/argocd-1.3-green.svg
    :target: https://github.com/argoproj/argo-cd/releases/tag/v1.2.4
    :alt: Argo CD
 .. image:: https://img.shields.io/badge/license-Apache%202.0-blue.svg
@@ -17,12 +17,12 @@ Argo CD Operator (Helm)
 .. image:: https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest
    :target: https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
-.. image:: https://img.shields.io/badge/latest%20release-0.0.1-yellow.svg
-   :target: https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.1
+.. image:: https://img.shields.io/badge/latest%20release-0.0.2-yellow.svg
+   :target: https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.2
    :alt: Latest Release
 
 
-The `Argo CD Operator (Helm)`_ is based on the stable `Argo CD Helm Chart`_ 
+The `Argo CD Operator (Helm)`_ is based on the `Argo CD Helm Chart`_ 
 and currently installs the non-HA version of Argo CD in 
 `OpenShift Container Platform`_ and `Kubernetes`_.
 
@@ -43,8 +43,12 @@ About Argo CD
 Operator Features
 =================
 
-- Basic Installation to a single Namespace
-- Configure through Custom Resource
+- Basic Installation
+
+.. Note:: This operator shares all `configuration values`_ from the Argo CD Helm Chart.
+
+.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
+
 
 Get started
 ===========
