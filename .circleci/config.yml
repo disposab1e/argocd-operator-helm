@@ -28,8 +28,4 @@ jobs:
       - checkout
     environment:
       GO111MODULE: "on"
-workflows:
-  version: 2
-  workflow:
-    jobs:
-      - operator-sdk-build
+
