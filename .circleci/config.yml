@@ -13,17 +13,17 @@ commands:
   install_operator_sdk:
     steps:
       - run:
-          name: Install Operator SDK 0.12.0
-          command: |
-            pip install operator-courier
-  install_operator_courier:
-    steps:
-      - run:
           name: Install Operator Courier (latest)
           command: |
             export  RELEASE_VERSION=v0.12.0
             curl -LO https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
             chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu && sudo mkdir -p /usr/local/bin/ && sudo cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-sdk && rm operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
+  install_operator__courier:
+    steps:
+      - run:
+          name: Install Operator SDK 0.12.0
+          command: |
+            pip install operator-courier
   build_operator:
     steps:
       - run:
@@ -37,19 +37,19 @@ commands:
       - run:
           name: Build Bundle
           command: |
-            ARGOCD_OPERATOR_BUNDLE_DIR=${CIRCLE_WORKING_DIRECTORY}/build/bundle
-            ARGOCD_OPERATOR_BUNDLE_BUILD_DIR=${CIRCLE_WORKING_DIRECTORY}/build/_output/bundle
-            ARGOCD_OPERATOR_BUNDLE_MANIFEST_DIR=${CIRCLE_WORKING_DIRECTORY}/deploy/olm-catalog/argocd-operator-helm
+            ARGOCD_OPERATOR_BUNDLE_DIR=$CIRCLE_WORKING_DIRECTORY/build/bundle
+            ARGOCD_OPERATOR_BUNDLE_BUILD_DIR=$CIRCLE_WORKING_DIRECTORY/build/_output/bundle
+            ARGOCD_OPERATOR_BUNDLE_MANIFEST_DIR=$CIRCLE_WORKING_DIRECTORY/deploy/olm-catalog/argocd-operator-helm
             ARGOCD_OPERATOR_BUNDLE_IMAGE_NAME="argocd-operator-helm-registry"
-            ARGOCD_OPERATOR_BUNDLE_IMAGE_REPO="quay.io/disposab1e/${ARGOCD_OPERATOR_BUNDLE_IMAGE_NAME}"
+            ARGOCD_OPERATOR_BUNDLE_IMAGE_REPO=quay.io/disposab1e/$ARGOCD_OPERATOR_BUNDLE_IMAGE_NAME
             ARGOCD_OPERATOR_BUNDLE_IMAGE_TAG="0.0.2"
-            ARGOCD_OPERATOR_BUNDLE_IMAGE="${ARGOCD_OPERATOR_BUNDLE_IMAGE_REPO}:${ARGOCD_OPERATOR_BUNDLE_IMAGE_TAG}"
-            operator-courier --verbose verify ${ARGOCD_OPERATOR_BUNDLE_MANIFEST_DIR}
-            mkdir -p ${ARGOCD_OPERATOR_BUNDLE_BUILD_DIR}
-            cp -r ${ARGOCD_OPERATOR_BUNDLE_DIR}/* ${ARGOCD_OPERATOR_BUNDLE_BUILD_DIR}/
-            mkdir -p ${ARGOCD_OPERATOR_BUNDLE_BUILD_DIR}/manifests
-            cp -r ${ARGOCD_OPERATOR_BUNDLE_MANIFEST_DIR} ${ARGOCD_OPERATOR_BUNDLE_BUILD_DIR}/manifests/
-            docker build -t ${ARGOCD_OPERATOR_BUNDLE_IMAGE} ${ARGOCD_OPERATOR_BUNDLE_BUILD_DIR}
+            ARGOCD_OPERATOR_BUNDLE_IMAGE=$ARGOCD_OPERATOR_BUNDLE_IMAGE_REPO:$ARGOCD_OPERATOR_BUNDLE_IMAGE_TAG
+            operator-courier --verbose verify $ARGOCD_OPERATOR_BUNDLE_MANIFEST_DIR
+            mkdir -p $ARGOCD_OPERATOR_BUNDLE_BUILD_DIR
+            cp -r $ARGOCD_OPERATOR_BUNDLE_DIR/* $ARGOCD_OPERATOR_BUNDLE_BUILD_DIR/
+            mkdir -p $ARGOCD_OPERATOR_BUNDLE_BUILD_DIR/manifests
+            cp -r $ARGOCD_OPERATOR_BUNDLE_MANIFEST_DIR $ARGOCD_OPERATOR_BUNDLE_BUILD_DIR/manifests/
+            docker build -t $ARGOCD_OPERATOR_BUNDLE_IMAGE $ARGOCD_OPERATOR_BUNDLE_BUILD_DIR
 jobs:
   build:
     working_directory: /home/circleci/.go_workspace/src/github.com/disposab1e/argocd-operator-helm
