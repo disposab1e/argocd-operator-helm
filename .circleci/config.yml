@@ -27,7 +27,7 @@ commands:
             ./hack/build.sh
 jobs:
   build:
-    working_directory: /home/circleci/.go_workspace/src/github.com/disposab1e/argocd-operator-helm
+    working_directory: /home/circleci/.go_workspace/src/github.com/disposab1e
     machine:
       image: circleci/classic:201808-01
     steps:
