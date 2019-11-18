@@ -24,10 +24,11 @@ commands:
           name: Build Operator
           command: |
             cd /home/circleci/.go_workspace/src/github.com/disposab1e/argocd-operator-helm
-            ./hack/build.sh
+            ls -la
+            hack/build.sh
 jobs:
   build:
-    working_directory: /home/circleci/.go_workspace/src/github.com/disposab1e
+    working_directory: /home/circleci/.go_workspace/src/github.com/disposab1e/argocd-operator-helm
     machine:
       image: circleci/classic:201808-01
     steps:
