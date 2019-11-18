@@ -41,6 +41,8 @@ commands:
 jobs:
   build:
     working_directory: /home/circleci/.go_workspace/src/github.com/disposab1e/argocd-operator-helm
+    python:
+        version: 3.6.1
     machine:
       image: circleci/classic:201808-01
     steps:
