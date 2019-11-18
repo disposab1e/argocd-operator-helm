@@ -15,7 +15,7 @@ commands:
       - run:
           name: Install Operator SDK 0.12.0
           command: |
-            pip3 install operator-courier
+            pip install operator-courier
   install_operator_courier:
     steps:
       - run:
@@ -58,8 +58,10 @@ jobs:
     steps:
       - install_golang
       - install_operator_sdk
+      - install_operator_courier
       - checkout
       - build_operator
+      - build_bundle
     environment:
       GO111MODULE: "on"
 workflows:
