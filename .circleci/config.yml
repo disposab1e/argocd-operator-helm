@@ -25,7 +25,7 @@ commands:
           command: |
             cd /home/circleci/.go_workspace/src/github.com/disposab1e/argocd-operator-helm
             ls -la
-            hack/build.sh
+            operator-sdk build disposab1e/argocd-operator-helm:0.0.2
 jobs:
   build:
     working_directory: /home/circleci/.go_workspace/src/github.com/disposab1e/argocd-operator-helm
