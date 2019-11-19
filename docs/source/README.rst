@@ -2,25 +2,27 @@
 Argo CD Operator (Helm)
 ***********************
 
+.. image:: https://img.shields.io/badge/argocd-1.3-green.svg
+   :target: https://github.com/argoproj/argo-cd/releases/tag/v1.2.4
+   :alt: Argo CD
 .. image:: https://img.shields.io/badge/ocp-4.2-red.svg
    :target: https://www.openshift.com/products/container-platform
    :alt: OpenShift Container Platform
 .. image:: https://img.shields.io/badge/kubernetes-1.14-blue.svg
    :target: https://kubernetes.io/
    :alt: Kubernetes
-.. image:: https://img.shields.io/badge/argocd-1.3-green.svg
-   :target: https://github.com/argoproj/argo-cd/releases/tag/v1.2.4
-   :alt: Argo CD
 .. image:: https://img.shields.io/badge/license-Apache%202.0-blue.svg
    :target: http://www.apache.org/licenses/LICENSE-2.0.html
    :alt: License
 .. image:: https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest
    :target: https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
+.. image:: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/master.svg?style=svg
+   :target: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/master
+   :alt: Build with CircleCI
 .. image:: https://img.shields.io/badge/latest%20release-0.0.2-yellow.svg
    :target: https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.2
    :alt: Latest Release
-
 
 The `Argo CD Operator (Helm)`_ is based on the `Argo CD Helm Chart`_ 
 and currently installs the non-HA version of Argo CD in 

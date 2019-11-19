@@ -1,9 +1,10 @@
-![OpenShift Container Platform](https://img.shields.io/badge/ocp-4.2-red.svg)
-![Kubernetes](https://img.shields.io/badge/kubernetes-1.14-blue.svg)
-![Argo CD](https://img.shields.io/badge/argocd-1.3.0-green.svg)
-![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)
-![Documentation Status](https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest)
-![Latest Release](https://img.shields.io/badge/latest%20release-0.0.2-yellow.svg)
+[![Argo CD](https://img.shields.io/badge/argocd-1.3.0-green.svg)](https://github.com/argoproj/argo-cd/releases/tag/v1.3.0)
+[![OpenShift Container Platform](https://img.shields.io/badge/ocp-4.2-red.svg)](https://www.openshift.com/products/container-platform)
+[![Kubernetes](https://img.shields.io/badge/kubernetes-1.14-blue.svg)](https://kubernetes.io/)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![Documentation Status](https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest)](https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest)
+[![CircleCI](https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/master.svg?style=svg)](https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/master)
+[![Latest Release](https://img.shields.io/badge/latest%20release-0.0.2-yellow.svg)](https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.2)
 
 
 # Argo CD Operator (Helm)
