@@ -41,7 +41,7 @@ commands:
 jobs:
   build:
     docker:
-      - image: golang:1.6.4-jessie   # (1)
+      - image: golang:1.12.13   # (1)
     working_directory: /go/src/github.com/disposab1e/argocd-operator-helm
     environment:
       GO111MODULE: "on"
