@@ -1,15 +1,5 @@
 version: 2.1
 commands:
-  install_golang:
-    steps:
-      - run:
-          name: Install Golang v1.12.6
-          command: |
-            go get golang.org/dl/go1.12.6
-            [ -e /home/circleci/sdk/go1.12.6 ] || go1.12.6 download
-            go env
-            echo "export GOPATH=/home/circleci/.go_workspace" | tee -a $BASH_ENV
-            echo "export PATH=/home/circleci/sdk/go1.12.6/bin:\$PATH" | tee -a $BASH_ENV
   install_operator_sdk:
     steps:
       - run:
@@ -52,8 +42,8 @@ jobs:
       - install_operator_sdk
       - checkout
       - run: |
-          cd /go/src/github.com/disposab1e/argocd-operator-helm
-          ls -la
+          ./hack/build.sh
+      - run: |
           operator-sdk build disposab1e/argocd-operator-helm:0.0.2
   bundle:
     docker:

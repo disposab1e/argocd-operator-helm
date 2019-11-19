@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+set -eux -o pipefail
 
 # General vars
 export ARGOCD_OPERATOR_NAME=${ARGOCD_OPERATOR_NAME:-"argocd-operator-helm"}
