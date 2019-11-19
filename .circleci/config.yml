@@ -3,21 +3,21 @@ commands:
   install_docker_client:
     steps:
       - run:
-          name: Install Operator Courier (latest)
+          name: Install Docker client
           command: |
             set -x
-            VER="18.06.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            echo ${DOCKER_RELEASE_VERSION}
+            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-${DOCKER_RELEASE_VERSION}.tgz
+            tar -xz -C /tmp -f /tmp/docker-${DOCKER_RELEASE_VERSION}.tgz
             mv /tmp/docker/* /usr/bin
   install_operator_sdk:
     steps:
       - run:
-          name: Install Operator Courier (latest)
+          name: Install Operator SDK
           command: |
-            export  RELEASE_VERSION=v0.12.0
-            curl -LO https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
-            chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu && mkdir -p /usr/local/bin/ && cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-sdk && rm operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
+            echo ${OPERATOR_COURIER_RELEASE_VERSION}
+            curl -LO https://github.com/operator-framework/operator-sdk/releases/download/${OPERATOR_COURIER_RELEASE_VERSION}/operator-sdk-${OPERATOR_COURIER_RELEASE_VERSION}-x86_64-linux-gnu
+            chmod +x operator-sdk-${OPERATOR_COURIER_RELEASE_VERSION}-x86_64-linux-gnu && mkdir -p /usr/local/bin/ && cp operator-sdk-${OPERATOR_COURIER_RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-sdk && rm operator-sdk-${OPERATOR_COURIER_RELEASE_VERSION}-x86_64-linux-gnu
   install_operator_courier:
     steps:
       - run:
@@ -32,14 +32,13 @@ jobs:
     environment:
       GO111MODULE: "on"
     steps:
-      - setup_remote_docker:   # (2)
+      - setup_remote_docker:
           version: 18.06.0-ce
-          docker_layer_caching: false # (3)
+          docker_layer_caching: false
       - install_docker_client
       - install_operator_sdk
       - checkout
-      - run: |
-          ./hack/build.sh
+      - run: ./hack/build.sh
   bundle:
     docker:
       - image: python:3.6.4
@@ -51,8 +50,7 @@ jobs:
       - install_docker_client
       - install_operator_courier
       - checkout
-      - run: |
-          ./hack/bundle.sh
+      - run: ./hack/bundle.sh
 workflows:
   version: 2
   build:
