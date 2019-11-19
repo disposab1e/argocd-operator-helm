@@ -1,6 +1,5 @@
-#!/bin/sh
-
-set -e
+#!/bin/bash
+set -eux -o pipefail
 
 HACK_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source ${HACK_DIR}/env.sh
@@ -20,4 +19,4 @@ cp -r ${ARGOCD_OPERATOR_BUNDLE_MANIFEST_DIR} ${ARGOCD_OPERATOR_BUNDLE_BUILD_DIR}
 
 # Build the bundle registry container image
 docker build -t ${ARGOCD_OPERATOR_BUNDLE_IMAGE} ${ARGOCD_OPERATOR_BUNDLE_BUILD_DIR}
-docker push ${ARGOCD_OPERATOR_BUNDLE_IMAGE}
+#docker push ${ARGOCD_OPERATOR_BUNDLE_IMAGE}

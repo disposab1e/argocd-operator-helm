@@ -43,8 +43,6 @@ jobs:
       - checkout
       - run: |
           ./hack/build.sh
-      - run: |
-          operator-sdk build disposab1e/argocd-operator-helm:0.0.2
   bundle:
     docker:
       - image: python:3.6.4
@@ -64,7 +62,7 @@ jobs:
       - install_operator_courier
       - checkout
       - run: |
-          operator-courier --verbose verify /go/src/github.com/disposab1e/argocd-operator-helm/deploy/olm-catalog/argocd-operator-helm
+          ./hack/bundle.sh
 workflows:
   version: 2
   build:
