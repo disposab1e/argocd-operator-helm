@@ -1,5 +1,15 @@
 version: 2.1
 commands:
+  install_docker_client:
+    steps:
+      - run:
+          name: Install Operator Courier (latest)
+          command: |
+            set -x
+            VER="18.06.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
   install_operator_sdk:
     steps:
       - run:
@@ -14,12 +24,6 @@ commands:
           name: Install Operator Courier
           command: |
             pip3 install operator-courier
-  build_bundle:
-    steps:
-      - run:
-          name: Build Bundle
-          command: |
-            operator-courier --verbose verify /home/circleci/.go_workspace/src/github.com/disposab1e/argocd-operator-helm/deploy/olm-catalog/argocd-operator-helm
 jobs:
   build:
     docker:
@@ -31,14 +35,7 @@ jobs:
       - setup_remote_docker:   # (2)
           version: 18.06.0-ce
           docker_layer_caching: false # (3)
-      - run:
-          name: Install Docker client
-          command: |
-            set -x
-            VER="18.06.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
+      - install_docker_client
       - install_operator_sdk
       - checkout
       - run: |
@@ -48,17 +45,10 @@ jobs:
       - image: python:3.6.4
     working_directory: /go/src/github.com/disposab1e/argocd-operator-helm
     steps:
-      - setup_remote_docker:   # (2)
+      - setup_remote_docker:
           version: 18.06.0-ce
-          docker_layer_caching: false # (3)
-      - run:
-          name: Install Docker client
-          command: |
-            set -x
-            VER="18.06.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
+          docker_layer_caching: false
+      - install_docker_client
       - install_operator_courier
       - checkout
       - run: |
