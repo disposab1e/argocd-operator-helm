@@ -21,17 +21,9 @@ commands:
   install_operator_courier:
     steps:
       - run:
-          name: Install Operator SDK 0.12.0
+          name: Install Operator Courier
           command: |
-            pip install operator-courier
-  build_operator:
-    steps:
-      - run:
-          name: Build Operator
-          command: |
-            cd /home/circleci/.go_workspace/src/github.com/disposab1e/argocd-operator-helm
-            ls -la
-            operator-sdk build disposab1e/argocd-operator-helm:0.0.2
+            pip3 install operator-courier
   build_bundle:
     steps:
       - run:
@@ -41,20 +33,14 @@ commands:
 jobs:
   build:
     docker:
-      - image: golang:1.12.13   # (1)
+      - image: golang:1.12.13
     working_directory: /go/src/github.com/disposab1e/argocd-operator-helm
     environment:
       GO111MODULE: "on"
     steps:
-      - install_operator_sdk
-      - checkout
-      # ... steps for building/testing app ...
       - setup_remote_docker:   # (2)
           version: 18.06.0-ce
           docker_layer_caching: false # (3)
-
-      # use a primary image that already has Docker (recommended)
-      # or install it during a build like we do here
       - run:
           name: Install Docker client
           command: |
@@ -63,14 +49,35 @@ jobs:
             curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
             mv /tmp/docker/* /usr/bin
-
-      # build and push Docker image
+      - install_operator_sdk
+      - checkout
       - run: |
           cd /go/src/github.com/disposab1e/argocd-operator-helm
           ls -la
           operator-sdk build disposab1e/argocd-operator-helm:0.0.2
+  bundle:
+    docker:
+      - image: python:3.6.4
+    working_directory: /go/src/github.com/disposab1e/argocd-operator-helm
+    steps:
+      - setup_remote_docker:   # (2)
+          version: 18.06.0-ce
+          docker_layer_caching: false # (3)
+      - run:
+          name: Install Docker client
+          command: |
+            set -x
+            VER="18.06.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            mv /tmp/docker/* /usr/bin
+      - install_operator_courier
+      - checkout
+      - run: |
+          operator-courier --verbose verify /go/src/github.com/disposab1e/argocd-operator-helm/deploy/olm-catalog/argocd-operator-helm
 workflows:
   version: 2
   build:
     jobs:
       - build
+      - bundle
