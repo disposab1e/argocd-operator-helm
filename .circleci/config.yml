@@ -14,7 +14,7 @@ jobs:
       - run:
           name: Create Kubernetes Cluster
           command: |
-            kind create cluster
+            kind create cluster --name kind-1
       - run:
           name: Install kubectl
           command: |
@@ -29,9 +29,9 @@ jobs:
             echo "susi"
             echo 'export KUBECONFIG=$(kind get kubeconfig-path)' >> $BASH_ENV
             source $BASH_ENV
-            kubectl cluster-info
+            kubectl cluster-info --context kind-1
             cat $KUBECONFIG
-            kubectl get pods --all-namespaces
+            kubectl get pods --all-namespaces --context kind-1
 workflows:
   version: 2
   build:
