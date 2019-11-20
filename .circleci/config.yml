@@ -27,7 +27,8 @@ jobs:
             echo "paula"
             kind get kubeconfig-path
             echo "susi"
-            export KUBECONFIG="$(kind get kubeconfig-path)"
+            echo 'export KUBECONFIG=$(kind get kubeconfig-path)' >> $BASH_ENV
+            source $BASH_ENV
             kubectl cluster-info
             kubectl get pods --all-namespaces
 workflows:
