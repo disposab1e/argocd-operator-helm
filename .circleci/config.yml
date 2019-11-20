@@ -93,3 +93,4 @@ workflows:
     jobs:
       - build
       - bundle
+      - test
