@@ -57,10 +57,6 @@ jobs:
       image: circleci/classic:201808-01
     working_directory: /go/src/github.com/disposab1e/argocd-operator-helm
     steps:
-      - setup_remote_docker:
-          version: 18.06.0-ce
-          docker_layer_caching: false
-      - install_docker_client
       - checkout
       - run:
           name: Install KinD
