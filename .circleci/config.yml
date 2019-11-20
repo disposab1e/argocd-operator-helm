@@ -25,8 +25,8 @@ jobs:
           name: Run Tests
           command: |
             echo "paula"
-            kind get kubeconfig-pat
-            echos "susi"
+            kind get kubeconfig-path
+            echo "susi"
             export KUBECONFIG="$(kind get kubeconfig-path)"
             kubectl cluster-info
             kubectl get pods --all-namespaces
