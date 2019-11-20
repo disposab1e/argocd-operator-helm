@@ -30,6 +30,7 @@ jobs:
             echo 'export KUBECONFIG=$(kind get kubeconfig-path)' >> $BASH_ENV
             source $BASH_ENV
             kubectl cluster-info
+            cat $KUBECONFIG
             kubectl get pods --all-namespaces
 workflows:
   version: 2
