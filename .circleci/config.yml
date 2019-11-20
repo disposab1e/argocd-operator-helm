@@ -3,7 +3,6 @@ jobs:
   build:
     machine: 
       image: circleci/classic:201808-01
-    working_directory: /go/src/github.com/disposab1e/argocd-operator-helm
     steps:
       - checkout
       - run:
