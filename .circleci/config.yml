@@ -43,6 +43,9 @@ jobs:
             kubectl rollout status -w deployment/olm-operator -n olm
             kubectl rollout status -w deployment/catalog-operator -n olm
             kubectl rollout status -w deployment/packageserver -n olm
+
+            kubectl get pods --all-namespaces
+
 workflows:
   version: 2
   build:
