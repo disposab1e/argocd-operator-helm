@@ -1,58 +1,6 @@
 version: 2.1
-commands:
-  install_docker_client:
-    steps:
-      - run:
-          name: Install Docker client
-          command: |
-            set -x
-            DOCKER_RELEASE_VERSION=18.06.0-ce
-            curl -L -o /tmp/docker-$DOCKER_RELEASE_VERSION.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$DOCKER_RELEASE_VERSION.tgz
-            tar -xz -C /tmp -f /tmp/docker-$DOCKER_RELEASE_VERSION.tgz
-            mv /tmp/docker/* /usr/bin
-  install_operator_sdk:
-    steps:
-      - run:
-          name: Install Operator SDK
-          command: |
-            OPERATOR_SDK_RELEASE_VERSION=v0.12.0
-            curl -LO https://github.com/operator-framework/operator-sdk/releases/download/$OPERATOR_SDK_RELEASE_VERSION/operator-sdk-$OPERATOR_SDK_RELEASE_VERSION-x86_64-linux-gnu
-            chmod +x operator-sdk-$OPERATOR_SDK_RELEASE_VERSION-x86_64-linux-gnu && mkdir -p /usr/local/bin/ && cp operator-sdk-$OPERATOR_SDK_RELEASE_VERSION-x86_64-linux-gnu /usr/local/bin/operator-sdk && rm operator-sdk-$OPERATOR_SDK_RELEASE_VERSION-x86_64-linux-gnu
-  install_operator_courier:
-    steps:
-      - run:
-          name: Install Operator Courier
-          command: |
-            pip3 install operator-courier
 jobs:
   build:
-    docker:
-      - image: golang:1.12.13
-    working_directory: /go/src/github.com/disposab1e/argocd-operator-helm
-    environment:
-      GO111MODULE: "on"
-    steps:
-      - setup_remote_docker:
-          version: 18.06.0-ce
-          docker_layer_caching: false
-      - install_docker_client
-      - install_operator_sdk
-      - checkout
-      - run: ./hack/build.sh
-  bundle:
-    docker:
-      - image: python:3.6.4
-    working_directory: /go/src/github.com/disposab1e/argocd-operator-helm
-    steps:
-      - setup_remote_docker:
-          version: 18.06.0-ce
-          docker_layer_caching: false
-      - install_docker_client
-      - install_operator_courier
-      - checkout
-      - run: ./hack/bundle.sh
-
-  test:
     machine: 
       image: circleci/classic:201808-01
     working_directory: /go/src/github.com/disposab1e/argocd-operator-helm
@@ -85,5 +33,3 @@ workflows:
   build:
     jobs:
       - build
-      - bundle
-      - test
