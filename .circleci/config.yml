@@ -51,6 +51,42 @@ jobs:
       - install_operator_courier
       - checkout
       - run: ./hack/bundle.sh
+
+  test:
+    docker:
+      - image: golang:1.12.13
+    environment:
+      GO111MODULE: "on"
+    working_directory: /go/src/github.com/disposab1e/argocd-operator-helm
+    steps:
+      - setup_remote_docker:
+          version: 18.06.0-ce
+          docker_layer_caching: false
+      - install_docker_client
+      - install_operator_courier
+      - checkout
+      - run:
+          name: Install KinD
+          command: |
+            curl -Lo kind https://github.com/kubernetes-sigs/kind/releases/download/0.1.0/kind-linux-amd64
+            chmod +x kind
+            sudo mv kind /usr/local/bin/
+      - run:
+          name: Create Kubernetes Cluster
+          command: |
+            kind create cluster
+      - run:
+          name: Install kubectl
+          command: |
+            curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/v1.12.0/bin/linux/amd64/kubectl
+            chmod +x kubectl
+            sudo mv kubectl /usr/local/bin/
+      - run:
+          name: Run Tests
+          command: |
+            export KUBECONFIG="$(kind get kubeconfig-path)"
+            kubectl cluster-info
+            kubectl get pods --all-namespaces
 workflows:
   version: 2
   build:
