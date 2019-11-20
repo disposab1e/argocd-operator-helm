@@ -63,7 +63,6 @@ jobs:
           version: 18.06.0-ce
           docker_layer_caching: false
       - install_docker_client
-      - install_operator_courier
       - checkout
       - run:
           name: Install KinD
