@@ -23,7 +23,7 @@ jobs:
           name: Run integration tests
           command: |
             sudo /snap/bin/microk8s.kubectl config view --raw > /tmp/kubeconfig
-            echo 'export KUBECONFIG=KUBECONFIG=/tmp/kubeconfig' >> $BASH_ENV
+            echo 'export KUBECONFIG=/tmp/kubeconfig' >> $BASH_ENV
             source $BASH_ENV
             sudo microk8s.kubectl cluster-info
             cat $KUBECONFIG
