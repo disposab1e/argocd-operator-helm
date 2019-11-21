@@ -8,7 +8,7 @@ jobs:
       - run:
           name: Install Snap
           command: |
-            sudo apt install snapd
+            sudo apt-get install snapd
       - run:
           name: Create Kubernetes Cluster
           command: |
