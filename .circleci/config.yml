@@ -16,8 +16,8 @@ jobs:
           command: |
             sudo /snap/bin/microk8s.kubectl config view --raw > /tmp/kubeconfig
             echo 'export KUBECONFIG=/tmp/kubeconfig' >> $BASH_ENV
-            source $BASH_ENV
             sudo snap install kubectl --classic
+            echo 'export PATH=/snap/bin:$PATH' >> $BASH_ENV
             source $BASH_ENV
             kubectl --kubeconfig /tmp/kubeconfig
             kubectl cluster-info
