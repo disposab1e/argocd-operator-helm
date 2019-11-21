@@ -8,10 +8,9 @@ jobs:
       - run:
           name: Launch Kubernetes with microk8s
           command: |
-            sudo -H -s -E
-
-            snap install microk8s --classic --channel=1.16/stable
-            usermod -a -G microk8s circleci
+            sudo snap install microk8s --classic --channel=1.16/stable
+            sudo chown root:ubuntu /var/snap/microk8s/current/credentials/
+            sudo chown root:ubuntu /var/snap/microk8s/current/credentials/client.config
             # wait until a k8s node is ready
             sleep 10
             n=0
