@@ -25,21 +25,21 @@ jobs:
             sudo /snap/bin/microk8s.kubectl config > ~/.kube/config
             echo 'export KUBECONFIG=KUBECONFIG=~/.kube/config' >> $BASH_ENV
             source $BASH_ENV
-            microk8s.kubectl cluster-info
+            sudo microk8s.kubectl cluster-info
             cat $KUBECONFIG
-            microk8s.kubectl get pods --all-namespaces
+            sudo microk8s.kubectl get pods --all-namespaces
 
-            microk8s.kubectl apply -f \
+            sudo microk8s.kubectl apply -f \
               https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.12.0/crds.yaml
 
-            microk8s.kubectl apply -f \
+            sudo microk8s.kubectl apply -f \
             https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.12.0/olm.yaml
 
-            microk8s.kubectl rollout status -w deployment/olm-operator -n olm
-            microk8s.kubectl rollout status -w deployment/catalog-operator -n olm
-            microk8s.kubectl rollout status -w deployment/packageserver -n olm
+            sudo microk8s.kubectl rollout status -w deployment/olm-operator -n olm
+            sudo microk8s.kubectl rollout status -w deployment/catalog-operator -n olm
+            sudo microk8s.kubectl rollout status -w deployment/packageserver -n olm
 
-            microk8s.kubectl get pods --all-namespaces
+            sudo microk8s.kubectl get pods --all-namespaces
 
 workflows:
   version: 2
