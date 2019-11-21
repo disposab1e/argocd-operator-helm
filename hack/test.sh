@@ -4,12 +4,12 @@ set -eux -o pipefail
 kubectl apply -f guides/kubernetes/olm/namespace.yaml
 
 kubectl apply -f guides/kubernetes/olm/catalog-source.yaml
-kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=30s
+kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=60s
 
 kubectl apply -f guides/kubernetes/olm/operator-group.yaml
 kubectl apply -f guides/kubernetes/olm/subscription.yaml
 
-sleep 10
+sleep 30
 
 kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=30s
 kubectl rollout status -w deployment/argocd-operator-helm -n argocd
