@@ -18,6 +18,7 @@ jobs:
             echo 'export KUBECONFIG=/tmp/kubeconfig' >> $BASH_ENV
             source $BASH_ENV
             sudo snap install kubectl --classic
+            source $BASH_ENV
             kubectl --kubeconfig /tmp/kubeconfig
             kubectl cluster-info
             cat $KUBECONFIG
