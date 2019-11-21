@@ -6,16 +6,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Snap
-          command: |
-            sudo rm /var/lib/dpkg/lock
-            sudo dpkg --configure -a
-            sudo apt-get install snapd
-      - run:
-          name: Create Kubernetes Cluster
-          command: |
-            kind create cluster
-      - run:
           name: Launch Kubernetes with microk8s
           command: |
             sudo snap install microk8s --classic --channel=1.16/stable
