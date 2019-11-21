@@ -8,6 +8,7 @@ jobs:
       - run:
           name: Install Snap
           command: |
+            sudo rm /var/lib/dpkg/lock
             sudo apt-get install snapd
       - run:
           name: Create Kubernetes Cluster
