@@ -24,7 +24,7 @@ jobs:
           command: |
             sudo /snap/bin/microk8s.kubectl config > ~/.kube/config
             echo 'export KUBECONFIG=KUBECONFIG=~/.kube/config' >> $BASH_ENV
-            source $BASH_ENV
+            sudo source $BASH_ENV
             sudo microk8s.kubectl cluster-info
             cat $KUBECONFIG
             sudo microk8s.kubectl get pods --all-namespaces
