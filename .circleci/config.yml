@@ -8,7 +8,10 @@ jobs:
       - run:
           name: Launch Kubernetes with microk8s
           command: |
-            sudo snap install microk8s --classic --channel=1.16/stable
+            sudo -H -s -E
+
+            snap install microk8s --classic --channel=1.16/stable
+            usermod -a -G microk8s circleci
             # wait until a k8s node is ready
             sleep 10
             n=0
@@ -22,8 +25,8 @@ jobs:
       - run:
           name: Run integration tests
           command: |
-            /snap/bin/microk8s.kubectl config view --raw > /tmp/kubeconfig
-            echo 'export KUBECONFIG=KUBECONFIG=/tmp/kubeconfig' >> $BASH_ENV
+            /snap/bin/microk8s.kubectl config > ~/.kube/config
+            echo 'export KUBECONFIG=KUBECONFIG=~/.kube/config' >> $BASH_ENV
             source $BASH_ENV
             kubectl cluster-info
             cat $KUBECONFIG
