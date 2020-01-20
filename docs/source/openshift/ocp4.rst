@@ -85,7 +85,7 @@ or with the `Default Authentication`_ provider.
 
 .. Note:: This operator shares all `configuration values`_ from the Argo CD Helm Chart.
 
-.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
+.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.3/helm-charts/argo-cd/README.md
 
 OpenShift OAuth
 """""""""""""""

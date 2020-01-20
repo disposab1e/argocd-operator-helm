@@ -40,7 +40,7 @@ Install the operator and Argo CD in a new ``argocd`` namespace.
 
 .. Note:: This operator shares all `configuration values`_ from the Argo CD Helm Chart.
 
-.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
+.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.3/helm-charts/argo-cd/README.md
 
 
 OpenShift 4
@@ -52,14 +52,14 @@ OpenShift 4
     # Operator
 
     oc apply -f  \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/quickstart/ocp4/operator.yaml
+    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.3/quickstart/ocp4/operator.yaml
 
 .. code-block:: bash
 
     # Argo CD with OpenShift OAuth Integration
 
     oc apply -f  \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/quickstart/ocp4/argocd.yaml
+    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.3/quickstart/ocp4/argocd.yaml
 
 .. Note:: You must have an existing `developer`, `kubeadmin` or `admin` User for OAuth quickstart. If not change this file to fit your needs. 
 
@@ -72,14 +72,14 @@ OpenShift 3
     # Operator
 
     oc apply -f  \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/quickstart/ocp3/operator.yaml
+    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.3/quickstart/ocp3/operator.yaml
 
 .. code-block:: bash
 
     # Argo CD with OpenShift OAuth Integration
 
     oc apply -f  \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/quickstart/ocp3/argocd.yaml
+    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.3/quickstart/ocp3/argocd.yaml
 
 .. Note:: You must have an existing `developer`, `kubeadmin` or `admin` User for OAuth quickstart. If not change this file to fit your needs. 
 
@@ -92,7 +92,7 @@ Kubernetes
     # Operator
 
     kubectl apply -f \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/quickstart/kubernetes/operator.yaml
+    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.3/quickstart/kubernetes/operator.yaml
 
 
 .. code-block:: bash
@@ -100,5 +100,5 @@ Kubernetes
     # Argo CD
 
     kubectl apply -f \
-    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/master/quickstart/kubernetes/argocd.yaml
+    https://raw.githubusercontent.com/disposab1e/argocd-operator-helm/release-0.0.3/quickstart/kubernetes/argocd.yaml
 

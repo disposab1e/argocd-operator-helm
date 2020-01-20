@@ -21,7 +21,7 @@ Prerequisites
 
 As usual you need to have access to an up and running Kubernetes cluster. 
 
-.. _example: https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/kubernetes/examples/gcp.sh
+.. _example: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.3/deploy/kubernetes/examples/gcp.sh
 
 .. Caution:: We recommend adding a LoadBalancer to your cluster!
 
@@ -61,7 +61,7 @@ Install Argo CD from the command line.
 
 .. Note:: This operator shares all `configuration values`_ from the Argo CD Helm Chart.
 
-.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
+.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.3/helm-charts/argo-cd/README.md
 
 .. image:: https://img.shields.io/badge/git%20clone-https%3A%2F%2Fgithub.com%2Fdisposab1e%2Fargocd--operator--helm.git-9cf.svg
    :target: https://github.com/disposab1e/argocd-operator-helm

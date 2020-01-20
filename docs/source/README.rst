@@ -17,8 +17,8 @@ Argo CD Operator (Helm)
 .. image:: https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest
    :target: https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
-.. image:: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/master.svg?style=svg
-   :target: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/master
+.. image:: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/release-0.0.3.svg?style=svg
+   :target: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/release-0.0.3
    :alt: Build with CircleCI
 .. image:: https://img.shields.io/badge/latest%20release-0.0.3-yellow.svg
    :target: https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.3
@@ -69,7 +69,7 @@ Operator Features
 
 .. Note:: This operator shares all `configuration values`_ from the Argo CD Helm 3 Chart.
 
-.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
+.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.3/helm-charts/argo-cd/README.md
 
 
 Get started
@@ -78,7 +78,7 @@ Get started
 `Quickstart`_ or try our comprehensive guides to install this 
 opertor and `Argo CD`_ in `OpenShift 3`_, `OpenShift 4`_, `Minishift`_, `ContainerReady Containers`_, `Google Cloud Platform`_ or `Minikube`_.
 
-.. _Argo CD Helm 3 Chart: https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd
+.. _Argo CD Helm 3 Chart: https://github.com/argoproj/argo-helm/tree/release-0.0.3/charts/argo-cd
 .. _Argo CD Operator (Helm): https://github.com/disposab1e/argocd-operator-helm
 .. _Argo CD: https://argoproj.github.io/argo-cd/
 .. _Quickstart: quickstart.html
@@ -104,5 +104,5 @@ Argo CD Operator (Helm) is released under the `Apache 2.0`_ license.
 See the `LICENSE`_ file for details.
 
 .. _Apache 2.0: http://www.apache.org/licenses/LICENSE-2.0.html
-.. _LICENSE: https://github.com/disposab1e/argocd-operator-helm/blob/master/LICENSE
+.. _LICENSE: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.3/LICENSE
 

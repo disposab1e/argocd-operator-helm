@@ -4,13 +4,13 @@
 [![Kubernetes](https://img.shields.io/badge/kubernetes-1.14-blue.svg)](https://kubernetes.io/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Documentation Status](https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest)](https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest)
-[![CircleCI](https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/master.svg?style=svg)](https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/master)
+[![CircleCI](https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/release-0.0.3.svg?style=svg)](https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/release-0.0.3)
 [![Latest Release](https://img.shields.io/badge/latest%20release-0.0.3-yellow.svg)](https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.3)
 
 
 # Argo CD Operator (Helm)
 
-This **community maintained** Argo CD Operator is based on the **community maintained** [Argo CD Helm 3 Chart](https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd) and currently installs the non-HA version of Argo CD in OpenShift Container Platform and Kubernetes.
+This **community maintained** Argo CD Operator is based on the **community maintained** [Argo CD Helm 3 Chart](https://github.com/argoproj/argo-helm/tree/release-0.0.3/charts/argo-cd) and currently installs the non-HA version of Argo CD in OpenShift Container Platform and Kubernetes.
 
 ## About Argo CD
 
@@ -49,4 +49,4 @@ This operator supports OpenShift OAuth integration on all supported OpenShift pl
 ## License
 
 Argo CD Operator (Helm) is released under the [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0.html) license. 
-See the [LICENSE](https://github.com/disposab1e/argocd-operator-helm/blob/master/LICENSE) file for details.
+See the [LICENSE](https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.3/LICENSE) file for details.
