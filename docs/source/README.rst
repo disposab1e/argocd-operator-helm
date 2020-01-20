@@ -34,7 +34,7 @@ and currently installs the non-HA version of Argo CD in
 
 
 .. Note::
-    **Argo CD Operator (Helm)** and the **Argo CD Helm Chart** are **community maintained** projects!
+    **Argo CD Operator (Helm)** and the **Argo CD Helm 3 Chart** are **community maintained** projects!
 
 
 About Argo CD
@@ -67,7 +67,7 @@ Operator Features
 
 - Basic Installation
 
-.. Note:: This operator shares all `configuration values`_ from the Argo CD Helm Chart.
+.. Note:: This operator shares all `configuration values`_ from the Argo CD Helm 3 Chart.
 
 .. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
 
