@@ -14,8 +14,8 @@ Argo CD Operator (Helm)
 .. image:: https://img.shields.io/badge/kubernetes-1.14-blue.svg
    :target: https://kubernetes.io/
    :alt: Kubernetes
-.. image:: https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest
-   :target: https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/argocd-operator-helm/badge/?version=release-0.0.3
+   :target: https://argocd-operator-helm.readthedocs.io/en/release-0.0.3/?badge=release-0.0.3
    :alt: Documentation Status
 .. image:: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/release-0.0.3.svg?style=svg
    :target: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/release-0.0.3

@@ -3,7 +3,7 @@
 [![OpenShift Container Platform](https://img.shields.io/badge/ocp-4.2-red.svg)](https://www.openshift.com/products/container-platform)
 [![Kubernetes](https://img.shields.io/badge/kubernetes-1.14-blue.svg)](https://kubernetes.io/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-[![Documentation Status](https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest)](https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/argocd-operator-helm/badge/?version=release-0.0.3)](https://argocd-operator-helm.readthedocs.io/en/release-0.0.3/?badge=release-0.0.3)
 [![CircleCI](https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/release-0.0.3.svg?style=svg)](https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/release-0.0.3)
 [![Latest Release](https://img.shields.io/badge/latest%20release-0.0.3-yellow.svg)](https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.3)
 
@@ -35,7 +35,7 @@ This operator supports OpenShift OAuth integration on all supported OpenShift pl
 
 ## Get started
 
-[Quickstart](https://argocd-operator-helm.readthedocs.io/en/latest/quickstart.html) or try our comprehensive guides to install this opertor and [Argo CD](https://argoproj.github.io/argo-cd/) in [OpenShift 3](https://argocd-operator-helm.readthedocs.io/en/latest/openshift/ocp3.html), [OpenShift 4](https://argocd-operator-helm.readthedocs.io/en/latest/openshift/ocp4.html), [Minishift](https://argocd-operator-helm.readthedocs.io/en/latest/openshift/ocp3.html), [ContainerReady Containers](https://argocd-operator-helm.readthedocs.io/en/latest/openshift/ocp4.html), [Google Cloud Platform](https://argocd-operator-helm.readthedocs.io/en/latest/kubernetes/gcp.html) or [Minikube](https://argocd-operator-helm.readthedocs.io/en/latest/kubernetes/minikube.html).
+[Quickstart](https://argocd-operator-helm.readthedocs.io/en/release-0.0.3/quickstart.html) or try our comprehensive guides to install this opertor and [Argo CD](https://argoproj.github.io/argo-cd/) in [OpenShift 3](https://argocd-operator-helm.readthedocs.io/en/release-0.0.3/openshift/ocp3.html), [OpenShift 4](https://argocd-operator-helm.readthedocs.io/en/release-0.0.3/openshift/ocp4.html), [Minishift](https://argocd-operator-helm.readthedocs.io/en/release-0.0.3/openshift/ocp3.html), [ContainerReady Containers](https://argocd-operator-helm.readthedocs.io/en/release-0.0.3/openshift/ocp4.html), [Google Cloud Platform](https://argocd-operator-helm.readthedocs.io/en/release-0.0.3/kubernetes/gcp.html) or [Minikube](https://argocd-operator-helm.readthedocs.io/en/release-0.0.3/kubernetes/minikube.html).
 
 ## Why an Operator and not just a Helm Chart?
 
