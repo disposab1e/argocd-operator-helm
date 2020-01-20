@@ -14,8 +14,8 @@ Argo CD Operator (Helm)
 .. image:: https://img.shields.io/badge/kubernetes-1.14-blue.svg
    :target: https://kubernetes.io/
    :alt: Kubernetes
-.. image:: https://readthedocs.org/projects/argocd-operator-helm/badge/?version=release-0.0.3
-   :target: https://argocd-operator-helm.readthedocs.io/en/release-0.0.3/?badge=release-0.0.3
+.. image:: https://readthedocs.org/projects/argocd-operator-helm/badge/?version=0.0.3
+   :target: https://argocd-operator-helm.readthedocs.io/en/0.0.3/?badge=0.0.3
    :alt: Documentation Status
 .. image:: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/release-0.0.3.svg?style=svg
    :target: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/release-0.0.3
@@ -78,7 +78,7 @@ Get started
 `Quickstart`_ or try our comprehensive guides to install this 
 opertor and `Argo CD`_ in `OpenShift 3`_, `OpenShift 4`_, `Minishift`_, `ContainerReady Containers`_, `Google Cloud Platform`_ or `Minikube`_.
 
-.. _Argo CD Helm 3 Chart: https://github.com/argoproj/argo-helm/tree/release-0.0.3/charts/argo-cd
+.. _Argo CD Helm 3 Chart: https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd
 .. _Argo CD Operator (Helm): https://github.com/disposab1e/argocd-operator-helm
 .. _Argo CD: https://argoproj.github.io/argo-cd/
 .. _Quickstart: quickstart.html

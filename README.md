@@ -3,7 +3,7 @@
 [![OpenShift Container Platform](https://img.shields.io/badge/ocp-4.2-red.svg)](https://www.openshift.com/products/container-platform)
 [![Kubernetes](https://img.shields.io/badge/kubernetes-1.14-blue.svg)](https://kubernetes.io/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
-[![Documentation Status](https://readthedocs.org/projects/argocd-operator-helm/badge/?version=release-0.0.3)](https://argocd-operator-helm.readthedocs.io/en/release-0.0.3/?badge=release-0.0.3)
+[![Documentation Status](https://readthedocs.org/projects/argocd-operator-helm/badge/?version=0.0.3)](https://argocd-operator-helm.readthedocs.io/en/0.0.3/?badge=0.0.3)
 [![CircleCI](https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/release-0.0.3.svg?style=svg)](https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/release-0.0.3)
 [![Latest Release](https://img.shields.io/badge/latest%20release-0.0.3-yellow.svg)](https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.3)
 
