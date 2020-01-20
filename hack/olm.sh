@@ -2,10 +2,10 @@
 set -eux -o pipefail
 
 kubectl apply -f \
-https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.12.0/crds.yaml
+https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.13.0/crds.yaml
 
 kubectl apply -f \
-https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.12.0/olm.yaml
+https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.13.0/olm.yaml
 
 kubectl rollout status -w deployment/olm-operator -n olm
 kubectl rollout status -w deployment/catalog-operator -n olm

@@ -11,3 +11,14 @@ metadata:
     app.kubernetes.io/component: {{ .Values.server.name }}
 data:
 {{- toYaml .Values.server.config | nindent 4 }}
+{{- if .Values.openshift.enabled }}
+{{- if .Values.openshift.oAuth.enabled }}
+{{- toYaml .Values.openshift.oAuth.config.base | nindent 4 }}
+{{- toYaml .Values.openshift.oAuth.config.dex | nindent 4 }}
+{{- if .Values.openshift.oAuth.rbac.enabled }}
+            groups:
+              - {{ .Values.openshift.oAuth.rbac.groups.developers.name }}
+              - {{ .Values.openshift.oAuth.rbac.groups.admins.name }}
+{{- end }}
+{{- end }}
+{{- end }}

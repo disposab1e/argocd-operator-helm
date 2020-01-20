@@ -13,47 +13,24 @@ Argo CD CLI and the Guestbook Example in Minikube.
 Prerequisites
 =============
 
-.. image:: https://img.shields.io/badge/minikube-v1.5.2-blue.svg
+.. image:: https://img.shields.io/badge/minikube-v1.6.2-blue.svg
    :target: https://github.com/kubernetes/minikube
    :alt: minikube
-.. image:: https://img.shields.io/badge/kubernetes-1.14-blue.svg
-   :target: https://v1-14.docs.kubernetes.io/
+.. image:: https://img.shields.io/badge/kubernetes-1.16-blue.svg
+   :target: https://v1-16.docs.kubernetes.io/
    :alt: Kubernetes
-.. image:: https://img.shields.io/badge/olm-0.12.0-blue.svg
+.. image:: https://img.shields.io/badge/olm-0.13.0-blue.svg
    :target: https://github.com/operator-framework/operator-lifecycle-manager
    :alt: Operator Lifecycle Manager
 
-
-Cluster Setup
--------------
-
-As usual you need to have access to an up and running Kubernetes_ cluster. 
-
-To follow the screenshots in this guide it's recommended to add the Dashboard 
-to your Minikube installation.
-
-.. _Kubernetes: https://github.com/kubernetes/minikube
-.. _example: https://github.com/disposab1e/argocd-operator-helm/blob/master/deploy/kubernetes/examples/minikube.sh
-
-
-.. code-block:: bash
-    
-    minikube addons enable dashboard
-    minikube dashboard
-
 .. include:: ../_static/kubernetes_olm.txt
-
-.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue
-   :target: ../_static/minikube_01.png
-   :alt: Screenshot
 
 
 Administrator Console
 """""""""""""""""""""
 
 The OKD Administrator Console  for upstream Kubernetes provides a nice user 
-interface to visualize and interact with the Operator Lifecycle Manager. 
-To follow the screenshots in this guide it's recommended to install it.
+interface to visualize and interact with the Operator Lifecycle Manager.
 
 .. Note:: You need a local (not inside Minikube!) Docker or Podman installation!
 
@@ -70,7 +47,7 @@ To follow the screenshots in this guide it's recommended to install it.
    :alt: Point your Browser to
 
 .. image:: https://img.shields.io/badge/Screenshot-Console-red.svg
-   :target: ../_static/minikube_02.png
+   :target: ../_static/minikube_01.png
    :alt: Screenshot
 
 .. include:: ../_static/kubernetes_operator_installation.txt
@@ -78,22 +55,13 @@ To follow the screenshots in this guide it's recommended to install it.
 .. include:: ../_static/kubernetes_operator_olm_installation.txt
 
 
-.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue.svg
-   :target: ../_static/minikube_03.png
-   :alt: Screenshot
-.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue.svg
-   :target: ../_static/minikube_04.png
-   :alt: Screenshot
 .. image:: https://img.shields.io/badge/Screenshot-Console-red.svg
-   :target: ../_static/minikube_05.png
+   :target: ../_static/minikube_02.png
    :alt: Screenshot
 
 
 .. include:: ../_static/kubernetes_operator_manual_installation.txt
 
-.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue.svg
-   :target: ../_static/minikube_06.png
-   :alt: Screenshot
 
 
 Argo CD Installation
@@ -104,9 +72,6 @@ Install Argo CD server components and Argo CD command line interface.
 Argo CD
 -------
 
-Install Argo CD from the command line (quick) or when you have the 
-`Administrator Console`_ up and running through a nice web user interface. 
-
 .. Note:: This operator shares all `configuration values`_ from the Argo CD Helm Chart.
 
 .. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/master/helm-charts/argo-cd/README.md
@@ -115,34 +80,11 @@ Install Argo CD from the command line (quick) or when you have the
    :target: https://github.com/disposab1e/argocd-operator-helm
    :alt: git clone
 
-
-
-
-Command Line
-""""""""""""
-
 .. code-block:: bash
    
     kubectl apply -f guides/kubernetes/examples/minikube.yaml
 
 .. include:: ../_static/kubernetes_argocd_installation.txt
-
-.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue.svg
-   :target: ../_static/minikube_07.png
-   :alt: Screenshot
-
-
-Web UI
-""""""
-
-.. image:: ../_static/minikube_argocd_install_webui_01.png
-.. image:: ../_static/minikube_argocd_install_webui_02.png
-.. image:: ../_static/minikube_argocd_install_webui_03.png
-.. image:: ../_static/minikube_argocd_install_webui_04.png
-
-.. image:: https://img.shields.io/badge/Screenshot-Dashboard-blue
-   :target: ../_static/minikube_07.png
-   :alt: Screenshot
 
 
 Argo CD Ingress

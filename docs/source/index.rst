@@ -12,7 +12,8 @@
    :maxdepth: 2
    :hidden:
 
-   openshift/crc    
+   openshift/ocp4    
+   openshift/ocp3    
    kubernetes/gcp
    kubernetes/minikube
 

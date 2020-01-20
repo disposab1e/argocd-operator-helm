@@ -12,4 +12,23 @@ metadata:
 {{- if .Values.server.rbacConfig }}
 data:
 {{- toYaml .Values.server.rbacConfig | nindent 4 }}
+{{- if .Values.openshift.enabled }}
+{{- if .Values.openshift.oAuth.enabled }}
+{{- if .Values.openshift.oAuth.rbac.enabled }}
+      g, {{ .Values.openshift.oAuth.rbac.groups.developers.name }}, {{ .Values.openshift.oAuth.rbac.groups.developers.role }}
+      g, {{ .Values.openshift.oAuth.rbac.groups.admins.name }}, {{ .Values.openshift.oAuth.rbac.groups.admins.role }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- else }}
+{{- if .Values.openshift.enabled }}
+{{- if .Values.openshift.oAuth.enabled }}
+{{- if .Values.openshift.oAuth.rbac.enabled }}
+data:
+  policy.csv: |
+      g, {{ .Values.openshift.oAuth.rbac.groups.developers.name }}, {{ .Values.openshift.oAuth.rbac.groups.developers.role }}
+      g, {{ .Values.openshift.oAuth.rbac.groups.admins.name }}, {{ .Values.openshift.oAuth.rbac.groups.admins.role }}
+{{- end }}
+{{- end }}
+{{- end }}
 {{- end }}

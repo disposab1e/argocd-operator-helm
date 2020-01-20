@@ -1,0 +1,19 @@
+{{- if .Values.openshift.enabled -}}
+{{- if .Values.openshift.oAuth.enabled -}}
+{{- if .Values.openshift.oAuth.rbac.enabled -}}
+kind: Group
+apiVersion: user.openshift.io/v1
+metadata:
+  name: {{ .Values.openshift.oAuth.rbac.groups.admins.name }}
+  labels:
+    app.kubernetes.io/name: {{ include "argo-cd.name" . }}-rbac-groups
+    helm.sh/chart: {{ include "argo-cd.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/part-of: argocd
+    app.kubernetes.io/component: {{ .Values.server.name }}
+users:
+{{- toYaml .Values.openshift.oAuth.rbac.users.admins | nindent 2 }}
+{{- end }}
+{{- end }}
+{{- end }}

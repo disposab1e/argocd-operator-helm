@@ -93,8 +93,25 @@ Create the name of the ArgoCD server service account to use
 {{- end -}}
 
 {{/*
+Create the name of the repo-server service account to use
+*/}}
+{{- define "argo-cd.repoServerServiceAccountName" -}}
+{{- if .Values.repoServer.serviceAccount.create -}}
+    {{ default (include "argo-cd.fullname" .) .Values.repoServer.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.repoServer.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create chart name and version as used by the chart label.
 */}}
 {{- define "argo-cd.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{- define "argo-cd.helmRouteFix" -}}
+status:
+  ingress:
+    - host: ""
 {{- end -}}

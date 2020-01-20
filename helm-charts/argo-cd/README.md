@@ -1,57 +1,35 @@
-Argo CD Chart
-======
-A Helm chart for ArgoCD, a declarative, GitOps continuous delivery tool for Kubernetes.
+Argo CD Operator (Helm) Configuration
+===
 
-Current chart version is `1.1.0`
-
-Source code can be found [here](https://argoproj.github.io/argo-cd/)
-
-## Additional Information
-This is a **community maintained** chart. This chart installs [argo-cd](https://argoproj.github.io/argo-cd/), a declarative, GitOps continuous delivery tool for Kubernetes.
-
-The default installation is intended to be similar to the provided ArgoCD [releases](https://github.com/argoproj/argo-cd/releases).
-
-This chart currently installs the non-HA version of ArgoCD.
-
-## Prerequisites
-
-- Kubernetes 1.7+
-
-## Installing the Chart
-
-To install the chart with the release name `my-release`:
-
-```console
-$ helm repo add argo https://argoproj.github.io/argo-helm
-$ helm install --name my-release argo/argo-cd
-```
-
-
-## Chart Values
+## Globals
 
 | Parameter | Description | Default |
 |-----|------|---------|
 | global.image.imagePullPolicy | If defined, a imagePullPolicy applied to all ArgoCD deployments. | `"IfNotPresent"` |
 | global.image.repository | If defined, a repository applied to all ArgoCD deployments. | `"argoproj/argocd"` |
-| global.image.tag | If defined, a tag applied to all ArgoCD deployments. | `"v1.2.3"` |
+| global.image.tag | If defined, a tag applied to all ArgoCD deployments. | `"v1.3.6"` |
+| global.securityContext | Toggle and define securityContext | See [values.yaml](values.yaml) | 
 | nameOverride | Provide a name in place of `argocd` | `"argocd"` |
+| installCRDs | bool | `true` | Install CRDs if you are using Helm2. |
 | configs.knownHosts.data.ssh_known_hosts | Known Hosts | See [values.yaml](values.yaml) |
 | configs.secret.bitbucketSecret | BitBucket incoming webhook secret | `""` |
 | configs.secret.createSecret | Create the argocd-secret. | `true` |
 | configs.secret.githubSecret | GitHub incoming webhook secret | `""` |
 | configs.secret.gitlabSecret | GitLab incoming webhook secret | `""` |
 | configs.tlsCerts.data."argocd.example.com" | TLS certificate | See [values.yaml](values.yaml) |
+| configs.secret.extra | add additional secrets to be added to argocd-secret | `{}` |
 
 ## ArgoCD Controller
 
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
+| Key | Description | Default |
+|-----|------|---------|
 | controller.affinity | Assign custom affinity rules to the deployment https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ | `{}` |
 | controller.args.operationProcessors | define the controller `--operation-processors` | `"10"` |
 | controller.args.statusProcessors | define the controller `--status-processors` | `"20"` |
 | controller.clusterAdminAccess.enabled | Enable RBAC for local cluster deployments. | `true` |
 | controller.containerPort | Controller listening port. | `8082` |
 | controller.extraArgs | Additional arguments for the controller. A list of key:value pairs | `[]` |
+| controller.env | Environment variables for the controller. | `[]` |
 | controller.image.repository | Repository to use for the controller | `global.image.repository` |
 | controller.image.imagePullPolicy | Image pull policy for the controller | `global.image.imagePullPolicy` |
 | controller.image.tag | Tag to use for the controller | `global.image.tag` |
@@ -89,11 +67,12 @@ $ helm install --name my-release argo/argo-cd
 
 ## Argo Repo Server
 
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
+| Key | Description | Default |
+|-----|------|---------|
 | repoServer.affinity | Assign custom affinity rules to the deployment https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ | `{}` |
 | repoServer.containerPort | Repo server port | `8081` |
 | repoServer.extraArgs | Additional arguments for the repo server. A  list of key:value pairs. | `[]` |
+| repoServer.env | Environment variables for the repo server. | `[]` |
 | repoServer.image.repository | Repository to use for the repo server | `global.image.repository` |
 | repoServer.image.imagePullPolicy | Image pull policy for the repo server | `global.image.imagePullPolicy` |
 | repoServer.image.tag | Tag to use for the repo server | `global.image.tag` |
@@ -129,16 +108,17 @@ $ helm install --name my-release argo/argo-cd
 
 ## Argo Server
 
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
+| Key | Description | Default |
+|-----|------|---------|
 | server.affinity | Assign custom affinity rules to the deployment https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ | `{}` |
 | server.certificate.additionalHosts | Certificate manager additional hosts | `[]` |
 | server.certificate.domain | Certificate manager domain | `"argocd.example.com"` |
 | server.certificate.enabled | Enables a certificate manager certificate. | `false` |
 | server.certificate.issuer | Certificate manager issuer | `{}` |
-| server.config | URL for Argo CD | `{}` |
+| server.config | [General Argo CD configuration](https://argoproj.github.io/argo-cd/operator-manual/declarative-setup/#repositories) | See [values.yaml](values.yaml) |
 | server.containerPort | Server container port. | `8080` |
 | server.extraArgs | Additional arguments for the server. A list of key:value pairs. | `[]` |
+| server.env | Environment variables for the server. | `[]` |
 | server.image.repository | Repository to use for the server | `global.image.repository` |
 | server.image.imagePullPolicy | Image pull policy for the server | `global.image.imagePullPolicy` |
 | server.image.tag | Tag to use for the repo server | `global.image.tag` |
@@ -148,7 +128,7 @@ $ helm install --name my-release argo/argo-cd
 | server.ingress.labels | Additional ingress labels. | `{}` |
 | server.ingress.tls | Ingress TLS configuration. | `[]` |
 | server.route.enabled | Enable a OpenShift route for the server | `false` |
-| server.route.hostname | Hostname of OpenShift route | `""` |
+| server.route.hostname | Hostname of OpenShift route. Leave empty for auto generation. | `""` |
 | server.livenessProbe.failureThreshold | int | `3` |
 | server.livenessProbe.initialDelaySeconds | int | `10` |
 | server.livenessProbe.periodSeconds | int | `10` |
@@ -166,7 +146,7 @@ $ helm install --name my-release argo/argo-cd
 | server.podAnnotations | Annotations for the repo server pods | `{}` |
 | server.podLabels | Labels for the repo server pods | `{}` |
 | server.priorityClassName | Priority class for the repo server | `""` |
-| server.rbacConfig | Argo CD RBAC policy https://argoproj.github.io/argo-cd/operator-manual/rbac/ | `See [values.yaml](values.yaml)` |
+| server.rbacConfig | [Argo CD RBAC policy](https://argoproj.github.io/argo-cd/operator-manual/rbac/) | `{}` |
 | server.readinessProbe.failureThreshold | int | `3` |
 | server.readinessProbe.initialDelaySeconds | int | `10` |
 | server.readinessProbe.periodSeconds | int | `10` |
@@ -186,8 +166,8 @@ $ helm install --name my-release argo/argo-cd
 
 ## Dex
 
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
+| Key | Description | Default | 
+|-----|------|---------|
 | dex.affinity | Assign custom affinity rules to the deployment https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ | `{}` |
 | dex.containerPortGrpc | GRPC container port | `5557` |
 | dex.containerPortHttp | HTTP container port | `5556` |
@@ -199,21 +179,27 @@ $ helm install --name my-release argo/argo-cd
 | dex.initImage.imagePullPolicy | Argo CD init image imagePullPolicy | `global.image.imagePullPolicy` |
 | dex.initImage.tag | Argo CD init image tag | `global.image.tag` |
 | dex.name | Dex name | `"dex-server"` |
+| dex.env | Environment variables for the Dex server. | `[]` |
 | dex.nodeSelector | Dex node selector https://kubernetes.io/docs/user-guide/node-selection/ | `{}` |
 | dex.priorityClassName | Priority class for dex | `""` |
 | dex.resources | Resource limits and requests for dex | `{}` |
 | dex.serviceAccount.create | Create dex service account | `true` |
 | dex.serviceAccount.name | Dex service account name | `"argocd-dex-server"` |
+| dex.serviceAccount.annotations | Dex service annotations | `"{}"` |
 | dex.servicePortGrpc | Server GRPC port | `5557` |
 | dex.servicePortHttp | Server HTTP port | `5556` |
 | dex.tolerations | Tolerations for use with node taints https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ | `[]` |
 | dex.volumeMounts | Dex volume mounts | `"/shared"` |
 | dex.volumes | Dex volumes | `{}` |
+| dex.openshift.enabled | Enable SSO with OpenShift | `false` |
+| dex.openshift.admins | ArgoCD Administrators | `["admin", "kubeadmin"]` |
+| dex.openshift.users | ArgoCD Users | `[]` |
+
 
 ## Redis
 
-| Key | Type | Default | Description |
-|-----|------|---------|-------------|
+| Key | Description | Default |
+|-----|------|---------|
 | redis.affinity | Assign custom affinity rules to the deployment https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ | `{}` |
 | redis.containerPort | Redis container port | `6379` |
 | redis.enabled | Enable redis | `true` |
@@ -221,8 +207,32 @@ $ helm install --name my-release argo/argo-cd
 | redis.image.repository | Redis repository | `"redis"` |
 | redis.image.tag | Redis tag | `"5.0.3"` |
 | redis.name | Redis name | `"redis"` |
+| redis.env | Environment variables for the Redis server. | `[]` |
 | redis.nodeSelector | Redis node selector https://kubernetes.io/docs/user-guide/node-selection/ | `{}` |
 | redis.priorityClassName | Priority class for redis | `""` |
 | redis.resources | Resource limits and requests for redis | `{}` |
 | redis.servicePort | Redis service port | `6379` |
 | redis.tolerations | Tolerations for use with node taints https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ | `[]` |
+
+## OpenShift Integration
+
+| Parameter | Description | Default |
+|-----|------|---------|
+| openshift.enabled | Enable OpenShift integration globally. | `true` |
+| openshift.route.enabled | Enable OpenShift Route. | `true` |
+| openshift.route.host | Define hostname for Route. Empty for automatic generation. | `""` |
+| openshift.route.annotations | Route annotations. | `{}` |
+| openshift.oAuth.enabled | Enable OpenShift OAuth integration globally. | `true` |
+| openshift.oAuth.config.image.repository | Image Repository used for automatic configuration tasks. | `quay.io/openshift/origin-cli` |
+| openshift.oAuth.config.image.tag |  Image tag. | `latest` |
+| openshift.oAuth.config.image.imagePullPolicy | Image pull policy. | `IfNotPresent` |
+| openshift.oAuth.config.base.url | ArgoCD URI in format: `"https://<argocd_host>"` or leave this default for automatic discovery (recommended). | `openshiftOAuthConfigBaseUrl` |
+| openshift.oAuth.config.redirect.url | ArgoCD redirect URI in format: `"https://<argocd_host>/api/dex/callback"` or leave this default for automatic discovery (recommended). | `openshiftOAuthConfigRedirectURI` |
+| openshift.oAuth.config.dex | ArgoCD SSO configuration for OpenShift. | See [values.yaml](values.yaml) |
+| openshift.oAuth.rbac.enabled | Enable Role Based Access Control (optional but recommended). | `true` |
+| openshift.oAuth.rbac.groups.admins.name | Administrators group name. | `argocd-admins` |
+| openshift.oAuth.rbac.groups.admins.role | Administrators ArgoCD role. | `role:admin` |
+| openshift.oAuth.rbac.groups.developers.name | Developers group name. | `argocd-developers` |
+| openshift.oAuth.rbac.groups.developers.role | Developers ArgoCD role. | `role:readonly` |
+| openshift.oAuth.rbac.users.admins | Members of the Administrators group. These users must exist! | `["developer","kubedadmin","admin"]` |
+| openshift.oAuth.rbac.users.developers | Members of the Developers group. These users must exist! | `[]` |

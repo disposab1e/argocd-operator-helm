@@ -28,6 +28,7 @@ rules:
   resources:
   - applications
   - appprojects
+  - argocds
   verbs:
   - create
   - get

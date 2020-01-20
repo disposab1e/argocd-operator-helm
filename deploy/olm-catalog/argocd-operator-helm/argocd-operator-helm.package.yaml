@@ -1,5 +1,5 @@
 channels:
-- currentCSV: argocd-operator-helm.v0.0.2
+- currentCSV: argocd-operator-helm.v0.0.3
   name: alpha
 defaultChannel: alpha
 packageName: argocd-operator-helm

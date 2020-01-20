@@ -16,7 +16,7 @@ spec:
       serviceAccountName: argocd-operator-helm
       containers:
         - name: argocd-operator-helm
-          image: quay.io/disposab1e/argocd-operator-helm:v0.0.2
+          image: quay.io/disposab1e/argocd-operator-helm:v0.0.3
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE

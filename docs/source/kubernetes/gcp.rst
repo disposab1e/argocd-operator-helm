@@ -12,16 +12,12 @@ Argo CD CLI and the Guestbook Example in Google Cloud Platform Kubernetes Engine
 Prerequisites
 =============
 
-.. image:: https://img.shields.io/badge/kubernetes-1.14-blue.svg
-   :target: https://v1-14.docs.kubernetes.io/
+.. image:: https://img.shields.io/badge/kubernetes-1.16-blue.svg
+   :target: https://v1-16.docs.kubernetes.io/
    :alt: Kubernetes
-.. image:: https://img.shields.io/badge/olm-0.12.0-blue.svg
+.. image:: https://img.shields.io/badge/olm-0.13.0-blue.svg
    :target: https://github.com/operator-framework/operator-lifecycle-manager
    :alt: Operator Lifecycle Manager
-
-
-Kubernetes
-----------
 
 As usual you need to have access to an up and running Kubernetes cluster. 
 

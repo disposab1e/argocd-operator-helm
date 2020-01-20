@@ -16,10 +16,6 @@ New Application
     --dest-server https://kubernetes.default.svc \
     --dest-namespace default
 
-.. image:: https://img.shields.io/badge/Screenshot-ArgoCD-yellowgreen
-   :target: ../_static/common_argocd_new_app.png
-   :alt: Screenshot
-
 Sync Application
 ----------------
 
@@ -27,6 +23,3 @@ Sync Application
 
     argocd app sync guestbook
 
-.. image:: https://img.shields.io/badge/Screenshot-ArgoCD-yellowgreen
-   :target: ../_static/common_argocd_sync.png
-   :alt: Screenshot

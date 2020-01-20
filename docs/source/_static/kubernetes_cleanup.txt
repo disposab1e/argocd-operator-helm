@@ -25,6 +25,8 @@ The uninstallation process will remove the Argo CD installation (CR) but NOT the
 
     kubectl delete crd appprojects.argoproj.io
     kubectl delete crd applications.argoproj.io
+    kubectl delete crd workflowtemplates.argoproj.io
+    kubectl delete crd workflows.argoproj.io
 
 
 
@@ -34,7 +36,7 @@ Operator Lifecycle Manager installation
 .. code-block:: bash
 
     kubectl delete -f guides/kubernetes/olm/subscription.yaml
-    kubectl delete csv argocd-operator-helm.v0.0.2 -n argocd
+    kubectl delete csv argocd-operator-helm.v0.0.3 -n argocd
     kubectl delete crd argocds.argoproj.io
     kubectl delete -f guides/kubernetes/olm/catalog-source.yaml
     kubectl delete -f guides/kubernetes/olm/operator-group.yaml
