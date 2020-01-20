@@ -82,10 +82,10 @@ opertor and `Argo CD`_ in `OpenShift 3`_, `OpenShift 4`_, `Minishift`_, `Contain
 .. _Argo CD Operator (Helm): https://github.com/disposab1e/argocd-operator-helm
 .. _Argo CD: https://argoproj.github.io/argo-cd/
 .. _Quickstart: quickstart.html
-.. _OpenShift 3: https://www.openshift.com/products/container-platform
-.. _OpenShift 4: https://www.openshift.com/products/container-platform
-.. _Minishift: https://www.okd.io/minishift/
-.. _ContainerReady Containers: openshift/crc.html
+.. _OpenShift 3: openshift/ocp3.html
+.. _OpenShift 4: openshift/ocp4.html
+.. _Minishift: openshift/ocp3.html
+.. _ContainerReady Containers: openshift/ocp4.html
 .. _Google Cloud Platform: kubernetes/gcp.html
 .. _Minikube: kubernetes/minikube.html
 
