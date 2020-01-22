@@ -1,0 +1,6 @@
+scorecard:
+  output: text
+  plugins:
+    - basic:
+        cr-manifest:
+          - "deploy/crds/argoproj.io_argocds_crd.yaml"
