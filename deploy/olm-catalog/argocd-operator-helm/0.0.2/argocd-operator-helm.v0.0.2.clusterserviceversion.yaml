@@ -290,6 +290,7 @@ metadata:
         }
       ]
     capabilities: Basic Install
+    createdAt: 2019-07-20 01:01:01
     categories: "Integration & Delivery"
     description: Manages the installation of Argo CD.
     certified: "false"

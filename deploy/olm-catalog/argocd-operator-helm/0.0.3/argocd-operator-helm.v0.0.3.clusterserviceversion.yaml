@@ -461,6 +461,7 @@ metadata:
         }
       ]
     capabilities: Basic Install
+    createdAt: 2020-01-20 01:01:01
     categories: "Integration & Delivery"
     description: Declarative Continuous Delivery following Gitops.
     certified: "false"
