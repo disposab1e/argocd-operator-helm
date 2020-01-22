@@ -516,6 +516,8 @@ spec:
       openshift.enabled: false
       ```
 
+      See the documentation and examples at the [official github repository](https://github.com/disposab1e/argocd-operator-helm) for more information.
+
 
   displayName: Argo CD Operator (Helm)
   links:
