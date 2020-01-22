@@ -480,29 +480,41 @@ spec:
       description: 'Represents the Argo CD installation.'
   description:  |
 
-      ### Argo CD
-
       [Argo CD](https://argoproj.github.io/argo-cd/) is a declarative, GitOps continuous delivery tool for Kubernetes.
 
       ### Overview
       This **community maintained** [Argo CD Operator (Helm)](https://github.com/disposab1e/argocd-operator-helm) 
-      is based on the [Argo CD Helm 3 Chart](https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd) 
+      is based on the **community maintained** [Argo CD Helm Chart](https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd) 
       and currently installs the non-HA version of [Argo CD](https://argoproj.github.io/argo-cd/) in OpenShift Container Platform and Kubernetes. 
-      The operator shares all [configuration values](https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.3/helm-charts/argo-cd/README.md) 
-      from the Argo CD Helm Chart.
+      
 
+      ### Features:
+      * Easy configuration and installation
+      * OpenShift OAuth integration 
 
       ### Install
 
-      The operator manages a single namespace installation of Argo CD. 
+      The operator shares all [configuration values](https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.3/helm-charts/argo-cd/README.md) 
+      from the Argo CD Helm Chart and manages a single namespace installation of Argo CD. 
       Therefore you have to install the operator and Argo CD in the same namespace. 
-      For simplicity we recommend creating a namespace `argocd`. 
+      For simplicity we recommend creating a namespace **argocd**. 
       
-      To install Argo CD create a new ArgoCD resource with your own customizations or use the provided example from the Web UI.
+      To install Argo CD create [a new ArgoCD resource](https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.3/guides/ocp4/examples/openshift-oauth.yaml) 
+      with your own customizations or use the provided example from the Web UI.
 
-      OpenShift note! You must have an existing `developer`, `kubeadmin` or `admin` User for OpenShift OAuth integration. If not change the example to fit your needs.
- 
-      Kubernetes note! For Kubernetes you must disable the OpenShift integration from the Web UI example with `openshift.enabled: false`. 
+      The provided example with OpenShift OAuth integration enabled assumes you have an existing `developer`, `kubeadmin` or `admin` User 
+      already available for the Argo CD administrator group. 
+      If you have other existing groups or users feel free to change the example to fit your needs. You can also disable the 
+      OAuth integration with:
+      ```  
+      openshift.oAuth.enabled: false
+      ```
+
+      For Kubernetes you must disable the OpenShift integration with: 
+      ```  
+      openshift.enabled: false
+      ```
+
 
   displayName: Argo CD Operator (Helm)
   links:
