@@ -7,7 +7,7 @@ Argo CD Operator (Helm) Configuration
 |-----|------|---------|
 | global.image.imagePullPolicy | If defined, a imagePullPolicy applied to all ArgoCD deployments. | `"IfNotPresent"` |
 | global.image.repository | If defined, a repository applied to all ArgoCD deployments. | `"argoproj/argocd"` |
-| global.image.tag | If defined, a tag applied to all ArgoCD deployments. | `"v1.3.6"` |
+| global.image.tag | If defined, a tag applied to all ArgoCD deployments. | `"v1.4.0"` |
 | global.securityContext | Toggle and define securityContext | See [values.yaml](values.yaml) | 
 | nameOverride | Provide a name in place of `argocd` | `"argocd"` |
 | installCRDs | bool | `true` | Install CRDs if you are using Helm2. |
@@ -174,7 +174,7 @@ Argo CD Operator (Helm) Configuration
 | dex.enabled | Enable dex | `true` |
 | dex.image.imagePullPolicy | Dex imagePullPolicy | `"IfNotPresent"` |
 | dex.image.repository | Dex image repository | `"quay.io/dexidp/dex"` |
-| dex.image.tag | Dex image tag | `"v2.14.0"` |
+| dex.image.tag | Dex image tag | `"latest"` |
 | dex.initImage.repository | Argo CD init image repository. | `global.image.repository` |
 | dex.initImage.imagePullPolicy | Argo CD init image imagePullPolicy | `global.image.imagePullPolicy` |
 | dex.initImage.tag | Argo CD init image tag | `global.image.tag` |
