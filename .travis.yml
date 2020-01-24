@@ -1,0 +1,29 @@
+dist: xenial
+language: python
+os: linux
+sudo: required
+
+python:
+- "3.6"
+
+env:
+- CHANGE_MINIKUBE_NONE_USER=true DISTRO_TYPE=upstream
+
+install:
+- hack/ci/install-deps
+
+before_script:
+- sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="v1.14.0" --extra-config=apiserver.v=10
+- sudo chown -R $USER ${HOME}/.{mini,}kube
+- kubectl config use-context minikube
+- hack/ci/install-olm
+
+jobs:
+  include:
+  - name: First Job
+    script:
+    # Since travis conditionals can't operate on bash scripts, the first script
+    # line will check whether only scripts have been updated, and if so use
+    # the jaeger operator as an operator to test script correctness.
+    - |-
+      kubectl get pods -n kube-system
