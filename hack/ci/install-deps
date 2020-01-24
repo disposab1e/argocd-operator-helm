@@ -9,7 +9,7 @@ python3 -m pip install operator-courier
 # Operator SDK
 echo "Installing operator-sdk"
 OPERATOR_SDK_VER=v0.15.0
-curl -LO operator-sdk https://github.com/operator-framework/operator-sdk/releases/download/${OPERATOR_SDK_VER}/operator-sdk-${OPERATOR_SDK_VER}-x86_64-linux-gnu
+curl -Lo operator-sdk https://github.com/operator-framework/operator-sdk/releases/download/${OPERATOR_SDK_VER}/operator-sdk-${OPERATOR_SDK_VER}-x86_64-linux-gnu
 chmod +x operator-sdk
 sudo mv operator-sdk /usr/local/bin/
 
