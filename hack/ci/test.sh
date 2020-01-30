@@ -11,7 +11,7 @@ kubectl apply -f guides/k8s/olm/subscription.yaml
 
 sleep 30
 
-kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=30s
+kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=60s
 kubectl rollout status -w deployment/argocd-operator-helm -n argocd
 
 
@@ -30,7 +30,7 @@ kubectl apply -f guides/k8s/manual/role-binding.yaml
 kubectl apply -f guides/k8s/manual/crd.yaml
 kubectl apply -f guides/k8s/manual/deployment.yaml
 
-kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=30s
+kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=60s
 kubectl rollout status -w deployment/argocd-operator-helm -n argocd
 
 kubectl delete -f guides/k8s/manual/deployment.yaml
