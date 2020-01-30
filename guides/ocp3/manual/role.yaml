@@ -79,4 +79,3 @@ rules:
   - roles
   verbs:
   - '*'
-  

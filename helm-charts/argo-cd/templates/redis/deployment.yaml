@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/component: {{ .Values.redis.name }}
-    app.kubernetes.io/version: {{ default .Values.global.image.tag .Values.redis.image.tag }}    
+    app.kubernetes.io/version: {{ .Values.redis.image.tag }}    
 spec:
   selector:
     matchLabels:

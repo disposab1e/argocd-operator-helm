@@ -7,10 +7,9 @@ Argo CD Operator (Helm) Configuration
 |-----|------|---------|
 | global.image.imagePullPolicy | If defined, a imagePullPolicy applied to all ArgoCD deployments. | `"IfNotPresent"` |
 | global.image.repository | If defined, a repository applied to all ArgoCD deployments. | `"argoproj/argocd"` |
-| global.image.tag | If defined, a tag applied to all ArgoCD deployments. | `"v1.4.0"` |
+| global.image.tag | If defined, a tag applied to all ArgoCD deployments. | `"v1.4.2"` |
 | global.securityContext | Toggle and define securityContext | See [values.yaml](values.yaml) | 
 | nameOverride | Provide a name in place of `argocd` | `"argocd"` |
-| installCRDs | bool | `true` | Install CRDs if you are using Helm2. |
 | configs.knownHosts.data.ssh_known_hosts | Known Hosts | See [values.yaml](values.yaml) |
 | configs.secret.bitbucketSecret | BitBucket incoming webhook secret | `""` |
 | configs.secret.createSecret | Create the argocd-secret. | `true` |
@@ -127,8 +126,6 @@ Argo CD Operator (Helm) Configuration
 | server.ingress.hosts | List of ingress hosts | `[]` |
 | server.ingress.labels | Additional ingress labels. | `{}` |
 | server.ingress.tls | Ingress TLS configuration. | `[]` |
-| server.route.enabled | Enable a OpenShift route for the server | `false` |
-| server.route.hostname | Hostname of OpenShift route. Leave empty for auto generation. | `""` |
 | server.livenessProbe.failureThreshold | int | `3` |
 | server.livenessProbe.initialDelaySeconds | int | `10` |
 | server.livenessProbe.periodSeconds | int | `10` |
@@ -191,9 +188,6 @@ Argo CD Operator (Helm) Configuration
 | dex.tolerations | Tolerations for use with node taints https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/ | `[]` |
 | dex.volumeMounts | Dex volume mounts | `"/shared"` |
 | dex.volumes | Dex volumes | `{}` |
-| dex.openshift.enabled | Enable SSO with OpenShift | `false` |
-| dex.openshift.admins | ArgoCD Administrators | `["admin", "kubeadmin"]` |
-| dex.openshift.users | ArgoCD Users | `[]` |
 
 
 ## Redis

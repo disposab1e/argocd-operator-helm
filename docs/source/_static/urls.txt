@@ -1,0 +1,3 @@
+
+.. _configuration values: https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.4/helm-charts/argo-cd/README.md
+

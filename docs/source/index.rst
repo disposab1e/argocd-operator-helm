@@ -5,17 +5,17 @@
    :maxdepth: 2
    :hidden:
 
-   quickstart
+   quickstarts
 
 .. toctree::
    :caption: Guides
    :maxdepth: 2
    :hidden:
 
-   openshift/ocp4    
-   openshift/ocp3    
-   kubernetes/gcp
-   kubernetes/minikube
+   ocp/ocp4    
+   ocp/ocp3    
+   k8s/gcp
+   k8s/minikube
 
 
 

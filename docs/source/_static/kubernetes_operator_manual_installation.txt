@@ -11,11 +11,11 @@ You can install the operator from local sources without having to install an OLM
 
 .. code-block:: bash
 
-    kubectl apply -f guides/kubernetes/manual/namespace.yaml
-    kubectl apply -f guides/kubernetes/manual/service_account.yaml
-    kubectl apply -f guides/kubernetes/manual/role.yaml
-    kubectl apply -f guides/kubernetes/manual/role_binding.yaml
-    kubectl apply -f guides/kubernetes/manual/crd.yaml
-    kubectl apply -f guides/kubernetes/manual/deployment.yaml
+    kubectl apply -f guides/k8s/manual/namespace.yaml
+    kubectl apply -f guides/k8s/manual/service-account.yaml
+    kubectl apply -f guides/k8s/manual/role.yaml
+    kubectl apply -f guides/k8s/manual/role-binding.yaml
+    kubectl apply -f guides/k8s/manual/crd.yaml
+    kubectl apply -f guides/k8s/manual/deployment.yaml
 
     kubectl rollout status -w deployment/argocd-operator-helm -n argocd

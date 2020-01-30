@@ -11,10 +11,10 @@ This installation method installs the operator using an `OLM Catalog`_.
 
 .. code-block:: bash
    
-    kubectl apply -f guides/kubernetes/olm/namespace.yaml
-    kubectl apply -f guides/kubernetes/olm/catalog-source.yaml
-    kubectl apply -f guides/kubernetes/olm/operator-group.yaml
-    kubectl apply -f guides/kubernetes/olm/subscription.yaml
+    kubectl apply -f guides/k8s/olm/namespace.yaml
+    kubectl apply -f guides/k8s/olm/catalog-source.yaml
+    kubectl apply -f guides/k8s/olm/operator-group.yaml
+    kubectl apply -f guides/k8s/olm/subscription.yaml
     
     kubectl rollout status -w deployment/argocd-operator-helm -n argocd
 
