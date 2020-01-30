@@ -57,7 +57,7 @@ Argo CD
 
 .. code-block:: bash
    
-    kubectl apply -f examples/minikube.yaml
+    kubectl apply -f examples/k8s.yaml
 
 .. include:: ../_static/kubernetes_argocd_installation.txt
 
