@@ -160,17 +160,17 @@ generate-guide-k8s-olm:
 
 operator-build-dev:
 	export GO111MODULE=on
-	cd ../ && operator-sdk build ${REGISTRY}/${NAME}-dev:${VERSION}
+	cd ../ && operator-sdk build ${REGISTRY}/${NAME}-dev:v${VERSION}
 	
 operator-push-dev:
-	docker push ${REGISTRY}/${NAME}-dev:${VERSION}
+	docker push ${REGISTRY}/${NAME}-dev:v${VERSION}
 
 operator-build-release:
 	export GO111MODULE=on
-	cd ../ && operator-sdk build ${REGISTRY}/${NAME}:${VERSION}
+	cd ../ && operator-sdk build ${REGISTRY}/${NAME}:v${VERSION}
 	
 operator-push-release:
-	docker push ${REGISTRY}/${NAME}:${VERSION}
+	docker push ${REGISTRY}/${NAME}:v${VERSION}
 
 bundle-build-ocp-release:
 	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME}
