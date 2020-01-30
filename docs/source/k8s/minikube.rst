@@ -30,12 +30,6 @@ Prerequisites
 
 .. include:: ../_static/kubernetes_operator_olm_installation.txt
 
-
-.. image:: https://img.shields.io/badge/Screenshot-Console-red.svg
-   :target: ../_static/minikube_02.png
-   :alt: Screenshot
-
-
 .. include:: ../_static/kubernetes_operator_manual_installation.txt
 
 
