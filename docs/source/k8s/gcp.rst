@@ -68,7 +68,7 @@ Install Argo CD from the command line.
 
 .. code-block:: bash
    
-    kubectl apply -f examples/gcp.yaml
+    kubectl apply -f examples/k8s-lb.yaml
 
 .. include:: ../_static/kubernetes_argocd_installation.txt
 
