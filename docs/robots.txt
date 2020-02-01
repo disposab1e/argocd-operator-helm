@@ -1,3 +1,5 @@
 User-agent: *
 Disallow: /en/0.0.1/
+Disallow: /en/0.0.2/
+Disallow: /en/0.0.3/
 Disallow: /en/stable

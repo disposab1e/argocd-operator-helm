@@ -35,12 +35,12 @@ Operator Lifecycle Manager installation
 
 .. code-block:: bash
 
-    kubectl delete -f guides/kubernetes/olm/subscription.yaml
-    kubectl delete csv argocd-operator-helm.v0.0.3 -n argocd
+    kubectl delete -f guides/k8s/olm/subscription.yaml
+    kubectl delete csv argocd-operator-helm.v0.0.4 -n argocd
     kubectl delete crd argocds.argoproj.io
-    kubectl delete -f guides/kubernetes/olm/catalog-source.yaml
-    kubectl delete -f guides/kubernetes/olm/operator-group.yaml
-    kubectl delete -f guides/kubernetes/olm/namespace.yaml
+    kubectl delete -f guides/k8s/olm/catalog-source.yaml
+    kubectl delete -f guides/k8s/olm/operator-group.yaml
+    kubectl delete -f guides/k8s/olm/namespace.yaml
 
 
 Manual installation
@@ -48,10 +48,10 @@ Manual installation
 
 .. code-block:: bash
 
-    kubectl delete -f guides/kubernetes/manual/deployment.yaml
-    kubectl delete -f guides/kubernetes/manual/crd.yaml
-    kubectl delete -f guides/kubernetes/manual/role_binding.yaml
-    kubectl delete -f guides/kubernetes/manual/role.yaml
-    kubectl delete -f guides/kubernetes/manual/service_account.yaml
-    kubectl delete -f guides/kubernetes/manual/namespace.yaml
+    kubectl delete -f guides/k8s/manual/deployment.yaml
+    kubectl delete -f guides/k8s/manual/crd.yaml
+    kubectl delete -f guides/k8s/manual/role-binding.yaml
+    kubectl delete -f guides/k8s/manual/role.yaml
+    kubectl delete -f guides/k8s/manual/service-account.yaml
+    kubectl delete -f guides/k8s/manual/namespace.yaml
 

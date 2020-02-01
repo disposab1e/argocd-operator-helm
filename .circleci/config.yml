@@ -20,10 +20,10 @@ jobs:
       - checkout
       - run:
           name: Install Operator Lifecycle Manager
-          command: ./hack/olm.sh
+          command: ./hack/ci/olm.sh
       - run:
           name: Test
-          command: ./hack/test.sh
+          command: ./hack/ci/test.sh
 
 workflows:
   version: 2
