@@ -12,7 +12,7 @@ GUIDES_BASE_DIR = ../guides
 QUICKSTARTS_BASE_DIR = ../quickstarts
 
 clean:
-	rm -rf build/_output
+	rm -rf _output
 
 olm-deploy:
 	curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.13.0/install.sh | bash -s 0.13.0

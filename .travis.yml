@@ -24,4 +24,6 @@ jobs:
 #    - |-
 #      kubectl get pods -n kube-system
     - |-
-      cd build && make clean 
+      cd build && make release-all
+    - |-
+      git status 
