@@ -24,4 +24,4 @@ jobs:
 #    - |-
 #      kubectl get pods -n kube-system
     - |-
-      cd hack && make clean 
+      cd build && make clean 
