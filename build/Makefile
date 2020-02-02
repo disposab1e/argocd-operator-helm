@@ -12,7 +12,7 @@ GUIDES_BASE_DIR = ../guides
 QUICKSTARTS_BASE_DIR = ../quickstarts
 
 clean:
-	rm -rf build/_output
+	rm -rf _output
 
 olm-deploy:
 	curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.13.0/install.sh | bash -s 0.13.0
@@ -168,12 +168,11 @@ operator-push-dev:
 operator-build-release:
 	export GO111MODULE=on
 	cd ../ && operator-sdk build ${REGISTRY}/${NAME}:v${VERSION}
-	
-operator-push-release:
-	docker push ${REGISTRY}/${NAME}:v${VERSION}
 
-bundle-build-ocp-release:
+bundle-verify-ocp-release:
 	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME}
+
+bundle-build-ocp-release: bundle-verify-ocp-release
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/release/ocp
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}/release/ocp/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests
@@ -191,8 +190,10 @@ bundle-build-ocp-release:
 bundle-push-ocp-release:
 	docker push ${REGISTRY}/${NAME}-registry-ocp:${VERSION}
 
-bundle-build-ocp-dev:
+bundle-verify-ocp-dev:
 	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME}
+
+bundle-build-ocp-dev: bundle-verify-ocp-dev
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}-ocp
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}-ocp/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}-ocp/manifests
@@ -203,8 +204,10 @@ bundle-build-ocp-dev:
 bundle-push-ocp-dev:
 	docker push ${REGISTRY}/${NAME}-registry-ocp-dev:${VERSION}
 
-bundle-build-k8s-release:
-	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME}
+bundle-verify-k8s-release:
+	operator-courier --verbose verify --ui_validate_io ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME}
+
+bundle-build-k8s-release: bundle-verify-k8s-release
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/release/k8s
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}/release/k8s/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests
@@ -222,8 +225,10 @@ bundle-build-k8s-release:
 bundle-push-k8s-release:
 	docker push ${REGISTRY}/${NAME}-registry-k8s:${VERSION}
 
-bundle-build-k8s-dev:
-	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME}
+bundle-verify-k8s-dev:
+	operator-courier --verbose verify --ui_validate_io ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME}
+
+bundle-build-k8s-dev: bundle-verify-k8s-dev
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}-k8s
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}-k8s/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}-k8s/manifests
@@ -244,7 +249,7 @@ ocp4-deploy-olm-dev:
 
 ocp4-undeploy-olm-dev:
 	oc delete -f ./../deploy/ocp4/subscription.yaml
-	oc delete csv argocd-operator-helm.v${VERSION} -n argocd
+	oc delete csvs --all -n argocd
 	oc delete -f ./../deploy/ocp4/catalog-source.yaml
 	oc delete -f ./../deploy/common/operator-group.yaml
 	oc delete -f ./../deploy/common/namespace.yaml
@@ -276,7 +281,7 @@ ocp3-deploy-olm-dev:
 
 ocp3-undeploy-olm-dev:
 	oc delete -f ./../deploy/ocp3/subscription.yaml
-	oc delete csv argocd-operator-helm.v${VERSION} -n argocd
+	oc delete csvs --all -n argocd
 	oc delete -f ./../deploy/ocp3/catalog-source.yaml
 	oc delete -f ./../deploy/ocp3/role-binding.yaml
 	oc delete -f ./../deploy/common/operator-group.yaml
@@ -304,13 +309,18 @@ ocp3-undeploy-manual-dev:
 k8s-deploy-olm-dev:
 	kubectl apply -f ./../deploy/common/namespace.yaml
 	kubectl apply -f ./../deploy/k8s/catalog-source.yaml
+	kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=90s
 	kubectl apply -f ./../deploy/common/operator-group.yaml
 	kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=60s
+	sleep 5
 	kubectl apply -f ./../deploy/k8s/subscription.yaml
+	kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=90s
+	kubectl rollout status -w deployment/argocd-operator-helm -n argocd
+
 
 k8s-undeploy-olm-dev:
 	kubectl delete -f ./../deploy/k8s/subscription.yaml
-	kubectl delete csv argocd-operator-helm.v${VERSION} -n argocd
+	kubectl delete csvs --all -n argocd
 	kubectl delete -f ./../deploy/k8s/catalog-source.yaml
 	kubectl delete -f ./../deploy/common/operator-group.yaml
 	kubectl delete -f ./../deploy/common/namespace.yaml
