@@ -22,7 +22,7 @@ install:
 - kubectl config use-context minikube
 - build/ci/install-olm
 - eval $(sudo minikube docker-env)
-- docker ps
+- docker images
 
 jobs:
   include:

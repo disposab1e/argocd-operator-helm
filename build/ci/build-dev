@@ -10,6 +10,6 @@ make bundle-build-ocp-dev
 
 make bundle-build-k8s-dev
 
-docker ps
+docker images
 
 cd ${TRAVIS_BUILD_DIR}

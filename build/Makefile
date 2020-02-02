@@ -168,12 +168,11 @@ operator-push-dev:
 operator-build-release:
 	export GO111MODULE=on
 	cd ../ && operator-sdk build ${REGISTRY}/${NAME}:v${VERSION}
-	
-bundle-verifbuild-ocp-release:
+
+bundle-verify-ocp-release:
 	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME}
 
-bundle-build-ocp-release:
-	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME}
+bundle-build-ocp-release: bundle-verify-ocp-release
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/release/ocp
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}/release/ocp/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests
@@ -191,8 +190,10 @@ bundle-build-ocp-release:
 bundle-push-ocp-release:
 	docker push ${REGISTRY}/${NAME}-registry-ocp:${VERSION}
 
-bundle-build-ocp-dev:
+bundle-verify-ocp-dev:
 	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME}
+
+bundle-build-ocp-dev: bundle-verify-ocp-dev
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}-ocp
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}-ocp/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}-ocp/manifests
@@ -203,8 +204,10 @@ bundle-build-ocp-dev:
 bundle-push-ocp-dev:
 	docker push ${REGISTRY}/${NAME}-registry-ocp-dev:${VERSION}
 
-bundle-build-k8s-release:
+bundle-verify-k8s-release:
 	operator-courier --verbose verify --ui_validate_io ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME}
+
+bundle-build-k8s-release: bundle-verify-k8s-release
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/release/k8s
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}/release/k8s/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests
@@ -222,8 +225,10 @@ bundle-build-k8s-release:
 bundle-push-k8s-release:
 	docker push ${REGISTRY}/${NAME}-registry-k8s:${VERSION}
 
-bundle-build-k8s-dev:
+bundle-verify-k8s-dev:
 	operator-courier --verbose verify --ui_validate_io ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME}
+
+bundle-build-k8s-dev: bundle-verify-k8s-dev
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}-k8s
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}-k8s/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}-k8s/manifests
