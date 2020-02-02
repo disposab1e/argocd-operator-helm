@@ -8,9 +8,6 @@ jobs:
       - run:
           name: Prepare Kubernetes with microk8s
           command: ./build/ci/install-deps
-    branches:
-      only:
-        - "master"
 
 workflows:
   version: 2
