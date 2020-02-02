@@ -204,7 +204,7 @@ bundle-push-ocp-dev:
 	docker push ${REGISTRY}/${NAME}-registry-ocp-dev:${VERSION}
 
 bundle-build-k8s-release:
-	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME}
+	operator-courier --verbose verify --ui_validate_io ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME}
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/release/k8s
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}/release/k8s/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests
@@ -223,7 +223,7 @@ bundle-push-k8s-release:
 	docker push ${REGISTRY}/${NAME}-registry-k8s:${VERSION}
 
 bundle-build-k8s-dev:
-	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME}
+	operator-courier --verbose verify --ui_validate_io ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME}
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}-k8s
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}-k8s/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}-k8s/manifests
