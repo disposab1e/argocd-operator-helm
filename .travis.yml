@@ -29,6 +29,7 @@ jobs:
     script:
     - build/ci/build-dev
     - build/ci/test-dev
+    - build/ci/release
 
 
 #    - |-
