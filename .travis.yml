@@ -7,9 +7,6 @@ python:
 
 if: branch = travis-ci
 
-#services:
-#  - docker
-
 env:
 - CHANGE_MINIKUBE_NONE_USER=true
 
@@ -25,7 +22,7 @@ install:
 
 jobs:
   include:
-  - name: kubectl
+  - name: build
     script:
     - build/ci/build-dev
     - build/ci/test-dev
