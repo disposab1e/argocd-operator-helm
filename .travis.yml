@@ -5,6 +5,8 @@ os: linux
 python:
 - "3.6"
 
+if: branch = travis-ci
+
 env:
 - CHANGE_MINIKUBE_NONE_USER=true DISTRO_TYPE=upstream
 
