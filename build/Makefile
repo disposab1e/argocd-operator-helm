@@ -244,7 +244,7 @@ ocp4-deploy-olm-dev:
 
 ocp4-undeploy-olm-dev:
 	oc delete -f ./../deploy/ocp4/subscription.yaml
-	oc delete csv argocd-operator-helm.v${VERSION} -n argocd
+	oc delete csvs --all -n argocd
 	oc delete -f ./../deploy/ocp4/catalog-source.yaml
 	oc delete -f ./../deploy/common/operator-group.yaml
 	oc delete -f ./../deploy/common/namespace.yaml
@@ -276,7 +276,7 @@ ocp3-deploy-olm-dev:
 
 ocp3-undeploy-olm-dev:
 	oc delete -f ./../deploy/ocp3/subscription.yaml
-	oc delete csv argocd-operator-helm.v${VERSION} -n argocd
+	oc delete csvs --all -n argocd
 	oc delete -f ./../deploy/ocp3/catalog-source.yaml
 	oc delete -f ./../deploy/ocp3/role-binding.yaml
 	oc delete -f ./../deploy/common/operator-group.yaml
@@ -315,7 +315,7 @@ k8s-deploy-olm-dev:
 
 k8s-undeploy-olm-dev:
 	kubectl delete -f ./../deploy/k8s/subscription.yaml
-	kubectl delete csv argocd-operator-helm.v${VERSION} -n argocd
+	kubectl delete csvs --all -n argocd
 	kubectl delete -f ./../deploy/k8s/catalog-source.yaml
 	kubectl delete -f ./../deploy/common/operator-group.yaml
 	kubectl delete -f ./../deploy/common/namespace.yaml
