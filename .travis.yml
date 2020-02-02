@@ -30,8 +30,9 @@ jobs:
       cd ${TRAVIS_BUILD_DIR}/build && \
       make operator-build-dev && \
       make bundle-build-ocp-release && \
-      make bundle-build-k8s-release
-    - ci/test-dev
+      make bundle-build-k8s-releasecd && \
+      cd ${TRAVIS_BUILD_DIR}
+    - build/ci/test-dev
 #    - |-
 #      kubectl get pods -n kube-system
 #    - |-
