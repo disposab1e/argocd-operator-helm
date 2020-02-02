@@ -2,6 +2,8 @@
 
 set -e
 
+docker images
+
 cd ${TRAVIS_BUILD_DIR}/build
 
 make operator-build-dev

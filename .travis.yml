@@ -11,7 +11,7 @@ if: branch = travis-ci
 #  - docker
 
 env:
-- CHANGE_MINIKUBE_NONE_USER=true DISTRO_TYPE=upstream
+- CHANGE_MINIKUBE_NONE_USER=true
 
 before_install:
 - build/ci/install-deps
@@ -22,7 +22,6 @@ install:
 - kubectl config use-context minikube
 - build/ci/install-olm
 - eval $(sudo minikube docker-env)
-- docker images
 
 jobs:
   include:
@@ -30,15 +29,6 @@ jobs:
     script:
     - build/ci/build-dev
     - build/ci/test-dev
-
-
-
-
-
-
-
-
-
 
 
 #    - |-
