@@ -28,7 +28,7 @@ jobs:
     script:
 #    - |-
 #      cd ${TRAVIS_BUILD_DIR}/build && make release-all
-    - hack/ci/test
+    - hack/ci/test-dev
 #    - |-
 #      kubectl get pods -n kube-system
 #    - |-
