@@ -30,7 +30,7 @@ jobs:
 #    - |-
 #      kubectl get pods -n kube-system
     - |-
-      make --makefile=build/Makefile k8s-deploy-olm-dev
+      pwd && cd build && make k8s-deploy-olm-dev
 #    - |-
 #      git status 
 #    - |-
