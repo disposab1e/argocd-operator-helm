@@ -26,17 +26,17 @@ jobs:
   include:
   - name: kubectl
     script:
-#    - hack/ci/test
+    - hack/ci/test
 #    - |-
 #      kubectl get pods -n kube-system
-    - |-
-      cd ${TRAVIS_BUILD_DIR}/build && make k8s-deploy-olm-dev
-    - |-
-      cd ${TRAVIS_BUILD_DIR}/build && make k8s-undeploy-olm-dev
-    - |-
-      cd ${TRAVIS_BUILD_DIR}/build && make k8s-deploy-manual-dev
-    - |-
-      cd ${TRAVIS_BUILD_DIR}/build && make k8s-undeploy-manual-dev
+#    - |-
+#      cd ${TRAVIS_BUILD_DIR}/build && make k8s-deploy-olm-dev
+#    - |-
+#      cd ${TRAVIS_BUILD_DIR}/build && make k8s-undeploy-olm-dev
+#    - |-
+#      cd ${TRAVIS_BUILD_DIR}/build && make k8s-deploy-manual-dev
+#    - |-
+#      cd ${TRAVIS_BUILD_DIR}/build && make k8s-undeploy-manual-dev
 #    - |-
 #      git status 
 #    - |-
