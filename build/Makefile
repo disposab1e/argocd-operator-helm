@@ -304,9 +304,14 @@ ocp3-undeploy-manual-dev:
 k8s-deploy-olm-dev:
 	kubectl apply -f ./../deploy/common/namespace.yaml
 	kubectl apply -f ./../deploy/k8s/catalog-source.yaml
+	kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=90s
 	kubectl apply -f ./../deploy/common/operator-group.yaml
 	kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=60s
+	sleep 5
 	kubectl apply -f ./../deploy/k8s/subscription.yaml
+	kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=90s
+	kubectl rollout status -w deployment/argocd-operator-helm -n argocd
+
 
 k8s-undeploy-olm-dev:
 	kubectl delete -f ./../deploy/k8s/subscription.yaml
