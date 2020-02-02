@@ -30,6 +30,7 @@ jobs:
     - build/ci/build-dev
     - build/ci/test-dev
     - build/ci/release
+    - build/ci/test
 
 
 #    - |-
