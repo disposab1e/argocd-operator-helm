@@ -31,7 +31,7 @@ jobs:
       make operator-build-dev && \
       make bundle-build-ocp-release && \
       make bundle-build-k8s-release
-    - build/ci/test-dev
+    - ci/test-dev
 #    - |-
 #      kubectl get pods -n kube-system
 #    - |-
