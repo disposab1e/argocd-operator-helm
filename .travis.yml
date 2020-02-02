@@ -16,11 +16,11 @@ env:
 install:
 - hack/ci/install-deps
 
-#before_script:
-#- sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="v1.14.0" --extra-config=apiserver.v=10
-#- sudo chown -R $USER ${HOME}/.{mini,}kube
-#- kubectl config use-context minikube
-#- hack/ci/install-olm
+before_script:
+- sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="v1.14.0" --extra-config=apiserver.v=10
+- sudo chown -R $USER ${HOME}/.{mini,}kube
+- kubectl config use-context minikube
+- hack/ci/install-olm
 
 jobs:
   include:
@@ -34,3 +34,5 @@ jobs:
       git status 
     - |-
       docker images 
+    - |-
+      hack/ci/test
