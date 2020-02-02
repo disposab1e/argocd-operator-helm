@@ -3,6 +3,7 @@
 set -e
 
 
+
 kubectl apply -f deploy/common/namespace.yaml
 
 kubectl apply -f deploy/k8s/catalog-source.yaml

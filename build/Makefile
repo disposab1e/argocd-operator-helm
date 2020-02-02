@@ -169,8 +169,8 @@ operator-build-release:
 	export GO111MODULE=on
 	cd ../ && operator-sdk build ${REGISTRY}/${NAME}:v${VERSION}
 	
-operator-push-release:
-	docker push ${REGISTRY}/${NAME}:v${VERSION}
+bundle-verifbuild-ocp-release:
+	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME}
 
 bundle-build-ocp-release:
 	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME}
