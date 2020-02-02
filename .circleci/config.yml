@@ -4,26 +4,10 @@ jobs:
     machine: 
       image: circleci/classic:201808-01
     steps:
-      - run:
-          name: Prepare Kubernetes with microk8s
-          command: |
-            sudo snap install kubectl --classic
-            sudo snap install microk8s --classic --channel=1.16/stable
-            sudo /snap/bin/microk8s.status --wait-ready --timeout=300
-            sudo /snap/bin/microk8s.kubectl config view --raw > /tmp/kubeconfig
-            echo 'export PATH=/snap/bin:$PATH' >> $BASH_ENV
-            echo 'export KUBECONFIG=/tmp/kubeconfig' >> $BASH_ENV
-            source $BASH_ENV
-            sudo microk8s.enable dns registry ingress
-            kubectl --kubeconfig /tmp/kubeconfig
-            kubectl cluster-info
       - checkout
       - run:
-          name: Install Operator Lifecycle Manager
-          command: ./build/ci/install-olm
-      - run:
-          name: Build Dev
-          command: ./build/ci/build-dev
+          name: Prepare Kubernetes with microk8s
+          command: ./build/ci/install-deps
 
 workflows:
   version: 2
@@ -31,4 +15,4 @@ workflows:
     jobs:
       - build
 
-      
+

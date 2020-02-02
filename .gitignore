@@ -3,3 +3,4 @@ decription.md
 /docs/build/
 /build/_output
 .DS_Store
+.circleci/config copy.yml
