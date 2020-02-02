@@ -13,10 +13,10 @@ services:
 env:
 - CHANGE_MINIKUBE_NONE_USER=true DISTRO_TYPE=upstream
 
-install:
+before_install:
 - hack/ci/install-deps
 
-before_script:
+install:
 - sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="v1.14.0" --extra-config=apiserver.v=10
 - sudo chown -R $USER ${HOME}/.{mini,}kube
 - kubectl config use-context minikube
@@ -28,11 +28,11 @@ jobs:
     script:
 #    - |-
 #      kubectl get pods -n kube-system
+#    - |-
+#      cd build && make release-all
+#    - |-
+#      git status 
+#    - |-
+#      docker images 
     - |-
-      cd build && make release-all
-    - |-
-      git status 
-    - |-
-      docker images 
-    - |-
-      ./../hack/ci/test
+      cd ../hack/ci/ && test
