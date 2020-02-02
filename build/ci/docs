@@ -4,7 +4,6 @@ set -e
 
 cd ${TRAVIS_BUILD_DIR}/build
 
-make docs
+cd ../docs && make html 
 
 cd ${TRAVIS_BUILD_DIR}
-
