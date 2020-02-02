@@ -21,7 +21,7 @@ install:
 - sudo chown -R $USER ${HOME}/.{mini,}kube
 - kubectl config use-context minikube
 - build/ci/install-olm
-- eval $(minikube docker-env)
+- eval $(sudo minikube docker-env)
 - docker ps
 
 jobs:
