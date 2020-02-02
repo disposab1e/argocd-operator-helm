@@ -9,7 +9,7 @@ if: branch = travis-ci
 
 services:
   - docker
-  
+
 env:
 - CHANGE_MINIKUBE_NONE_USER=true DISTRO_TYPE=upstream
 
@@ -32,3 +32,5 @@ jobs:
       cd build && make release-all
     - |-
       git status 
+    - |-
+      docker images 
