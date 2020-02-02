@@ -4,7 +4,7 @@ set -e
 
 # operator-courier
 echo "Installing operator-courier"
-pip3 install operator-courier
+pip install operator-courier
 
 # Operator SDK
 echo "Installing operator-sdk"
