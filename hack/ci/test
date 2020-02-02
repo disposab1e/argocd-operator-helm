@@ -25,6 +25,7 @@ kubectl delete -f guides/k8s/olm/operator-group.yaml
 kubectl delete -f guides/k8s/olm/namespace.yaml
 
 
+
 kubectl apply -f guides/k8s/manual/namespace.yaml
 kubectl apply -f guides/k8s/manual/service-account.yaml
 kubectl apply -f guides/k8s/manual/role.yaml

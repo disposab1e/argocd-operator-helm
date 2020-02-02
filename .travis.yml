@@ -26,11 +26,11 @@ jobs:
   include:
   - name: kubectl
     script:
-      - hack/ci/test
+    - hack/ci/test
 #    - |-
 #      kubectl get pods -n kube-system
-#    - |-
-#      cd build && make release-all
+    - |-
+      make --makefile=build/Makefile k8s-deploy-olm-dev
 #    - |-
 #      git status 
 #    - |-
