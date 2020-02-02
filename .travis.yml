@@ -30,6 +30,17 @@ jobs:
     script:
     - build/ci/build-dev
     - build/ci/test-dev
+
+
+
+
+
+
+
+
+
+
+
 #    - |-
 #      kubectl get pods -n kube-system
 #    - |-
