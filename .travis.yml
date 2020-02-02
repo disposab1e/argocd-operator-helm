@@ -7,8 +7,8 @@ python:
 
 if: branch = travis-ci
 
-services:
-  - docker
+#services:
+#  - docker
 
 env:
 - CHANGE_MINIKUBE_NONE_USER=true DISTRO_TYPE=upstream
@@ -21,6 +21,8 @@ install:
 - sudo chown -R $USER ${HOME}/.{mini,}kube
 - kubectl config use-context minikube
 - build/ci/install-olm
+- eval $(minikube docker-env)
+- docker ps
 
 jobs:
   include:

@@ -5,5 +5,5 @@ set -e
 cd ${TRAVIS_BUILD_DIR}/build
 make operator-build-dev
 make bundle-build-ocp-release
-make bundle-build-k8s-releasecd
+make bundle-build-k8s-release
 cd ${TRAVIS_BUILD_DIR}
