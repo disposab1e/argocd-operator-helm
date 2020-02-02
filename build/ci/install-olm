@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Operator Lifecycle Manager
+echo "Installing Operator Lifecycle Manager"
+OLM=0.13.0
+curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM}/install.sh | bash -s ${OLM}
+
