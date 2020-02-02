@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+cd ${TRAVIS_BUILD_DIR}/build
+
+make docs
+
+cd ${TRAVIS_BUILD_DIR}
+
