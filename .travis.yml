@@ -35,4 +35,4 @@ jobs:
     - |-
       docker images 
     - |-
-      hack/ci/test
+      ./../hack/ci/test
