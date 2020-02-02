@@ -26,6 +26,7 @@ jobs:
   include:
   - name: kubectl
     script:
+      - hack/ci/test
 #    - |-
 #      kubectl get pods -n kube-system
 #    - |-
@@ -34,5 +35,5 @@ jobs:
 #      git status 
 #    - |-
 #      docker images 
-    - |-
-      cd ../hack/ci/ && test
+#    - |-
+#      cd ../hack/ci/ && test
