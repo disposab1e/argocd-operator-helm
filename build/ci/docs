@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-set -e
-
-cd ${TRAVIS_BUILD_DIR}/build
-
-cd ../docs && make html 
-
-cd ${TRAVIS_BUILD_DIR}

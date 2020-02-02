@@ -28,4 +28,4 @@ jobs:
     - build/ci/test-dev
     - build/ci/release
     - build/ci/test
-    - build/ci/docs
+
