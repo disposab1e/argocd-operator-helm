@@ -3,6 +3,7 @@ jobs:
   build:
     machine: 
       image: circleci/classic:201808-01
+    working_directory: ~/my-project
     steps:
       - checkout
       - run:
@@ -19,9 +20,9 @@ jobs:
       - run:
           name: Build
           command: ./build/ci/build-dev
-      - run:
-          name: Test Dev
-          command: ./build/ci/test-dev
+#      - run:
+#          name: Test Dev
+#          command: ./build/ci/test-dev
 
 workflows:
   version: 2
