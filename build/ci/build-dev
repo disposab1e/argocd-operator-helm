@@ -5,13 +5,7 @@ set -e
 pwd
 ls -la 
 
-if [ -d "${TRAVIS_BUILD_DIR}/build" ]; then
-    cd ${TRAVIS_BUILD_DIR}/build
-fi
-
-if [ -d "${CIRCLE_WORKING_DIRECTORY}/build" ]; then
-    cd ${CIRCLE_WORKING_DIRECTORY}/build
-fi
+cd build/
 
 make operator-build-dev
 
@@ -19,10 +13,4 @@ make bundle-build-ocp-dev
 
 make bundle-build-k8s-dev
 
-if [ -d "${CIRCLE_WORKING_DIRECTORY}/build" ]; then
-    cd ${CIRCLE_WORKING_DIRECTORY}
-fi
-
-if [ -d "${TRAVIS_BUILD_DIR}/build" ]; then
-    cd ${TRAVIS_BUILD_DIR}
-fi
+cd ../
