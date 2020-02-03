@@ -2,6 +2,9 @@
 
 set -e
 
+pwd
+ls -la 
+
 if [ -d "${TRAVIS_BUILD_DIR}/build" ]; then
     cd ${TRAVIS_BUILD_DIR}/build
 fi
