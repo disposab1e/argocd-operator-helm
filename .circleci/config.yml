@@ -6,9 +6,9 @@ jobs:
     working_directory: ~/my-project
     steps:
       - checkout
-#      - run:
-#          name: Install Dependencies
-#          command: ./build/ci/install-deps
+      - run:
+          name: Install Dependencies
+          command: ./build/ci/install-deps
 #      - run:
 #          name: Install Minikube
 #          command: |
