@@ -44,5 +44,3 @@ kubectl delete -f guides/k8s/manual/role-binding.yaml
 kubectl delete -f guides/k8s/manual/role.yaml
 kubectl delete -f guides/k8s/manual/service-account.yaml
 kubectl delete -f guides/k8s/manual/namespace.yaml
-
-docker images

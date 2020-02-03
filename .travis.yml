@@ -22,13 +22,10 @@ install:
 
 jobs:
   include:
-  - stage: build
-    script: build/ci/build-dev
-  - stage: test-dev
-    script: build/ci/test-dev
-  - stage: release
-    script: build/ci/release
-  - stage: test
-    script: build/ci/test
-
+  - name: build
+    script:
+    - build/ci/build-dev
+    - build/ci/test-dev
+    - build/ci/release
+    - build/ci/test
 
