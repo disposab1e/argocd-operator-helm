@@ -22,10 +22,11 @@ install:
 
 jobs:
   include:
-  - name: build
+  - name: build-and-test
     script:
     - build/ci/build-dev
     - build/ci/test-dev
     - build/ci/release
     - build/ci/test
+    - build/ci/install-argocd
 
