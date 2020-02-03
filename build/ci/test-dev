@@ -45,5 +45,3 @@ kubectl delete -f deploy/common/role.yaml
 kubectl delete -f deploy/common/service-account.yaml
 kubectl delete -f deploy/common/namespace.yaml
 
-docker images
-
