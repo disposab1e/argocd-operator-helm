@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+set -e
+
+
+kubectl apply -f guides/k8s/olm/namespace.yaml
+
+kubectl apply -f guides/k8s/olm/catalog-source.yaml
+kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=90s
+
+kubectl apply -f guides/k8s/olm/operator-group.yaml
+kubectl apply -f guides/k8s/olm/subscription.yaml
+
+sleep 45
+
+kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=120s
+kubectl rollout status -w deployment/argocd-operator-helm -n argocd
+
+kubectl apply -f examples/k8s.yaml
+
+kubectl get ArgoCDs argocd -n argocd
+
+kubectl rollout status -w deployment/argocd-application-controller -n argocd
+kubectl rollout status -w deployment/argocd-dex-server -n argocd
+kubectl rollout status -w deployment/argocd-redis -n argocd
+kubectl rollout status -w deployment/argocd-repo-server -n argocd
+kubectl rollout status -w deployment/argocd-server -n argocd
+
+
+kubectl delete -f guides/k8s/olm/subscription.yaml
+kubectl delete csvs --all -n argocd
+kubectl delete crd argocds.argoproj.io
+kubectl delete -f guides/k8s/olm/catalog-source.yaml
+kubectl delete -f guides/k8s/olm/operator-group.yaml
+kubectl delete -f guides/k8s/olm/namespace.yaml
+
+
+
+kubectl apply -f guides/k8s/manual/namespace.yaml
+kubectl apply -f guides/k8s/manual/service-account.yaml
+kubectl apply -f guides/k8s/manual/role.yaml
+kubectl apply -f guides/k8s/manual/role-binding.yaml
+kubectl apply -f guides/k8s/manual/crd.yaml
+kubectl apply -f guides/k8s/manual/deployment.yaml
+
+sleep 5
+
+kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=120s
+kubectl rollout status -w deployment/argocd-operator-helm -n argocd
+
+kubectl delete -f guides/k8s/manual/deployment.yaml
+kubectl delete -f guides/k8s/manual/crd.yaml
+kubectl delete -f guides/k8s/manual/role-binding.yaml
+kubectl delete -f guides/k8s/manual/role.yaml
+kubectl delete -f guides/k8s/manual/service-account.yaml
+kubectl delete -f guides/k8s/manual/namespace.yaml
