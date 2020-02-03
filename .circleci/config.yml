@@ -16,6 +16,12 @@ jobs:
             kubectl config use-context minikube
             build/ci/install-olm
             eval $(sudo minikube docker-env)
+      - run:
+          name: Build
+          command: ./build/ci/build-dev
+      - run:
+          name: Test Dev
+          command: ./build/ci/test-dev
 
 workflows:
   version: 2
