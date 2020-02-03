@@ -11,11 +11,11 @@ jobs:
       - run:
           name: Install Minikube
           command: |
-            minikube start --memory=4096 --vm-driver=none --kubernetes-version="v1.14.0" --extra-config=apiserver.v=10
+            sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="v1.14.0" --extra-config=apiserver.v=10
             chown -R $USER ${HOME}/.{mini,}kube
             kubectl config use-context minikube
             build/ci/install-olm
-            eval $(minikube docker-env)
+            eval $(sudo minikube docker-env)
 
 workflows:
   version: 2
