@@ -7,6 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install Python 3
+          command: sudo apt-get update && sudo apt-get install -y python3 
+      - run:
           name: Install Dependencies
           command: ./build/ci/install-deps
 
