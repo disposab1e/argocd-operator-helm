@@ -16,6 +16,9 @@ jobs:
         python-version: '3.x'
     - name: Install Dependencies
       run: build/ci/install-deps
+    - name: Helm templates
+      run: make helm-templates
+      working-directory: ${{ github.workspace }}/build
     - name: Build Operator (dev)
       run: make operator-build-dev
       working-directory: ${{ github.workspace }}/build
@@ -30,6 +33,9 @@ jobs:
       working-directory: ${{ github.workspace }}/build
     - name: Build Bundle ocp (dev)
       run: make bundle-build-ocp-dev
+      working-directory: ${{ github.workspace }}/build
+    - name: Build Operator (release)
+      run: make operator-build-release
       working-directory: ${{ github.workspace }}/build
     - name: Verify Bundle k8s (release)
       run: make bundle-verify-k8s-release
@@ -49,3 +55,12 @@ jobs:
     - name: Generate Quickstarts
       run: make generate-quickstarts
       working-directory: ${{ github.workspace }}/build
+    - name: Release Guides
+      run: make release-guides
+      working-directory: ${{ github.workspace }}/build
+    - name: Release Quickstarts
+      run: make release-quickstarts
+      working-directory: ${{ github.workspace }}/build
+
+
+      

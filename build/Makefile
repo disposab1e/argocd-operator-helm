@@ -35,7 +35,7 @@ argocd-undeploy:
 
 helm-templates:
 	helm template --values ./../helm-charts/argo-cd/values.yaml  ./../helm-charts/argo-cd/
-	helm template --values ./../guides/ocp3/examples/ocp-oauth.yaml ./../helm-charts/argo-cd 
+	helm template --values ./../examples/ocp-oauth.yaml ./../helm-charts/argo-cd 
 
 docs:
 	cd ../docs && make html && open ../docs/build/html/index.html
