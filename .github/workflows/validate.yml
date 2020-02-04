@@ -16,4 +16,6 @@ jobs:
         python-version: '3.x'
     - name: Install Dependencies
       run: build/ci/install-deps
-
+    - name: Build
+      run: build/ci/build-dev
+      
