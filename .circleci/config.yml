@@ -2,13 +2,10 @@ version: 2.1
 jobs:
   build:
     machine: 
-      image: circleci/classic:201808-01
+      image: ubuntu-1604:201903-01
 #    working_directory: ~/my-project
     steps:
       - checkout
-      - run:
-          name: Install Python 3
-          command: sudo apt-get update && sudo apt-get install -y python3 
       - run:
           name: Install Dependencies
           command: ./build/ci/install-deps
