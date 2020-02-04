@@ -19,11 +19,20 @@ jobs:
           name: Install Operator Lifecycle Manager
           command: ./build/ci/install-olm
       - run:
-          name: Build
+          name: Build Development Environment
           command: ./build/ci/build-dev
       - run:
-          name: Test Dev
+          name: Test Development Environment
           command: ./build/ci/test-dev
+      - run:
+          name: Build Release Environment
+          command: ./build/ci/release
+      - run:
+          name: Test Release Environment
+          command: ./build/ci/test
+      - run:
+          name: Install Argo CD
+          command: ./build/ci/install-argocd
 
 workflows:
   version: 2
