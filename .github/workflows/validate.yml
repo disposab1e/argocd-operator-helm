@@ -19,10 +19,21 @@ jobs:
     - name: Build Operator (dev)
       run: make operator-build-dev
       working-directory: ${{ github.workspace }}/build
+    - name: Verify Bundle k8s (dev)
+      run: make bundle-verify-k8s-dev
+      working-directory: ${{ github.workspace }}/build
     - name: Build Bundle k8s (dev)
       run: make bundle-build-k8s-dev
+      working-directory: ${{ github.workspace }}/build
+    - name: Verify Bundle ocp (dev)
+      run: make bundle-verify-ocp-dev
       working-directory: ${{ github.workspace }}/build
     - name: Build Bundle ocp (dev)
       run: make bundle-build-ocp-dev
       working-directory: ${{ github.workspace }}/build
-
+    - name: Generate Guides
+      run: make generate-guides
+      working-directory: ${{ github.workspace }}/build
+    - name: Generate Quickstarts
+      run: make generate-quickstarts
+      working-directory: ${{ github.workspace }}/build
