@@ -17,7 +17,7 @@ jobs:
           command: ./build/ci/start-minikube
       - run:
           name: Install Operator Lifecycle Manager
-          command: ./build/ciinstall-olm
+          command: ./build/ci/install-olm
       - run:
           name: Build
           command: ./build/ci/build-dev
