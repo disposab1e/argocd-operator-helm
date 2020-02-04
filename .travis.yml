@@ -7,9 +7,6 @@ python:
 
 if: branch = travis-ci
 
-#env:
-#- CHANGE_MINIKUBE_NONE_USER=true
-
 before_install:
 - build/ci/install-deps
 
@@ -26,4 +23,3 @@ jobs:
     - build/ci/release
     - build/ci/test
     - build/ci/install-argocd
-
