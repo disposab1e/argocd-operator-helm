@@ -7,18 +7,12 @@ python:
 
 if: branch = travis-ci
 
-env:
-- CHANGE_MINIKUBE_NONE_USER=true
-
 before_install:
 - build/ci/install-deps
 
 install:
-- sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="v1.14.0" --extra-config=apiserver.v=10
-- sudo chown -R $USER ${HOME}/.{mini,}kube
-- kubectl config use-context minikube
+- build/ci/start-minikube
 - build/ci/install-olm
-- eval $(sudo minikube docker-env)
 
 jobs:
   include:
@@ -29,4 +23,3 @@ jobs:
     - build/ci/release
     - build/ci/test
     - build/ci/install-argocd
-
