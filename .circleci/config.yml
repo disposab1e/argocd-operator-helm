@@ -12,21 +12,18 @@ jobs:
       - run:
           name: Install Dependencies
           command: ./build/ci/install-deps
-
-          #      - run:
-#          name: Install Minikube
-#          command: |
-#            sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="v1.14.0" --extra-config=apiserver.v=10
-#            sudo chown -R $USER ${HOME}/.{mini,}kube
-#            kubectl config use-context minikube
-#            build/ci/install-olm
-#            eval $(sudo minikube docker-env)
+      - run:
+          name: Start Minikube
+          command: ./build/ci/start-minikube
+      - run:
+          name: Install Operator Lifecycle Manager
+          command: ./build/ciinstall-olm
       - run:
           name: Build
           command: ./build/ci/build-dev
-#      - run:
-#          name: Test Dev
-#          command: ./build/ci/test-dev
+      - run:
+          name: Test Dev
+          command: ./build/ci/test-dev
 
 workflows:
   version: 2
