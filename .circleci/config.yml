@@ -18,12 +18,12 @@ jobs:
       - run:
           name: Install Operator Lifecycle Manager
           command: ./build/ci/install-olm
-#      - run:
-#          name: Build Development Environment
-#          command: ./build/ci/build-dev
-#      - run:
-#          name: Test Development Environment
-#          command: ./build/ci/test-dev
+      - run:
+          name: Build Development Environment
+          command: ./build/ci/build-dev
+      - run:
+          name: Test Development Environment
+          command: ./build/ci/test-dev
       - run:
           name: Build Release Environment
           command: ./build/ci/release
