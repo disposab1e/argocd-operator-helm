@@ -1,4 +1,4 @@
-name: CI
+name: build-and-test
 
 on:
   pull_request:
@@ -7,11 +7,9 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
-    - name: Run a one-line script
-      run: build/ci/install-deps
+    - name: Install Dependencies
+      run: cd ${{ github.workspace }} && build/ci/install-deps
 
