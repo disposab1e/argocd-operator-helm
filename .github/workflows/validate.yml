@@ -20,9 +20,9 @@ jobs:
       run: make operator-build-dev
       working-directory: ${{ github.workspace }}/build
     - name: Build Bundle k8s (dev)
-      run: bundle-build-k8s-dev
+      run: make bundle-build-k8s-dev
       working-directory: ${{ github.workspace }}/build
     - name: Build Bundle ocp (dev)
-      run: bundle-build-ocp-dev
+      run: make bundle-build-ocp-dev
       working-directory: ${{ github.workspace }}/build
 
