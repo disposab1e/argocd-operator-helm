@@ -2,9 +2,6 @@
 
 set -e
 
-pwd
-ls -la 
-
 cd build/
 
 make operator-build-dev

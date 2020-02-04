@@ -7,6 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Use Python 3.6.5
+          command: pyenv global 3.6.5
+      - run:
           name: Install Dependencies
           command: ./build/ci/install-deps
 
