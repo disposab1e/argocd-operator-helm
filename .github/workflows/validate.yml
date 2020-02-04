@@ -1,4 +1,4 @@
-name: build-and-test
+name: verify
 
 on:
   pull_request:
@@ -17,5 +17,5 @@ jobs:
     - name: Install Dependencies
       run: build/ci/install-deps
     - name: Build
-      run: build/ci/build-dev
-      
+      run: make clean
+      working-directory: ${{ github.workspace }}/build
