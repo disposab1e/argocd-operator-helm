@@ -43,7 +43,7 @@ jobs:
     - name: Build Bundle ocp (release)
       run: make bundle-build-ocp-release
       working-directory: ${{ github.workspace }}/build
-      - name: Generate Guides
+    - name: Generate Guides
       run: make generate-guides
       working-directory: ${{ github.workspace }}/build
     - name: Generate Quickstarts
