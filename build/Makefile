@@ -170,6 +170,8 @@ operator-build-release:
 	cd ../ && operator-sdk build ${REGISTRY}/${NAME}:v${VERSION}
 
 bundle-verify-ocp-release:
+	pwd
+	ls -la
 	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME}
 
 bundle-build-ocp-release: bundle-verify-ocp-release
@@ -191,6 +193,8 @@ bundle-push-ocp-release:
 	docker push ${REGISTRY}/${NAME}-registry-ocp:${VERSION}
 
 bundle-verify-ocp-dev:
+	pwd
+	ls -la
 	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME}
 
 bundle-build-ocp-dev: bundle-verify-ocp-dev
@@ -205,6 +209,8 @@ bundle-push-ocp-dev:
 	docker push ${REGISTRY}/${NAME}-registry-ocp-dev:${VERSION}
 
 bundle-verify-k8s-release:
+	pwd
+	ls -la
 	operator-courier --verbose verify --ui_validate_io ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME}
 
 bundle-build-k8s-release: bundle-verify-k8s-release
