@@ -15,5 +15,5 @@ jobs:
       with:
         python-version: '3.x'
     - name: Install Dependencies
-      run: cd ${{ github.workspace }} && build/ci/install-deps
+      run: build/ci/install-deps
 
