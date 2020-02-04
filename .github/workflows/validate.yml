@@ -31,7 +31,19 @@ jobs:
     - name: Build Bundle ocp (dev)
       run: make bundle-build-ocp-dev
       working-directory: ${{ github.workspace }}/build
-    - name: Generate Guides
+    - name: Verify Bundle k8s (release)
+      run: make bundle-verify-k8s-release
+      working-directory: ${{ github.workspace }}/build
+    - name: Build Bundle k8s (release)
+      run: make bundle-build-k8s-release
+      working-directory: ${{ github.workspace }}/build
+    - name: Verify Bundle ocp (release)
+      run: make bundle-verify-ocp-release
+      working-directory: ${{ github.workspace }}/build
+    - name: Build Bundle ocp (release)
+      run: make bundle-build-ocp-release
+      working-directory: ${{ github.workspace }}/build
+      - name: Generate Guides
       run: make generate-guides
       working-directory: ${{ github.workspace }}/build
     - name: Generate Quickstarts
