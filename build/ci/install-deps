@@ -2,9 +2,14 @@
 
 set -e
 
+#pyenv versions
+#pyenv global 3.6.5
+#pyenv versions
+
 # operator-courier
 echo "Installing operator-courier"
 pip install operator-courier
+operator-courier --version
 
 # Operator SDK
 echo "Installing operator-sdk"

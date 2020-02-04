@@ -2,7 +2,7 @@
 
 set -e
 
-cd ${TRAVIS_BUILD_DIR}/build
+cd build/
 
 make operator-build-dev
 
@@ -10,4 +10,4 @@ make bundle-build-ocp-dev
 
 make bundle-build-k8s-dev
 
-cd ${TRAVIS_BUILD_DIR}
+cd ../
