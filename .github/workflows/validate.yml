@@ -20,8 +20,8 @@ jobs:
       run: make helm-templates
       working-directory: ${{ github.workspace }}/build
     - name: Generate Documentation
-      run: make docs
-      working-directory: ${{ github.workspace }}/build
+      run: make html
+      working-directory: ${{ github.workspace }}/docs
     - name: Build Operator (dev)
       run: make operator-build-dev
       working-directory: ${{ github.workspace }}/build
