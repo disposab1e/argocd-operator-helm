@@ -3,6 +3,8 @@
 set -e
 
 pyenv versions
+pyenv install 3.6.0
+pyenv global 3.6.0
 
 # operator-courier
 echo "Installing operator-courier"
