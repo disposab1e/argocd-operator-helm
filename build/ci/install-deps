@@ -5,6 +5,7 @@ set -e
 # operator-courier
 echo "Installing operator-courier"
 pip install operator-courier
+operator-courier --version
 
 # Operator SDK
 echo "Installing operator-sdk"
