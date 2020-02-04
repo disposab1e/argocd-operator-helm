@@ -2,6 +2,8 @@
 
 set -e
 
+pyenv versions
+
 # operator-courier
 echo "Installing operator-courier"
 sudo pip install operator-courier
