@@ -16,8 +16,11 @@ jobs:
         python-version: '3.x'
     - name: Install Dependencies
       run: build/ci/install-deps
-    - name: Helm templates
+    - name: Verify Helm templates
       run: make helm-templates
+      working-directory: ${{ github.workspace }}/build
+    - name: Generate Documentation
+      run: make docs
       working-directory: ${{ github.workspace }}/build
     - name: Build Operator (dev)
       run: make operator-build-dev
