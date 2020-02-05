@@ -34,6 +34,7 @@ argocd-undeploy:
 	oc delete ArgoCD argocd -n argocd
 
 helm-templates:
+	helm lint ./../helm-charts/argo-cd/
 	helm template --values ./../helm-charts/argo-cd/values.yaml  ./../helm-charts/argo-cd/
 	helm template --values ./../examples/ocp-oauth.yaml ./../helm-charts/argo-cd 
 
