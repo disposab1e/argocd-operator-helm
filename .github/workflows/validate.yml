@@ -31,16 +31,10 @@ jobs:
     - name: Build Operator (release)
       run: make operator-build-release
       working-directory: ${{ github.workspace }}/build
-    - name: Verify Bundle k8s (release)
-      run: make bundle-verify-k8s-release
-      working-directory: ${{ github.workspace }}/build
-    - name: Build Bundle k8s (release)
+    - name: Build and verify Bundle k8s (release)
       run: make bundle-build-k8s-release
       working-directory: ${{ github.workspace }}/build
-    - name: Verify Bundle ocp (release)
-      run: make bundle-verify-ocp-release
-      working-directory: ${{ github.workspace }}/build
-    - name: Build Bundle ocp (release)
+    - name: Build and verify Bundle ocp (release)
       run: make bundle-build-ocp-release
       working-directory: ${{ github.workspace }}/build
     - name: Generate Guides
