@@ -34,12 +34,15 @@ argocd-undeploy:
 	oc delete ArgoCD argocd -n argocd
 
 helm-templates:
+	helm lint ./../helm-charts/argo-cd/
 	helm template --values ./../helm-charts/argo-cd/values.yaml  ./../helm-charts/argo-cd/
-	helm template --values ./../guides/ocp3/examples/ocp-oauth.yaml ./../helm-charts/argo-cd 
+	helm template --values ./../examples/ocp-oauth.yaml ./../helm-charts/argo-cd 
 
-docs:
+docs-view:
 	cd ../docs && make html && open ../docs/build/html/index.html
 
+docs:
+	cd ../docs && make html
 
 release-all: release-guides release-quickstarts operator-build-release bundle-build-ocp-release bundle-build-k8s-release
 
