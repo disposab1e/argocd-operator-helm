@@ -8,9 +8,9 @@ make operator-build-ci
 
 make bundle-build-k8s-ci
 
-generate-guide-k8s-ci-manual
+make generate-guide-k8s-ci-manual
 
-generate-guide-k8s-ci-olm
+make generate-guide-k8s-ci-olm
 
 cd ../
 
