@@ -465,7 +465,7 @@ metadata:
     categories: "Integration & Delivery"
     description: Declarative Continuous Delivery following Gitops.
     certified: "false"
-    containerImage: quay.io/disposab1e/argocd-operator-helm-dev:v0.0.4
+    containerImage: imac.fritz.box:5000/disposab1e/argocd-operator-helm:v0.0.4
     support: Community
     repository: https://github.com/disposab1e/argocd-operator-helm.git
   name: argocd-operator-helm.v0.0.4
@@ -645,7 +645,7 @@ spec:
                       fieldPath: metadata.name
                 - name: OPERATOR_NAME
                   value: argocd-operator-helm
-                image: quay.io/disposab1e/argocd-operator-helm-dev:v0.0.4
+                image: imac.fritz.box:5000/disposab1e/argocd-operator-helm:v0.0.4
                 imagePullPolicy: Always
                 name: argocd-operator-helm
                 resources: {}

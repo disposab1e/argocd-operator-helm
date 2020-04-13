@@ -1,7 +1,9 @@
 VERSION = 0.0.4
 NAME = argocd-operator-helm
 
-REGISTRY = quay.io/disposab1e
+REGISTRY = quay.io
+REGISTRY_DEV = imac.fritz.box:5000
+NAMESPACE=disposab1e
 
 BUNDLE_MANIFEST_BASE_DIR = ../deploy/olm-catalog/
 BUNDLE_DIR = bundle
@@ -30,7 +32,7 @@ argocd-deploy-k8s:
 argocd-deploy-k8s-lb:
 	oc apply -f ./../examples/k8s-lb.yaml
 
-argocd-undeploy:
+argocd-undeploy-do-it-better:
 	oc delete ArgoCD argocd -n argocd
 
 helm-templates:
@@ -109,7 +111,7 @@ generate-guide-ocp3-manual:
 	cp ../deploy/crds/argoproj.io_argocds_crd.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/manual/crd.yaml
 	echo "---" >> ${GUIDES_BUILD_BASE_DIR}/ocp3/manual/role-binding.yaml
 	cat ../deploy/ocp3/role-binding.yaml >> ${GUIDES_BUILD_BASE_DIR}/ocp3/manual/role-binding.yaml
-	sed 's/-dev//g' ../deploy/common/deployment.yaml > ${GUIDES_BUILD_BASE_DIR}/ocp3/manual/deployment.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ../deploy/common/deployment.yaml > ${GUIDES_BUILD_BASE_DIR}/ocp3/manual/deployment.yaml
 
 generate-guide-ocp3-olm:
 	rm -rf ${GUIDES_BUILD_BASE_DIR}/ocp3/olm
@@ -119,7 +121,7 @@ generate-guide-ocp3-olm:
 	cp ../deploy/ocp3/role-binding.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/olm
 	cp ../deploy/ocp3/catalog-source.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/olm
 	cp ../deploy/ocp3/subscription.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/olm
-	sed 's/-dev//g' ../deploy/ocp3/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/ocp3/manual/catalog-source.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ../deploy/ocp3/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/ocp3/olm/catalog-source.yaml
 
 generate-guide-ocp4-manual:
 	rm -rf ${GUIDES_BUILD_BASE_DIR}/ocp4/manual
@@ -130,7 +132,7 @@ generate-guide-ocp4-manual:
 	cp ../deploy/common/role-binding.yaml ${GUIDES_BUILD_BASE_DIR}/ocp4/manual
 	cp ../deploy/common/deployment.yaml ${GUIDES_BUILD_BASE_DIR}/ocp4/manual
 	cp ../deploy/crds/argoproj.io_argocds_crd.yaml ${GUIDES_BUILD_BASE_DIR}/ocp4/manual/crd.yaml
-	sed 's/-dev//g' ../deploy/common/deployment.yaml > ${GUIDES_BUILD_BASE_DIR}/ocp4/manual/deployment.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ../deploy/common/deployment.yaml > ${GUIDES_BUILD_BASE_DIR}/ocp4/manual/deployment.yaml
 
 generate-guide-ocp4-olm:
 	rm -rf ${GUIDES_BUILD_BASE_DIR}/ocp4/olm
@@ -139,7 +141,7 @@ generate-guide-ocp4-olm:
 	cp ../deploy/common/operator-group.yaml ${GUIDES_BUILD_BASE_DIR}/ocp4/olm
 	cp ../deploy/ocp4/catalog-source.yaml ${GUIDES_BUILD_BASE_DIR}/ocp4/olm
 	cp ../deploy/ocp4/subscription.yaml ${GUIDES_BUILD_BASE_DIR}/ocp4/olm
-	sed 's/-dev//g' ../deploy/ocp4/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/ocp4/olm/catalog-source.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ../deploy/ocp4/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/ocp4/olm/catalog-source.yaml
 
 generate-guide-k8s-manual:
 	rm -rf ${GUIDES_BUILD_BASE_DIR}/k8s/manual
@@ -150,7 +152,7 @@ generate-guide-k8s-manual:
 	cp ../deploy/common/role-binding.yaml ${GUIDES_BUILD_BASE_DIR}/k8s/manual
 	cp ../deploy/common/deployment.yaml ${GUIDES_BUILD_BASE_DIR}/k8s/manual
 	cp ../deploy/crds/argoproj.io_argocds_crd.yaml ${GUIDES_BUILD_BASE_DIR}/k8s/manual/crd.yaml
-	sed 's/-dev//g' ../deploy/common/deployment.yaml > ${GUIDES_BUILD_BASE_DIR}/k8s/manual/deployment.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ../deploy/common/deployment.yaml > ${GUIDES_BUILD_BASE_DIR}/k8s/manual/deployment.yaml
 
 generate-guide-k8s-olm:
 	rm -rf ${GUIDES_BUILD_BASE_DIR}/k8s/olm
@@ -159,18 +161,18 @@ generate-guide-k8s-olm:
 	cp ../deploy/common/operator-group.yaml ${GUIDES_BUILD_BASE_DIR}/k8s/olm
 	cp ../deploy/k8s/catalog-source.yaml ${GUIDES_BUILD_BASE_DIR}/k8s/olm
 	cp ../deploy/k8s/subscription.yaml ${GUIDES_BUILD_BASE_DIR}/k8s/olm
-	sed 's/-dev//g' ../deploy/k8s/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/k8s/olm/catalog-source.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ../deploy/k8s/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/k8s/olm/catalog-source.yaml
 
 operator-build-dev:
 	export GO111MODULE=on
-	cd ../ && operator-sdk build ${REGISTRY}/${NAME}-dev:v${VERSION}
+	cd ../ && operator-sdk build ${REGISTRY_DEV}/${NAMESPACE}/${NAME}:v${VERSION}
 	
 operator-push-dev:
-	docker push ${REGISTRY}/${NAME}-dev:v${VERSION}
+	docker push ${REGISTRY_DEV}/${NAMESPACE}/${NAME}:v${VERSION}
 
 operator-build-release:
 	export GO111MODULE=on
-	cd ../ && operator-sdk build ${REGISTRY}/${NAME}:v${VERSION}
+	cd ../ && operator-sdk build ${REGISTRY}/${NAMESPACE}/${NAME}:v${VERSION}
 
 bundle-verify-ocp-release:
 	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME}
@@ -180,18 +182,18 @@ bundle-build-ocp-release: bundle-verify-ocp-release
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}/release/ocp/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests
 	cp -r ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME} ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/
-	sed 's/argocd-operator-helm-dev/argocd-operator-helm/g' ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
-	sed 's/argocd-operator-helm-dev/argocd-operator-helm/g' ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
-	docker build -t ${REGISTRY}/${NAME}-registry-ocp:${VERSION} ${BUNDLE_BUILD_BASE_DIR}/release/ocp
+	docker build -t ${REGISTRY}/${NAMESPACE}/${NAME}-registry-ocp:${VERSION} ${BUNDLE_BUILD_BASE_DIR}/release/ocp
 	cp -r ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME} ../deploy/operatorhubs/ocp
-	rm -rf ${BUNDLE_BUILD_BASE_DIR}/release/ocp
+#	rm -rf ${BUNDLE_BUILD_BASE_DIR}/release/ocp
 
 bundle-push-ocp-release:
-	docker push ${REGISTRY}/${NAME}-registry-ocp:${VERSION}
+	docker push ${REGISTRY}/${NAMESPACE}/${NAME}-registry-ocp:${VERSION}
 
 bundle-verify-ocp-dev:
 	operator-courier --verbose verify ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME}
@@ -201,11 +203,11 @@ bundle-build-ocp-dev: bundle-verify-ocp-dev
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}-ocp/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}-ocp/manifests
 	cp -r ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME} ${BUNDLE_BUILD_BASE_DIR}-ocp/manifests/
-	docker build -t ${REGISTRY}/${NAME}-registry-ocp-dev:${VERSION} ${BUNDLE_BUILD_BASE_DIR}-ocp/
+	docker build -t ${REGISTRY_DEV}/${NAMESPACE}/${NAME}-registry-ocp:${VERSION} ${BUNDLE_BUILD_BASE_DIR}-ocp/
 	#rm -rf ${BUNDLE_BUILD_BASE_DIR}-ocp
 
 bundle-push-ocp-dev:
-	docker push ${REGISTRY}/${NAME}-registry-ocp-dev:${VERSION}
+	docker push ${REGISTRY_DEV}/${NAMESPACE}/${NAME}-registry-ocp:${VERSION}
 
 bundle-verify-k8s-release:
 	operator-courier --verbose verify --ui_validate_io ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME}
@@ -215,18 +217,18 @@ bundle-build-k8s-release: bundle-verify-k8s-release
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}/release/k8s/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests
 	cp -r ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME} ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/
-	sed 's/argocd-operator-helm-dev/argocd-operator-helm/g' ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
-	sed 's/argocd-operator-helm-dev/argocd-operator-helm/g' ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
-	docker build -t ${REGISTRY}/${NAME}-registry-k8s:${VERSION} ${BUNDLE_BUILD_BASE_DIR}/release/k8s
+	docker build -t ${REGISTRY}/${NAMESPACE}/${NAME}-registry-k8s:${VERSION} ${BUNDLE_BUILD_BASE_DIR}/release/k8s
 	cp -r ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME} ../deploy/operatorhubs/k8s
-	rm -rf ${BUNDLE_BUILD_BASE_DIR}/release/k8s
+#	rm -rf ${BUNDLE_BUILD_BASE_DIR}/release/k8s
 
 bundle-push-k8s-release:
-	docker push ${REGISTRY}/${NAME}-registry-k8s:${VERSION}
+	docker push ${REGISTRY}/${NAMESPACE}/${NAME}-registry-k8s:${VERSION}
 
 bundle-verify-k8s-dev:
 	operator-courier --verbose verify --ui_validate_io ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME}
@@ -236,11 +238,11 @@ bundle-build-k8s-dev: bundle-verify-k8s-dev
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}-k8s/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}-k8s/manifests
 	cp -r ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME} ${BUNDLE_BUILD_BASE_DIR}-k8s/manifests/
-	docker build -t ${REGISTRY}/${NAME}-registry-k8s-dev:${VERSION} ${BUNDLE_BUILD_BASE_DIR}-k8s/
+	docker build -t ${REGISTRY_DEV}/${NAMESPACE}/${NAME}-registry-k8s:${VERSION} ${BUNDLE_BUILD_BASE_DIR}-k8s/
 	#rm -rf ${BUNDLE_BUILD_BASE_DIR}-k8s
 
 bundle-push-k8s-dev:
-	docker push ${REGISTRY}/${NAME}-registry-k8s-dev:${VERSION}
+	docker push ${REGISTRY_DEV}/${NAMESPACE}/${NAME}-registry-k8s:${VERSION}
 
 
 ocp4-deploy-olm-dev:
@@ -315,8 +317,8 @@ k8s-deploy-olm-dev:
 	kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=90s
 	kubectl apply -f ./../deploy/common/operator-group.yaml
 	kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=60s
-	sleep 5
 	kubectl apply -f ./../deploy/k8s/subscription.yaml
+	sleep 15
 	kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=90s
 	kubectl rollout status -w deployment/argocd-operator-helm -n argocd
 
