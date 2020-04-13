@@ -8,6 +8,12 @@ make operator-build-ci
 
 make bundle-build-k8s-ci
 
+echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin
+
+make operator-push-ci
+
+make bundle-push-k8s-ci
+
 make generate-guide-k8s-ci-manual
 
 make generate-guide-k8s-ci-olm
