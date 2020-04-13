@@ -10,7 +10,7 @@ kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Read
 kubectl apply -f build/_output/guides/ci/k8s/olm/operator-group.yaml
 kubectl apply -f build/_output/guides/ci/k8s/olm/subscription.yaml
 
-sleep 45
+sleep 60
 
 kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=120s
 kubectl rollout status -w deployment/argocd-operator-helm -n argocd
