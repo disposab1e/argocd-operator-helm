@@ -2,15 +2,6 @@
 
 set -e
 
-ls -la 
-ls -la build/
-ls -la build/_output/
-ls -la build/_output/guides/
-ls -la build/_output/guides/ci/
-ls -la build/_output/guides/ci/k8s/
-ls -la build/_output/guides/ci/olm/
-
-
 kubectl apply -f build/_output/guides/ci/k8s/olm/namespace.yaml
 
 kubectl apply -f build/_output/guides/ci/k8s/olm/catalog-source.yaml
