@@ -40,5 +40,4 @@ minishift addon enable anyuid
 
 minishift addons list
 
-
-sudo minishift start -v 5
+minishift start -v 5
