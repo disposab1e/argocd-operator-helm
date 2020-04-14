@@ -9,8 +9,6 @@ echo "Installing CRC"
 curl -Lo crc-linux-amd64.tar.xz https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz
 tar xvf crc-linux-amd64.tar.xz
 chmod +x crc-linux-1.8.0-amd64/crc
-mv crc-linux-1.8.0-amd64 /crc
 rm crc-linux-amd64.tar.xz
-rm -rf crc-linux-1.8.0-amd64
-cd /crc
+cd crc-linux-1.8.0-amd64
 crc version
