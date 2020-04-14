@@ -25,3 +25,5 @@ jobs:
       - build/ci/start-minishift
       - build/ci/install-olm
       - build/ci/stop-minishift
+
+      
