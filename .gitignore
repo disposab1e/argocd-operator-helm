@@ -7,3 +7,4 @@ decription.md
 
 build/ci/docker-login
 .travis_minikue.yml
+pull-secret
