@@ -22,10 +22,7 @@ operator-build-ci:
 operator-push-ci:
 	docker push ${REGISTRY_CI}/${NAMESPACE}/${NAME}:v${VERSION}
 
-bundle-verify-k8s-ci:
-	operator-courier --verbose verify --ui_validate_io ${BUNDLE_MANIFEST_BASE_DIR}/k8s/${NAME}
-
-bundle-build-k8s-ci: bundle-verify-k8s-ci
+bundle-generate-k8s-ci: 
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/ci/k8s
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests
@@ -36,13 +33,17 @@ bundle-build-k8s-ci: bundle-verify-k8s-ci
 	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
+
+bundle-verify-k8s-ci:
+	operator-courier --verbose verify --ui_validate_io ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}
+
+bundle-build-k8s-ci: 
 	docker build -t ${REGISTRY_CI}/${NAMESPACE}/${NAME}-registry-k8s:${VERSION} ${BUNDLE_BUILD_BASE_DIR}/ci/k8s
-#	rm -rf ${BUNDLE_BUILD_BASE_DIR}/ci/k8s
 
 bundle-push-k8s-ci:
 	docker push ${REGISTRY_CI}/${NAMESPACE}/${NAME}-registry-k8s:${VERSION}
 
-generate-guide-k8s-ci-manual:
+guide-generate-k8s-manual-ci:
 	rm -rf ${GUIDES_BUILD_BASE_DIR}/ci/k8s/manual
 	mkdir -p ${GUIDES_BUILD_BASE_DIR}/ci/k8s/manual
 	cp ../deploy/common/namespace.yaml ${GUIDES_BUILD_BASE_DIR}/ci/k8s/manual
@@ -53,7 +54,7 @@ generate-guide-k8s-ci-manual:
 	cp ../deploy/crds/argoproj.io_argocds_crd.yaml ${GUIDES_BUILD_BASE_DIR}/ci/k8s/manual/crd.yaml
 	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ../deploy/common/deployment.yaml > ${GUIDES_BUILD_BASE_DIR}/ci/k8s/manual/deployment.yaml
 
-generate-guide-k8s-ci-olm:
+guide-generate-k8s-olm-ci:
 	rm -rf ${GUIDES_BUILD_BASE_DIR}/ci/k8s/olm
 	mkdir -p ${GUIDES_BUILD_BASE_DIR}/ci/k8s/olm
 	cp ../deploy/common/namespace.yaml ${GUIDES_BUILD_BASE_DIR}/ci/k8s/olm
@@ -61,9 +62,6 @@ generate-guide-k8s-ci-olm:
 	cp ../deploy/k8s/catalog-source.yaml ${GUIDES_BUILD_BASE_DIR}/ci/k8s/olm
 	cp ../deploy/k8s/subscription.yaml ${GUIDES_BUILD_BASE_DIR}/ci/k8s/olm
 	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ../deploy/k8s/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/ci/k8s/olm/catalog-source.yaml
-
-
-
 
 
 clean:

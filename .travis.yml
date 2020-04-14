@@ -18,6 +18,4 @@ jobs:
   include:
   - name: build-and-test
     script:
-    - build/ci/build-ci
-    - build/ci/test-ci
-    - build/ci/install-argocd
+    - build/ci/build-ci && build/ci/test-ci &&  build/ci/install-argocd
