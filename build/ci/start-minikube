@@ -1,21 +1,6 @@
 #!/usr/bin/env bash
-
 set -e
 
-export MINISHIFT_ENABLE_EXPERIMENTAL=y
-
-#minishift profile set argocd
-minishift config set memory 6GB
-
-#minishift config set skip-startup-checks true
-
-minishift config view
-
-minishift addon enable admin-user 
-minishift addon enable anyuid
-
-minishift addons list
-
-minishift start -v 5
-
-# minishift start -v 5
+sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="v1.14.0" --extra-config=apiserver.v=10
+sudo chown -R $USER ${HOME}/.{mini,}kube
+kubectl config use-context minikube

@@ -2,8 +2,5 @@
 
 set -e
 
-sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="v1.14.0" --extra-config=apiserver.v=10
-sudo chown -R $USER ${HOME}/.{mini,}kube
-kubectl config use-context minikube
+sudo minikube stop
 
-eval $(sudo minikube docker-env)
