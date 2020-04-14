@@ -14,8 +14,10 @@ sudo systemctl stop libvirtd
 sudo systemctl start libvirtd
 sudo systemctl status libvirtd
 
+sudo virsh net-list --all
+
 #sudo virsh net-start default
-sudo virsh net-autostart default
+#sudo virsh net-autostart default
 
 
 echo "Installing CRC"
