@@ -26,4 +26,4 @@ tar xvf minishift.tgz
 sudo mv minishift-1.34.2-linux-amd64/minishift /usr/local/bin
 chmod +x /usr/local/bin/minishift
 
-minishift start -v 5
+sudo minishift start -v 5
