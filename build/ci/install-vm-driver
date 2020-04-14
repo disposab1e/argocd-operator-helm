@@ -9,7 +9,12 @@ sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtable
 #sudo usermod -a -G libvirt $USER
 #newgrp libvirt
 sudo getent group | grep libvirt
-sudo getent group | grep libvirtd
+
+echo $USER
+
+echo $(whoami)
+
+
 
 
 sudo usermod -a -G libvirt $(whoami)
