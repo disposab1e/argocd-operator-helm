@@ -5,8 +5,8 @@ set -e
 sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev 
 
 # ls -la /var/run/libvirt/libvirt-sock
-sudo usermod -a -G libvirt $USER
-newgrp libvirt
+#sudo usermod -a -G libvirt $USER
+#newgrp libvirt
 sudo curl -L https://github.com/dhiltgen/docker-machine-kvm/releases/download/v0.10.0/docker-machine-driver-kvm-ubuntu16.04 -o /usr/local/bin/docker-machine-driver-kvm
 sudo chmod +x /usr/local/bin/docker-machine-driver-kvm
 
