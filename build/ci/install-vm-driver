@@ -6,9 +6,9 @@ sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtable
 
 ls -la /var/run/libvirt/libvirt-sock
 
-systemctl stop libvirtd
-systemctl start libvirtd
-systemctl status libvirtd
+sudo systemctl stop libvirtd
+sudo systemctl start libvirtd
+sudo systemctl status libvirtd
 
 
 # Operator SDK
