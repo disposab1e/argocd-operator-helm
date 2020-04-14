@@ -2,6 +2,8 @@
 
 set -e
 
+ls -la /root/
+
 sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev 
 
 # ls -la /var/run/libvirt/libvirt-sock
