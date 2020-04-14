@@ -10,5 +10,6 @@ curl -Lo crc.tar.xz https://mirror.openshift.com/pub/openshift-v4/clients/crc/la
 tar xvf crc.tar.xz
 mv crc-linux-1.8.0-amd64 crc
 cd crc/
+ls -la
 chmod +x crc
 ./crc version
