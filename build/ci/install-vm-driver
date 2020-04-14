@@ -27,7 +27,6 @@ chmod +x crc
 
 ./crc config set pull-secret-file ../pull-secret
 ./crc config set skip-check-root-user true
-./crc config set memory 3000
 ./crc config set disable-update-check true
 
 
