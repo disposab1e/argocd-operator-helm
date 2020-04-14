@@ -4,6 +4,8 @@ set -e
 
 sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev network-manager
 
+sudo usermod -a -G libvirtd $USER
+
 # Operator SDK
 echo "Installing CRC"
 curl -Lo crc.tar.xz https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz
