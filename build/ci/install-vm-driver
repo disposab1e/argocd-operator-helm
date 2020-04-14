@@ -2,33 +2,26 @@
 
 set -e
 
-sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev network-manager
+sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev 
 
 # ls -la /var/run/libvirt/libvirt-sock
+sudo usermod -a -G libvirt $(whoami)
+newgrp libvirt
+sudo curl -L https://github.com/dhiltgen/docker-machine-kvm/releases/download/v0.10.0/docker-machine-driver-kvm-ubuntu16.04 -o /usr/local/bin/docker-machine-driver-kvm
+sudo chmod +x /usr/local/bin/docker-machine-driver-kvm
 
 sudo systemctl stop libvirtd
 sudo systemctl start libvirtd
 sudo systemctl status libvirtd
 
-sudo systemctl enable NetworkManager
-sudo systemctl start NetworkManager
-sudo systemctl status NetworkManager
+sudo virsh net-start default
+sudo virsh net-autostart default
 
 
-# Operator SDK
 echo "Installing CRC"
-curl -Lo crc.tar.xz https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz
-tar xvf crc.tar.xz
-mv crc-linux-1.8.0-amd64 crc
-cd crc/
-ls -la
-chmod +x crc
-./crc version
+curl -Lo minishift.tgz https://github.com/minishift/minishift/releases/download/v1.34.2/minishift-1.34.2-linux-amd64.tgz
+tar xvf minishift.tgz
+mv minishift-1.34.2-linux-amd64/minishift /usr/local/bin
+chmod +x /usr/local/bin/minishift
 
-./crc config set pull-secret-file ../pull-secret
-./crc config set skip-check-root-user true
-./crc config set disable-update-check true
-
-
-sudo ./crc setup --log-level debug
-sudo ./crc start
+minishift start
