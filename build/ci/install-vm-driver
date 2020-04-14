@@ -17,9 +17,9 @@ echo $(whoami)
 
 
 
-sudo usermod -a -G libvirt travis
-sudo usermod -a -G libvirt-qemu travis
-sudo usermod -a -G libvirt-dnsmasq travis
+sudo useradd -G libvirt travis
+sudo useradd -G libvirt-qemu travis
+sudo useradd -G libvirt-dnsmasq travis
 
 
 
