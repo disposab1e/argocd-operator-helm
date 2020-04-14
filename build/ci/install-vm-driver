@@ -4,6 +4,9 @@ set -e
 
 sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev network-manager
 
+ls -la /var/run/libvirt/libvirt-sock
+
+
 sudo usermod -a -G libvirtd $USER
 
 # Operator SDK
