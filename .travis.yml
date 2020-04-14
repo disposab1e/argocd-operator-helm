@@ -1,13 +1,28 @@
-dist: bionic
+dist: xenial
 language: python
 os: linux
+
 python:
-- '3.6'
+- "3.6"
+
 if: branch = travis-ci
+
 before_install:
-- build/ci/install-vm-driver
+- build/ci/install-deps
+
+# install:
+
 jobs:
   include:
-  - name: build-and-test
+  - name: minikube
     script:
-    - build/ci/hello
+    - build/ci/start-minikube
+    - build/ci/install-olm
+    - build/ci/build-ci && build/ci/test-ci &&  build/ci/install-argocd
+    - build/ci/stop-minikube
+
+  - name: minikube
+    script:
+    - build/ci/start-minishift
+    - build/ci/install-olm
+    - build/ci/stop-minishift

@@ -4,7 +4,7 @@ set -e
 
 export MINISHIFT_ENABLE_EXPERIMENTAL=y
 
-#minishift profile set argocd
+minishift profile set argocd
 minishift config set memory 6GB
 
 #minishift config set skip-startup-checks true
@@ -18,4 +18,4 @@ minishift addons list
 
 minishift start -v 5
 
-# minishift start -v 5
+eval $(sudo minikube docker-env)
