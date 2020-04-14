@@ -10,6 +10,9 @@ sudo systemctl stop libvirtd
 sudo systemctl start libvirtd
 sudo systemctl status libvirtd
 
+sudo systemctl enable NetworkManager
+sudo systemctl start NetworkManager
+
 
 # Operator SDK
 echo "Installing CRC"
