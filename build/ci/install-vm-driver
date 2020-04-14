@@ -13,3 +13,7 @@ cd crc/
 ls -la
 chmod +x crc
 ./crc version
+
+echo $SUSI >> susi.txt
+
+cat susi.txt
