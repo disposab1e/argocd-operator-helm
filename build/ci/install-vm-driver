@@ -25,7 +25,7 @@ ls -la
 chmod +x crc
 ./crc version
 
-./crc config set pull-secret-file ./pull-secret
+./crc config set pull-secret-file ../pull-secret
 ./crc config set skip-check-root-user true
 
 sudo ./crc setup --log-level debug
