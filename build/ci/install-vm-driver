@@ -14,6 +14,6 @@ ls -la
 chmod +x crc
 ./crc version
 echo $PULL_SECRET >> pull-secret
-./crc setup
+./crc setup --log-level debug
 ./crc config set pull-secret-file ./pull-secret
 ./crc start
