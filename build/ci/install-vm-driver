@@ -4,7 +4,7 @@ set -e
 
 sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils ruby-dev network-manager
 
-ls -la /var/run/libvirt/libvirt-sock
+# ls -la /var/run/libvirt/libvirt-sock
 
 sudo systemctl stop libvirtd
 sudo systemctl start libvirtd
@@ -12,6 +12,7 @@ sudo systemctl status libvirtd
 
 sudo systemctl enable NetworkManager
 sudo systemctl start NetworkManager
+sudo systemctl status NetworkManager
 
 
 # Operator SDK
@@ -27,6 +28,7 @@ echo $PULL_SECRET >> pull-secret
 
 ./crc config set pull-secret-file ./pull-secret
 ./crc config set skip-check-root-user true
+
 
 
 sudo ./crc setup --log-level debug
