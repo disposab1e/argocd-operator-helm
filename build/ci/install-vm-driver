@@ -14,9 +14,6 @@ echo $USER
 
 echo $(whoami)
 
-
-
-
 sudo usermod -a -G libvirt travis
 sudo usermod -a -G libvirt-qemu travis
 sudo usermod -a -G libvirt-dnsmasq travis
