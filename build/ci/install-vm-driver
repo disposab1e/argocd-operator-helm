@@ -1,4 +1,3 @@
-sudo getent group | grep libvirtd
 #!/usr/bin/env bash
 
 set -e
@@ -18,9 +17,7 @@ sudo usermod -a -G libvirt travis
 sudo usermod -a -G libvirt-qemu travis
 sudo usermod -a -G libvirt-dnsmasq travis
 
-sudo reboot -h now
-
-id
+newgrp libvirt
 
 
 sudo curl -L https://github.com/dhiltgen/docker-machine-kvm/releases/download/v0.10.0/docker-machine-driver-kvm-ubuntu16.04 -o /usr/local/bin/docker-machine-driver-kvm
