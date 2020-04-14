@@ -14,15 +14,12 @@ before_install:
 
 jobs:
   include:
-  - name: minikube
+  - name: minikube-minishift
     script:
     - build/ci/start-minikube
     - build/ci/install-olm
     - build/ci/build-ci && build/ci/test-ci &&  build/ci/install-argocd
     - build/ci/stop-minikube
-
-  - name: minikube
-    script:
     - build/ci/start-minishift
-    - build/ci/install-olm
+#    - build/ci/install-olm
     - build/ci/stop-minishift
