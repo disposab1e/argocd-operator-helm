@@ -2,29 +2,30 @@
 
 set -e
 
-sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtables libvirt-bin libvirt-dev qemu-kvm qemu-utils 
+sudo apt-get update && sudo apt-get install -y bridge-utils libvirt-bin libvirt-dev qemu-kvm qemu-utils 
 
+#dnsmasq-base ebtables
 # ls -la /var/run/libvirt/libvirt-sock
 #sudo usermod -a -G libvirt $USER
 #newgrp libvirt
-sudo getent group | grep libvirt
+#sudo getent group | grep libvirt
 
-echo $USER
+#echo $USER
 
-echo $(whoami)
+#echo $(whoami)
 
-sudo usermod -a -G libvirt travis
-sudo usermod -a -G libvirt-qemu travis
-sudo usermod -a -G libvirt-dnsmasq travis
+#sudo usermod -a -G libvirt travis
+#sudo usermod -a -G libvirt-qemu travis
+#sudo usermod -a -G libvirt-dnsmasq travis
 
 
 
 sudo curl -L https://github.com/dhiltgen/docker-machine-kvm/releases/download/v0.10.0/docker-machine-driver-kvm-ubuntu16.04 -o /usr/local/bin/docker-machine-driver-kvm
 sudo chmod +x /usr/local/bin/docker-machine-driver-kvm
 
-sudo systemctl stop libvirtd
-sudo systemctl start libvirtd
-sudo systemctl status libvirtd
+#sudo systemctl stop libvirtd
+#sudo systemctl start libvirtd
+#sudo systemctl status libvirtd
 
 sudo virsh net-list --all
 
