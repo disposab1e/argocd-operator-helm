@@ -62,8 +62,8 @@ sudo mv minikube /usr/local/bin/
 
 # Minishift
 echo "Installing minishift"
-MINISHIFT_VERSION="v1.34.2"
-curl -Lo minishift.tgz https://github.com/minishift/minishift/releases/download/${MINISHIFT_VERSION}/minishift-${MINISHIFT_VERSION}-linux-amd64.tgz
+MINISHIFT_VERSION="1.34.2"
+curl -Lo minishift.tgz https://github.com/minishift/minishift/releases/download/v${MINISHIFT_VERSION}/minishift-${MINISHIFT_VERSION}-linux-amd64.tgz
 tar xvf minishift.tgz
 sudo mv minishift-${MINISHIFT_VERSION}-linux-amd64/minishift /usr/local/bin
 chmod +x /usr/local/bin/minishift
