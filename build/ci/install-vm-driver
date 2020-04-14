@@ -13,7 +13,7 @@ cd crc/
 ls -la
 chmod +x crc
 ./crc version
-
-echo $SUSI >> susi.txt
-
-cat susi.txt
+echo $PULL_SECRET >> pull-secret
+./crc setup
+./crc config set pull-secret-file ./pull-secret
+./crc start
