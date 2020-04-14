@@ -5,8 +5,6 @@ python:
 - '3.6'
 if: branch = travis-ci
 before_install:
-- openssl aes-256-cbc -K $encrypted_819cbdb9fe32_key -iv $encrypted_819cbdb9fe32_iv
-  -in pull-secret.enc -out pull-secret -d
 - build/ci/install-vm-driver
 jobs:
   include:
