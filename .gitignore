@@ -6,3 +6,4 @@ decription.md
 .circleci/config copy.yml
 
 build/ci/docker-login
+.travis_minikue.yml

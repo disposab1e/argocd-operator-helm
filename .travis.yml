@@ -8,14 +8,14 @@ python:
 if: branch = travis-ci
 
 before_install:
-- build/ci/install-deps
+- build/ci/install-vm-driver
 
-install:
-- build/ci/start-minikube
-- build/ci/install-olm
+#install:
+#- build/ci/start-minikube
+#- build/ci/install-olm
 
 jobs:
   include:
   - name: build-and-test
     script:
-    - build/ci/build-ci && build/ci/test-ci &&  build/ci/install-argocd
+    - build/ci/hello

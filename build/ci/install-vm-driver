@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -e
+
+sudo apt install qemu-kvm libvirt-daemon libvirt-daemon-system network-manager
