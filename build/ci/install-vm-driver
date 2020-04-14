@@ -6,9 +6,9 @@ sudo apt-get update && sudo apt-get install -y bridge-utils dnsmasq-base ebtable
 
 # Operator SDK
 echo "Installing CRC"
-curl -Lo crc-linux-amd64.tar.xz https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz
-tar xvf crc-linux-amd64.tar.xz
-chmod +x crc-linux-1.8.0-amd64/crc
-rm crc-linux-amd64.tar.xz
-cd crc-linux-1.8.0-amd64
-crc version
+curl -Lo crc.tar.xz https://mirror.openshift.com/pub/openshift-v4/clients/crc/latest/crc-linux-amd64.tar.xz
+tar xvf crc.tar.xz
+mv crc-linux-1.8.0-amd64 crc
+cd crc/
+chmod +x crc
+./crc version
