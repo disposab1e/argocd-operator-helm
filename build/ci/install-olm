@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -e
 
 # Operator Lifecycle Manager
@@ -9,4 +8,3 @@ curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releas
 
 # Delete "operatorhubio-catalog"
 kubectl delete catalogsource operatorhubio-catalog -n olm
-
