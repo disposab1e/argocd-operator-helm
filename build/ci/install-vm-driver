@@ -18,7 +18,7 @@ sudo usermod -a -G libvirt travis
 sudo usermod -a -G libvirt-qemu travis
 sudo usermod -a -G libvirt-dnsmasq travis
 
-su travis
+su - travis
 
 id
 
