@@ -21,7 +21,7 @@ sudo virsh net-autostart default
 echo "Installing CRC"
 curl -Lo minishift.tgz https://github.com/minishift/minishift/releases/download/v1.34.2/minishift-1.34.2-linux-amd64.tgz
 tar xvf minishift.tgz
-mv minishift-1.34.2-linux-amd64/minishift /usr/local/bin
+sudo mv minishift-1.34.2-linux-amd64/minishift /usr/local/bin
 chmod +x /usr/local/bin/minishift
 
 minishift start
