@@ -2,3 +2,6 @@
 set -e
 
 kubectl describe csv -n olm packageserver
+
+oc get pods --all-namespaces
+
