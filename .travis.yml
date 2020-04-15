@@ -23,5 +23,5 @@ jobs:
     - stage: minishift   
       script:
       - build/ci/start-minishift
-      - build/ci/install-olm
+      - build/ci/install-olm-manual
       - build/ci/stop-minishift
