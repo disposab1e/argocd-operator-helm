@@ -66,6 +66,8 @@ guide-generate-k8s-olm-ci:
 
 
 
+
+
 bundle-generate-ocp-ci:
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/ci/ocp
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/
@@ -88,30 +90,28 @@ bundle-push-ocp-ci:
 	docker push ${REGISTRY_CI}/${NAMESPACE}/${NAME}-registry-ocp:${VERSION}
 
 
+guide-generate-ocp3-manual-ci:
+	rm -rf ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/manual
+	mkdir -p ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/manual
+	cp ../deploy/common/namespace.yaml ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/manual
+	cp ../deploy/common/service-account.yaml ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/manual
+	cp ../deploy/common/role.yaml ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/manual
+	cp ../deploy/common/role-binding.yaml ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/manual
+	cp ../deploy/common/deployment.yaml ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/manual
+	cp ../deploy/crds/argoproj.io_argocds_crd.yaml ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/manual/crd.yaml
+	echo "---" >> ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/manual/role-binding.yaml
+	cat ../deploy/ocp3/role-binding.yaml >> ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/manual/role-binding.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ../deploy/common/deployment.yaml > ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/manual/deployment.yaml
 
-
-guide-generate-ocp3-manual:
-	rm -rf ${GUIDES_BUILD_BASE_DIR}/ocp3/manual
-	mkdir -p ${GUIDES_BUILD_BASE_DIR}/ocp3/manual
-	cp ../deploy/common/namespace.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/manual
-	cp ../deploy/common/service-account.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/manual
-	cp ../deploy/common/role.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/manual
-	cp ../deploy/common/role-binding.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/manual
-	cp ../deploy/common/deployment.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/manual
-	cp ../deploy/crds/argoproj.io_argocds_crd.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/manual/crd.yaml
-	echo "---" >> ${GUIDES_BUILD_BASE_DIR}/ocp3/manual/role-binding.yaml
-	cat ../deploy/ocp3/role-binding.yaml >> ${GUIDES_BUILD_BASE_DIR}/ocp3/manual/role-binding.yaml
-	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ../deploy/common/deployment.yaml > ${GUIDES_BUILD_BASE_DIR}/ocp3/manual/deployment.yaml
-
-guide-generate-ocp3-olm:
-	rm -rf ${GUIDES_BUILD_BASE_DIR}/ocp3/olm
-	mkdir -p ${GUIDES_BUILD_BASE_DIR}/ocp3/olm
-	cp ../deploy/common/namespace.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/olm
-	cp ../deploy/common/operator-group.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/olm
-	cp ../deploy/ocp3/role-binding.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/olm
-	cp ../deploy/ocp3/catalog-source.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/olm
-	cp ../deploy/ocp3/subscription.yaml ${GUIDES_BUILD_BASE_DIR}/ocp3/olm
-	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ../deploy/ocp3/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/ocp3/olm/catalog-source.yaml
+guide-generate-ocp3-olm-ci:
+	rm -rf ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/olm
+	mkdir -p ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/olm
+	cp ../deploy/common/namespace.yaml ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/olm
+	cp ../deploy/common/operator-group.yaml ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/olm
+	cp ../deploy/ocp3/role-binding.yaml ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/olm
+	cp ../deploy/ocp3/catalog-source.yaml ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/olm
+	cp ../deploy/ocp3/subscription.yaml ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/olm
+	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ../deploy/ocp3/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/olm/catalog-source.yaml
 
 
 

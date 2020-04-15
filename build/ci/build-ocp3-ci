@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# Stop immediately when an error occurs
+set -e
+
+# Works in local, github, travisci and circleci environments :-)
+cd build/
+
+# Build operator with operator-sdk
+make operator-build-ci
+
+# Generate bundle 
+make bundle-generate-ocp-ci
+
+# Verify bundle 
+make bundle-verify-ocp-ci
+
+# Build bundle (registry) docker image 
+make bundle-build-ocp-ci
+
+# Securely login to docker.io
+echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin
+
+# Push the operator to dockerhub
+make operator-push-ci
+
+# Push the bundle to dockerhub
+make bundle-push-ocp-ci
+
+# Generate yaml's for manual operator installation
+make guide-generate-ocp3-manual-ci
+
+# Generate yaml's for operator installation with olm
+make guide-generate-ocp3-olm-ci
+
+# Go back ;-)
+cd ../
+
