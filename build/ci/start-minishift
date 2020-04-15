@@ -16,3 +16,4 @@ minishift addons list
 minishift start
 
 # minishift start -v 5
+oc login -u admin -p admin
