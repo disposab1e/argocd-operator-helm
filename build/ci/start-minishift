@@ -18,6 +18,7 @@ minishift start
 
 eval $(minishift oc-env)
 
+
 # minishift start -v 5
 
 oc login -u admin -p admin
