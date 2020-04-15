@@ -64,6 +64,48 @@ guide-generate-k8s-olm-ci:
 	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ../deploy/k8s/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/ci/k8s/olm/catalog-source.yaml
 
 
+
+
+bundle-generate-ocp-ci:
+	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/ci/ocp
+	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/
+	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests
+	cp -r ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME} ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/
+	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
+	rm ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
+	mv ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
+	rm ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
+	mv ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
+	docker build -t ${REGISTRY}/${NAMESPACE}/${NAME}-registry-ocp:${VERSION} ${BUNDLE_BUILD_BASE_DIR}/ci/ocp
+
+
+bundle-verify-k8s-ci:
+	operator-courier --verbose verify --ui_validate_io ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}
+
+bundle-build-k8s-ci: 
+	docker build -t ${REGISTRY_CI}/${NAMESPACE}/${NAME}-registry-k8s:${VERSION} ${BUNDLE_BUILD_BASE_DIR}/ci/k8s
+
+bundle-push-k8s-ci:
+	docker push ${REGISTRY_CI}/${NAMESPACE}/${NAME}-registry-k8s:${VERSION}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 clean:
 	rm -rf _output
 
