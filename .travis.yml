@@ -24,4 +24,5 @@ jobs:
       script:
       - build/ci/start-minishift
       - build/ci/install-olm-manual
+      - build/ci/install-olm-manual-check
       - build/ci/stop-minishift

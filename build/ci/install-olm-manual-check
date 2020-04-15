@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+
+kubectl describe csv -n olm packageserver
