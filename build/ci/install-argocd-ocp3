@@ -69,7 +69,6 @@ oc delete crd workflows.argoproj.io
 echo "ArgoCD removed"
 
 echo "Remove ArgoCD operator"
-oc delete ArgoCD argocd -n argocd
 
 oc delete -f build/_output/guides/ci/ocp3/manual/deployment.yaml
 oc delete -f build/_output/guides/ci/ocp3/manual/crd.yaml
