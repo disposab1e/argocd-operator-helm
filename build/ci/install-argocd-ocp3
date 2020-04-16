@@ -20,17 +20,13 @@ kubectl apply -f examples/ocp.yaml
 kubectl get ArgoCDs argocd -n argocd
 
 kubectl get all -n argocd
-sleep 20
+sleep 40
 kubectl get all -n argocd
-sleep 20
+sleep 40
 kubectl get all -n argocd
-sleep 20
+sleep 40
 kubectl get all -n argocd
-sleep 20
-kubectl get all -n argocd
-sleep 20
-kubectl get all -n argocd
-sleep 20
+sleep 40
 kubectl get all -n argocd
 
 kubectl rollout status -w deployment/argocd-application-controller -n argocd
@@ -40,6 +36,13 @@ kubectl rollout status -w deployment/argocd-repo-server -n argocd
 kubectl rollout status -w deployment/argocd-server -n argocd
 
 sleep 10
+
+kubectl delete ArgoCD argocd -n argocd
+
+kubectl delete crd appprojects.argoproj.io
+kubectl delete crd applications.argoproj.io
+kubectl delete crd workflowtemplates.argoproj.io
+kubectl delete crd workflows.argoproj.io
 
 kubectl delete -f build/_output/guides/ci/ocp3/manual/deployment.yaml
 kubectl delete -f build/_output/guides/ci/ocp3/manual/crd.yaml
