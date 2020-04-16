@@ -28,12 +28,16 @@ sleep 40
 kubectl get all -n argocd
 sleep 40
 kubectl get all -n argocd
+sleep 40
+kubectl get all -n argocd
 
 kubectl rollout status -w deployment/argocd-application-controller -n argocd
 kubectl rollout status -w deployment/argocd-dex-server -n argocd
 kubectl rollout status -w deployment/argocd-redis -n argocd
 kubectl rollout status -w deployment/argocd-repo-server -n argocd
 kubectl rollout status -w deployment/argocd-server -n argocd
+
+kubectl get all -n argocd
 
 sleep 10
 

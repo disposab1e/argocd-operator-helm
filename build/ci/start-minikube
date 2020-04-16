@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
+
 export CHANGE_MINIKUBE_NONE_USER=true
+export MINIKUBE_WANTUPDATENOTIFICATION=false
+export MINIKUBE_WANTREPORTERRORPROMPT=false
 
 sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="v1.14.0"
 sudo chown -R $USER ${HOME}/.{mini,}kube

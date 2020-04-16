@@ -28,9 +28,9 @@ jobs:
       - build/ci/start-minishift
       script:
       - build/ci/install-olm-manual
-      - build/ci/install-olm-manual-check
-      - build/ci/build-ocp3-ci
-      - build/ci/test-ocp3-ci
-      - build/ci/install-argocd-ocp3
+#      - build/ci/install-olm-manual-check
+#      - build/ci/build-ocp3-ci
+#      - build/ci/test-ocp3-ci
+#      - build/ci/install-argocd-ocp3
       after_script:
       - build/ci/stop-minishift
