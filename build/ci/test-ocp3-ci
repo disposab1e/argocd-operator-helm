@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
-
 set -e
+
+
 
 kubectl apply -f build/_output/guides/ci/ocp3/olm/namespace.yaml
 
 kubectl apply -f build/_output/guides/ci/ocp3/olm/catalog-source.yaml
+
+sleep 20
+
 kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=120s
 
 kubectl apply -f build/_output/guides/ci/ocp3/olm/operator-group.yaml
