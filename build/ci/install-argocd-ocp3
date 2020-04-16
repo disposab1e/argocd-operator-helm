@@ -22,7 +22,7 @@ kubectl apply -f examples/k8s.yaml
 
 kubectl get ArgoCDs argocd -n argocd
 
-sleep 120
+sleep 240
 
 kubectl rollout status -w deployment/argocd-application-controller -n argocd
 kubectl rollout status -w deployment/argocd-dex-server -n argocd
