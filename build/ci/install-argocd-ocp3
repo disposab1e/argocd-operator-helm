@@ -1,24 +1,21 @@
 #!/usr/bin/env bash
 set -e
 
+kubectl apply -f build/_output/guides/ci/ocp3/manual/namespace.yaml
+kubectl apply -f build/_output/guides/ci/ocp3/manual/service-account.yaml
+kubectl apply -f build/_output/guides/ci/ocp3/manual/role.yaml
+kubectl apply -f build/_output/guides/ci/ocp3/manual/role-binding.yaml
+kubectl apply -f build/_output/guides/ci/ocp3/manual/crd.yaml
+kubectl apply -f build/_output/guides/ci/ocp3/manual/deployment.yaml
 
-kubectl apply -f build/_output/guides/ci/ocp3/olm/namespace.yaml
-
-kubectl apply -f build/_output/guides/ci/ocp3/olm/catalog-source.yaml
-
-sleep 20
-
-kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=90s
-
-kubectl apply -f build/_output/guides/ci/ocp3/olm/operator-group.yaml
-kubectl apply -f build/_output/guides/ci/ocp3/olm/subscription.yaml
-
-sleep 60
+sleep 45
 
 kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=120s
 kubectl rollout status -w deployment/argocd-operator-helm -n argocd
 
-kubectl apply -f examples/k8s.yaml
+sleep 20
+
+kubectl apply -f examples/ocp.yaml
 
 kubectl get ArgoCDs argocd -n argocd
 
@@ -29,21 +26,4 @@ kubectl rollout status -w deployment/argocd-dex-server -n argocd
 kubectl rollout status -w deployment/argocd-redis -n argocd
 kubectl rollout status -w deployment/argocd-repo-server -n argocd
 kubectl rollout status -w deployment/argocd-server -n argocd
-
-sleep 10
-
-kubectl delete ArgoCD argocd -n argocd
-
-kubectl delete crd appprojects.argoproj.io
-kubectl delete crd applications.argoproj.io
-kubectl delete crd workflowtemplates.argoproj.io
-kubectl delete crd workflows.argoproj.io
-
-
-kubectl delete -f build/_output/guides/ci/ocp3/olm/subscription.yaml
-kubectl delete csvs --all -n argocd
-kubectl delete crd argocds.argoproj.io
-kubectl delete -f build/_output/guides/ci/ocp3/olm/catalog-source.yaml
-kubectl delete -f build/_output/guides/ci/ocp3/olm/operator-group.yaml
-kubectl delete -f build/_output/guides/ci/ocp3/olm/namespace.yaml
 
