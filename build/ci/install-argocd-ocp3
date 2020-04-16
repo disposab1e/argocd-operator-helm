@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
-
 set -e
 
 
-kubectl apply -f guides/k8s/olm/namespace.yaml
+kubectl apply -f build/_output/guides/ci/ocp3/olm/namespace.yaml
 
-kubectl apply -f guides/k8s/olm/catalog-source.yaml
+kubectl apply -f build/_output/guides/ci/ocp3/olm/catalog-source.yaml
+
+sleep 20
+
 kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=90s
 
-kubectl apply -f guides/k8s/olm/operator-group.yaml
-kubectl apply -f guides/k8s/olm/subscription.yaml
+kubectl apply -f build/_output/guides/ci/ocp3/olm/operator-group.yaml
+kubectl apply -f build/_output/guides/ci/ocp3/olm/subscription.yaml
 
-sleep 45
+sleep 60
 
 kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=120s
 kubectl rollout status -w deployment/argocd-operator-helm -n argocd
@@ -38,10 +40,10 @@ kubectl delete crd workflowtemplates.argoproj.io
 kubectl delete crd workflows.argoproj.io
 
 
-kubectl delete -f guides/k8s/olm/subscription.yaml
+kubectl delete -f build/_output/guides/ci/ocp3/olm/subscription.yaml
 kubectl delete csvs --all -n argocd
 kubectl delete crd argocds.argoproj.io
-kubectl delete -f guides/k8s/olm/catalog-source.yaml
-kubectl delete -f guides/k8s/olm/operator-group.yaml
-kubectl delete -f guides/k8s/olm/namespace.yaml
+kubectl delete -f build/_output/guides/ci/ocp3/olm/catalog-source.yaml
+kubectl delete -f build/_output/guides/ci/ocp3/olm/operator-group.yaml
+kubectl delete -f build/_output/guides/ci/ocp3/olm/namespace.yaml
 
