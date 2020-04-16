@@ -5,7 +5,7 @@ export MINISHIFT_ENABLE_EXPERIMENTAL=y
 
 minishift profile set argocd
 
-minishift config set memory 6500
+minishift config set memory 7200
 
 minishift config view
 
@@ -22,3 +22,11 @@ eval $(minishift oc-env)
 # minishift start -v 5
 
 oc login -u admin -p admin
+
+oc delete deployment.apps/openshift-web-console-operator -n openshift-core-operators
+
+sleeep 20
+
+oc delete deployment.apps/webconsole -n openshift-web-console
+
+sleeep 20
