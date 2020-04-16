@@ -64,10 +64,6 @@ guide-generate-k8s-olm-ci:
 	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ../deploy/k8s/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/ci/k8s/olm/catalog-source.yaml
 
 
-
-
-
-
 bundle-generate-ocp-ci:
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/ci/ocp
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/
