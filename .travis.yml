@@ -7,9 +7,6 @@ python:
 
 if: branch = travis-ci
 
-before_install:
-- build/ci/install-deps
-
 jobs:
   include:
 #    - stage: minikube   
@@ -21,6 +18,8 @@ jobs:
 #      - build/ci/install-argocd
 #      - build/ci/stop-minikube
     - stage: minishift   
+      before_install:
+      - build/ci/install-deps
       script:
       - build/ci/start-minishift
       - build/ci/install-olm-manual
