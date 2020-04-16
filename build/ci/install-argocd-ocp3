@@ -1,56 +1,58 @@
 #!/usr/bin/env bash
 set -e
 
-kubectl apply -f build/_output/guides/ci/ocp3/manual/namespace.yaml
-kubectl apply -f build/_output/guides/ci/ocp3/manual/service-account.yaml
-kubectl apply -f build/_output/guides/ci/ocp3/manual/role.yaml
-kubectl apply -f build/_output/guides/ci/ocp3/manual/role-binding.yaml
-kubectl apply -f build/_output/guides/ci/ocp3/manual/crd.yaml
-kubectl apply -f build/_output/guides/ci/ocp3/manual/deployment.yaml
+eval $(minishift oc-env)
+
+oc apply -f build/_output/guides/ci/ocp3/manual/namespace.yaml
+oc apply -f build/_output/guides/ci/ocp3/manual/service-account.yaml
+oc apply -f build/_output/guides/ci/ocp3/manual/role.yaml
+oc apply -f build/_output/guides/ci/ocp3/manual/role-binding.yaml
+oc apply -f build/_output/guides/ci/ocp3/manual/crd.yaml
+oc apply -f build/_output/guides/ci/ocp3/manual/deployment.yaml
 
 sleep 45
 
-kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=120s
-kubectl rollout status -w deployment/argocd-operator-helm -n argocd
+oc wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=120s
+oc rollout status -w deployment/argocd-operator-helm -n argocd
 
 sleep 20
 
-kubectl apply -f examples/ocp.yaml
+oc apply -f examples/ocp.yaml
 
-kubectl get ArgoCDs argocd -n argocd
+oc get ArgoCDs argocd -n argocd
 
-kubectl get all -n argocd
+oc get all -n argocd
 sleep 40
-kubectl get all -n argocd
+oc get all -n argocd
 sleep 40
-kubectl get all -n argocd
+oc get all -n argocd
 sleep 40
-kubectl get all -n argocd
+oc get all -n argocd
 sleep 40
-kubectl get all -n argocd
+oc get all -n argocd
 sleep 40
-kubectl get all -n argocd
+oc get all -n argocd
 
-kubectl rollout status -w deployment/argocd-application-controller -n argocd
-kubectl rollout status -w deployment/argocd-dex-server -n argocd
-kubectl rollout status -w deployment/argocd-redis -n argocd
-kubectl rollout status -w deployment/argocd-repo-server -n argocd
-kubectl rollout status -w deployment/argocd-server -n argocd
+oc rollout status -w deployment/argocd-application-controller -n argocd
+oc rollout status -w deployment/argocd-dex-server -n argocd
+oc rollout status -w deployment/argocd-redis -n argocd
+oc rollout status -w deployment/argocd-repo-server -n argocd
+oc rollout status -w deployment/argocd-server -n argocd
 
-kubectl get all -n argocd
+oc get all -n argocd
 
 sleep 10
 
-kubectl delete ArgoCD argocd -n argocd
+oc delete ArgoCD argocd -n argocd
 
-kubectl delete crd appprojects.argoproj.io
-kubectl delete crd applications.argoproj.io
-kubectl delete crd workflowtemplates.argoproj.io
-kubectl delete crd workflows.argoproj.io
+oc delete crd appprojects.argoproj.io
+oc delete crd applications.argoproj.io
+oc delete crd workflowtemplates.argoproj.io
+oc delete crd workflows.argoproj.io
 
-kubectl delete -f build/_output/guides/ci/ocp3/manual/deployment.yaml
-kubectl delete -f build/_output/guides/ci/ocp3/manual/crd.yaml
-kubectl delete -f build/_output/guides/ci/ocp3/manual/role-binding.yaml
-kubectl delete -f build/_output/guides/ci/ocp3/manual/role.yaml
-kubectl delete -f build/_output/guides/ci/ocp3/manual/service-account.yaml
-kubectl delete -f build/_output/guides/ci/ocp3/manual/namespace.yaml
+oc delete -f build/_output/guides/ci/ocp3/manual/deployment.yaml
+oc delete -f build/_output/guides/ci/ocp3/manual/crd.yaml
+oc delete -f build/_output/guides/ci/ocp3/manual/role-binding.yaml
+oc delete -f build/_output/guides/ci/ocp3/manual/role.yaml
+oc delete -f build/_output/guides/ci/ocp3/manual/service-account.yaml
+oc delete -f build/_output/guides/ci/ocp3/manual/namespace.yaml
