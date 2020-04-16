@@ -3,7 +3,7 @@ set -e
 
 export MINISHIFT_ENABLE_EXPERIMENTAL=y
 
-# minishift profile set argocd
+minishift profile set argocd
 
 minishift config set memory 7400
 
