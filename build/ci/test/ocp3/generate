@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Stop immediately when an error occurs
+set -e
+
+# Works in local, github, travisci and circleci environments :-)
+cd build/
+
+# Generate yaml's for manual operator installation
+make guide-generate-ocp3-manual-ci
+
+# Generate yaml's for operator installation with olm
+make guide-generate-ocp3-olm-ci
+
+# Go back ;-)
+cd ../
+

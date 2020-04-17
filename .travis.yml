@@ -12,39 +12,39 @@ jobs:
     - stage: build
       name: operator-and-bundles
       before_install:
-      - build/ci/install-deps-common
+      - build/ci/build/install-deps
       script:
-      - build/ci/build-push-common
+      - build/ci/build/build-push
 
     - stage: test
       name: k8s-1.14.0-minikube
       env: 
         - KUBE_VERSION=v1.14.0
       before_install:
-      - build/ci/install-deps-k8s
+      - build/ci/test/k8s/install-deps
       install:
-      - build/ci/start-minikube
+      - build/ci/test/k8s/start-minikube
       before_script:
-      - build/ci/install-olm-k8s
+      - build/ci/test/k8s/install-olm
       script:
-      - build/ci/generate-k8s
-      - build/ci/test-k8s
-      - build/ci/install-argocd
+      - build/ci/test/k8s/generate
+      - build/ci/test/k8s/test-operator
+      - build/ci/test/k8s/test-argocd
       after_script:
       - build/ci/stop-minikube
     - name: k8s-1.18.0-minikube    
       env: 
         - KUBE_VERSION=v1.18.0
       before_install:
-      - build/ci/install-deps-k8s
+      - build/ci/test/k8s/install-deps
       install:
-      - build/ci/start-minikube
+      - build/ci/test/k8s/start-minikube
       before_script:
-      - build/ci/install-olm-k8s
+      - build/ci/test/k8s/install-olm
       script:
-      - build/ci/generate-k8s
-      - build/ci/test-k8s
-      - build/ci/install-argocd
+      - build/ci/test/k8s/generate
+      - build/ci/test/k8s/test-operator
+      - build/ci/test/k8s/test-argocd
       after_script:
       - build/ci/stop-minikube
 #    - name: ocp3-3.11.0-minishift   

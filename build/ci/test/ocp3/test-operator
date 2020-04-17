@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -e
+
+eval $(minishift oc-env)
+
+oc apply -f build/_output/guides/ci/ocp3/olm/namespace.yaml
+
+oc apply -f build/_output/guides/ci/ocp3/olm/catalog-source.yaml
+
+sleep 20
+
+oc wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=120s
+
+oc apply -f build/_output/guides/ci/ocp3/olm/operator-group.yaml
+oc apply -f build/_output/guides/ci/ocp3/olm/subscription.yaml
+
+sleep 60
+
+oc wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=120s
+oc rollout status -w deployment/argocd-operator-helm -n argocd
+
+
+oc delete -f build/_output/guides/ci/ocp3/olm/subscription.yaml
+oc delete csvs --all -n argocd
+oc delete crd argocds.argoproj.io
+oc delete -f build/_output/guides/ci/ocp3/olm/catalog-source.yaml
+oc delete -f build/_output/guides/ci/ocp3/olm/operator-group.yaml
+oc delete -f build/_output/guides/ci/ocp3/olm/namespace.yaml
+
+
+
+oc apply -f build/_output/guides/ci/ocp3/manual/namespace.yaml
+oc apply -f build/_output/guides/ci/ocp3/manual/service-account.yaml
+oc apply -f build/_output/guides/ci/ocp3/manual/role.yaml
+oc apply -f build/_output/guides/ci/ocp3/manual/role-binding.yaml
+oc apply -f build/_output/guides/ci/ocp3/manual/crd.yaml
+oc apply -f build/_output/guides/ci/ocp3/manual/deployment.yaml
+
+sleep 5
+
+oc wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=120s
+oc rollout status -w deployment/argocd-operator-helm -n argocd
+
+oc delete -f build/_output/guides/ci/ocp3/manual/deployment.yaml
+oc delete -f build/_output/guides/ci/ocp3/manual/crd.yaml
+oc delete -f build/_output/guides/ci/ocp3/manual/role-binding.yaml
+oc delete -f build/_output/guides/ci/ocp3/manual/role.yaml
+oc delete -f build/_output/guides/ci/ocp3/manual/service-account.yaml
+oc delete -f build/_output/guides/ci/ocp3/manual/namespace.yaml
