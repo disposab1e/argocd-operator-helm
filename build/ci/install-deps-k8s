@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
-sudo apt-get install conntrack-tools
+apt-cache search conntrack
+
+sudo apt-get install -y conntrack-tools
 
 # kubectl
 echo "Installing kubectl"
