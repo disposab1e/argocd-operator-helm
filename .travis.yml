@@ -11,7 +11,7 @@ jobs:
   include:
     - name: k8s-1.14.0-minikube
       env: 
-        - KUBECTL_VERSION=v1.14.0
+        - KUBECTL_VERSION=v1.18.0
         - OLM=0.13.0
       before_install:
       - build/ci/install-deps-common
