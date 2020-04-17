@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+sudo apt-get install conntrack
+
 # kubectl
 echo "Installing kubectl"
 #KUBECTL_VERSION="v1.14.0"
