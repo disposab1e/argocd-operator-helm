@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
+sudo apt-get update 
+
 #pyenv versions
 #pyenv global 3.6.5
 
