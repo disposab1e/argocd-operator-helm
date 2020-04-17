@@ -9,18 +9,18 @@ if: branch = travis-ci
 
 jobs:
   include:
-#    - stage: minikube   
-#      before_install:
-#      - build/ci/install-deps
-#      install:
-#      - build/ci/start-minikube
-#      script:
-#      - build/ci/install-olm
-#      - build/ci/build-ci
-#      - build/ci/test-ci
-#      - build/ci/install-argocd
-#      after_script:
-#      - build/ci/stop-minikube
+    - stage: minikube   
+      before_install:
+      - build/ci/install-deps
+      install:
+      - build/ci/start-minikube
+      script:
+      - build/ci/install-olm
+      - build/ci/build-ci
+      - build/ci/test-ci
+      - build/ci/install-argocd
+      after_script:
+      - build/ci/stop-minikube
     - stage: minishift   
       before_install:
       - build/ci/install-deps

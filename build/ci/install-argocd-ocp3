@@ -35,17 +35,15 @@ oc get all -n argocd
 
 echo "Remove ArgoCD installation"
 oc delete ArgoCD argocd -n argocd
-
 oc delete crd appprojects.argoproj.io
 oc delete crd applications.argoproj.io
 oc delete crd workflowtemplates.argoproj.io
 oc delete crd workflows.argoproj.io
+echo "ArgoCD removed"
 
 
 echo "Istall ArgoCD with OAuth integration"
 oc apply -f examples/ocp-oauth.yaml
-
-# oc get ArgoCDs argocd -n argocd
 
 echo "Wait 240s for ArgoCD installation"
 sleep 240
@@ -60,21 +58,17 @@ oc get all -n argocd
 
 echo "Remove ArgoCD installation"
 oc delete ArgoCD argocd -n argocd
-
 oc delete crd appprojects.argoproj.io
 oc delete crd applications.argoproj.io
 oc delete crd workflowtemplates.argoproj.io
 oc delete crd workflows.argoproj.io
-
 echo "ArgoCD removed"
 
 echo "Remove ArgoCD operator"
-
 oc delete -f build/_output/guides/ci/ocp3/manual/deployment.yaml
 oc delete -f build/_output/guides/ci/ocp3/manual/crd.yaml
 oc delete -f build/_output/guides/ci/ocp3/manual/role-binding.yaml
 oc delete -f build/_output/guides/ci/ocp3/manual/role.yaml
 oc delete -f build/_output/guides/ci/ocp3/manual/service-account.yaml
 oc delete -f build/_output/guides/ci/ocp3/manual/namespace.yaml
-
 echo "ArgoCD operator removed"
