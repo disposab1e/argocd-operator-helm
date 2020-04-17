@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
+#KUBECTL_VERSION="v1.14.0"
+
 export CHANGE_MINIKUBE_NONE_USER=true
 export MINIKUBE_WANTUPDATENOTIFICATION=false
 export MINIKUBE_WANTREPORTERRORPROMPT=false
 
-sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="v1.14.0"
+sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="${KUBECTL_VERSION}"
 sudo chown -R $USER ${HOME}/.{mini,}kube
 kubectl config use-context minikube
