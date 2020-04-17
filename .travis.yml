@@ -17,9 +17,10 @@ jobs:
       - build/ci/install-deps-k8s
       install:
       - build/ci/start-minikube
-      script:
-      - build/ci/install-olm
+      before_script:
       - build/ci/build-ci
+      - build/ci/install-olm
+      script:
       - build/ci/test-ci
       - build/ci/install-argocd
       after_script:
@@ -32,9 +33,10 @@ jobs:
       - build/ci/install-deps-k8s
       install:
       - build/ci/start-minikube
-      script:
-      - build/ci/install-olm
+      before_script:
       - build/ci/build-ci
+      - build/ci/install-olm
+      script:
       - build/ci/test-ci
       - build/ci/install-argocd
       after_script:
