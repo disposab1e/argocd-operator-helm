@@ -15,7 +15,6 @@ jobs:
       - build/ci/build/install-deps
       script:
       - build/ci/build/build-push
-
     - stage: test
       name: k8s-1.14.0-minikube
       env: 
@@ -47,17 +46,16 @@ jobs:
       - build/ci/test/k8s/test-argocd
       after_script:
       - build/ci/stop-minikube
-#    - name: ocp3-3.11.0-minishift   
-#      before_install:
-#      - build/ci/install-deps-common
-#      - build/ci/install-deps-ocp3
-#      install:
-#      - build/ci/start-minishift
-#      script:
-#      - build/ci/install-olm-manual
-#      - build/ci/install-olm-manual-check
-#      - build/ci/build-ocp3-ci
-#      - build/ci/test-ocp3-ci
-#      - build/ci/install-argocd-ocp3
-#      after_script:
-#      - build/ci/stop-minishift
+    - name: ocp3-3.11.0-minishift   
+      before_install:
+      - build/ci/test/ocp3/install-deps
+      install:
+      - build/ci/test/ocp3/start-minishift
+      before_script:
+      - build/ci/test/ocp3/install-olm
+      script:
+      - build/ci/test/ocp3/generate
+      - build/ci/test/ocp3/test-operator
+      - build/ci/test/ocp3/test-argocd
+      after_script:
+      - build/ci/test/ocp3/stop-minishift
