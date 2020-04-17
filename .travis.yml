@@ -9,9 +9,10 @@ if: branch = travis-ci
 
 jobs:
   include:
-    - stage: minikube   
+    - name: minikube   
       before_install:
-      - build/ci/install-deps
+      - build/ci/install-deps-common
+      - build/ci/install-deps-k8s
       install:
       - build/ci/start-minikube
       script:
@@ -21,9 +22,10 @@ jobs:
       - build/ci/install-argocd
       after_script:
       - build/ci/stop-minikube
-    - stage: minishift   
+    - name: minishift   
       before_install:
-      - build/ci/install-deps
+      - build/ci/install-deps-common
+      - build/ci/install-deps-ocp3
       install:
       - build/ci/start-minishift
       script:
