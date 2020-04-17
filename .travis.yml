@@ -15,7 +15,7 @@ jobs:
       - build/ci/build/install-deps
       script:
       - build/ci/build/build-push
-    - stage: test-k8s
+    - stage: test
       name: k8s-1.14.0-minikube
       env: 
         - KUBE_VERSION=v1.14.0
@@ -61,8 +61,7 @@ jobs:
       - build/ci/test/k8s/test-argocd
       after_script:
       - build/ci/stop-minikube
-    - stage: test-ocp3
-      name: ocp3-3.11.0-minishift   
+    - name: ocp3-3.11.0-minishift   
       before_install:
       - build/ci/test/ocp3/install-deps
       install:
