@@ -1,15 +1,19 @@
 #!/usr/bin/env bash
 set -e
 
-sudo apt-get update 
-sudo apt-cache search conntrack
+if [[ -z "${KUBE_VERSION}"] ]; then
+    KUBERNETES_VERSION=${KUBE_VERSION}
+else
+    KUBERNETES_VERSION=v1.14.0
+fi
 
+# install conntrack needed for kubernetes 1.18
 sudo apt-get install -y conntrack
 
 # kubectl
 echo "Installing kubectl"
 #KUBECTL_VERSION="v1.14.0"
-curl -Lo kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl"
+curl -Lo kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBERNETES_VERSION}/bin/linux/amd64/kubectl"
 chmod +x kubectl
 sudo mv kubectl /usr/local/bin/
 

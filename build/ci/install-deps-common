@@ -3,9 +3,6 @@ set -e
 
 sudo apt-get update 
 
-#pyenv versions
-#pyenv global 3.6.5
-
 # operator-courier
 echo "Installing operator-courier"
 pip install operator-courier
@@ -18,7 +15,7 @@ curl -Lo operator-sdk https://github.com/operator-framework/operator-sdk/release
 chmod +x operator-sdk
 sudo mv operator-sdk /usr/local/bin/
 
-# Helm
+# Helm 3
 echo "Installing helm-3"
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
