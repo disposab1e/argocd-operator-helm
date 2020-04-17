@@ -3,7 +3,8 @@ set -e
 
 # libvirt
 echo "Installing libvirt/kvm"
-sudo apt-get update && sudo apt-get install -y bridge-utils libvirt-bin libvirt-dev qemu-kvm qemu-utils 
+sudo apt-get update 
+sudo apt-get install -y bridge-utils libvirt-bin libvirt-dev qemu-kvm qemu-utils 
 
 # docker-machine-driver-kvm for Minishift
 echo "Installing docker-machine-driver-kvm for minishift"

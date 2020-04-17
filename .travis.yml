@@ -9,27 +9,25 @@ if: branch = travis-ci
 
 jobs:
   include:
-    - stage: prepare-k8s
-      name: build-deploy-operator
-      env: 
-        - KUBE_VERSION=v1.14.0
+    - stage: build-push
+      name: operator-bundle
       before_install:
       - build/ci/install-deps-common
       script:
-      - build/ci/build-ci
+      - build/ci/build-push-ci
 
-    - stage: test-k8s
+    - stage: k8s-test
       name: k8s-1.14.0-minikube
       env: 
         - KUBE_VERSION=v1.14.0
       before_install:
-      - build/ci/install-deps-common
       - build/ci/install-deps-k8s
       install:
       - build/ci/start-minikube
       before_script:
       - build/ci/install-olm
       script:
+      - build/ci/generate-k8s-ci
       - build/ci/test-ci
       - build/ci/install-argocd
       after_script:
@@ -38,13 +36,13 @@ jobs:
       env: 
         - KUBE_VERSION=v1.18.0
       before_install:
-      - build/ci/install-deps-common
       - build/ci/install-deps-k8s
       install:
       - build/ci/start-minikube
       before_script:
       - build/ci/install-olm
       script:
+      - build/ci/generate-k8s-ci
       - build/ci/test-ci
       - build/ci/install-argocd
       after_script:
