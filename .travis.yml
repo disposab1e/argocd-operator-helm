@@ -31,9 +31,24 @@ jobs:
       - build/ci/test/k8s/test-argocd
       after_script:
       - build/ci/stop-minikube
-    - name: k8s-1.18.0-minikube    
+    - name: k8s-1.17.0-minikube    
       env: 
-        - KUBE_VERSION=v1.18.0
+        - KUBE_VERSION=v1.17.0
+      before_install:
+      - build/ci/test/k8s/install-deps
+      install:
+      - build/ci/test/k8s/start-minikube
+      before_script:
+      - build/ci/test/k8s/install-olm
+      script:
+      - build/ci/test/k8s/generate
+      - build/ci/test/k8s/test-operator
+      - build/ci/test/k8s/test-argocd
+      after_script:
+      - build/ci/stop-minikube
+    - name: k8s-1.18.1-minikube    
+      env: 
+        - KUBE_VERSION=v1.18.1
       before_install:
       - build/ci/test/k8s/install-deps
       install:
