@@ -9,14 +9,14 @@ if: branch = travis-ci
 
 jobs:
   include:
-    - stage: common-build
+    - stage: build
       name: operator-and-bundles
       before_install:
       - build/ci/install-deps-common
       script:
       - build/ci/build-push-common
 
-    - stage: k8s-test
+    - stage: test
       name: k8s-1.14.0-minikube
       env: 
         - KUBE_VERSION=v1.14.0
@@ -25,10 +25,10 @@ jobs:
       install:
       - build/ci/start-minikube
       before_script:
-      - build/ci/install-olm-manual
+      - build/ci/install-olm-k8s
       script:
-      - build/ci/generate-k8s-ci
-      - build/ci/test-ci
+      - build/ci/generate-k8s
+      - build/ci/test-k8s
       - build/ci/install-argocd
       after_script:
       - build/ci/stop-minikube
@@ -40,14 +40,13 @@ jobs:
       install:
       - build/ci/start-minikube
       before_script:
-      - build/ci/install-olm-manual
+      - build/ci/install-olm-k8s
       script:
-      - build/ci/generate-k8s-ci
-      - build/ci/test-ci
+      - build/ci/generate-k8s
+      - build/ci/test-k8s
       - build/ci/install-argocd
       after_script:
       - build/ci/stop-minikube
-
 #    - name: ocp3-3.11.0-minishift   
 #      before_install:
 #      - build/ci/install-deps-common
