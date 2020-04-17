@@ -9,12 +9,12 @@ if: branch = travis-ci
 
 jobs:
   include:
-    - stage: build-push
-      name: operator-bundle
+    - stage: common-build
+      name: operator-and-bundles
       before_install:
       - build/ci/install-deps-common
       script:
-      - build/ci/build-push-ci
+      - build/ci/build-push-common
 
     - stage: k8s-test
       name: k8s-1.14.0-minikube
@@ -25,7 +25,7 @@ jobs:
       install:
       - build/ci/start-minikube
       before_script:
-      - build/ci/install-olm
+      - build/ci/install-olm-manual
       script:
       - build/ci/generate-k8s-ci
       - build/ci/test-ci
@@ -40,7 +40,7 @@ jobs:
       install:
       - build/ci/start-minikube
       before_script:
-      - build/ci/install-olm
+      - build/ci/install-olm-manual
       script:
       - build/ci/generate-k8s-ci
       - build/ci/test-ci
