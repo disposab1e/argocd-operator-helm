@@ -11,9 +11,7 @@ jobs:
   include:
     - name: k8s-1.14.0-minikube
       env: 
-        - KUBECTL_VERSION=v1.18.0
-        - KUBE_VERSION=v1.18.0
-        - OLM=0.13.0
+        - KUBE_VERSION=v1.14.0
       before_install:
       - build/ci/install-deps-common
       - build/ci/install-deps-k8s
@@ -26,7 +24,22 @@ jobs:
       - build/ci/install-argocd
       after_script:
       - build/ci/stop-minikube
-#    - name: k8s-1.18.0-minikube    
+    - name: k8s-1.18.0-minikube    
+      env: 
+        - KUBE_VERSION=v1.18.0
+      before_install:
+      - build/ci/install-deps-common
+      - build/ci/install-deps-k8s
+      install:
+      - build/ci/start-minikube
+      script:
+      - build/ci/install-olm
+      - build/ci/build-ci
+      - build/ci/test-ci
+      - build/ci/install-argocd
+      after_script:
+      - build/ci/stop-minikube
+
 #    - name: ocp3-3.11.0-minishift   
 #      before_install:
 #      - build/ci/install-deps-common
