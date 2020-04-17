@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-if [[ -z "${KUBE_VERSION}"]]; then
+if [ -z "${KUBE_VERSION}" ]; then
     KUBERNETES_VERSION=${KUBE_VERSION}
 else
     KUBERNETES_VERSION=v1.14.0
