@@ -15,21 +15,20 @@ sudo curl -L https://github.com/dhiltgen/docker-machine-kvm/releases/download/v0
 sudo chmod +x /usr/local/bin/docker-machine-driver-kvm
 
 # Normally 
-sudo usermod -a -G libvirt $USER
-sudo usermod -a -G libvirt-qemu $USER
-sudo usermod -a -G libvirt-dnsmasq $USER
-newgrp libvirt
-
-# No need to restart
-sudo systemctl restart libvirtd
-sudo systemctl status libvirtd
+# sudo usermod -a -G libvirt travis
+# sudo usermod -a -G libvirt-qemu travis
+# sudo usermod -a -G libvirt-dnsmasq travis
+# newgrp libvirt
 
 # Bad hack cause 'newgrp libvirt' is not working in travis vm
 sudo chmod 777 /var/run/libvirt/libvirt-sock*
 
 # Show network list to see default network is running and autoconfigure is enabled
-sudo virsh net-list --all
+# sudo virsh net-list --all
 
+# No need to restart
+#sudo systemctl restart libvirtd
+#sudo systemctl status libvirtd
 
 # Minishift
 echo "======================================================"

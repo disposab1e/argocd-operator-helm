@@ -23,14 +23,27 @@ jobs:
       env: 
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
-#    - name: k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2
-#      env: 
-#        MINIKUBE_VERSION: v1.9.2
-#        KUBERNETES_VERSION: v1.14.0
-#        OLM_VERSION: 0.13.0
-#      run: build/ci/test/k8s/install-deps && build/ci/test/k8s/start-minikube && build/ci/test/k8s/install-olm &&  build/ci/test/k8s/generate && build/ci/test/k8s/generate && build/ci/test/k8s/test-operator && build/ci/test/k8s/test-argocd && build/ci/test/k8s/stop-minikube
-    - name: ocp3_3.11.0-olm_0.13.0-minishift_1.34.2 
+    - name: k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2
       env: 
-        MINISHIFT_VERSION: 1.34.2
+        MINIKUBE_VERSION: v1.9.2
+        KUBERNETES_VERSION: v1.14.0
         OLM_VERSION: 0.13.0
-      run: build/ci/test/ocp3/install-deps && build/ci/test/ocp3/start-minishift && build/ci/test/ocp3/install-olm && build/ci/test/ocp3/generate && build/ci/test/ocp3/test-operator && build/ci/test/ocp3/test-argocd && build/ci/test/ocp3/stop-minishift
+      run: build/ci/test/k8s/install-deps && build/ci/test/k8s/start-minikube && build/ci/test/k8s/install-olm &&  build/ci/test/k8s/generate && build/ci/test/k8s/generate && build/ci/test/k8s/test-operator && build/ci/test/k8s/test-argocd && build/ci/test/k8s/stop-minikube
+    - name: k8s_v1.16.0-olm_0.13.0-minikube_v1.9.2
+      env: 
+        MINIKUBE_VERSION: v1.9.2
+        KUBERNETES_VERSION: v1.16.0
+        OLM_VERSION: 0.13.0
+      run: build/ci/test/k8s/install-deps && build/ci/test/k8s/start-minikube && build/ci/test/k8s/install-olm &&  build/ci/test/k8s/generate && build/ci/test/k8s/generate && build/ci/test/k8s/test-operator && build/ci/test/k8s/test-argocd && build/ci/test/k8s/stop-minikube
+    - name: k8s_v1.17.0-olm_0.14.1-minikube_v1.9.2
+      env: 
+        MINIKUBE_VERSION: v1.9.2
+        KUBERNETES_VERSION: v1.17.0
+        OLM_VERSION: 0.14.1
+      run: build/ci/test/k8s/install-deps && build/ci/test/k8s/start-minikube && build/ci/test/k8s/install-olm &&  build/ci/test/k8s/generate && build/ci/test/k8s/generate && build/ci/test/k8s/test-operator && build/ci/test/k8s/test-argocd && build/ci/test/k8s/stop-minikube
+    - name: k8s_v1.18.0-olm_0.14.1-minikube_v1.9.2
+      env: 
+        MINIKUBE_VERSION: v1.9.2
+        KUBERNETES_VERSION: v1.18.0
+        OLM_VERSION: 0.14.1
+      run: build/ci/test/k8s/install-deps && build/ci/test/k8s/start-minikube && build/ci/test/k8s/install-olm &&  build/ci/test/k8s/generate && build/ci/test/k8s/generate && build/ci/test/k8s/test-operator && build/ci/test/k8s/test-argocd && build/ci/test/k8s/stop-minikube
