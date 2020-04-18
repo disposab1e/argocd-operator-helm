@@ -20,7 +20,9 @@ jobs:
       env: 
         OPERATOR_SDK_VERSION: v0.15.0
     - name: Build and Push Operator and Bundles
-      run: build/ci/macos/build/build-push
+      run: |
+        docker info  
+        build/ci/macos/build/build-push
       env: 
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
