@@ -6,7 +6,7 @@ on:
     - travis-ci
 
 jobs:
-  pull-request:
+  operator-and-bundles:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -23,24 +23,36 @@ jobs:
       env: 
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
+  k8s-v1140-olm-0130-minikube-v192:
+    runs-on: ubuntu-latest
+    steps:
     - name: k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2
       env: 
         MINIKUBE_VERSION: v1.9.2
         KUBERNETES_VERSION: v1.14.0
         OLM_VERSION: 0.13.0
       run: build/ci/test/k8s/install-deps && build/ci/test/k8s/start-minikube && build/ci/test/k8s/install-olm &&  build/ci/test/k8s/generate && build/ci/test/k8s/generate && build/ci/test/k8s/test-operator && build/ci/test/k8s/test-argocd && build/ci/test/k8s/stop-minikube
+  k8s-v1160-olm-0130-minikube-v192:
+    runs-on: ubuntu-latest
+    steps:
     - name: k8s_v1.16.0-olm_0.13.0-minikube_v1.9.2
       env: 
         MINIKUBE_VERSION: v1.9.2
         KUBERNETES_VERSION: v1.16.0
         OLM_VERSION: 0.13.0
       run: build/ci/test/k8s/install-deps && build/ci/test/k8s/start-minikube && build/ci/test/k8s/install-olm &&  build/ci/test/k8s/generate && build/ci/test/k8s/generate && build/ci/test/k8s/test-operator && build/ci/test/k8s/test-argocd && build/ci/test/k8s/stop-minikube
+  k8s-v1170-olm-0141-minikube-v192:
+    runs-on: ubuntu-latest
+    steps:
     - name: k8s_v1.17.0-olm_0.14.1-minikube_v1.9.2
       env: 
         MINIKUBE_VERSION: v1.9.2
         KUBERNETES_VERSION: v1.17.0
         OLM_VERSION: 0.14.1
       run: build/ci/test/k8s/install-deps && build/ci/test/k8s/start-minikube && build/ci/test/k8s/install-olm &&  build/ci/test/k8s/generate && build/ci/test/k8s/generate && build/ci/test/k8s/test-operator && build/ci/test/k8s/test-argocd && build/ci/test/k8s/stop-minikube
+  k8s-v1180-olm-0141-minikube-v192:
+    runs-on: ubuntu-latest
+    steps:
     - name: k8s_v1.18.0-olm_0.14.1-minikube_v1.9.2
       env: 
         MINIKUBE_VERSION: v1.9.2
