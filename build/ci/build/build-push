@@ -58,5 +58,3 @@ make bundle-push-k8s-ci
 
 # Go back ;-)
 cd ../
-
-cat /home/runner/.docker/config.json
