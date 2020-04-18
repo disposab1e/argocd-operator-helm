@@ -6,11 +6,11 @@ echo "======================================================"
 echo "Install and Test Argo CD installation"
 echo "======================================================"
 echo "Install Operator with olm installation"
-kubectl apply -f guides/k8s/olm/namespace.yaml
-kubectl apply -f guides/k8s/olm/catalog-source.yaml
-kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=90s
-kubectl apply -f guides/k8s/olm/operator-group.yaml
-kubectl apply -f guides/k8s/olm/subscription.yaml
+kubectl apply -f build/_output/guides/ci/k8s/olm/namespace.yaml
+kubectl apply -f build/_output/guides/ci/k8s/olm/catalog-source.yaml
+kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=120s
+kubectl apply -f build/_output/guides/ci/k8s/olm/operator-group.yaml
+kubectl apply -f build/_output/guides/ci/k8s/olm/subscription.yaml
 echo "Wait 45s"
 sleep 45
 kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=120s
