@@ -27,6 +27,7 @@ jobs:
   k8s-v1140-olm-0130-minikube-v192:
     name: k8s-v1140-olm-0130-minikube-v192
     runs-on: ubuntu-latest
+    needs: operator-and-bundles
     steps:
     - uses: actions/checkout@v2
     - name: k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2
@@ -38,6 +39,7 @@ jobs:
   k8s-v1160-olm-0130-minikube-v192:
     name: k8s-v1160-olm-0130-minikube-v192
     runs-on: ubuntu-latest
+    needs: operator-and-bundles
     steps:
     - uses: actions/checkout@v2
     - name: k8s_v1.16.0-olm_0.13.0-minikube_v1.9.2
@@ -49,6 +51,7 @@ jobs:
   k8s-v1170-olm-0141-minikube-v192:
     name: k8s-v1170-olm-0141-minikube-v192
     runs-on: ubuntu-latest
+    needs: operator-and-bundles
     steps:
     - uses: actions/checkout@v2
     - name: k8s_v1.17.0-olm_0.14.1-minikube_v1.9.2
@@ -60,6 +63,7 @@ jobs:
   k8s-v1180-olm-0141-minikube-v192:
     name: k8s-v1180-olm-0141-minikube-v192
     runs-on: ubuntu-latest
+    needs: operator-and-bundles
     steps:
     - uses: actions/checkout@v2
     - name: k8s_v1.18.0-olm_0.14.1-minikube_v1.9.2
