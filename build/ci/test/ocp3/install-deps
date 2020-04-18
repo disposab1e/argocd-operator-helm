@@ -24,11 +24,11 @@ sudo chmod +x /usr/local/bin/docker-machine-driver-kvm
 sudo chmod 777 /var/run/libvirt/libvirt-sock*
 
 # Show network list to see default network is running and autoconfigure is enabled
-# sudo virsh net-list --all
+sudo virsh net-list --all
 
 # No need to restart
-#sudo systemctl restart libvirtd
-#sudo systemctl status libvirtd
+sudo systemctl restart libvirtd
+sudo systemctl status libvirtd
 
 # Minishift
 echo "======================================================"
