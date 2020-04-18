@@ -1,14 +1,14 @@
 dist: bionic
 os: linux
+language: python
+python:
+- "3.6"
 
 if: branch = travis-ci
 
 jobs:
   include:
     - stage: build
-      language: python
-      python:
-      - "3.6"
       name: operator-and-bundles
       before_install:
       - build/ci/build/install-deps
@@ -32,11 +32,11 @@ jobs:
       - build/ci/test/k8s/test-argocd
       after_script:
       - build/ci/stop-minikube
-    - name: k8s_v1.17.0-olm_0.13.0-minikube_v1.9.2
+    - name: k8s_v1.17.0-olm_0.14.0-minikube_v1.9.2
       env: 
         - MINIKUBE_VERSION=v1.9.2
         - KUBERNETES_VERSION=v1.17.0
-        - OLM_VERSION=0.13.0
+        - OLM_VERSION=0.14.0
       before_install:
       - build/ci/test/k8s/install-deps
       install:
