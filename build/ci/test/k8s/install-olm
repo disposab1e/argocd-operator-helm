@@ -26,6 +26,3 @@ echo "======================================================"
 echo "Delete Community Catalogue from operatohub.io"
 echo "======================================================"
 kubectl delete catalogsource operatorhubio-catalog -n olm
-
-kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.14.1/crds.yaml
-kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.14.1/olm.yaml
