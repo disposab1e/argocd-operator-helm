@@ -28,4 +28,4 @@ jobs:
         MINIKUBE_VERSION: v1.9.2
         KUBERNETES_VERSION: v1.14.0
         OLM_VERSION: 0.13.0
-      run: build/ci/test/k8s/install-deps && build/ci/test/k8s/start-minikube && build/ci/test/k8s/install-olm &&  build/ci/test/k8s/generate && build/ci/test/k8s/generate && build/ci/test/k8s/test-operator && build/ci/test/k8s/test-argocd && build/ci/stop-minikube
+      run: build/ci/test/k8s/install-deps && build/ci/test/k8s/start-minikube && build/ci/test/k8s/install-olm &&  build/ci/test/k8s/generate && build/ci/test/k8s/generate && build/ci/test/k8s/test-operator && build/ci/test/k8s/test-argocd && build/ci/test/k8s/stop-minikube
