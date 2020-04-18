@@ -18,5 +18,8 @@ jobs:
       run: build/ci/build/install-deps
       env: 
         OPERATOR_SDK_VERSION: v0.15.0
+    - name: Install Dependencies
+      run: build/ci/build/build-push
+      env: 
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
