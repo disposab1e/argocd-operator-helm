@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
-if [ -z "${OLM_VERSION}" ]; then
-    OLM=${OLM_VERSION}
-else
-    OLM=0.13.0
-fi
-
 # Operator Lifecycle Manager
 echo "======================================================"
-echo "Installing Operator Lifecycle Manager ${OLM}"
+echo "Installing Operator Lifecycle Manager ${OLM_VERSION}"
 echo "======================================================"
-curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM}/install.sh | bash -s ${OLM}
+curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/install.sh | bash -s ${OLM_VERSION}
 
 # Delete "operatorhubio-catalog" cause we provide our own catalogue
 echo "======================================================"
