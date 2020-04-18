@@ -6,8 +6,8 @@ echo "======================================================"
 echo "Installing Operator Lifecycle Manager ${OLM_VERSION}"
 echo "======================================================"
 
-oc apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/crds.yaml
-oc apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/olm.yaml
+kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/crds.yaml
+kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/olm.yaml
 
 
 # wait for deployments to be ready
