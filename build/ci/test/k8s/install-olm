@@ -15,6 +15,6 @@ curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releas
 
 # Delete "operatorhubio-catalog" cause we provide our own catalogue
 echo "======================================================"
-echo "Delete Commuinty Catalogue from operatohub.io"
+echo "Delete Community Catalogue from operatohub.io"
 echo "======================================================"
 kubectl delete catalogsource operatorhubio-catalog -n olm
