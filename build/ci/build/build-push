@@ -60,3 +60,8 @@ make bundle-push-k8s-ci
 cd ../
 
 cat /home/runner/.docker/config.json
+
+echo "susi"
+
+cat /home/runner/.docker/config.json
+
