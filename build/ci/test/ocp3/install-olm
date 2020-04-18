@@ -3,8 +3,13 @@ set -e
 
 eval $(minishift oc-env)
 
-oc apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.13.0/crds.yaml
-oc apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.13.0/olm.yaml
+echo "======================================================"
+echo "Installing Operator Lifecycle Manager ${OLM_VERSION}"
+echo "======================================================"
+
+oc apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/crds.yaml
+sleep 20
+oc apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/olm.yaml
 
 
 # wait for deployments to be ready
@@ -15,3 +20,8 @@ sleep 60
 
 oc rollout status -w deployment/packageserver --namespace=olm
 
+# Delete "operatorhubio-catalog" cause we provide our own catalogue
+echo "======================================================"
+echo "Delete Community Catalogue from operatohub.io"
+echo "======================================================"
+oc delete catalogsource operatorhubio-catalog -n olm

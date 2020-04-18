@@ -86,7 +86,10 @@ jobs:
       - build/ci/test/k8s/test-argocd
       after_script:
       - build/ci/stop-minikube
-    - name: ocp3-3.11.0-minishift   
+    - name: ocp3_3.11.0-olm_0.13.0-minishift_1.34.2   
+      env: 
+        - MINISHIFT_VERSION=1.34.2
+        - OLM_VERSION=0.13.0
       before_install:
       - build/ci/test/ocp3/install-deps
       install:

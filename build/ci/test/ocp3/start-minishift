@@ -1,31 +1,29 @@
 #!/usr/bin/env bash
 set -e
 
+echo "======================================================"
+echo "Setup minishift environment"
+echo "======================================================"
 export MINISHIFT_ENABLE_EXPERIMENTAL=y
-
 minishift profile set argocd
-
 minishift config set memory 7200
-
 minishift config view
-
 minishift addon enable admin-user 
 minishift addon enable anyuid
-
 minishift addons list
 
+
+echo "======================================================"
+echo "Starting minishift ${MINISHIFT_VERSION}"
+echo "======================================================"
 minishift start
 
+echo "======================================================"
+echo "Remove openshift-web-console to free some memory"
+echo "======================================================"
 eval $(minishift oc-env)
-
-# minishift start -v 5
-
 oc login -u admin -p admin
-
 oc delete deployment.apps/openshift-web-console-operator -n openshift-core-operators
-
 sleep 20
-
 oc delete deployment.apps/webconsole -n openshift-web-console
-
 sleep 20

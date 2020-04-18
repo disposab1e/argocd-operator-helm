@@ -2,9 +2,10 @@
 set -e
 
 # Setup minikube environment
-#export CHANGE_MINIKUBE_NONE_USER=true
+echo "======================================================"
+echo "Setup minikube environment"
+echo "======================================================"
 export MINIKUBE_WANTUPDATENOTIFICATION=false
-#export MINIKUBE_WANTREPORTERRORPROMPT=false
 
 # Start minikube and set context
 echo "======================================================"

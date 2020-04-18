@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+echo "======================================================"
+echo "Installing dependencies"
+echo "======================================================"
 # libvirt
 echo "Installing libvirt/kvm"
 sudo apt-get update 
@@ -17,7 +20,7 @@ sudo chmod +x /usr/local/bin/docker-machine-driver-kvm
 # sudo usermod -a -G libvirt-dnsmasq travis
 # newgrp libvirt
 
-# Bad hack cause 'newgrp libvirt' is not working
+# Bad hack cause 'newgrp libvirt' is not working in travis vm
 sudo chmod 777 /var/run/libvirt/libvirt-sock*
 
 # Show network list to see default network is running and autoconfigure is enabled
@@ -28,9 +31,11 @@ sudo chmod 777 /var/run/libvirt/libvirt-sock*
 #sudo systemctl status libvirtd
 
 # Minishift
-echo "Installing minishift"
-MINISHIFT_VERSION="1.34.2"
+echo "======================================================"
+echo "Installing minishift ${MINISHIFT_VERSION}"
+echo "======================================================"
 curl -Lo minishift.tgz https://github.com/minishift/minishift/releases/download/v${MINISHIFT_VERSION}/minishift-${MINISHIFT_VERSION}-linux-amd64.tgz
 tar xvf minishift.tgz
 sudo mv minishift-${MINISHIFT_VERSION}-linux-amd64/minishift /usr/local/bin
 chmod +x /usr/local/bin/minishift
+

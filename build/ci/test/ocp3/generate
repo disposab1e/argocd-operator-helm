@@ -5,9 +5,15 @@ set -e
 cd build/
 
 # Generate yaml's for manual operator installation
+echo "======================================================"
+echo "Generate yaml's for manual operator installation"
+echo "======================================================"
 make guide-generate-ocp3-manual-ci
 
 # Generate yaml's for operator installation with olm
+echo "======================================================"
+echo "Generate yaml's for olm operator installation"
+echo "======================================================"
 make guide-generate-ocp3-olm-ci
 
 # Go back ;-)

@@ -2,7 +2,6 @@
 set -e
 
 echo "======================================================"
-echo "Stopping minikube ${MINI_VERSION}"
+echo "Stopping minikube ${MINIKUBE_VERSION}"
 echo "======================================================"
-sudo minikube stop -p argocd
-
+minikube stop -p argocd

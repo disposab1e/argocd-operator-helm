@@ -7,9 +7,7 @@ echo "Installing Operator Lifecycle Manager ${OLM_VERSION}"
 echo "======================================================"
 
 kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/crds.yaml
-
 sleep 20
-
 kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/olm.yaml
 
 
