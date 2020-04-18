@@ -1,16 +1,27 @@
 #!/usr/bin/env bash
 set -e
 
-if [ -z "${KUBE_VERSION}" ]; then
-    KUBERNETES_VERSION=${KUBE_VERSION}
+if [ -z "${KUBERNETES_VERSION}" ]; then
+    KUBE_VERSION=${KUBERNETES_VERSION}
 else
-    KUBERNETES_VERSION=v1.14.0
+    KUBE_VERSION=v1.14.0
 fi
 
+if [ -z "${MINIKUBE_VERSION}" ]; then
+    MINI_VERSION=${MINIKUBE_VERSION}
+else
+    MINI_VERSION=v1.9.2
+fi
+
+# Setup minikube environment
 export CHANGE_MINIKUBE_NONE_USER=true
 export MINIKUBE_WANTUPDATENOTIFICATION=false
 export MINIKUBE_WANTREPORTERRORPROMPT=false
 
-sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="${KUBERNETES_VERSION}"
+# Start minikube and set context
+echo "======================================================"
+echo "Starting minikube ${MINI_VERSION} with kubernetes ${KUBE_VERSION}"
+echo "======================================================"
+sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="${KUBE_VERSION}" -p argocd
 sudo chown -R $USER ${HOME}/.{mini,}kube
-kubectl config use-context minikube
+kubectl config use-context argocd

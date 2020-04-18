@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-
-# Stop immediately when an error occurs
 set -e
 
 # Works in local, github, travisci and circleci environments :-)

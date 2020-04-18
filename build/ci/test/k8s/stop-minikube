@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-
 set -e
 
-sudo minikube stop
+echo "======================================================"
+echo "Stopping minikube ${MINI_VERSION}"
+echo "======================================================"
+sudo minikube stop -p argocd
 

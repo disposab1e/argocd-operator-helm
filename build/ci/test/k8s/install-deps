@@ -1,25 +1,38 @@
 #!/usr/bin/env bash
 set -e
 
-if [ -z "${KUBE_VERSION}" ]; then
-    KUBERNETES_VERSION=${KUBE_VERSION}
+if [ -z "${KUBERNETES_VERSION}" ]; then
+    KUBE_VERSION=${KUBERNETES_VERSION}
 else
-    KUBERNETES_VERSION=v1.14.0
+    KUBE_VERSION=v1.14.0
 fi
 
-# install conntrack needed for kubernetes 1.18
+if [ -z "${MINIKUBE_VERSION}" ]; then
+    MINI_VERSION=${MINIKUBE_VERSION}
+else
+    MINI_VERSION=v1.9.2
+fi
+
+
+# Install conntrack (mandatory for kubernetes 1.18)
+echo "======================================================"
+echo "Installing dependencies"
+echo "======================================================"
 sudo apt-get update 
 sudo apt-get install -y conntrack
 
-# kubectl
-echo "Installing kubectl"
-#KUBECTL_VERSION="v1.14.0"
-curl -Lo kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBERNETES_VERSION}/bin/linux/amd64/kubectl"
+# Install kubectl
+echo "======================================================"
+echo "Installing kubectl ${KUBE_VERSION}"
+echo "======================================================"
+curl -Lo kubectl "https://storage.googleapis.com/kubernetes-release/release/${KUBE_VERSION}/bin/linux/amd64/kubectl"
 chmod +x kubectl
 sudo mv kubectl /usr/local/bin/
 
-# Minikube
-echo "Installing minikube"
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+# Install Minikube
+echo "======================================================"
+echo "Installing minikube ${MINI_VERSION}"
+echo "======================================================"
+curl -Lo minikube https://github.com/kubernetes/minikube/releases/download/${MINI_VERSION}/minikube-linux-amd64
 chmod +x minikube
 sudo mv minikube /usr/local/bin/

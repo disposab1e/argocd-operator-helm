@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-eval $(minishift oc-env)
-
-kubectl describe csv -n olm packageserver
-
-kubectl get pods --all-namespaces
-

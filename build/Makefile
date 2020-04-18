@@ -64,6 +64,13 @@ guide-generate-k8s-olm-ci:
 	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ../deploy/k8s/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/ci/k8s/olm/catalog-source.yaml
 
 
+
+
+
+
+
+
+
 bundle-generate-ocp-ci:
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/ci/ocp
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/
@@ -169,45 +176,6 @@ generate-all: generate-guides generate-quickstarts
 
 generate-guides: generate-guide-ocp3-manual generate-guide-ocp3-olm generate-guide-ocp4-manual generate-guide-ocp4-olm generate-guide-k8s-manual generate-guide-k8s-olm
 
-generate-quickstarts: generate-quickstart-ocp3 generate-quickstart-ocp4 generate-quickstart-k8s
-
-generate-quickstart-ocp3: generate-guide-ocp3-olm
-	rm -rf ${QUICKSTARTS_BUILD_BASE_DIR}/ocp3
-	mkdir -p ${QUICKSTARTS_BUILD_BASE_DIR}/ocp3
-	cat ${GUIDES_BUILD_BASE_DIR}/ocp3/olm/namespace.yaml > ${QUICKSTARTS_BUILD_BASE_DIR}/ocp3/operator.yaml
-	echo "---" >> ${QUICKSTARTS_BUILD_BASE_DIR}/ocp3/operator.yaml
-	cat ${GUIDES_BUILD_BASE_DIR}/ocp3/olm/operator-group.yaml >> ${QUICKSTARTS_BUILD_BASE_DIR}/ocp3/operator.yaml
-	echo "---" >> ${QUICKSTARTS_BUILD_BASE_DIR}/ocp3/operator.yaml
-	cat ${GUIDES_BUILD_BASE_DIR}/ocp3/olm/role-binding.yaml >> ${QUICKSTARTS_BUILD_BASE_DIR}/ocp3/operator.yaml
-	echo "---" >> ${QUICKSTARTS_BUILD_BASE_DIR}/ocp3/operator.yaml
-	cat ${GUIDES_BUILD_BASE_DIR}/ocp3/olm//catalog-source.yaml >> ${QUICKSTARTS_BUILD_BASE_DIR}/ocp3/operator.yaml
-	echo "---" >> ${QUICKSTARTS_BUILD_BASE_DIR}/ocp3/operator.yaml
-	cat ${GUIDES_BUILD_BASE_DIR}/ocp3/olm//subscription.yaml >> ${QUICKSTARTS_BUILD_BASE_DIR}/ocp3/operator.yaml
-	cp ./../examples/ocp-oauth.yaml ${QUICKSTARTS_BUILD_BASE_DIR}/ocp3/argocd.yaml
-
-generate-quickstart-ocp4: generate-guide-ocp4-olm
-	rm -rf ${QUICKSTARTS_BUILD_BASE_DIR}/ocp4
-	mkdir -p ${QUICKSTARTS_BUILD_BASE_DIR}/ocp4
-	cat ${GUIDES_BUILD_BASE_DIR}/ocp4/olm/namespace.yaml > ${QUICKSTARTS_BUILD_BASE_DIR}/ocp4/operator.yaml
-	echo "---" >> ${QUICKSTARTS_BUILD_BASE_DIR}/ocp4/operator.yaml
-	cat ${GUIDES_BUILD_BASE_DIR}/ocp4/olm/operator-group.yaml >> ${QUICKSTARTS_BUILD_BASE_DIR}/ocp4/operator.yaml
-	echo "---" >> ${QUICKSTARTS_BUILD_BASE_DIR}/ocp4/operator.yaml
-	cat ${GUIDES_BUILD_BASE_DIR}/ocp4/olm//catalog-source.yaml >> ${QUICKSTARTS_BUILD_BASE_DIR}/ocp4/operator.yaml
-	echo "---" >> ${QUICKSTARTS_BUILD_BASE_DIR}/ocp4/operator.yaml
-	cat ${GUIDES_BUILD_BASE_DIR}/ocp4/olm//subscription.yaml >> ${QUICKSTARTS_BUILD_BASE_DIR}/ocp4/operator.yaml
-	cp ./../examples/ocp-oauth.yaml ${QUICKSTARTS_BUILD_BASE_DIR}/ocp4/argocd.yaml
-
-generate-quickstart-k8s: generate-guide-k8s-olm
-	rm -rf ${QUICKSTARTS_BUILD_BASE_DIR}/k8s
-	mkdir -p ${QUICKSTARTS_BUILD_BASE_DIR}/k8s
-	cat ${GUIDES_BUILD_BASE_DIR}/k8s/olm/namespace.yaml > ${QUICKSTARTS_BUILD_BASE_DIR}/k8s/operator.yaml
-	echo "---" >> ${QUICKSTARTS_BUILD_BASE_DIR}/k8s/operator.yaml
-	cat ${GUIDES_BUILD_BASE_DIR}/k8s/olm/operator-group.yaml >> ${QUICKSTARTS_BUILD_BASE_DIR}/k8s/operator.yaml
-	echo "---" >> ${QUICKSTARTS_BUILD_BASE_DIR}/k8s/operator.yaml
-	cat ${GUIDES_BUILD_BASE_DIR}/k8s/olm//catalog-source.yaml >> ${QUICKSTARTS_BUILD_BASE_DIR}/k8s/operator.yaml
-	echo "---" >> ${QUICKSTARTS_BUILD_BASE_DIR}/k8s/operator.yaml
-	cat ${GUIDES_BUILD_BASE_DIR}/k8s/olm//subscription.yaml >> ${QUICKSTARTS_BUILD_BASE_DIR}/k8s/operator.yaml
-	cp ./../examples/k8s.yaml ${QUICKSTARTS_BUILD_BASE_DIR}/k8s/argocd.yaml
 
 generate-guide-ocp3-manual:
 	rm -rf ${GUIDES_BUILD_BASE_DIR}/ocp3/manual
@@ -353,109 +321,4 @@ bundle-build-k8s-dev: bundle-verify-k8s-dev
 
 bundle-push-k8s-dev:
 	docker push ${REGISTRY_DEV}/${NAMESPACE}/${NAME}-registry-k8s:${VERSION}
-
-
-ocp4-deploy-olm-dev:
-	oc apply -f ./../deploy/common/namespace.yaml
-	oc apply -f ./../deploy/ocp4/catalog-source.yaml
-	oc apply -f ./../deploy/common/operator-group.yaml
-	oc wait pod -n openshift-marketplace -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=60s
-	oc apply -f ./../deploy/ocp4/subscription.yaml
-
-ocp4-undeploy-olm-dev:
-	oc delete -f ./../deploy/ocp4/subscription.yaml
-	oc delete csvs --all -n argocd
-	oc delete -f ./../deploy/ocp4/catalog-source.yaml
-	oc delete -f ./../deploy/common/operator-group.yaml
-	oc delete -f ./../deploy/common/namespace.yaml
-
-ocp4-deploy-manual-dev:
-	oc apply -f ./../deploy/common/namespace.yaml
-	oc apply -f ./../deploy/common/service-account.yaml
-	oc apply -f ./../deploy/common/role.yaml
-	oc apply -f ./../deploy/common/role-binding.yaml
-	oc apply -f ./../deploy/crds/argoproj.io_argocds_crd.yaml
-	oc apply -f ./../deploy/common/deployment.yaml
-
-ocp4-undeploy-manual-dev:
-	oc delete -f ./../deploy/common/deployment.yaml
-	oc delete -f ./../deploy/crds/argoproj.io_argocds_crd.yaml
-	oc delete -f ./../deploy/common/role-binding.yaml
-	oc delete -f ./../deploy/common/role.yaml
-	oc delete -f ./../deploy/common/service-account.yaml
-	oc delete -f ./../deploy/common/namespace.yaml
-
-
-ocp3-deploy-olm-dev:
-	oc apply -f ./../deploy/common/namespace.yaml
-	oc apply -f ./../deploy/ocp3/catalog-source.yaml
-	oc apply -f ./../deploy/common/operator-group.yaml
-	oc apply -f ./../deploy/ocp3/role-binding.yaml
-	oc wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=60s
-	oc apply -f ./../deploy/ocp3/subscription.yaml
-
-ocp3-undeploy-olm-dev:
-	oc delete -f ./../deploy/ocp3/subscription.yaml
-	oc delete csvs --all -n argocd
-	oc delete -f ./../deploy/ocp3/catalog-source.yaml
-	oc delete -f ./../deploy/ocp3/role-binding.yaml
-	oc delete -f ./../deploy/common/operator-group.yaml
-	oc delete -f ./../deploy/common/namespace.yaml
-
-
-ocp3-deploy-manual-dev:
-	oc apply -f ./../deploy/common/namespace.yaml
-	oc apply -f ./../deploy/common/service-account.yaml
-	oc apply -f ./../deploy/common/role.yaml
-	oc apply -f ./../deploy/common/role-binding.yaml
-	oc apply -f ./../deploy/ocp3/role-binding.yaml
-	oc apply -f ./../deploy/crds/argoproj.io_argocds_crd.yaml
-	oc apply -f ./../deploy/common/deployment.yaml
-
-ocp3-undeploy-manual-dev:
-	oc delete -f ./../deploy/common/deployment.yaml
-	oc delete -f ./../deploy/crds/argoproj.io_argocds_crd.yaml
-	oc delete -f ./../deploy/ocp3/role-binding.yaml
-	oc delete -f ./../deploy/common/role-binding.yaml
-	oc delete -f ./../deploy/common/role.yaml
-	oc delete -f ./../deploy/common/service-account.yaml
-	oc delete -f ./../deploy/common/namespace.yaml
-
-k8s-deploy-olm-dev:
-	kubectl apply -f ./../deploy/common/namespace.yaml
-	kubectl apply -f ./../deploy/k8s/catalog-source.yaml
-	kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=90s
-	kubectl apply -f ./../deploy/common/operator-group.yaml
-	kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=60s
-	kubectl apply -f ./../deploy/k8s/subscription.yaml
-	sleep 15
-	kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=90s
-	kubectl rollout status -w deployment/argocd-operator-helm -n argocd
-
-
-k8s-undeploy-olm-dev:
-	kubectl delete -f ./../deploy/k8s/subscription.yaml
-	kubectl delete csvs --all -n argocd
-	kubectl delete -f ./../deploy/k8s/catalog-source.yaml
-	kubectl delete -f ./../deploy/common/operator-group.yaml
-	kubectl delete -f ./../deploy/common/namespace.yaml
-
-
-k8s-deploy-manual-dev:
-	kubectl apply -f ./../deploy/common/namespace.yaml
-	kubectl apply -f ./../deploy/common/service-account.yaml
-	kubectl apply -f ./../deploy/common/role.yaml
-	kubectl apply -f ./../deploy/common/role-binding.yaml
-	kubectl apply -f ./../deploy/crds/argoproj.io_argocds_crd.yaml
-	kubectl apply -f ./../deploy/common/deployment.yaml
-
-k8s-undeploy-manual-dev:
-	kubectl delete -f ./../deploy/common/deployment.yaml
-	kubectl delete -f ./../deploy/crds/argoproj.io_argocds_crd.yaml
-	kubectl delete -f ./../deploy/common/role-binding.yaml
-	kubectl delete -f ./../deploy/common/role.yaml
-	kubectl delete -f ./../deploy/common/service-account.yaml
-	kubectl delete -f ./../deploy/common/namespace.yaml
-
-
 

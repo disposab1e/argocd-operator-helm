@@ -16,9 +16,10 @@ jobs:
       script:
       - build/ci/build/build-push
     - stage: test
-      name: k8s-1.14.0-minikube
+      name: k8s_1.14.0-minikube_v1.9.2
       env: 
-        - KUBE_VERSION=v1.14.0
+        - KUBERNETES_VERSION=v1.14.0
+        - MINIKUBE_VERSION=v1.9.2
       before_install:
       - build/ci/test/k8s/install-deps
       install:
@@ -31,9 +32,10 @@ jobs:
       - build/ci/test/k8s/test-argocd
       after_script:
       - build/ci/stop-minikube
-    - name: k8s-1.17.0-minikube    
+    - name: k8s_1.17.0-minikube_v1.9.2
       env: 
-        - KUBE_VERSION=v1.17.0
+        - KUBERNETES_VERSION=v1.17.0
+        - MINIKUBE_VERSION=v1.9.2
       before_install:
       - build/ci/test/k8s/install-deps
       install:
@@ -46,9 +48,10 @@ jobs:
       - build/ci/test/k8s/test-argocd
       after_script:
       - build/ci/stop-minikube
-    - name: k8s-1.18.1-minikube    
+    - name: k8s_1.18.1-minikube_v1.9.2
       env: 
-        - KUBE_VERSION=v1.18.1
+        - KUBERNETES_VERSION=v1.18.1
+        - MINIKUBE_VERSION=v1.9.2
       before_install:
       - build/ci/test/k8s/install-deps
       install:

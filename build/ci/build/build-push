@@ -4,6 +4,9 @@ set -e
 # Works in local, github, travisci and circleci environments :-)
 cd build/
 
+# Lint Helm chart
+make helm-templates
+
 # Build operator with operator-sdk
 make operator-build-ci
 
@@ -25,7 +28,7 @@ echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin
 # Push the operator to dockerhub
 make operator-push-ci
 
-# Push bundles to dockerhub
+# Push bundles to docker.io
 make bundle-push-ocp-ci
 make bundle-push-k8s-ci
 
