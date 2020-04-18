@@ -33,7 +33,7 @@ jobs:
       - build/ci/test/k8s/test-operator
       - build/ci/test/k8s/test-argocd
       after_script:
-      - build/ci/stop-minikube
+      - build/ci/test/k8s/stop-minikube
     - name: k8s_v1.16.0-olm_0.13.0-minikube_v1.9.2
       env: 
         - MINIKUBE_VERSION=v1.9.2
@@ -50,7 +50,7 @@ jobs:
       - build/ci/test/k8s/test-operator
       - build/ci/test/k8s/test-argocd
       after_script:
-      - build/ci/stop-minikube
+      - build/ci/test/k8s/stop-minikube
     - name: k8s_v1.17.0-olm_0.14.1-minikube_v1.9.2
       env: 
         - MINIKUBE_VERSION=v1.9.2
@@ -67,7 +67,7 @@ jobs:
       - build/ci/test/k8s/test-operator
       - build/ci/test/k8s/test-argocd
       after_script:
-      - build/ci/stop-minikube
+      - build/ci/test/k8s/stop-minikube
     - name: k8s_v1.18.0-olm_0.14.1-minikube_v1.9.2
       env: 
         - MINIKUBE_VERSION=v1.9.2
@@ -84,7 +84,7 @@ jobs:
       - build/ci/test/k8s/test-operator
       - build/ci/test/k8s/test-argocd
       after_script:
-      - build/ci/stop-minikube
+      - build/ci/test/k8s/stop-minikube
     - stage: test-ocp3
       name: ocp3_3.11.0-olm_0.13.0-minishift_1.34.2   
       env: 
