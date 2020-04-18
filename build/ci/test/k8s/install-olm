@@ -5,7 +5,18 @@ set -e
 echo "======================================================"
 echo "Installing Operator Lifecycle Manager ${OLM_VERSION}"
 echo "======================================================"
-curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/install.sh | bash -s ${OLM_VERSION}
+
+oc apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/crds.yaml
+oc apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/olm.yaml
+
+
+# wait for deployments to be ready
+kubectl rollout status -w deployment/olm-operator --namespace=olm
+kubectl rollout status -w deployment/catalog-operator --namespace=olm
+
+sleep 60
+
+kubectl rollout status -w deployment/packageserver --namespace=olm
 
 # Delete "operatorhubio-catalog" cause we provide our own catalogue
 echo "======================================================"
