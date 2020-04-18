@@ -1,0 +1,22 @@
+name: verify
+
+on:
+  pull_request:
+    branches:
+    - travis-ci
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+    - name: Install Dependencies
+      run: build/ci/build/install-deps
+      env: 
+        OPERATOR_SDK_VERSION: v0.15.0
+        DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}

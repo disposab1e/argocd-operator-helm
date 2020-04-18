@@ -4,7 +4,7 @@ language: python
 python:
 - "3.6"
 
-if: branch = travis-ci
+if: branch = travis-ci-dead
 
 jobs:
   include:
