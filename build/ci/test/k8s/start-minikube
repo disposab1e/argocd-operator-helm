@@ -22,6 +22,6 @@ export MINIKUBE_WANTREPORTERRORPROMPT=false
 echo "======================================================"
 echo "Starting minikube ${MINI_VERSION} with kubernetes ${KUBE_VERSION}"
 echo "======================================================"
-sudo minikube start --memory=4096 --vm-driver=none --kubernetes-version="${KUBE_VERSION}" -p argocd
+sudo minikube start --memory=4096 --vm-driver=docker --kubernetes-version="${KUBE_VERSION}" -p argocd
 sudo chown -R $USER ${HOME}/.{mini,}kube
 kubectl config use-context argocd
