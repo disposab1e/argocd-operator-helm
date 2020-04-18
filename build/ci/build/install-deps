@@ -12,8 +12,8 @@ operator-courier --version
 echo "======================================================"
 echo "Installing operator-sdk"
 echo "======================================================"
-OPERATOR_SDK_VER=v0.15.0
-curl -Lo operator-sdk https://github.com/operator-framework/operator-sdk/releases/download/${OPERATOR_SDK_VER}/operator-sdk-${OPERATOR_SDK_VER}-x86_64-linux-gnu
+OPERATOR_SDK_VERSION=v0.15.0
+curl -Lo operator-sdk https://github.com/operator-framework/operator-sdk/releases/download/${OPERATOR_SDK_VERSION}/operator-sdk-${OPERATOR_SDK_VERSION}-x86_64-linux-gnu
 chmod +x operator-sdk
 sudo mv operator-sdk /usr/local/bin/
 
