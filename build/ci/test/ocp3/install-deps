@@ -15,9 +15,9 @@ sudo curl -L https://github.com/dhiltgen/docker-machine-kvm/releases/download/v0
 sudo chmod +x /usr/local/bin/docker-machine-driver-kvm
 
 # Normally 
-sudo usermod -a -G libvirt travis
-sudo usermod -a -G libvirt-qemu travis
-sudo usermod -a -G libvirt-dnsmasq travis
+sudo usermod -a -G libvirt $USER
+sudo usermod -a -G libvirt-qemu $USER
+sudo usermod -a -G libvirt-dnsmasq $USER
 newgrp libvirt
 
 # No need to restart
