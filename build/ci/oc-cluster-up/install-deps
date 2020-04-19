@@ -20,7 +20,7 @@ EOF
 
 sudo systemctl restart docker
 
-iptables -F
+sudo iptables -F
 
 
 mkdir -p "$HOME/.occluster"
