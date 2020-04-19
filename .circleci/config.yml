@@ -1,44 +1,108 @@
 version: 2.1
 jobs:
-  build:
+  operator-and-bundles:
     machine: 
       image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
-          name: Use Python 3.6.5
-          command: pyenv global 3.6.5
+          name: Build & Publish operator and bundles
+          environment:
+            OPERATOR_SDK_VERSION: v0.15.0
+          command: |
+            pyenv global 3.6.5
+            build/ci/build/install-deps
+            build/ci/build/build-push
+  k8s-v1140-olm-0130-minikube-v192:
+    machine: 
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
       - run:
-          name: Install Dependencies
-          command: ./build/ci/install-deps
+          name: Kubernetes v1.14.0 & OLM 0.13.0 (Minikube v1.9.2)
+          environment:
+            MINIKUBE_VERSION: v1.9.2
+            KUBERNETES_VERSION: v1.14.0
+            OLM_VERSION: 0.13.0
+          command: |
+            build/ci/test/k8s/install-deps
+            build/ci/test/k8s/start-minikube
+            build/ci/test/k8s/install-olm
+            build/ci/test/k8s/generate
+            build/ci/test/k8s/test-operator
+            build/ci/test/k8s/test-argocd
+            build/ci/test/k8s/stop-minikube
+  k8s-v1170-olm-0141-minikube-v192:
+    machine: 
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
       - run:
-          name: Start Minikube
-          command: ./build/ci/start-minikube
+          name: Kubernetes v1.17.0 & OLM 0.14.1 (Minikube v1.9.2)
+          environment:
+            MINIKUBE_VERSION: v1.9.2
+            KUBERNETES_VERSION: v1.17.0
+            OLM_VERSION: 0.14.1
+          command: |
+            build/ci/test/k8s/install-deps
+            build/ci/test/k8s/start-minikube
+            build/ci/test/k8s/install-olm
+            build/ci/test/k8s/generate
+            build/ci/test/k8s/test-operator
+            build/ci/test/k8s/test-argocd
+            build/ci/test/k8s/stop-minikube
+  k8s-v1180-olm-0141-minikube-v192:
+    machine: 
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
       - run:
-          name: Install Operator Lifecycle Manager
-          command: ./build/ci/install-olm
-      - run:
-          name: Build Development Environment
-          command: ./build/ci/build-dev
-      - run:
-          name: Test Development Environment
-          command: ./build/ci/test-dev
-      - run:
-          name: Build Release Environment
-          command: ./build/ci/release
-      - run:
-          name: Test Release Environment
-          command: ./build/ci/test
-      - run:
-          name: Install Argo CD
-          command: ./build/ci/install-argocd
+          name: Kubernetes v1.18.0 & OLM 0.14.1 (Minikube v1.9.2)
+          environment:
+            MINIKUBE_VERSION: v1.9.2
+            KUBERNETES_VERSION: v1.18.0
+            OLM_VERSION: 0.14.1
+          command: |
+            build/ci/test/k8s/install-deps
+            build/ci/test/k8s/start-minikube
+            build/ci/test/k8s/install-olm
+            build/ci/test/k8s/generate
+            build/ci/test/k8s/test-operator
+            build/ci/test/k8s/test-argocd
+            build/ci/test/k8s/stop-minikube
+
 
 workflows:
   version: 2
-  build:
+  build-and-test:
     jobs:
-      - build:
+      - operator-and-bundles:
           filters:
             branches:
-              only: circle-ci
-
+              only: 
+                - circle-ci
+                - release-0.0.4
+      - k8s-v1140-olm-0130-minikube-v192:
+          requires:
+            - operator-and-bundles
+          filters:
+            branches:
+              only: 
+                - circle-ci
+                - release-0.0.4
+      - k8s-v1170-olm-0141-minikube-v192:
+          requires:
+            - operator-and-bundles
+          filters:
+            branches:
+              only: 
+                - circle-ci
+                - release-0.0.4
+      - k8s-v1180-olm-0141-minikube-v192:
+          requires:
+            - operator-and-bundles
+          filters:
+            branches:
+              only: 
+                - circle-ci
+                - release-0.0.4
