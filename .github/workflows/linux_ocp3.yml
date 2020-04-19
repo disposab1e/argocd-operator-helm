@@ -3,7 +3,7 @@ name: linux-ocp3
 on:
   pull_request:
     branches:
-    - travis-ci
+    - travis-ci-paula
 
 jobs:
   operator-and-bundles:
