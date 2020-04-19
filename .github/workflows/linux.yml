@@ -3,7 +3,7 @@ name: linux
 on:
   pull_request:
     branches:
-    - travis-ci
+    - travis-ci-susi
 
 jobs:
   operator-and-bundles:
@@ -105,4 +105,3 @@ jobs:
         build/ci/test/k8s/test-argocd
         build/ci/test/k8s/stop-minikube
 
-        
