@@ -8,7 +8,7 @@ on:
 jobs:
   operator-and-bundles:
     name: Operator & Bundles
-    runs-on: ubuntu-16.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.x
