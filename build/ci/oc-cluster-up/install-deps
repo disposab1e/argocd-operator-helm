@@ -34,9 +34,10 @@ sudo iptables -I INPUT 1 -p udp --dport 53 -j ACCEPT
 sudo iptables -I INPUT 1 -p udp --dport 8083 -j ACCEPT
 
 mkdir -p "$HOME/.occluster"
-oc cluster up --public-hostname=$(hostname -I  | cut -d" " -f2) --routing-suffix=$(hostname -I  | cut -d" " -f2).xip.io --loglevel=5
+#oc cluster up --public-hostname=$(hostname -I  | cut -d" " -f1) --routing-suffix=$(hostname -I  | cut -d" " -f1).xip.io --loglevel=5
 #oc cluster up --routing-suffix="127.0.0.1.nip.io
-oc cluster up --public-hostname=127.0.0.1 --routing-suffix=127.0.0.1.xip.io --loglevel=5
+oc cluster up 
+#--public-hostname=127.0.0.1 --routing-suffix=127.0.0.1.xip.io --loglevel=5
 
 # --forward-ports=true
 #--base-dir="$HOME/.occluster"
