@@ -15,15 +15,15 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: '3.x'
-    - name: Install Dependencies
-      run: build/ci/build/install-deps
-      env: 
-        OPERATOR_SDK_VERSION: v0.15.0
-    - name: Build and Push Operator and Bundles
-      run: build/ci/build/build-push
-      env: 
-        DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
-        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+#    - name: Install Dependencies
+#      run: build/ci/build/install-deps
+#      env: 
+#        OPERATOR_SDK_VERSION: v0.15.0
+#    - name: Build and Push Operator and Bundles
+#      run: build/ci/build/build-push
+#      env: 
+#        DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+#        DOCKER_USER: ${{ secrets.DOCKER_USER }}
   oc-cluster-up:
     name: oc-cluster-up
     runs-on: ubuntu-latest

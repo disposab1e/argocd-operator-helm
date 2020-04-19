@@ -12,8 +12,8 @@ sudo mv openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit/oc /usr/local/
 
 DOCKER_OPTS='--insecure-registry 172.30.0.0/16'
 
-systemctl daemon-reload
-systemctl restart docker
+sudo systemctl daemon-reload
+sudo systemctl restart docker
 
 oc cluster up
 
