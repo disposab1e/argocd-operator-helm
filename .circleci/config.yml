@@ -15,7 +15,7 @@ jobs:
           command: build/ci/build/install-deps
       - run:
           name: Build & Push
-          command: build/ci/build/install-deps
+          command: build/ci/build/build-push
 
 
 workflows:
