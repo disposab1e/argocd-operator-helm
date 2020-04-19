@@ -3,7 +3,7 @@ name: linux-ocp3
 on:
   pull_request:
     branches:
-    - travis-ci-paula
+    - travis-ci
 
 jobs:
   operator-and-bundles:
@@ -42,9 +42,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup OpenShift
-        uses: manusa/actions-setup-openshift@v1.0.2
+        uses: manusa/actions-setup-openshift@v1.0.3
         with:
           oc version: 'v3.11.0'
-#          github token: ${{ secrets.GITHUB_TOKEN }}
+          github token: ${{ secrets.GITHUB_TOKEN }}
       - name: Interact with the cluster
         run: oc cluster status
