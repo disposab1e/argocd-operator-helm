@@ -24,27 +24,17 @@ jobs:
 #      env: 
 #        DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
 #        DOCKER_USER: ${{ secrets.DOCKER_USER }}
- # oc-cluster-up:
- #   name: oc-cluster-up
- #   runs-on: ubuntu-latest
- #   needs: operator-and-bundles
- #   steps:
- #   - uses: actions/checkout@v2
- #   - name: cluster-up
- #     env: 
- #       MINIKUBE_VERSION: v1.9.2
- #       KUBERNETES_VERSION: v1.14.0
- #       OLM_VERSION: 0.13.0
- #     run: |
- #       build/ci/oc-cluster-up/install-deps
-  example:
-    name: Example OpenShift Cluster interaction
+  oc-cluster-up:
+    name: oc-cluster-up
     runs-on: ubuntu-latest
+    needs: operator-and-bundles
     steps:
-      - name: Setup OpenShift
-        uses: manusa/actions-setup-openshift@v1.0.3
-        with:
-          oc version: 'v3.11.0'
-          github token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Interact with the cluster
-        run: oc cluster status
+    - uses: actions/checkout@v2
+    - name: cluster-up
+      env: 
+        MINIKUBE_VERSION: v1.9.2
+        KUBERNETES_VERSION: v1.14.0
+        OLM_VERSION: 0.13.0
+      run: |
+        build/ci/oc-cluster-up/install-deps
+ 
