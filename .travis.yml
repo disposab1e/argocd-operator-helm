@@ -1,27 +1,111 @@
-dist: xenial
-language: python
+dist: bionic
 os: linux
-
+language: python
 python:
 - "3.6"
 
-if: branch = travis-ci
+env:
+  global:
+    - RELEASE_BRANCH=release-0.0.4
 
-before_install:
-- build/ci/install-deps
-
-install:
-- build/ci/start-minikube
-- build/ci/install-olm
+if: |
+  branch in (travis-ci, env(RELEASE_BRANCH)) AND \
+  fork = false AND \
+  type = push
 
 jobs:
   include:
-  - name: build-and-test
-    script:
-    - build/ci/build-dev
-    - build/ci/test-dev
-    - build/ci/release
-    - build/ci/test
-    - build/ci/install-argocd
-
-
+    - stage: build
+      name: operator-and-bundles
+      env: 
+        - OPERATOR_SDK_VERSION=v0.15.0
+      before_install:
+      - build/ci/build/install-deps
+      script:
+      - build/ci/build/build-push
+    - stage: test-k8s
+      name: k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2
+      env: 
+        - MINIKUBE_VERSION=v1.9.2
+        - KUBERNETES_VERSION=v1.14.0
+        - OLM_VERSION=0.13.0
+      before_install:
+      - build/ci/test/k8s/install-deps
+      install:
+      - build/ci/test/k8s/start-minikube
+      before_script:
+      - build/ci/test/k8s/install-olm
+      script:
+      - build/ci/test/k8s/generate
+      - build/ci/test/k8s/test-operator
+      - build/ci/test/k8s/test-argocd
+      after_script:
+      - build/ci/test/k8s/stop-minikube
+    - name: k8s_v1.16.0-olm_0.13.0-minikube_v1.9.2
+      env: 
+        - MINIKUBE_VERSION=v1.9.2
+        - KUBERNETES_VERSION=v1.16.0
+        - OLM_VERSION=0.13.0
+      before_install:
+      - build/ci/test/k8s/install-deps
+      install:
+      - build/ci/test/k8s/start-minikube
+      before_script:
+      - build/ci/test/k8s/install-olm
+      script:
+      - build/ci/test/k8s/generate
+      - build/ci/test/k8s/test-operator
+      - build/ci/test/k8s/test-argocd
+      after_script:
+      - build/ci/test/k8s/stop-minikube
+    - name: k8s_v1.17.0-olm_0.14.1-minikube_v1.9.2
+      env: 
+        - MINIKUBE_VERSION=v1.9.2
+        - KUBERNETES_VERSION=v1.17.0
+        - OLM_VERSION=0.14.1
+      before_install:
+      - build/ci/test/k8s/install-deps
+      install:
+      - build/ci/test/k8s/start-minikube
+      before_script:
+      - build/ci/test/k8s/install-olm
+      script:
+      - build/ci/test/k8s/generate
+      - build/ci/test/k8s/test-operator
+      - build/ci/test/k8s/test-argocd
+      after_script:
+      - build/ci/test/k8s/stop-minikube
+    - name: k8s_v1.18.0-olm_0.14.1-minikube_v1.9.2
+      env: 
+        - MINIKUBE_VERSION=v1.9.2
+        - KUBERNETES_VERSION=v1.18.0
+        - OLM_VERSION=0.14.1
+      before_install:
+      - build/ci/test/k8s/install-deps
+      install:
+      - build/ci/test/k8s/start-minikube
+      before_script:
+      - build/ci/test/k8s/install-olm
+      script:
+      - build/ci/test/k8s/generate
+      - build/ci/test/k8s/test-operator
+      - build/ci/test/k8s/test-argocd
+      after_script:
+      - build/ci/test/k8s/stop-minikube
+    - stage: test-ocp3
+      name: ocp3_3.11.0-olm_0.13.0-minishift_1.34.2   
+      env: 
+        - MINISHIFT_VERSION=1.34.2
+        - OLM_VERSION=0.13.0
+      before_install:
+      - build/ci/test/ocp3/install-deps
+      install:
+      - build/ci/test/ocp3/start-minishift
+      before_script:
+      - build/ci/test/ocp3/install-olm
+      script:
+      - build/ci/test/ocp3/generate
+      - build/ci/test/ocp3/test-operator
+      - build/ci/test/ocp3/test-argocd
+      after_script:
+      - build/ci/test/ocp3/stop-minishift

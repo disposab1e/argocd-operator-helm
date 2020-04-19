@@ -5,3 +5,6 @@ decription.md
 .DS_Store
 .circleci/config copy.yml
 
+build/ci/docker-login
+.travis_minikue.yml
+pull-secret

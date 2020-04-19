@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -e
+
+# Setup minikube environment
+echo "======================================================"
+echo "Setup minikube environment"
+echo "======================================================"
+export MINIKUBE_WANTUPDATENOTIFICATION=false
+
+# Start minikube and set context
+echo "======================================================"
+echo "Starting minikube ${MINIKUBE_VERSION} with kubernetes ${KUBERNETES_VERSION}"
+echo "======================================================"
+minikube start --memory=6144 --vm-driver=docker --kubernetes-version="${KUBERNETES_VERSION}" -p argocd
+#sudo chown -R $USER ${HOME}/.{mini,}kube
+kubectl config use-context argocd
