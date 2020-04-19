@@ -22,7 +22,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2
+          name: k8s-v1140-olm-0130-minikube-v192
           environment:
             MINIKUBE_VERSION: v1.9.2
             KUBERNETES_VERSION: v1.14.0
@@ -45,7 +45,7 @@ workflows:
           filters:
             branches:
               only: 0.0.5
-      - operator-and-bundles:
+      - k8s-v1140-olm-0130-minikube-v192:
           filters:
             branches:
               only: 0.0.5
