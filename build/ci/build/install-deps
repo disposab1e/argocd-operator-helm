@@ -21,3 +21,15 @@ echo "======================================================"
 echo "Installing Helm 3 (latest version)"
 echo "======================================================"
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
+
+# Kubeval
+echo "======================================================"
+echo "Installing kubeval (latest version)"
+echo "======================================================"
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+curl -Lo kubeval.tar.gz https://github.com/instrumenta/kubeval/releases/latest/download/kubeval-linux-amd64.tar.gz
+tar xf kubeval.tar.gz
+chmod +x kubeval
+sudo cp kubeval /usr/local/bin
+
