@@ -23,5 +23,5 @@ sudo systemctl restart docker
 sudo ufw disable
 
 mkdir -p "$HOME/.occluster"
-sudo oc cluster up --public-hostname=$(hostname -I  | cut -d" " -f1) --routing-suffix=$(hostname -I  | cut -d" " -f1).xip.io --loglevel=5 --base-dir="$HOME/.occluster"
-#oc cluster up --base-dir="$HOME/.occluster" --loglevel=5 
+#sudo oc cluster up --public-hostname=$(hostname -I  | cut -d" " -f1) --routing-suffix=$(hostname -I  | cut -d" " -f1).xip.io --loglevel=5 --base-dir="$HOME/.occluster"
+sudo oc cluster up --base-dir="$HOME/.occluster" --loglevel=5 
