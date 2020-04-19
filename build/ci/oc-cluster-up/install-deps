@@ -32,7 +32,7 @@ sudo ufw disable
 #mkdir -p "$HOME/.occluster"
 #oc cluster up --public-hostname=$(hostname -I  | cut -d" " -f1) --routing-suffix=$(hostname -I  | cut -d" " -f1).xip.io --loglevel=5 --base-dir="$HOME/.occluster"
 #oc cluster up --base-dir="$HOME/.occluster" --loglevel=5 
-
-sudo ./openshift etcd
-sudo ./openshift master
-sudo ./openshift network 
+sudo ./openshift --help
+sudo ./openshift start etcd
+sudo ./openshift start master
+sudo ./openshift start network 
