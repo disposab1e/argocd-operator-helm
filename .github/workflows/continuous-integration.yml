@@ -5,6 +5,9 @@ on:
     branches:
     - travis-ci
     - circle-ci
+  push:
+    branches:
+      - release-0.0.4
 
 jobs:
   operator-and-bundles:
