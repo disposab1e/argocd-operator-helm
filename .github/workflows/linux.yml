@@ -3,7 +3,7 @@ name: linux
 on:
   pull_request:
     branches:
-    - travis-ci-susi
+    - travis-ci
 
 jobs:
   operator-and-bundles:
