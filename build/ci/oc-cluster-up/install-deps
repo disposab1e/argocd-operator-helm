@@ -18,6 +18,8 @@ EOF
 
 sudo systemctl restart docker
 
+hostname -I
+
 oc cluster up
 
 
