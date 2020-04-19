@@ -11,7 +11,7 @@ env:
 if: |
   branch in (travis-ci, env(RELEASE_BRANCH)) AND \
   fork = false AND \
-  type in (pull_request, push) 
+  type = push 
 
 jobs:
   include:
