@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Build & Push
           command: build/ci/build/build-push
-  k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2:
+  k8s-v1140-olm-0130-minikube-v192:
     machine: 
       image: ubuntu-1604:201903-01
     steps:
