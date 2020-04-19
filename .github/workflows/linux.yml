@@ -7,7 +7,7 @@ on:
 
 jobs:
   operator-and-bundles:
-    name: Build & Push Operator and Bundles
+    name: Operator & Bundles
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -104,3 +104,5 @@ jobs:
         build/ci/test/k8s/test-operator
         build/ci/test/k8s/test-argocd
         build/ci/test/k8s/stop-minikube
+
+        
