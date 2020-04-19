@@ -18,8 +18,7 @@ EOF
 
 sudo systemctl restart docker
 
-hostname -I
 
-oc cluster up
+oc cluster up --public-hostname=$(hostname -I  | cut -d" " -f1) --routing-suffix=$(hostname -I  | cut -d" " -f1).xip.io
 
 
