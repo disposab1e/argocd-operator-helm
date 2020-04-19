@@ -20,6 +20,9 @@ EOF
 
 sudo systemctl restart docker
 
+sudo apt update
+sudo apt install socat
+
 sudo ufw disable
 sudo sysctl net.ipv4.ip_forward
 sudo sysctl -w net.ipv4.ip_forward=1
