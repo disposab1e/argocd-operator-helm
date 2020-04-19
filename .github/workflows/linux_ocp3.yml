@@ -41,8 +41,6 @@ jobs:
     name: Example OpenShift Cluster interaction
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
       - name: Setup OpenShift
         uses: manusa/actions-setup-openshift@v1.0.2
         with:
