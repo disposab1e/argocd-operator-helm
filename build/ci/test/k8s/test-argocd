@@ -13,8 +13,8 @@ sleep 10
 kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=180s
 kubectl apply -f build/_output/guides/ci/k8s/olm/operator-group.yaml
 kubectl apply -f build/_output/guides/ci/k8s/olm/subscription.yaml
-echo "Wait 90s"
-sleep 90
+echo "Wait 120s"
+sleep 120
 kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=180s
 kubectl rollout status -w deployment/argocd-operator-helm -n argocd
 echo "Install example Argo CD instance"
