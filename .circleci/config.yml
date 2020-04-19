@@ -25,4 +25,4 @@ workflows:
       - operator-and-bundles:
           filters:
             branches:
-              only: circle-ci
+              only: 0.0.5
