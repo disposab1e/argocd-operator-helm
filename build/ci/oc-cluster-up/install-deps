@@ -26,6 +26,7 @@ sudo systemctl enable firewalld
 sudo systemctl start firewalld
 sudo firewall-cmd --state
 
+docker network inspect -f "{{range .IPAM.Config }}{{ .Subnet }}{{end}}" bridge
 
 sudo firewall-cmd --permanent --new-zone dockerc
 sudo firewall-cmd --permanent --zone dockerc --add-source 172.17.0.0/16
