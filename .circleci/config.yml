@@ -46,6 +46,8 @@ workflows:
             branches:
               only: 0.0.5
       - k8s-v1140-olm-0130-minikube-v192:
+          requires:
+            - operator-and-bundles
           filters:
             branches:
               only: 0.0.5
