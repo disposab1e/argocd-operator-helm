@@ -45,7 +45,7 @@ jobs:
         build/ci/test/k8s/test-argocd
         build/ci/test/k8s/stop-minikube
   k8s-v1160-olm-0130-minikube-v192:
-    name: k8s-v1160-olm-0130-minikube-v192
+    name: Kubernetes 1.16.0 with OLM 0.13.0 (minikube)
     runs-on: ubuntu-latest
     needs: operator-and-bundles
     steps:
@@ -65,7 +65,7 @@ jobs:
         build/ci/test/k8s/test-argocd
         build/ci/test/k8s/stop-minikube
   k8s-v1170-olm-0141-minikube-v192:
-    name: k8s-v1170-olm-0141-minikube-v192
+    name: Kubernetes 1.17.0 with OLM 0.14.1 (minikube)
     runs-on: ubuntu-latest
     needs: operator-and-bundles
     steps:
@@ -85,7 +85,7 @@ jobs:
         build/ci/test/k8s/test-argocd
         build/ci/test/k8s/stop-minikube
   k8s-v1180-olm-0141-minikube-v192:
-    name: k8s-v1180-olm-0141-minikube-v192
+    name: Kubernetes 1.18.0 with OLM 0.14.1 (minikube)
     runs-on: ubuntu-latest
     needs: operator-and-bundles
     steps:
