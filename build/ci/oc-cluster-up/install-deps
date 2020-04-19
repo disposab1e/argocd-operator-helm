@@ -29,7 +29,7 @@ sudo sysctl -w net.ipv4.ip_forward=1
 sudo sysctl net.ipv4.ip_forward
 
 mkdir -p "$HOME/.occluster"
-oc cluster up --public-hostname=$(hostname -I  | cut -d" " -f1) --routing-suffix=$(hostname -I  | cut -d" " -f1).xip.io --loglevel=5
+oc cluster up --public-hostname=$(hostname -I  | cut -d" " -f2) --routing-suffix=$(hostname -I  | cut -d" " -f2).xip.io --loglevel=5
 #oc cluster up --routing-suffix="127.0.0.1.nip.io
 
 # --forward-ports=true
