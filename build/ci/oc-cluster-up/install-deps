@@ -26,5 +26,6 @@ sudo sysctl -w net.ipv4.ip_forward=1
 sudo sysctl net.ipv4.ip_forward
 
 mkdir -p "$HOME/.occluster"
-#sudo oc cluster up --public-hostname=$(hostname -I  | cut -d" " -f1) --routing-suffix=$(hostname -I  | cut -d" " -f1).xip.io --loglevel=5 --base-dir="$HOME/.occluster"
-sudo oc cluster up 
+sudo oc cluster up --public-hostname=$(hostname -I  | cut -d" " -f1) --routing-suffix=$(hostname -I  | cut -d" " -f1).xip.io --loglevel=5 --forward-ports=true
+#--base-dir="$HOME/.occluster"
+#sudo oc cluster up 
