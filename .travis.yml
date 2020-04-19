@@ -92,4 +92,3 @@ jobs:
       - build/ci/test/ocp3/test-argocd
       after_script:
       - build/ci/test/ocp3/stop-minishift
-
