@@ -79,22 +79,30 @@ workflows:
       - operator-and-bundles:
           filters:
             branches:
-              only: 0.0.5
+              only: 
+                - circle-ci
+                - release-0.0.4
       - k8s-v1140-olm-0130-minikube-v192:
           requires:
             - operator-and-bundles
           filters:
             branches:
-              only: 0.0.5
+              only: 
+                - circle-ci
+                - release-0.0.4
       - k8s-v1170-olm-0141-minikube-v192:
           requires:
             - operator-and-bundles
           filters:
             branches:
-              only: 0.0.5
+              only: 
+                - circle-ci
+                - release-0.0.4
       - k8s-v1180-olm-0141-minikube-v192:
           requires:
             - operator-and-bundles
           filters:
             branches:
-              only: 0.0.5
+              only: 
+                - circle-ci
+                - release-0.0.4
