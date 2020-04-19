@@ -16,12 +16,35 @@ jobs:
       - run:
           name: Build & Push
           command: build/ci/build/build-push
+  k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2:
+    machine: 
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run:
+          name: k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2
+          environment:
+            MINIKUBE_VERSION: v1.9.2
+            KUBERNETES_VERSION: v1.14.0
+            OLM_VERSION: 0.13.0
+          command: |
+            build/ci/test/k8s/install-deps
+            build/ci/test/k8s/start-minikube
+            build/ci/test/k8s/install-olm
+            build/ci/test/k8s/generate
+            build/ci/test/k8s/test-operator
+            build/ci/test/k8s/test-argocd
+            build/ci/test/k8s/stop-minikube
 
 
 workflows:
   version: 2
   build:
     jobs:
+      - operator-and-bundles:
+          filters:
+            branches:
+              only: 0.0.5
       - operator-and-bundles:
           filters:
             branches:
