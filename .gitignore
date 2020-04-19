@@ -1,10 +1,4 @@
-work.md
-decription.md
 /docs/build/
 /build/_output
 .DS_Store
-.circleci/config copy.yml
 
-build/ci/docker-login
-.travis_minikue.yml
-pull-secret
