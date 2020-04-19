@@ -1,0 +1,91 @@
+name: continuous-integration
+
+on:
+  pull_request:
+    branches:
+    - travis-ci
+    - circle-ci
+  push:
+    branches:
+      - release-0.0.4
+
+jobs:
+  operator-and-bundles:
+    name: Operator & Bundles
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.x'
+    - name: Install Dependencies
+      run: build/ci/build/install-deps
+      env: 
+        OPERATOR_SDK_VERSION: v0.15.0
+    - name: Build and Push Operator and Bundles
+      run: build/ci/build/build-push
+      env: 
+        DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+        DOCKER_USER: ${{ secrets.DOCKER_USER }}
+  k8s-v1140-olm-0130-minikube-v192:
+    name: Kubernetes 1.14.0 with OLM 0.13.0 (minikube)
+    runs-on: ubuntu-latest
+    needs: operator-and-bundles
+    steps:
+    - uses: actions/checkout@v2
+    - name: k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2
+      env: 
+        MINIKUBE_VERSION: v1.9.2
+        KUBERNETES_VERSION: v1.14.0
+        OLM_VERSION: 0.13.0
+      run: |
+        build/ci/test/k8s/install-deps
+        build/ci/test/k8s/start-minikube
+        build/ci/test/k8s/install-olm
+        build/ci/test/k8s/generate
+        build/ci/test/k8s/generate
+        build/ci/test/k8s/test-operator
+        build/ci/test/k8s/test-argocd
+        build/ci/test/k8s/stop-minikube
+  k8s-v1170-olm-0141-minikube-v192:
+    name: Kubernetes 1.17.0 with OLM 0.14.1 (minikube)
+    runs-on: ubuntu-latest
+    needs: operator-and-bundles
+    steps:
+    - uses: actions/checkout@v2
+    - name: k8s_v1.17.0-olm_0.14.1-minikube_v1.9.2
+      env: 
+        MINIKUBE_VERSION: v1.9.2
+        KUBERNETES_VERSION: v1.17.0
+        OLM_VERSION: 0.14.1
+      run: |
+        build/ci/test/k8s/install-deps
+        build/ci/test/k8s/start-minikube
+        build/ci/test/k8s/install-olm
+        build/ci/test/k8s/generate
+        build/ci/test/k8s/generate
+        build/ci/test/k8s/test-operator
+        build/ci/test/k8s/test-argocd
+        build/ci/test/k8s/stop-minikube
+  k8s-v1180-olm-0141-minikube-v192:
+    name: Kubernetes 1.18.0 with OLM 0.14.1 (minikube)
+    runs-on: ubuntu-latest
+    needs: operator-and-bundles
+    steps:
+    - uses: actions/checkout@v2
+    - name: k8s_v1.18.0-olm_0.14.1-minikube_v1.9.2
+      env: 
+        MINIKUBE_VERSION: v1.9.2
+        KUBERNETES_VERSION: v1.18.0
+        OLM_VERSION: 0.14.1
+      run: |
+        build/ci/test/k8s/install-deps
+        build/ci/test/k8s/start-minikube
+        build/ci/test/k8s/install-olm
+        build/ci/test/k8s/generate
+        build/ci/test/k8s/generate
+        build/ci/test/k8s/test-operator
+        build/ci/test/k8s/test-argocd
+        build/ci/test/k8s/stop-minikube
+
