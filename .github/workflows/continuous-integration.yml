@@ -5,9 +5,15 @@ on:
     branches:
     - travis-ci
     - circle-ci
+    paths:
+    - '.github/workflows/**'
+    - 'deploy/**'
+    - 'build/**'
+    - 'helm-charts/**'
+
   push:
     branches:
-      - release-0.0.4
+      - release-0.0.5
 
 jobs:
   operator-and-bundles:
@@ -22,7 +28,7 @@ jobs:
     - name: Install Dependencies
       run: build/ci/build/install-deps
       env: 
-        OPERATOR_SDK_VERSION: v0.15.0
+        OPERATOR_SDK_VERSION: v0.17.0
     - name: Build and Push Operator and Bundles
       run: build/ci/build/build-push
       env: 
@@ -88,4 +94,3 @@ jobs:
         build/ci/test/k8s/test-operator
         build/ci/test/k8s/test-argocd
         build/ci/test/k8s/stop-minikube
-
