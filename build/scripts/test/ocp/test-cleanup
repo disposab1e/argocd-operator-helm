@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -e
+
+echo "======================================================"
+echo "Remove Argo CD installation"
+echo "======================================================"
+oc delete ArgoCD argocd -n argocd
+oc delete crd appprojects.argoproj.io
+oc delete crd applications.argoproj.io
+oc delete crd workflowtemplates.argoproj.io
+oc delete crd workflows.argoproj.io
+
+echo "======================================================"
+echo "Remove Operator"
+echo "======================================================"
+if [ "$DISTRIBUTION" == "ocp4" ]; then
+    oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/olm/subscription.yaml
+    oc delete csvs --all -n argocd
+    oc delete crd argocds.argoproj.io
+    oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/olm/catalog-source.yaml
+    oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/olm/operator-group.yaml
+    oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/olm/namespace.yaml
+else
+    oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/deployment.yaml
+    oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/crd.yaml
+    oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/role-binding.yaml
+    oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/role.yaml
+    oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/service-account.yaml
+    oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/namespace.yaml
+fi

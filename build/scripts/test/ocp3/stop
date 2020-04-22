@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+echo "======================================================"
+echo "Stopping minishift ${MINISHIFT_VERSION}"
+echo "======================================================"
+minishift stop
+minishift delete --force

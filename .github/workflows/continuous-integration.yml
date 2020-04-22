@@ -26,11 +26,14 @@ jobs:
       with:
         python-version: '3.x'
     - name: Install Dependencies
-      run: build/ci/build/install-deps
+      run: scripts/build/install-deps
       env: 
         OPERATOR_SDK_VERSION: v0.17.0
     - name: Build and Push Operator and Bundles
-      run: build/ci/build/build-push
+      run: |
+        scripts/build/build
+        scripts/build/login
+        scripts/build/push
       env: 
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
@@ -45,15 +48,18 @@ jobs:
         MINIKUBE_VERSION: v1.9.2
         KUBERNETES_VERSION: v1.14.0
         OLM_VERSION: 0.13.0
+        ENVIRONMENT: ci
+        DISTRIBUTION: k8s
+        MEMORY: 6144
       run: |
-        build/ci/test/k8s/install-deps
-        build/ci/test/k8s/start-minikube
-        build/ci/test/k8s/install-olm
-        build/ci/test/k8s/generate
-        build/ci/test/k8s/generate
-        build/ci/test/k8s/test-operator
-        build/ci/test/k8s/test-argocd
-        build/ci/test/k8s/stop-minikube
+        scripts/test/k8s/install-deps
+        scripts/build/generate
+        scripts/test/k8s/start
+        scripts/test/common/install-olm
+        scripts/test/k8s/test-operator
+        scripts/test/k8s/test-argocd
+        scripts/test/k8s/test-cleanup
+        scripts/test/k8s/stop
   k8s-v1170-olm-0141-minikube-v192:
     name: Kubernetes 1.17.0 with OLM 0.14.1 (minikube)
     runs-on: ubuntu-latest
@@ -65,15 +71,18 @@ jobs:
         MINIKUBE_VERSION: v1.9.2
         KUBERNETES_VERSION: v1.17.0
         OLM_VERSION: 0.14.1
+        ENVIRONMENT: ci
+        DISTRIBUTION: k8s
+        MEMORY: 6144
       run: |
-        build/ci/test/k8s/install-deps
-        build/ci/test/k8s/start-minikube
-        build/ci/test/k8s/install-olm
-        build/ci/test/k8s/generate
-        build/ci/test/k8s/generate
-        build/ci/test/k8s/test-operator
-        build/ci/test/k8s/test-argocd
-        build/ci/test/k8s/stop-minikube
+        scripts/test/k8s/install-deps
+        scripts/build/generate
+        scripts/test/k8s/start
+        scripts/test/common/install-olm
+        scripts/test/k8s/test-operator
+        scripts/test/k8s/test-argocd
+        scripts/test/k8s/test-cleanup
+        scripts/test/k8s/stop
   k8s-v1180-olm-0141-minikube-v192:
     name: Kubernetes 1.18.0 with OLM 0.14.1 (minikube)
     runs-on: ubuntu-latest
@@ -85,12 +94,15 @@ jobs:
         MINIKUBE_VERSION: v1.9.2
         KUBERNETES_VERSION: v1.18.0
         OLM_VERSION: 0.14.1
+        ENVIRONMENT: ci
+        DISTRIBUTION: k8s
+        MEMORY: 6144
       run: |
-        build/ci/test/k8s/install-deps
-        build/ci/test/k8s/start-minikube
-        build/ci/test/k8s/install-olm
-        build/ci/test/k8s/generate
-        build/ci/test/k8s/generate
-        build/ci/test/k8s/test-operator
-        build/ci/test/k8s/test-argocd
-        build/ci/test/k8s/stop-minikube
+        scripts/test/k8s/install-deps
+        scripts/build/generate
+        scripts/test/k8s/start
+        scripts/test/common/install-olm
+        scripts/test/k8s/test-operator
+        scripts/test/k8s/test-argocd
+        scripts/test/k8s/test-cleanup
+        scripts/test/k8s/stop

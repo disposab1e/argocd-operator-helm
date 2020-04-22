@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+set -e
+
+# Test with operator olm installation
+echo "======================================================"
+echo "Install and Test Argo CD installation"
+echo "======================================================"
+echo "Install Operator with olm installation"
+kubectl apply -f build/_output/guides/${ENVIRONMENT}/k8s/olm/namespace.yaml
+kubectl apply -f build/_output/guides/${ENVIRONMENT}/k8s/olm/catalog-source.yaml
+echo "Wait 10s"
+sleep 10
+kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=180s
+kubectl apply -f build/_output/guides/${ENVIRONMENT}/k8s/olm/operator-group.yaml
+kubectl apply -f build/_output/guides/${ENVIRONMENT}/k8s/olm/subscription.yaml
+echo "Wait 60s"
+sleep 60
+kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=180s
+kubectl rollout status -w deployment/argocd-operator-helm -n argocd
+echo "Install example Argo CD instance"
+kubectl apply -f examples/k8s.yaml
+echo "Wait 10s"
+sleep 10
+kubectl rollout status -w deployment/argocd-application-controller -n argocd
+kubectl rollout status -w deployment/argocd-dex-server -n argocd
+kubectl rollout status -w deployment/argocd-redis -n argocd
+kubectl rollout status -w deployment/argocd-repo-server -n argocd
+kubectl rollout status -w deployment/argocd-server -n argocd

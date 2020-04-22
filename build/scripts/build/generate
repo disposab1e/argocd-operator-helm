@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -e
+
+# Works in local, github, travisci and circleci environments :-)
+cd build/
+
+# Generate yaml's for manual operator installation
+echo "======================================================"
+echo "Generate yaml's for manual operator installation"
+echo "======================================================"
+make guide-generate-${DISTRIBUTION}-manual-${ENVIRONMENT}
+
+# Generate yaml's for operator installation with olm
+echo "======================================================"
+echo "Generate yaml's for olm operator installation"
+echo "======================================================"
+make guide-generate-${DISTRIBUTION}-olm-${ENVIRONMENT}
+
+# Go back ;-)
+cd ../
