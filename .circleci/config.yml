@@ -9,6 +9,7 @@ jobs:
           name: Build & Publish operator and bundles
           environment:
             OPERATOR_SDK_VERSION: v0.17.0
+            ENVIRONMENT: ci
           command: |
             pyenv global 3.6.5
             build/scripts/build/install-deps
