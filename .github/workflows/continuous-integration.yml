@@ -35,6 +35,7 @@ jobs:
         build/scripts/build/login
         build/scripts/build/push
       env: 
+        ENVIRONMENT: ci
         DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
   k8s-v1140-olm-0130-minikube-v192:
