@@ -86,7 +86,6 @@ jobs:
             build/scripts/test/k8s/test-cleanup
             build/scripts/test/k8s/stop
 
-
 workflows:
   version: 2
   continuous-integration:

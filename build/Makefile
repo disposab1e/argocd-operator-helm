@@ -182,7 +182,6 @@ operator-build-dev:
 operator-push-dev:
 	docker push ${REGISTRY_DEV}/${NAMESPACE}/${NAME}:v${VERSION}
 
-
 ########################################################
 # DEV - Bundle - k8s
 ########################################################
