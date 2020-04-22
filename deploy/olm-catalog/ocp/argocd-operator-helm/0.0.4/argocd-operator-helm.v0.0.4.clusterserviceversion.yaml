@@ -117,7 +117,7 @@ metadata:
               "name": "dex-server",
               "image": {
                 "repository": "quay.io/dexidp/dex",
-                "tag": "latest",
+                "tag": "v2.22.0",
                 "imagePullPolicy": "IfNotPresent"
               },
               "initImage": {
