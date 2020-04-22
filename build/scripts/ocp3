@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -e
+
+export ENVIRONMENT=dev
+export DISTRIBUTION=ocp3
+export MINISHIFT_VERSION=1.34.2
+export MEMORY=12000
+
+export OLM_VERSION=0.13.0
+
+build/scripts/build/build
+build/scripts/build/push
+
+build/scripts/build/generate
+
+build/scripts/test/${DISTRIBUTION}/start
+
+build/scripts/test/common/install-olm
+build/scripts/test/ocp/test-operator
+build/scripts/test/ocp/test-argocd
+
+#build/scripts/test/ocp/test-cleanup
+#build/scripts/test/${DISTRIBUTION}/stop
+

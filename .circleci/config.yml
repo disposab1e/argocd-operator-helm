@@ -8,11 +8,13 @@ jobs:
       - run:
           name: Build & Publish operator and bundles
           environment:
-            OPERATOR_SDK_VERSION: v0.15.0
+            OPERATOR_SDK_VERSION: v0.17.0
           command: |
             pyenv global 3.6.5
-            build/ci/build/install-deps
-            build/ci/build/build-push
+            build/scripts/build/install-deps
+            build/scripts/build/build
+            build/scripts/build/login
+            build/scripts/build/push
   k8s-v1140-olm-0130-minikube-v192:
     machine: 
       image: ubuntu-1604:201903-01
@@ -24,14 +26,18 @@ jobs:
             MINIKUBE_VERSION: v1.9.2
             KUBERNETES_VERSION: v1.14.0
             OLM_VERSION: 0.13.0
+            ENVIRONMENT: ci
+            DISTRIBUTION: k8s
+            MEMORY: "6144"
           command: |
-            build/ci/test/k8s/install-deps
-            build/ci/test/k8s/start-minikube
-            build/ci/test/k8s/install-olm
-            build/ci/test/k8s/generate
-            build/ci/test/k8s/test-operator
-            build/ci/test/k8s/test-argocd
-            build/ci/test/k8s/stop-minikube
+            build/scripts/test/k8s/install-deps
+            build/scripts/build/generate
+            build/scripts/test/k8s/start
+            build/scripts/test/common/install-olm
+            build/scripts/test/k8s/test-operator
+            build/scripts/test/k8s/test-argocd
+            build/scripts/test/k8s/test-cleanup
+            build/scripts/test/k8s/stop
   k8s-v1170-olm-0141-minikube-v192:
     machine: 
       image: ubuntu-1604:201903-01
@@ -43,14 +49,18 @@ jobs:
             MINIKUBE_VERSION: v1.9.2
             KUBERNETES_VERSION: v1.17.0
             OLM_VERSION: 0.14.1
+            ENVIRONMENT: ci
+            DISTRIBUTION: k8s
+            MEMORY: "6144"
           command: |
-            build/ci/test/k8s/install-deps
-            build/ci/test/k8s/start-minikube
-            build/ci/test/k8s/install-olm
-            build/ci/test/k8s/generate
-            build/ci/test/k8s/test-operator
-            build/ci/test/k8s/test-argocd
-            build/ci/test/k8s/stop-minikube
+            build/scripts/test/k8s/install-deps
+            build/scripts/build/generate
+            build/scripts/test/k8s/start
+            build/scripts/test/common/install-olm
+            build/scripts/test/k8s/test-operator
+            build/scripts/test/k8s/test-argocd
+            build/scripts/test/k8s/test-cleanup
+            build/scripts/test/k8s/stop
   k8s-v1180-olm-0141-minikube-v192:
     machine: 
       image: ubuntu-1604:201903-01
@@ -62,19 +72,22 @@ jobs:
             MINIKUBE_VERSION: v1.9.2
             KUBERNETES_VERSION: v1.18.0
             OLM_VERSION: 0.14.1
+            ENVIRONMENT: ci
+            DISTRIBUTION: k8s
+            MEMORY: "6144"
           command: |
-            build/ci/test/k8s/install-deps
-            build/ci/test/k8s/start-minikube
-            build/ci/test/k8s/install-olm
-            build/ci/test/k8s/generate
-            build/ci/test/k8s/test-operator
-            build/ci/test/k8s/test-argocd
-            build/ci/test/k8s/stop-minikube
-
+            build/scripts/test/k8s/install-deps
+            build/scripts/build/generate
+            build/scripts/test/k8s/start
+            build/scripts/test/common/install-olm
+            build/scripts/test/k8s/test-operator
+            build/scripts/test/k8s/test-argocd
+            build/scripts/test/k8s/test-cleanup
+            build/scripts/test/k8s/stop
 
 workflows:
   version: 2
-  build-and-test:
+  continuous-integration:
     jobs:
       - operator-and-bundles:
           filters:

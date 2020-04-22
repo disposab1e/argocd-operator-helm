@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+export ENVIRONMENT=dev
+export DISTRIBUTION=k8s
+
+build/scripts/test/${DISTRIBUTION}/test-cleanup
+build/scripts/test/${DISTRIBUTION}/stop

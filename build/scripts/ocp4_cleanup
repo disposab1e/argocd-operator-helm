@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+export ENVIRONMENT=dev
+export DISTRIBUTION=ocp4
+
+build/scripts/test/ocp/test-cleanup
+build/scripts/test/${DISTRIBUTION}/stop
