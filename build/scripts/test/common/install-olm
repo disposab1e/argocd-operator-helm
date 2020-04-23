@@ -1,26 +1,32 @@
 #!/usr/bin/env bash
 set -e
 
+COMMAND=oc
+
+if [ "$DISTRIBUTION" == "k8s" ]; then
+    COMMAND=kubectl
+fi
+
 # Operator Lifecycle Manager
 echo "======================================================"
 echo "Installing Operator Lifecycle Manager ${OLM_VERSION}"
 echo "======================================================"
 
-kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/crds.yaml
+${COMMAND} apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/crds.yaml
 sleep 20
-kubectl apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/olm.yaml
+${COMMAND} apply -f https://github.com/operator-framework/operator-lifecycle-manager/releases/download/${OLM_VERSION}/olm.yaml
 
 
 # wait for deployments to be ready
-kubectl rollout status -w deployment/olm-operator --namespace=olm
-kubectl rollout status -w deployment/catalog-operator --namespace=olm
+${COMMAND} rollout status -w deployment/olm-operator --namespace=olm
+${COMMAND} rollout status -w deployment/catalog-operator --namespace=olm
 
 sleep 60
 
-kubectl rollout status -w deployment/packageserver --namespace=olm
+${COMMAND} rollout status -w deployment/packageserver --namespace=olm
 
 # Delete "operatorhubio-catalog" cause we provide our own catalogue
 echo "======================================================"
 echo "Delete Community Catalogue from operatohub.io"
 echo "======================================================"
-kubectl delete catalogsource operatorhubio-catalog -n olm
+${COMMAND} delete catalogsource operatorhubio-catalog -n olm
