@@ -5,7 +5,11 @@ COMMAND=oc
 
 if [ "$DISTRIBUTION" == "k8s" ]; then
     COMMAND=kubectl
+else
+    eval $(minishift oc-env)
 fi
+
+
 
 # Operator Lifecycle Manager
 echo "======================================================"
