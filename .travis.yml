@@ -26,70 +26,70 @@ jobs:
       - build/scripts/build/build
       - build/scripts/build/login
       - build/scripts/build/push
-    - stage: test-k8s
-      name: k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2
-      env: 
-        - MINIKUBE_VERSION=v1.9.2
-        - KUBERNETES_VERSION=v1.14.0
-        - OLM_VERSION=0.13.0
-        - ENVIRONMENT=ci
-        - DISTRIBUTION=k8s
-        - MEMORY=6144
-      before_install:
-      - build/scripts/test/k8s/install-deps
-      install:
-      - build/scripts/test/k8s/start
-      before_script:
-      - build/scripts/test/common/install-olm
-      script:
-      - build/scripts/build/generate
-      - build/scripts/test/k8s/test-operator
-      - build/scripts/test/k8s/test-argocd
-      - build/scripts/test/k8s/test-cleanup
-      after_script:
-      - build/scripts/test/k8s/stop
-    - name: k8s_v1.17.0-olm_0.14.1-minikube_v1.9.2
-      env: 
-        - MINIKUBE_VERSION=v1.9.2
-        - KUBERNETES_VERSION=v1.17.0
-        - OLM_VERSION=0.14.1
-        - ENVIRONMENT=ci
-        - DISTRIBUTION=k8s
-        - MEMORY=6144
-      before_install:
-      - build/scripts/test/k8s/install-deps
-      install:
-      - build/scripts/test/k8s/start
-      before_script:
-      - build/scripts/test/common/install-olm
-      script:
-      - build/scripts/build/generate
-      - build/scripts/test/k8s/test-operator
-      - build/scripts/test/k8s/test-argocd
-      - build/scripts/test/k8s/test-cleanup
-      after_script:
-      - build/scripts/test/k8s/stop
-    - name: k8s_v1.18.0-olm_0.14.1-minikube_v1.9.2
-      env: 
-        - MINIKUBE_VERSION=v1.9.2
-        - KUBERNETES_VERSION=v1.18.0
-        - OLM_VERSION=0.14.1
-        - ENVIRONMENT=ci
-        - DISTRIBUTION=k8s
-        - MEMORY=6144
-      before_install:
-      - build/scripts/test/k8s/install-deps
-      install:
-      - build/scripts/test/k8s/start
-      before_script:
-      - build/scripts/test/common/install-olm
-      script:
-      - build/scripts/build/generate
-      - build/scripts/test/k8s/test-operator
-      - build/scripts/test/k8s/test-argocd
-      - build/scripts/test/k8s/test-cleanup
-      after_script:
-      - build/scripts/test/k8s/stop
+#    - stage: test-k8s
+#      name: k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2
+#      env: 
+#        - MINIKUBE_VERSION=v1.9.2
+#        - KUBERNETES_VERSION=v1.14.0
+#        - OLM_VERSION=0.13.0
+#        - ENVIRONMENT=ci
+#        - DISTRIBUTION=k8s
+#        - MEMORY=6144
+#      before_install:
+#      - build/scripts/test/k8s/install-deps
+#      install:
+#      - build/scripts/test/k8s/start
+#      before_script:
+#      - build/scripts/test/common/install-olm
+#      script:
+#      - build/scripts/build/generate
+#      - build/scripts/test/k8s/test-operator
+#      - build/scripts/test/k8s/test-argocd
+#      - build/scripts/test/k8s/test-cleanup
+#      after_script:
+#      - build/scripts/test/k8s/stop
+#    - name: k8s_v1.17.0-olm_0.14.1-minikube_v1.9.2
+#      env: 
+#        - MINIKUBE_VERSION=v1.9.2
+#        - KUBERNETES_VERSION=v1.17.0
+#        - OLM_VERSION=0.14.1
+#        - ENVIRONMENT=ci
+#        - DISTRIBUTION=k8s
+#        - MEMORY=6144
+#      before_install:
+#      - build/scripts/test/k8s/install-deps
+#      install:
+#      - build/scripts/test/k8s/start
+#      before_script:
+#      - build/scripts/test/common/install-olm
+#      script:
+#      - build/scripts/build/generate
+#      - build/scripts/test/k8s/test-operator
+#      - build/scripts/test/k8s/test-argocd
+#      - build/scripts/test/k8s/test-cleanup
+#      after_script:
+#      - build/scripts/test/k8s/stop
+#    - name: k8s_v1.18.0-olm_0.14.1-minikube_v1.9.2
+#      env: 
+#        - MINIKUBE_VERSION=v1.9.2
+#        - KUBERNETES_VERSION=v1.18.0
+#        - OLM_VERSION=0.14.1
+#        - ENVIRONMENT=ci
+#        - DISTRIBUTION=k8s
+#        - MEMORY=6144
+#      before_install:
+#      - build/scripts/test/k8s/install-deps
+#      install:
+#      - build/scripts/test/k8s/start
+#      before_script:
+#      - build/scripts/test/common/install-olm
+#      script:
+#      - build/scripts/build/generate
+#     - build/scripts/test/k8s/test-operator
+#      - build/scripts/test/k8s/test-argocd
+#      - build/scripts/test/k8s/test-cleanup
+#      after_script:
+#      - build/scripts/test/k8s/stop
     - stage: test-ocp3
       name: ocp3_3.11.0-olm_0.13.0-minishift_1.34.2   
       env: 
