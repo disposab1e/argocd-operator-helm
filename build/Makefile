@@ -100,10 +100,10 @@ bundle-generate-ocp-ci:
 	cp -r ${BUNDLE_DIR}/* ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/
 	mkdir -p ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests
 	cp -r ${BUNDLE_MANIFEST_BASE_DIR}/ocp/${NAME} ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/
-	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
-	sed 's/${REGISTRY_DEV}/${REGISTRY}/g' ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 

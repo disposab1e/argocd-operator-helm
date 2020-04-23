@@ -23,37 +23,6 @@ oc apply -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/olm/operator-gro
 oc apply -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/olm/subscription.yaml
 echo "Wait 60s"
 sleep 60
-
-oc describe subscription argocd-operator-helm -n argocd
-oc describe catalogsource argocd-catalog -n olm
-sleep 10
-oc describe subscription argocd-operator-helm -n argocd
-oc describe catalogsource argocd-catalog -n olm
-sleep 10
-oc describe subscription argocd-operator-helm -n argocd
-oc describe catalogsource argocd-catalog -n olm
-sleep 10
-
-oc describe deployment/argocd-operator-helm -n argocd
-oc describe pod argocd-operator-helm -n argocd
-sleep 10
-oc describe deployment/argocd-operator-helm -n argocd
-oc describe pod argocd-operator-helm -n argocd
-sleep 10
-oc describe deployment/argocd-operator-helm -n argocd
-oc describe pod argocd-operator-helm -n argocd
-sleep 10
-oc describe deployment/argocd-operator-helm -n argocd
-oc describe pod argocd-operator-helm -n argocd
-sleep 10
-oc describe deployment/argocd-operator-helm -n argocd
-oc describe pod argocd-operator-helm -n argocd
-sleep 10
-oc describe deployment/argocd-operator-helm -n argocd
-oc describe pod argocd-operator-helm -n argocd
-sleep 10
-
-
 oc wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=120s
 oc rollout status -w deployment/argocd-operator-helm -n argocd
 echo "Remove olm installation"
