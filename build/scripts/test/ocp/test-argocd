@@ -32,8 +32,8 @@ else
     oc apply -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/role-binding.yaml
     oc apply -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/crd.yaml
     oc apply -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/deployment.yaml
-    echo "Wait 20s"
-    sleep 20
+    echo "Wait 60s"
+    sleep 60
     oc wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=120s
     oc rollout status -w deployment/argocd-operator-helm -n argocd
 fi
