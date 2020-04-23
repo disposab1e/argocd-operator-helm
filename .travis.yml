@@ -6,7 +6,7 @@ python:
 
 env:
   global:
-    - RELEASE_BRANCH=release-0.0.5
+    - RELEASE_BRANCH=release-0.0.4
 
 if: |
   branch in (travis-ci, env(RELEASE_BRANCH)) AND \
