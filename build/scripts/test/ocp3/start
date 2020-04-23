@@ -22,10 +22,14 @@ minishift start
 eval $(minishift oc-env)
 oc login -u admin -p admin
 
-#echo "======================================================"
-#echo "Remove openshift-web-console to free some memory"
-#echo "======================================================"
-#oc delete deployment.apps/openshift-web-console-operator -n openshift-core-operators
-#sleep 20
-#oc delete deployment.apps/webconsole -n openshift-web-console
-#sleep 20
+if [ "$ENVIRONMENT" == "ci" ]; then
+    echo "======================================================"
+    echo "Remove openshift-web-console to free some memory"
+    echo "======================================================"
+    oc delete deployment.apps/openshift-web-console-operator -n openshift-core-operators
+    sleep 20
+    oc delete deployment.apps/webconsole -n openshift-web-console
+    sleep 20
+fi
+
+
