@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -e
+
+echo "======================================================"
+echo "Uninstall operator with olm installation"
+echo "======================================================"
+kubectl delete -f build/_output/guides/${ENVIRONMENT}/k8s/olm/subscription.yaml
+kubectl delete csvs --all -n argocd
+kubectl delete crd argocds.argoproj.io
+kubectl delete -f build/_output/guides/${ENVIRONMENT}/k8s/olm/catalog-source.yaml
+kubectl delete -f build/_output/guides/${ENVIRONMENT}/k8s/olm/operator-group.yaml
+kubectl delete -f build/_output/guides/${ENVIRONMENT}/k8s/olm/namespace.yaml

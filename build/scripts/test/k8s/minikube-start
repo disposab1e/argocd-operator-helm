@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 set -e
 
-# Setup minikube environment
 echo "======================================================"
-echo "Setup minikube environment"
+echo "Setup minikube ${MINIKUBE_VERSION} environment"
 echo "======================================================"
 export MINIKUBE_WANTUPDATENOTIFICATION=false
 
-# Start minikube and set context
 echo "======================================================"
 echo "Starting minikube ${MINIKUBE_VERSION} with kubernetes ${KUBERNETES_VERSION}"
 echo "======================================================"
-minikube start --memory=6144 --vm-driver=docker --kubernetes-version="${KUBERNETES_VERSION}" -p argocd
-#sudo chown -R $USER ${HOME}/.{mini,}kube
+minikube start --memory=${MEMORY} --vm-driver=docker --kubernetes-version="${KUBERNETES_VERSION}" -p argocd --insecure-registry "imac.fritz.box:5000"
 kubectl config use-context argocd

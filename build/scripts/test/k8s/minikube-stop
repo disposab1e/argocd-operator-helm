@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+echo "======================================================"
+echo "Stopping minikube ${MINIKUBE_VERSION}"
+echo "======================================================"
+minikube stop -p argocd

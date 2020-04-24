@@ -12,7 +12,7 @@ jobs:
             ENVIRONMENT: ci
           command: |
             pyenv global 3.6.5
-            build/scripts/build/install-deps
+            build/scripts/build/deps-install
             build/scripts/build/build
             build/scripts/build/login
             build/scripts/build/push
@@ -24,21 +24,27 @@ jobs:
       - run:
           name: Kubernetes v1.14.0 & OLM 0.13.0 (Minikube v1.9.2)
           environment:
+            ENVIRONMENT: ci
+            DISTRIBUTION: k8s
             MINIKUBE_VERSION: v1.9.2
             KUBERNETES_VERSION: v1.14.0
             OLM_VERSION: 0.13.0
-            ENVIRONMENT: ci
-            DISTRIBUTION: k8s
             MEMORY: "6144"
           command: |
-            build/scripts/test/k8s/install-deps
+            build/scripts/test/k8s/deps-install
             build/scripts/build/generate
-            build/scripts/test/k8s/start
-            build/scripts/test/common/install-olm
-            build/scripts/test/k8s/test-operator
-            build/scripts/test/k8s/test-argocd
-            build/scripts/test/k8s/test-cleanup
-            build/scripts/test/k8s/stop
+            build/scripts/test/k8s/minikube-start
+            build/scripts/test/common/olm-install
+            build/scripts/test/k8s/operator-olm-install
+            build/scripts/test/k8s/operator-olm-uninstall
+            build/scripts/test/k8s/operator-manual-install
+            build/scripts/test/k8s/operator-manual-uninstall
+            build/scripts/test/k8s/operator-olm-install
+            build/scripts/test/k8s/argocd-install
+            build/scripts/test/k8s/argocd-uninstall
+            build/scripts/test/k8s/operator-olm-uninstall
+            build/scripts/test/k8s/minikube-stop
+            build/scripts/test/k8s/minikube-delete
   k8s-v1170-olm-0141-minikube-v192:
     machine: 
       image: ubuntu-1604:201903-01
@@ -47,21 +53,27 @@ jobs:
       - run:
           name: Kubernetes v1.17.0 & OLM 0.14.1 (Minikube v1.9.2)
           environment:
+            ENVIRONMENT: ci
+            DISTRIBUTION: k8s
             MINIKUBE_VERSION: v1.9.2
             KUBERNETES_VERSION: v1.17.0
             OLM_VERSION: 0.14.1
-            ENVIRONMENT: ci
-            DISTRIBUTION: k8s
             MEMORY: "6144"
           command: |
-            build/scripts/test/k8s/install-deps
+            build/scripts/test/k8s/deps-install
             build/scripts/build/generate
-            build/scripts/test/k8s/start
-            build/scripts/test/common/install-olm
-            build/scripts/test/k8s/test-operator
-            build/scripts/test/k8s/test-argocd
-            build/scripts/test/k8s/test-cleanup
-            build/scripts/test/k8s/stop
+            build/scripts/test/k8s/minikube-start
+            build/scripts/test/common/olm-install
+            build/scripts/test/k8s/operator-olm-install
+            build/scripts/test/k8s/operator-olm-uninstall
+            build/scripts/test/k8s/operator-manual-install
+            build/scripts/test/k8s/operator-manual-uninstall
+            build/scripts/test/k8s/operator-olm-install
+            build/scripts/test/k8s/argocd-install
+            build/scripts/test/k8s/argocd-uninstall
+            build/scripts/test/k8s/operator-olm-uninstall
+            build/scripts/test/k8s/minikube-stop
+            build/scripts/test/k8s/minikube-delete
   k8s-v1180-olm-0141-minikube-v192:
     machine: 
       image: ubuntu-1604:201903-01
@@ -70,21 +82,27 @@ jobs:
       - run:
           name: Kubernetes v1.18.0 & OLM 0.14.1 (Minikube v1.9.2)
           environment:
+            ENVIRONMENT: ci
+            DISTRIBUTION: k8s
             MINIKUBE_VERSION: v1.9.2
             KUBERNETES_VERSION: v1.18.0
             OLM_VERSION: 0.14.1
-            ENVIRONMENT: ci
-            DISTRIBUTION: k8s
             MEMORY: "6144"
           command: |
-            build/scripts/test/k8s/install-deps
+            build/scripts/test/k8s/deps-install
             build/scripts/build/generate
-            build/scripts/test/k8s/start
-            build/scripts/test/common/install-olm
-            build/scripts/test/k8s/test-operator
-            build/scripts/test/k8s/test-argocd
-            build/scripts/test/k8s/test-cleanup
-            build/scripts/test/k8s/stop
+            build/scripts/test/k8s/minikube-start
+            build/scripts/test/common/olm-install
+            build/scripts/test/k8s/operator-olm-install
+            build/scripts/test/k8s/operator-olm-uninstall
+            build/scripts/test/k8s/operator-manual-install
+            build/scripts/test/k8s/operator-manual-uninstall
+            build/scripts/test/k8s/operator-olm-install
+            build/scripts/test/k8s/argocd-install
+            build/scripts/test/k8s/argocd-uninstall
+            build/scripts/test/k8s/operator-olm-uninstall
+            build/scripts/test/k8s/minikube-stop
+            build/scripts/test/k8s/minikube-delete
 
 workflows:
   version: 2

@@ -18,10 +18,10 @@ jobs:
     - stage: build
       name: operator-and-bundles
       env: 
-        - OPERATOR_SDK_VERSION=v0.17.0
         - ENVIRONMENT=ci
+        - OPERATOR_SDK_VERSION=v0.17.0
       before_install:
-      - build/scripts/build/install-deps
+      - build/scripts/build/deps-install
       script:
       - build/scripts/build/build
       - build/scripts/build/login
@@ -29,85 +29,120 @@ jobs:
     - stage: test-k8s
       name: k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2
       env: 
+        - ENVIRONMENT=ci
+        - DISTRIBUTION=k8s
         - MINIKUBE_VERSION=v1.9.2
         - KUBERNETES_VERSION=v1.14.0
         - OLM_VERSION=0.13.0
-        - ENVIRONMENT=ci
-        - DISTRIBUTION=k8s
         - MEMORY=6144
       before_install:
-      - build/scripts/test/k8s/install-deps
+      - build/scripts/test/k8s/deps-install
       install:
-      - build/scripts/test/k8s/start
+      - build/scripts/test/k8s/minikube-start
       before_script:
-      - build/scripts/test/common/install-olm
+      - build/scripts/test/common/olm-install
       script:
       - build/scripts/build/generate
-      - build/scripts/test/k8s/test-operator
-      - build/scripts/test/k8s/test-argocd
-      - build/scripts/test/k8s/test-cleanup
+      - build/scripts/test/k8s/operator-olm-install
+      - build/scripts/test/k8s/operator-olm-uninstall
+      - build/scripts/test/k8s/operator-manual-install
+      - build/scripts/test/k8s/operator-manual-uninstall
+      - build/scripts/test/k8s/operator-olm-install
+      - build/scripts/test/k8s/argocd-install
+      - build/scripts/test/k8s/argocd-uninstall
+      - build/scripts/test/k8s/operator-olm-uninstall
       after_script:
-      - build/scripts/test/k8s/stop
+      - build/scripts/test/k8s/minikube-stop
+      - build/scripts/test/k8s/minikube-delete
     - name: k8s_v1.17.0-olm_0.14.1-minikube_v1.9.2
       env: 
+        - ENVIRONMENT=ci
+        - DISTRIBUTION=k8s
         - MINIKUBE_VERSION=v1.9.2
         - KUBERNETES_VERSION=v1.17.0
         - OLM_VERSION=0.14.1
-        - ENVIRONMENT=ci
-        - DISTRIBUTION=k8s
         - MEMORY=6144
       before_install:
-      - build/scripts/test/k8s/install-deps
+      - build/scripts/test/k8s/deps-install
       install:
-      - build/scripts/test/k8s/start
+      - build/scripts/test/k8s/minikube-start
       before_script:
-      - build/scripts/test/common/install-olm
+      - build/scripts/test/common/olm-install
       script:
       - build/scripts/build/generate
-      - build/scripts/test/k8s/test-operator
-      - build/scripts/test/k8s/test-argocd
-      - build/scripts/test/k8s/test-cleanup
+      - build/scripts/test/k8s/operator-olm-install
+      - build/scripts/test/k8s/operator-olm-uninstall
+      - build/scripts/test/k8s/operator-manual-install
+      - build/scripts/test/k8s/operator-manual-uninstall
+      - build/scripts/test/k8s/operator-olm-install
+      - build/scripts/test/k8s/argocd-install
+      - build/scripts/test/k8s/argocd-uninstall
+      - build/scripts/test/k8s/operator-olm-uninstall
       after_script:
-      - build/scripts/test/k8s/stop
+      - build/scripts/test/k8s/minikube-stop
+      - build/scripts/test/k8s/minikube-delete
     - name: k8s_v1.18.0-olm_0.14.1-minikube_v1.9.2
       env: 
+        - ENVIRONMENT=ci
+        - DISTRIBUTION=k8s
         - MINIKUBE_VERSION=v1.9.2
         - KUBERNETES_VERSION=v1.18.0
         - OLM_VERSION=0.14.1
-        - ENVIRONMENT=ci
-        - DISTRIBUTION=k8s
         - MEMORY=6144
       before_install:
-      - build/scripts/test/k8s/install-deps
+      - build/scripts/test/k8s/deps-install
       install:
-      - build/scripts/test/k8s/start
+      - build/scripts/test/k8s/minikube-start
       before_script:
-      - build/scripts/test/common/install-olm
+      - build/scripts/test/common/olm-install
       script:
       - build/scripts/build/generate
-      - build/scripts/test/k8s/test-operator
-      - build/scripts/test/k8s/test-argocd
-      - build/scripts/test/k8s/test-cleanup
+      - build/scripts/test/k8s/operator-olm-install
+      - build/scripts/test/k8s/operator-olm-uninstall
+      - build/scripts/test/k8s/operator-manual-install
+      - build/scripts/test/k8s/operator-manual-uninstall
+      - build/scripts/test/k8s/operator-olm-install
+      - build/scripts/test/k8s/argocd-install
+      - build/scripts/test/k8s/argocd-uninstall
+      - build/scripts/test/k8s/operator-olm-uninstall
       after_script:
-      - build/scripts/test/k8s/stop
+      - build/scripts/test/k8s/minikube-stop
+      - build/scripts/test/k8s/minikube-delete
     - stage: test-ocp3
       name: ocp3_3.11.0-olm_0.13.0-minishift_1.34.2   
       env: 
-        - MINISHIFT_VERSION=1.34.2
-        - OLM_VERSION=0.13.0
         - ENVIRONMENT=ci
         - DISTRIBUTION=ocp3
+        - MINISHIFT_VERSION=1.34.2
+        - OLM_VERSION=0.13.0
         - MEMORY=7200
       before_install:
-      - build/scripts/test/ocp3/install-deps
+      - build/scripts/test/ocp3/deps-install
       install:
-      - build/scripts/test/ocp3/start
+      - build/scripts/test/ocp3/minishift-start
       before_script:
-      - build/scripts/test/common/install-olm
+      - build/scripts/test/common/olm-install
       script:
       - build/scripts/build/generate
-      - build/scripts/test/ocp/test-operator
-      - build/scripts/test/ocp/test-argocd
-      - build/scripts/test/ocp/test-cleanup
+      - build/scripts/test/ocp/operator-olm-install
+      - build/scripts/test/ocp/operator-olm-uninstall
+      - build/scripts/test/ocp/operator-manual-install
+      - build/scripts/test/ocp/operator-manual-uninstall
+      - build/scripts/test/ocp/operator-manual-install
+      - build/scripts/test/ocp/argocd-install
+      - build/scripts/test/ocp/argocd-uninstall
+      - build/scripts/test/ocp/argocd-oauth-install
+      - build/scripts/test/ocp/argocd-oauth-uninstall
+      - build/scripts/test/ocp/operator-manual-uninstall
       after_script:
-      - build/scripts/test/ocp3/stop
+      - build/scripts/test/ocp3/minishift-stop
+      - build/scripts/test/ocp3/minishift-delete
+
+
+
+
+
+
+
+
+

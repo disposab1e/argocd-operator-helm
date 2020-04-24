@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -e
+
+echo "======================================================"
+echo "Uninstall operator with manual installation"
+echo "======================================================"
+kubectl delete -f build/_output/guides/${ENVIRONMENT}/k8s/manual/deployment.yaml
+kubectl delete -f build/_output/guides/${ENVIRONMENT}/k8s/manual/crd.yaml
+kubectl delete -f build/_output/guides/${ENVIRONMENT}/k8s/manual/role-binding.yaml
+kubectl delete -f build/_output/guides/${ENVIRONMENT}/k8s/manual/role.yaml
+kubectl delete -f build/_output/guides/${ENVIRONMENT}/k8s/manual/service-account.yaml
+kubectl delete -f build/_output/guides/${ENVIRONMENT}/k8s/manual/namespace.yaml

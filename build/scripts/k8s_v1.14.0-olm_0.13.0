@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 set -e
 
+# Environment: dev, ci, release
 export ENVIRONMENT=dev
+
+# Distribution: k8s, ocp3, ocp4
 export DISTRIBUTION=k8s
+
 export MINIKUBE_VERSION=v1.9.2
 export KUBERNETES_VERSION=v1.14.0
 export OLM_VERSION=0.13.0
+
 export MEMORY=16144
 
 build/scripts/build/build
@@ -13,11 +18,15 @@ build/scripts/build/push
 
 build/scripts/build/generate
 
-build/scripts/test/${DISTRIBUTION}/start
+build/scripts/test/${DISTRIBUTION}/minikube-start
 
-build/scripts/test/common/install-olm
-build/scripts/test/${DISTRIBUTION}/test-operator
-build/scripts/test/${DISTRIBUTION}/test-argocd
+build/scripts/test/common/olm-install
 
-#build/scripts/test/${DISTRIBUTION}/test-cleanup
-#build/scripts/test/${DISTRIBUTION}/stop
+build/scripts/test/${DISTRIBUTION}/operator-olm-install
+build/scripts/test/${DISTRIBUTION}/operator-olm-uninstall
+
+build/scripts/test/${DISTRIBUTION}/operator-manual-install
+build/scripts/test/${DISTRIBUTION}/operator-manual-uninstall
+
+build/scripts/test/${DISTRIBUTION}/operator-olm-install
+build/scripts/test/${DISTRIBUTION}/argocd-install

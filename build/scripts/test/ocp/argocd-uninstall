@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e
+
+if [ "$DISTRIBUTION" == "ocp3" ]; then
+    eval $(minishift oc-env)
+else
+    eval $(crc oc-env)
+fi
+
+echo "======================================================"
+echo "Uninstall Argo CD"
+echo "======================================================"
+oc delete ArgoCD argocd -n argocd
+oc delete crd appprojects.argoproj.io
+oc delete crd applications.argoproj.io
+oc delete crd workflowtemplates.argoproj.io
+oc delete crd workflows.argoproj.io

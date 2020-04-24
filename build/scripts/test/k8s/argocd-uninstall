@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -e
+
+echo "======================================================"
+echo "Uninstall Argo CD"
+echo "======================================================"
+kubectl delete ArgoCD argocd -n argocd
+kubectl delete crd appprojects.argoproj.io
+kubectl delete crd applications.argoproj.io
+kubectl delete crd workflowtemplates.argoproj.io
+kubectl delete crd workflows.argoproj.io

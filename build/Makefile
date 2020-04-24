@@ -163,6 +163,8 @@ guide-generate-ocp3-olm-ci:
 	cp ../deploy/common/operator-group.yaml ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/olm
 	cp ../deploy/ocp3/subscription.yaml ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/olm
 	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ../deploy/ocp3/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/olm/catalog-source.yaml
+	# cluster-admin to service account cause bug in openshift
+	cp ../deploy/ocp3/role-binding.yaml  ${GUIDES_BUILD_BASE_DIR}/ci/ocp3/olm
 
 
 
@@ -268,6 +270,8 @@ guide-generate-ocp3-olm-dev:
 	cp ../deploy/common/operator-group.yaml ${GUIDES_BUILD_BASE_DIR}/dev/ocp3/olm
 	cp ../deploy/ocp3/catalog-source.yaml ${GUIDES_BUILD_BASE_DIR}/dev/ocp3/olm
 	cp ../deploy/ocp3/subscription.yaml ${GUIDES_BUILD_BASE_DIR}/dev/ocp3/olm
+	# cluster-admin to service account cause bug in openshift
+	cp ../deploy/ocp3/role-binding.yaml  ${GUIDES_BUILD_BASE_DIR}/dev/ocp3/olm
 
 ########################################################
 # DEV - Guides - ocp4
@@ -407,6 +411,8 @@ guide-generate-ocp3-olm-release:
 	cp ../deploy/common/operator-group.yaml ${GUIDES_BUILD_BASE_DIR}/release/ocp3/olm
 	cp ../deploy/ocp3/subscription.yaml ${GUIDES_BUILD_BASE_DIR}/release/ocp3/olm
 	sed 's/${REGISTRY_DEV}/${REGISTRY_REL}/g' ../deploy/ocp3/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/release/ocp3/olm/catalog-source.yaml
+	# cluster-admin to service account cause bug in openshift
+	cp ../deploy/ocp3/role-binding.yaml  ${GUIDES_BUILD_BASE_DIR}/release/ocp3/olm
 
 ########################################################
 # RELEASE - Guides - ocp4

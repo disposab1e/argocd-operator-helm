@@ -2,6 +2,6 @@
 set -e
 
 echo "======================================================"
-echo "Stopping minikube ${MINIKUBE_VERSION}"
+echo "Stopping crc ${CRC_VERSION}"
 echo "======================================================"
-minikube stop -p argocd
+crc stop --force

@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
 set -e
 
-# operator-courier
 echo "======================================================"
 echo "Installing operator-courier (latest version)"
 echo "======================================================"
 pip install operator-courier
 operator-courier --version
 
-# Operator SDK
 echo "======================================================"
 echo "Installing operator-sdk ${OPERATOR_SDK_VERSION}"
 echo "======================================================"
@@ -16,9 +14,7 @@ curl -Lo operator-sdk https://github.com/operator-framework/operator-sdk/release
 chmod +x operator-sdk
 sudo mv operator-sdk /usr/local/bin/
 
-# Helm 3
 echo "======================================================"
 echo "Installing Helm 3 (latest version)"
 echo "======================================================"
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-

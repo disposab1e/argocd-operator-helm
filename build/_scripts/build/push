@@ -4,17 +4,18 @@ set -e
 # Works in local, github, travisci and circleci environments :-)
 cd build/
 
-# Generate yaml's for manual operator installation
+# Push the operator to dockerhub
 echo "======================================================"
-echo "Generate yaml's for manual operator installation"
+echo "Push Operator to Registry"
 echo "======================================================"
-make guide-generate-k8s-manual-ci
+make operator-push-${ENVIRONMENT}
 
-# Generate yaml's for operator installation with olm
+# Push bundles to docker.io
 echo "======================================================"
-echo "Generate yaml's for olm operator installation"
+echo "Push Operator Bundles to Registry"
 echo "======================================================"
-make guide-generate-k8s-olm-ci
+make bundle-push-ocp-${ENVIRONMENT}
+make bundle-push-k8s-${ENVIRONMENT}
 
 # Go back ;-)
 cd ../

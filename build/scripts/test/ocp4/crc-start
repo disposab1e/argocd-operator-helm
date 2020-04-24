@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -e
+
+echo "======================================================"
+echo "Setup crc ${CRC_VERSION} environment"
+echo "======================================================"
+
+crc cleanup --force
+
+crc setup
+
+crc config set cpus 4
+crc config set memory ${MEMORY}
+crc config set pull-secret-file ${HOME}/redhat/crc/pull-secret
+
+echo "======================================================"
+echo "Starting crc ${CRC_VERSION}"
+echo "======================================================"
+crc start
+
+
+echo "======================================================"
+echo "Login as kubedamin"
+echo "======================================================"
+eval $(crc oc-env)
+
+sleep 5
+oc login -u kubeadmin -p $(crc console --credentials | awk -F "kubeadmin" '{print $2}' | cut -c 5- | rev | cut -c31- | rev) https://api.crc.testing:6443
+
+sleep 15
+
+
+oc patch --type=merge --patch='{
+  "spec": {
+    "registrySources": {
+      "insecureRegistries": [
+      "imac.fritz.box:5000"
+      ]
+    }
+  }
+}' image.config.openshift.io/cluster
+
+ssh -i ~/.crc/machines/crc/id_rsa -o StrictHostKeyChecking=no core@$(crc ip) << EOF
+  sudo echo " " | sudo tee -a /etc/containers/registries.conf
+  sudo echo "[[registry]]" | sudo tee -a /etc/containers/registries.conf
+  sudo echo "  location = \"imac.fritz.box:5000\"" | sudo tee -a /etc/containers/registries.conf
+  sudo echo "  insecure = true" | sudo tee -a /etc/containers/registries.conf
+  sudo echo "  blocked = false" | sudo tee -a /etc/containers/registries.conf
+  sudo echo "  mirror-by-digest-only = false" | sudo tee -a /etc/containers/registries.conf
+  sudo echo "  prefix = \"\"" | sudo tee -a /etc/containers/registries.conf
+  sudo systemctl restart crio
+  sudo systemctl restart kubelet
+EOF
