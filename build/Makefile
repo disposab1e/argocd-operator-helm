@@ -434,4 +434,4 @@ guide-generate-ocp4-olm-release:
 	cp ../deploy/common/namespace.yaml ${GUIDES_BUILD_BASE_DIR}/release/ocp4/olm
 	cp ../deploy/common/operator-group.yaml ${GUIDES_BUILD_BASE_DIR}/release/ocp4/olm
 	cp ../deploy/ocp4/subscription.yaml ${GUIDES_BUILD_BASE_DIR}/release/ocp4/olm
-	sed 's/${REGISTRY_DEV}/${REGISTRY_REL}/g' ../deploy/ocp4/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/release/ocp3/olm/catalog-source.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY_REL}/g' ../deploy/ocp4/catalog-source.yaml > ${GUIDES_BUILD_BASE_DIR}/release/ocp4/olm/catalog-source.yaml
