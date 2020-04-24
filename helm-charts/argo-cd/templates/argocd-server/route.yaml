@@ -24,8 +24,8 @@ spec:
   port:
     targetPort: https
   tls:
-    termination: {{ .Values.server.route.termination_type | default "passthrough" }}
-    insecureEdgeTerminationPolicy: {{ .Values.server.route.termination_policy | default "Redirect" }} 
+    termination: passthrough
+    insecureEdgeTerminationPolicy: Redirect 
   wildcardPolicy: None
 {{ include "argo-cd.helmRouteFix" $ }}  
 {{- end }}
