@@ -1,4 +1,6 @@
 ## ArgoCD configuration
+## Ref: https://github.com/argoproj/argo-cd
+##
 nameOverride: argocd
 fullnameOverride: ""
 
@@ -8,12 +10,17 @@ installCRDs: false
 global:
   image:
     repository: argoproj/argocd
-    tag: v1.4.2
+    tag: v1.5.2
     imagePullPolicy: IfNotPresent
   securityContext: {}
   #  runAsUser: 999
   #  runAsGroup: 999
   #  fsGroup: 999
+  imagePullSecrets: []
+  hostAliases: []
+  # - ip: 10.20.30.40
+  #   hostnames:
+  #   - git.myhostname
 
 ## Controller
 controller:
@@ -21,7 +28,7 @@ controller:
 
   image:
     repository: # argoproj/argocd
-    tag: # v1.4.2
+    tag: # v1.5.2
     imagePullPolicy: # IfNotPresent
 
   ## Argo controller commandline flags
@@ -33,8 +40,8 @@ controller:
   logLevel: info
 
   ## Additional command line arguments to pass to argocd-controller
-  ## key: value
-  extraArgs: {}
+  ##
+  extraArgs: []
 
   ## Environment variables to pass to argocd-controller
   ##
@@ -84,6 +91,7 @@ controller:
     annotations: {}
     labels: {}
     port: 8082
+    portName: https-controller
 
   ## Node selectors and tolerations for server scheduling to nodes with taints
   ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
@@ -163,7 +171,7 @@ dex:
 
   image:
     repository: quay.io/dexidp/dex
-    tag: v2.14.0
+    tag: v2.22.0
     imagePullPolicy: IfNotPresent
   initImage:
     repository:
@@ -173,6 +181,14 @@ dex:
   ## Environment variables to pass to the Dex server
   ##
   env: []
+
+  ## Annotations to be added to the Dex server pods
+  ##
+  podAnnotations: {}
+
+  ## Labels to be added to the Dex server pods
+  ##
+  podLabels: {}
 
   serviceAccount:
     create: true
@@ -235,6 +251,14 @@ redis:
   ##
   env: []
 
+  ## Annotations to be added to the Redis server pods
+  ##
+  podAnnotations: {}
+
+  ## Labels to be added to the Redis server pods
+  ##
+  podLabels: {}
+
   ## Node selectors and tolerations for server scheduling to nodes with taints
   ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
   ##
@@ -262,18 +286,46 @@ redis:
   volumeMounts: []
   volumes: []
 
+# This key configures Redis-HA subchart and when enabled (redis-ha.enabled=true)
+# the custom redis deployment is omitted
+redis-ha:
+  enabled: false
+  # Check the redis-ha chart for more properties
+  exporter:
+    enabled: true
+  persistentVolume:
+    enabled: false
+  redis:
+    masterGroupName: argocd
+    config:
+      save: "\"\""
+  haproxy:
+    enabled: true
+    metrics:
+      enabled: true
+
 ## Server
 server:
   name: server
+
+  replicas: 1
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 50
+
   image:
     repository: # argoproj/argocd
-    tag: # v1.4.2
+    tag: # v1.5.2
     imagePullPolicy: # IfNotPresent
 
   ## Additional command line arguments to pass to argocd-server
-  ## key: value
-  extraArgs: {}
-  #   insecure: true
+  ##
+  extraArgs: []
+  #  - --insecure
 
   ## Environment variables to pass to argocd-server
   ##
@@ -352,6 +404,8 @@ server:
     type: ClusterIP
     servicePortHttp: 80
     servicePortHttps: 443
+    loadBalancerIP: ""
+    loadBalancerSourceRanges: []
 
   ## Server metrics service configuration
   metrics:
@@ -429,7 +483,8 @@ server:
 
   ## ArgoCD rbac config
   ## reference https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/rbac.md
-  rbacConfig: {}
+  rbacConfig:
+    {}
     # policy.csv is an file containing user-defined RBAC policies and role definitions (optional).
     # Policy rules are in the form:
     #   p, subject, resource, action, object, effect
@@ -437,7 +492,17 @@ server:
     #   g, subject, inherited-subject
     # See https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/rbac.md for additional information.
     # policy.csv: |
-    #   g, subject, inherited-subject
+    #   # Grant all members of the group 'my-org:team-alpha; the ability to sync apps in 'my-project'
+    #   p, my-org:team-alpha, applications, sync, my-project/*, allow
+    #   # Grant all members of 'my-org:team-beta' admins
+    #   g, my-org:team-beta, role:admin
+    # policy.default is the name of the default role which Argo CD will falls back to, when
+    # authorizing API requests (optional). If omitted or empty, users may be still be able to login,
+    # but will see no apps, projects, etc...
+    # policy.default: role:readonly
+    # scopes controls which OIDC scopes to examine during rbac enforcement (in addition to `sub` scope).
+    # If omitted, defaults to: '[groups]'. The scope value can be a string, or a list of strings.
+    # scopes: '[cognito:groups, email]'
 
   ## Not well tested and not well supported on release v1.0.0.
   ## Applications
@@ -457,9 +522,9 @@ server:
   #  destination:
   #     server: https://kubernetes.default.svc
   #     namespace: guestbook
-  #   syncPolicy:
-  #     automated:
-  #       prune: false
+  #  syncPolicy:
+  #    automated:
+  #      prune: false
   #      selfHeal: false
 
   ## Projects
@@ -488,18 +553,32 @@ server:
   #   orphanedResources: {}
   #   roles: []
 
+  ## Enable Admin ClusterRole resources.
+  ## Enable if you would like to grant rights to ArgoCD to deploy to the local kuberentes cluster.
+  clusterAdminAccess:
+    enabled: true
+
 ## Repo Server
 repoServer:
   name: repo-server
 
+  replicas: 1
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 5
+    targetCPUUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 50
+
   image:
     repository: # argoproj/argocd
-    tag: # 1.4.2
+    tag: # v1.5.2
     imagePullPolicy: # IfNotPresent
 
   ## Additional command line arguments to pass to argocd-repo-server
-  ## key: value
-  extraArgs: {}
+  ##
+  extraArgs: []
 
   ## Environment variables to pass to argocd-repo-server
   ##
@@ -569,6 +648,7 @@ repoServer:
     annotations: {}
     labels: {}
     port: 8081
+    portName: https-repo-server
 
   ## Repo server metrics service configuration
   metrics:
@@ -606,24 +686,24 @@ repoServer:
   ## Use init containers to configure custom tooling
   ## https://argoproj.github.io/argo-cd/operator-manual/custom_tools/
   ## When using the volumes & volumeMounts section bellow, please comment out those above.
-#  volumes:
-#  - name: custom-tools
-#    emptyDir: {}
-#
-#  initContainers:
-#  - name: download-tools
-#    image: alpine:3.8
-#    command: [sh, -c]
-#    args:
-#      - wget -qO- https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz | tar -xvzf - &&
-#        mv linux-amd64/helm /custom-tools/
-#    volumeMounts:
-#      - mountPath: /custom-tools
-#        name: custom-tools
-#  volumeMounts:
-#  - mountPath: /usr/local/bin/helm
-#    name: custom-tools
-#    subPath: helm
+ #  volumes:
+ #  - name: custom-tools
+ #    emptyDir: {}
+ #
+ #  initContainers:
+ #  - name: download-tools
+ #    image: alpine:3.8
+ #    command: [sh, -c]
+ #    args:
+ #      - wget -qO- https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz | tar -xvzf - &&
+ #        mv linux-amd64/helm /custom-tools/
+ #    volumeMounts:
+ #      - mountPath: /custom-tools
+ #        name: custom-tools
+ #  volumeMounts:
+ #  - mountPath: /usr/local/bin/helm
+ #    name: custom-tools
+ #    subPath: helm
 
 ## Argo Configs
 configs:
@@ -696,12 +776,15 @@ configs:
     # -----END RSA PRIVATE KEY-----
   secret:
     createSecret: true
+    ## Annotations to be added to argocd-secret
+    ##
+    annotations: {}
 
     # Webhook Configs
     githubSecret: ""
     gitlabSecret: ""
     bitbucketServerSecret: ""
-    bitbucketUUÌD: ""
+    bitbucketUUID: ""
     gogsSecret: ""
 
     # Custom secrets. Useful for injecting SSO secrets into environment variables.
@@ -725,7 +808,8 @@ configs:
     # Argo expects the password in the secret to be bcrypt hashed. You can create this hash with
     # `htpasswd -nbBC 10 "" $ARGO_PWD | tr -d ':\n' | sed 's/$2y/$2a/'`
     # argocdServerAdminPassword:
-
+    # Password modification time defaults to current time if not set
+    # argocdServerAdminPasswordMtime: "2006-01-02T15:04:05Z"
 
 ## OpenShift Integration
 openshift:
