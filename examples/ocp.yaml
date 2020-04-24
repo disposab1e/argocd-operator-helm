@@ -4,7 +4,6 @@ metadata:
   name: argocd
   namespace: argocd
 spec:
-  ## ArgoCD configuration
   nameOverride: argocd
   fullnameOverride: ""
 
@@ -14,12 +13,17 @@ spec:
   global:
     image:
       repository: argoproj/argocd
-      tag: v1.4.2
+      tag: v1.5.2
       imagePullPolicy: IfNotPresent
     securityContext: {}
     #  runAsUser: 999
     #  runAsGroup: 999
     #  fsGroup: 999
+    imagePullSecrets: []
+    hostAliases: []
+    # - ip: 10.20.30.40
+    #   hostnames:
+    #   - git.myhostname
 
   ## Controller
   controller:
@@ -27,7 +31,7 @@ spec:
 
     image:
       repository: # argoproj/argocd
-      tag: # v1.4.2
+      tag: # v1.5.2
       imagePullPolicy: # IfNotPresent
 
     ## Argo controller commandline flags
@@ -39,8 +43,8 @@ spec:
     logLevel: info
 
     ## Additional command line arguments to pass to argocd-controller
-    ## key: value
-    extraArgs: {}
+    ##
+    extraArgs: []
 
     ## Environment variables to pass to argocd-controller
     ##
@@ -90,6 +94,7 @@ spec:
       annotations: {}
       labels: {}
       port: 8082
+      portName: https-controller
 
     ## Node selectors and tolerations for server scheduling to nodes with taints
     ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
@@ -180,6 +185,14 @@ spec:
     ##
     env: []
 
+    ## Annotations to be added to the Dex server pods
+    ##
+    podAnnotations: {}
+
+    ## Labels to be added to the Dex server pods
+    ##
+    podLabels: {}
+
     serviceAccount:
       create: true
       name: argocd-dex-server
@@ -241,6 +254,14 @@ spec:
     ##
     env: []
 
+    ## Annotations to be added to the Redis server pods
+    ##
+    podAnnotations: {}
+
+    ## Labels to be added to the Redis server pods
+    ##
+    podLabels: {}
+
     ## Node selectors and tolerations for server scheduling to nodes with taints
     ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
     ##
@@ -268,18 +289,46 @@ spec:
     volumeMounts: []
     volumes: []
 
+  # This key configures Redis-HA subchart and when enabled (redis-ha.enabled=true)
+  # the custom redis deployment is omitted
+  redis-ha:
+    enabled: false
+    # Check the redis-ha chart for more properties
+    exporter:
+      enabled: true
+    persistentVolume:
+      enabled: false
+    redis:
+      masterGroupName: argocd
+      config:
+        save: "\"\""
+    haproxy:
+      enabled: true
+      metrics:
+        enabled: true
+
   ## Server
   server:
     name: server
+
+    replicas: 1
+
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 5
+      targetCPUUtilizationPercentage: 50
+      targetMemoryUtilizationPercentage: 50
+
     image:
       repository: # argoproj/argocd
-      tag: # v1.4.2
+      tag: # v1.5.2
       imagePullPolicy: # IfNotPresent
 
     ## Additional command line arguments to pass to argocd-server
-    ## key: value
-    extraArgs: {}
-    #   insecure: true
+    ##
+    extraArgs: []
+    #  - --insecure
 
     ## Environment variables to pass to argocd-server
     ##
@@ -358,6 +407,8 @@ spec:
       type: ClusterIP
       servicePortHttp: 80
       servicePortHttps: 443
+      loadBalancerIP: ""
+      loadBalancerSourceRanges: []
 
     ## Server metrics service configuration
     metrics:
@@ -435,7 +486,8 @@ spec:
 
     ## ArgoCD rbac config
     ## reference https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/rbac.md
-    rbacConfig: {}
+    rbacConfig:
+      {}
       # policy.csv is an file containing user-defined RBAC policies and role definitions (optional).
       # Policy rules are in the form:
       #   p, subject, resource, action, object, effect
@@ -443,7 +495,17 @@ spec:
       #   g, subject, inherited-subject
       # See https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/rbac.md for additional information.
       # policy.csv: |
-      #   g, subject, inherited-subject
+      #   # Grant all members of the group 'my-org:team-alpha; the ability to sync apps in 'my-project'
+      #   p, my-org:team-alpha, applications, sync, my-project/*, allow
+      #   # Grant all members of 'my-org:team-beta' admins
+      #   g, my-org:team-beta, role:admin
+      # policy.default is the name of the default role which Argo CD will falls back to, when
+      # authorizing API requests (optional). If omitted or empty, users may be still be able to login,
+      # but will see no apps, projects, etc...
+      # policy.default: role:readonly
+      # scopes controls which OIDC scopes to examine during rbac enforcement (in addition to `sub` scope).
+      # If omitted, defaults to: '[groups]'. The scope value can be a string, or a list of strings.
+      # scopes: '[cognito:groups, email]'
 
     ## Not well tested and not well supported on release v1.0.0.
     ## Applications
@@ -463,9 +525,9 @@ spec:
     #  destination:
     #     server: https://kubernetes.default.svc
     #     namespace: guestbook
-    #   syncPolicy:
-    #     automated:
-    #       prune: false
+    #  syncPolicy:
+    #    automated:
+    #      prune: false
     #      selfHeal: false
 
     ## Projects
@@ -494,18 +556,32 @@ spec:
     #   orphanedResources: {}
     #   roles: []
 
+    ## Enable Admin ClusterRole resources.
+    ## Enable if you would like to grant rights to ArgoCD to deploy to the local kuberentes cluster.
+    clusterAdminAccess:
+      enabled: true
+
   ## Repo Server
   repoServer:
     name: repo-server
 
+    replicas: 1
+
+    autoscaling:
+      enabled: false
+      minReplicas: 1
+      maxReplicas: 5
+      targetCPUUtilizationPercentage: 50
+      targetMemoryUtilizationPercentage: 50
+
     image:
       repository: # argoproj/argocd
-      tag: # 1.4.2
+      tag: # v1.5.2
       imagePullPolicy: # IfNotPresent
 
     ## Additional command line arguments to pass to argocd-repo-server
-    ## key: value
-    extraArgs: {}
+    ##
+    extraArgs: []
 
     ## Environment variables to pass to argocd-repo-server
     ##
@@ -575,6 +651,7 @@ spec:
       annotations: {}
       labels: {}
       port: 8081
+      portName: https-repo-server
 
     ## Repo server metrics service configuration
     metrics:
@@ -702,12 +779,15 @@ spec:
       # -----END RSA PRIVATE KEY-----
     secret:
       createSecret: true
+      ## Annotations to be added to argocd-secret
+      ##
+      annotations: {}
 
       # Webhook Configs
       githubSecret: ""
       gitlabSecret: ""
       bitbucketServerSecret: ""
-      bitbucketUUÌD: ""
+      bitbucketUUID: ""
       gogsSecret: ""
 
       # Custom secrets. Useful for injecting SSO secrets into environment variables.
@@ -730,7 +810,9 @@ spec:
 
       # Argo expects the password in the secret to be bcrypt hashed. You can create this hash with
       # `htpasswd -nbBC 10 "" $ARGO_PWD | tr -d ':\n' | sed 's/$2y/$2a/'`
-      # argocdServerAdminPassword: $2a$10$hDj12Tw9xVmvybSahN1Y0.f9DZixxN8oybyA32Uy/eqWklFU4Mo8O
+      # argocdServerAdminPassword:
+      # Password modification time defaults to current time if not set
+      # argocdServerAdminPasswordMtime: "2006-01-02T15:04:05Z"
 
   ## OpenShift Integration
   openshift:
