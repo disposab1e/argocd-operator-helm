@@ -6,7 +6,7 @@ python:
 
 env:
   global:
-    - RELEASE_BRANCH=release-0.0.4
+    - RELEASE_BRANCH=release-0.0.5
 
 if: |
   branch in (travis-ci, env(RELEASE_BRANCH)) AND \
@@ -132,7 +132,7 @@ jobs:
       - build/scripts/test/ocp/argocd-install
       - build/scripts/test/ocp/argocd-uninstall
       - build/scripts/test/ocp/argocd-oauth-install
-      - build/scripts/test/ocp/argocd-oauth-uninstall
+      - build/scripts/test/ocp/argocd-uninstall
       - build/scripts/test/ocp/operator-manual-uninstall
       after_script:
       - build/scripts/test/ocp3/minishift-stop

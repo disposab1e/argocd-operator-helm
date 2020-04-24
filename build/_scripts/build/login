@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-# Securely login to docker.io
-#echo "======================================================"
-#echo "Login to docker.io"
-#echo "======================================================"
-echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USER" --password-stdin
