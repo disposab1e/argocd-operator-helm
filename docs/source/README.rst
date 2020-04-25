@@ -5,24 +5,19 @@ Argo CD Operator (Helm)
 .. image:: https://img.shields.io/badge/argocd-1.5.2-green.svg
    :target: https://github.com/argoproj/argo-cd/releases/tag/v1.5.2
    :alt: Argo CD
-.. image:: https://img.shields.io/badge/ocp-3.11-red.svg
-   :target: https://www.openshift.com/products/container-platform
-   :alt: OpenShift Container Platform
-.. image:: https://img.shields.io/badge/ocp-≥%204.2-red.svg
-   :target: https://www.openshift.com/products/container-platform
-   :alt: OpenShift Container Platform
-.. image:: https://img.shields.io/badge/kubernetes-≥%201.11-blue.svg
-   :target: https://kubernetes.io/
-   :alt: Kubernetes
-.. image:: https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest
-   :target: https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest
-   :alt: Documentation Status
-.. image:: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/master.svg?style=svg
-   :target: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/master
-   :alt: Build with CircleCI
 .. image:: https://img.shields.io/badge/latest%20release-0.0.5-yellow.svg
    :target: https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.5
    :alt: Latest Release
+.. image:: https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest
+   :target: https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
+.. image:: https://travis-ci.org/disposab1e/argocd-operator-helm.svg?branch=release-0.0.5
+   :target: https://travis-ci.org/disposab1e/argocd-operator-helm
+   :alt: Build with Travis CI
+.. image:: https://github.com/disposab1e/argocd-operator-helm/workflows/continuous-integration/badge.svg?branch=release-0.0.5
+   :target: https://github.com/disposab1e/argocd-operator-helm/actions?query=workflow%3Acontinuous-integration
+   :alt: Build with Github Workflows
+
 
 The `Argo CD Operator (Helm)`_ is based on the `Argo CD Helm Chart`_ 
 and currently installs the non-HA version of Argo CD in 

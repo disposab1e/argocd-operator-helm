@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -e
+
+source build/scripts/envs/k8s_dev
+
+export KUBERNETES_VERSION=v1.17.0
+export OLM_VERSION=0.14.1
+
+
+build/scripts/build/build
+build/scripts/build/push
+
+build/scripts/build/generate
+
+build/scripts/test/${DISTRIBUTION}/minikube-start
+
+build/scripts/test/common/olm-install
+
+build/scripts/test/${DISTRIBUTION}/operator-olm-install
+build/scripts/test/${DISTRIBUTION}/operator-olm-uninstall
+
+build/scripts/test/${DISTRIBUTION}/operator-manual-install
+build/scripts/test/${DISTRIBUTION}/operator-manual-uninstall
+
+build/scripts/test/${DISTRIBUTION}/operator-olm-install
+build/scripts/test/${DISTRIBUTION}/argocd-install

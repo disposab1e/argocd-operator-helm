@@ -67,6 +67,64 @@ jobs:
         build/scripts/test/k8s/operator-olm-uninstall
         build/scripts/test/k8s/minikube-stop
         build/scripts/test/k8s/minikube-delete
+  k8s-v1140-olm-0141-minikube-v192:
+    name: Kubernetes 1.14.0 with OLM 0.13.0 (minikube)
+    runs-on: ubuntu-latest
+    needs: operator-and-bundles
+    steps:
+    - uses: actions/checkout@v2
+    - name: k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2
+      env: 
+        ENVIRONMENT: ci
+        DISTRIBUTION: k8s
+        MINIKUBE_VERSION: v1.9.2
+        KUBERNETES_VERSION: v1.14.0
+        OLM_VERSION: 0.14.1
+        MEMORY: 6144
+      run: |
+        build/scripts/test/k8s/deps-install
+        build/scripts/build/generate
+        build/scripts/test/k8s/minikube-start
+        build/scripts/test/common/olm-install
+        build/scripts/test/k8s/operator-olm-install
+        build/scripts/test/k8s/operator-olm-uninstall
+        build/scripts/test/k8s/operator-manual-install
+        build/scripts/test/k8s/operator-manual-uninstall
+        build/scripts/test/k8s/operator-olm-install
+        build/scripts/test/k8s/argocd-install
+        build/scripts/test/k8s/argocd-uninstall
+        build/scripts/test/k8s/operator-olm-uninstall
+        build/scripts/test/k8s/minikube-stop
+        build/scripts/test/k8s/minikube-delete
+  k8s-v1163-olm-0141-minikube-v192:
+    name: Kubernetes 1.14.0 with OLM 0.13.0 (minikube)
+    runs-on: ubuntu-latest
+    needs: operator-and-bundles
+    steps:
+    - uses: actions/checkout@v2
+    - name: k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2
+      env: 
+        ENVIRONMENT: ci
+        DISTRIBUTION: k8s
+        MINIKUBE_VERSION: v1.9.2
+        KUBERNETES_VERSION: v1.16.3
+        OLM_VERSION: 0.14.1
+        MEMORY: 6144
+      run: |
+        build/scripts/test/k8s/deps-install
+        build/scripts/build/generate
+        build/scripts/test/k8s/minikube-start
+        build/scripts/test/common/olm-install
+        build/scripts/test/k8s/operator-olm-install
+        build/scripts/test/k8s/operator-olm-uninstall
+        build/scripts/test/k8s/operator-manual-install
+        build/scripts/test/k8s/operator-manual-uninstall
+        build/scripts/test/k8s/operator-olm-install
+        build/scripts/test/k8s/argocd-install
+        build/scripts/test/k8s/argocd-uninstall
+        build/scripts/test/k8s/operator-olm-uninstall
+        build/scripts/test/k8s/minikube-stop
+        build/scripts/test/k8s/minikube-delete
   k8s-v1170-olm-0141-minikube-v192:
     name: Kubernetes 1.17.0 with OLM 0.14.1 (minikube)
     runs-on: ubuntu-latest
