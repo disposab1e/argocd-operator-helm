@@ -8,7 +8,7 @@ metadata:
           "apiVersion": "argoproj.io/v1alpha1",
           "kind": "ArgoCD",
           "metadata": {
-            "name": "argocd",
+            "name": "argocd"
           },
           "spec": {
             "nameOverride": "argocd",
