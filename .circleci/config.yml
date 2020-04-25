@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   operator-and-bundles:
     machine: 
-      image: ubuntu-1604:201903-01
+      image: ubuntu-1604:202004-01
     steps:
       - checkout
       - run:
@@ -18,7 +18,7 @@ jobs:
             build/scripts/build/push
   k8s-v1140-olm-0130-minikube-v192:
     machine: 
-      image: ubuntu-1604:201903-01
+      image: ubuntu-1604:202004-01
     steps:
       - checkout
       - run:
@@ -45,9 +45,38 @@ jobs:
             build/scripts/test/k8s/operator-olm-uninstall
             build/scripts/test/k8s/minikube-stop
             build/scripts/test/k8s/minikube-delete
+  k8s-v1163-olm-0141-minikube-v192:
+    machine: 
+      image: ubuntu-1604:202004-01
+    steps:
+      - checkout
+      - run:
+          name: Kubernetes v1.16.3 & OLM 0.14.1 (Minikube v1.9.2)
+          environment:
+            ENVIRONMENT: ci
+            DISTRIBUTION: k8s
+            MINIKUBE_VERSION: v1.9.2
+            KUBERNETES_VERSION: v1.16.3
+            OLM_VERSION: 0.14.1
+            MEMORY: "6144"
+          command: |
+            build/scripts/test/k8s/deps-install
+            build/scripts/build/generate
+            build/scripts/test/k8s/minikube-start
+            build/scripts/test/common/olm-install
+            build/scripts/test/k8s/operator-olm-install
+            build/scripts/test/k8s/operator-olm-uninstall
+            build/scripts/test/k8s/operator-manual-install
+            build/scripts/test/k8s/operator-manual-uninstall
+            build/scripts/test/k8s/operator-olm-install
+            build/scripts/test/k8s/argocd-install
+            build/scripts/test/k8s/argocd-uninstall
+            build/scripts/test/k8s/operator-olm-uninstall
+            build/scripts/test/k8s/minikube-stop
+            build/scripts/test/k8s/minikube-delete
   k8s-v1170-olm-0141-minikube-v192:
     machine: 
-      image: ubuntu-1604:201903-01
+      image: ubuntu-1604:202004-01
     steps:
       - checkout
       - run:
@@ -76,7 +105,7 @@ jobs:
             build/scripts/test/k8s/minikube-delete
   k8s-v1180-olm-0141-minikube-v192:
     machine: 
-      image: ubuntu-1604:201903-01
+      image: ubuntu-1604:202004-01
     steps:
       - checkout
       - run:
@@ -113,7 +142,6 @@ workflows:
             branches:
               only: 
                 - circle-ci
-                - release-0.0.4
       - k8s-v1140-olm-0130-minikube-v192:
           requires:
             - operator-and-bundles
@@ -121,7 +149,13 @@ workflows:
             branches:
               only: 
                 - circle-ci
-                - release-0.0.4
+      - k8s-v1163-olm-0141-minikube-v192:
+          requires:
+            - operator-and-bundles
+          filters:
+            branches:
+              only: 
+                - circle-ci
       - k8s-v1170-olm-0141-minikube-v192:
           requires:
             - operator-and-bundles
@@ -129,7 +163,6 @@ workflows:
             branches:
               only: 
                 - circle-ci
-                - release-0.0.4
       - k8s-v1180-olm-0141-minikube-v192:
           requires:
             - operator-and-bundles
@@ -137,4 +170,3 @@ workflows:
             branches:
               only: 
                 - circle-ci
-                - release-0.0.4

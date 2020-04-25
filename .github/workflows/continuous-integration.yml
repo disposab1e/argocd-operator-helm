@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
     - circle-ci
+    - release-0.0.5
+    - master
     paths:
     - '.github/workflows/**'
     - 'deploy/**'
@@ -12,7 +14,13 @@ on:
 
   push:
     branches:
+      - master
       - release-0.0.5
+    paths:
+    - '.github/workflows/**'
+    - 'deploy/**'
+    - 'build/**'
+    - 'helm-charts/**'
 
 jobs:
   operator-and-bundles:

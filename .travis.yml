@@ -9,7 +9,7 @@ env:
     - RELEASE_BRANCH=release-0.0.5
 
 if: |
-  branch in (travis-ci, env(RELEASE_BRANCH)) AND \
+  branch in (master, env(RELEASE_BRANCH)) AND \
   fork = false AND \
   type = push 
 

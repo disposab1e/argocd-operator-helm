@@ -37,20 +37,6 @@ About Argo CD
 
 `Argo CD`_ is a declarative, GitOps continuous delivery tool for Kubernetes.
 
-Tested Platforms
-================
-
-- OpenShift Container Platform 3.11
-- Origin Community Distribution 3.11
-- Minishift v1.34.2
-- OpenShift Container Platform ≥ 4.2
-- ContainerReady Containers 1.9.0-4.3.10
-- Google Cloud Platform (Kubernetes ≥ 1.14)
-- Minikube v1.9.2 (Kubernetes ≥ 1.14)
-
-These are the platforms we currently test the operator with. Other platforms should work fine too!
-
-
 Operator Features
 =================
 
@@ -79,14 +65,53 @@ operator and `Argo CD`_ in `OpenShift 3`_, `OpenShift 4`_, `Minishift`_, `Contai
 .. _Google Cloud Platform: k8s/gcp.html
 .. _Minikube: k8s/minikube.html
 
-Why an Operator and not just a Helm Chart?
-==========================================
-- No need to install Helm
-- Kubernetes native application
-- Integrated in Operator Lifecycle Manager and Operatorhub's
-- User friendly Web Console
+Tested Platforms
+================
 
-**Make it easier for the Kubernetes and OpenShift Community to install and use Argo CD!**
+- OpenShift Container Platform 3.11
+- Origin Community Distribution 3.11
+- Minishift v1.34.2
+- OpenShift Container Platform ≥ 4.2
+- ContainerReady Containers 1.9.0-4.3.10
+- Google Cloud Platform (Kubernetes ≥ 1.14)
+- Minikube v1.9.2 (Kubernetes ≥ 1.14)
+
+These are the platforms we currently test the operator with. Other platforms should work fine too!
+
+CI/CD Environment
+=================
+
+We use `Travis CI`_ and `Github Workflows`_ for continuous integration and deployment. 
+Following table shows the tested combinations after pushing to an release or master branch. 
+To verify some pull requests we only use Github Workflows.
+
+=================    ============    ===========  =======   ========== =========== ========
+   Service            Kubernetes      OpenShift    OLM       Minikube   Minishift   Ubuntu
+=================    ============    ===========  =======   ========== =========== ========
+Travis CI               1.11.0         3.11.0     0.13.0                v1.3.2      18.04
+\                       1.11.0         3.11.0     0.14.1                v1.3.2      18.04
+\                       1.14.0                    0.13.0      v1.9.2                18.04
+\                       1.16.3                    0.14.1      v1.9.2                18.04
+\                       1.17.0                    0.14.1      v1.9.2                18.04
+\                       1.18.0                    0.14.1      v1.9.2                18.04
+Github Workflows        1.14.0                    0.13.0      v1.9.2                18.04
+\                       1.16.3                    0.14.1      v1.9.2                18.04
+\                       1.17.0                    0.14.1      v1.9.2                18.04
+\                       1.18.0                    0.14.1      v1.9.2                18.04
+=================    ============    ===========  =======   ========== =========== ========
+
+Both services have less than 8GB memory available in their Ubuntu VM's, so it's not possible to use Container Ready Containers. 
+Nevertheless with test the operator with the latest version of Container Ready Containers on Mac OS Catalina in a fully automated process.
+
+We love CI/CD so we additionally test with `CircleCI`_. Because build time is limited we only test with CircleCI 
+Ubuntu 16.04 Vm's when we merge a release branch to the circle-ci branch.
+
+All of these services are pretty cool! Thx for supporting the open source community!
+
+.. _Travis CI: https://travis-ci.org/github/disposab1e/argocd-operator-helm
+.. _Github Workflows: https://github.com/disposab1e/argocd-operator-helm/actions?query=workflow%3Acontinuous-integration
+.. _CircleCI: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/circle-ci
+
 
 License
 =======
