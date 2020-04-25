@@ -1,4 +1,4 @@
-[![Argo CD](https://img.shields.io/badge/argocd-1.5.2-green.svg)](https://github.com/argoproj/argo-cd/releases/tag/v1.4.2)
+[![Argo CD](https://img.shields.io/badge/argocd-1.5.2-green.svg)](https://github.com/argoproj/argo-cd/releases/tag/v1.5.2)
 [![Latest Release](https://img.shields.io/badge/latest%20release-0.0.5-yellow.svg)](https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.5)
 [![Documentation Status](https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest)](https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest)
 [![Travis-CI](https://travis-ci.org/disposab1e/argocd-operator-helm.svg?branch=release-0.0.5)](https://travis-ci.org/disposab1e/argocd-operator-helm)
