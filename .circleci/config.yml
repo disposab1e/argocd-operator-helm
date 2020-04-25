@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   operator-and-bundles:
     machine: 
-      image: ubuntu-1604:202004-01
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
@@ -18,7 +18,7 @@ jobs:
             build/scripts/build/push
   k8s-v1140-olm-0130-minikube-v192:
     machine: 
-      image: ubuntu-1604:202004-01
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
@@ -47,7 +47,7 @@ jobs:
             build/scripts/test/k8s/minikube-delete
   k8s-v1163-olm-0141-minikube-v192:
     machine: 
-      image: ubuntu-1604:202004-01
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
@@ -76,7 +76,7 @@ jobs:
             build/scripts/test/k8s/minikube-delete
   k8s-v1170-olm-0141-minikube-v192:
     machine: 
-      image: ubuntu-1604:202004-01
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
@@ -105,7 +105,7 @@ jobs:
             build/scripts/test/k8s/minikube-delete
   k8s-v1180-olm-0141-minikube-v192:
     machine: 
-      image: ubuntu-1604:202004-01
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
