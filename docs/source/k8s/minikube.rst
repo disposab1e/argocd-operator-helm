@@ -6,27 +6,27 @@ A installation guide for Operator Lifecycle Manager,
 Argo CD Operator (Helm), Argo CD, 
 Argo CD CLI and the Guestbook Example in Minikube.
 
-.. include:: ../_static/kubernetes_clusteradmin.txt
+.. include:: ../_static/common_clusteradmin.txt
 
 
 
 Prerequisites
 =============
 
-.. image:: https://img.shields.io/badge/minikube-v1.6.2-blue.svg
+.. image:: https://img.shields.io/badge/minikube-≥%20v1.6.2-blue.svg
    :target: https://github.com/kubernetes/minikube
    :alt: minikube
-.. image:: https://img.shields.io/badge/kubernetes-1.16-blue.svg
+.. image:: https://img.shields.io/badge/kubernetes-≥%201.14-blue.svg
    :target: https://v1-16.docs.kubernetes.io/
    :alt: Kubernetes
-.. image:: https://img.shields.io/badge/olm-0.13.0-blue.svg
+.. image:: https://img.shields.io/badge/olm-≥%200.13.0-blue.svg
    :target: https://github.com/operator-framework/operator-lifecycle-manager
    :alt: Operator Lifecycle Manager
 
 .. include:: ../_static/kubernetes_olm.txt
 
 
-.. include:: ../_static/kubernetes_operator_installation.txt
+.. include:: ../_static/common_operator_installation.txt
 
 .. include:: ../_static/kubernetes_operator_olm_installation.txt
 
@@ -38,6 +38,7 @@ Argo CD Installation
 =====================
 
 Install Argo CD server components and Argo CD command line interface.
+
 
 Argo CD
 -------
@@ -51,7 +52,7 @@ Argo CD
 
 .. code-block:: bash
    
-    kubectl apply -f examples/k8s.yaml
+    kubectl apply -f examples/k8s.yaml -n argocd
 
 .. include:: ../_static/kubernetes_argocd_installation.txt
 
@@ -88,15 +89,13 @@ Download CLI
     curl --insecure https://localhost:9001/download/argocd-linux-amd64 -o argocd  
 
 
-.. include:: ../_static/kubernetes_change_default_password.txt
-
 
 Login Argo CD
 """""""""""""
 
 .. code-block:: bash
    
-    argocd login --insecure --username admin --password Password1! localhost:9001
+    argocd login --insecure --username admin --password admin localhost:9001
 
 
 .. include:: ../_static/common_guestbook_example.txt

@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -e
+
+echo "======================================================"
+echo "Setup minishift ${MINISHIFT_VERSION} environment"
+echo "======================================================"
+export MINISHIFT_ENABLE_EXPERIMENTAL=y
+minishift profile set argocd
+minishift config set memory ${MEMORY}
+minishift config set insecure-registry imac.fritz.box:5000
+minishift config view
+minishift addon enable admin-user 
+minishift addon enable anyuid
+minishift addons list
+
+
+echo "======================================================"
+echo "Starting minishift ${MINISHIFT_VERSION}"
+echo "======================================================"
+minishift start
+
+echo "======================================================"
+echo "Login as admin"
+echo "======================================================"
+eval $(minishift oc-env)
+oc login -u admin -p admin
+
+if [ "$ENVIRONMENT" == "ci" ]; then
+    echo "======================================================"
+    echo "Remove openshift-web-console in CI/CD environment"
+    echo "======================================================"
+    oc delete deployment.apps/openshift-web-console-operator -n openshift-core-operators
+    sleep 20
+    oc delete deployment.apps/webconsole -n openshift-web-console
+    sleep 20
+fi
+
+

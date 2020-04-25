@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -e
+
+source build/scripts/envs/ocp3_dev
+
+
+build/scripts/build/build
+build/scripts/build/push
+
+build/scripts/build/generate
+
+build/scripts/test/${DISTRIBUTION}/minishift-start
+
+build/scripts/test/common/olm-install
+
+build/scripts/test/ocp/operator-olm-install
+build/scripts/test/ocp/operator-olm-uninstall
+
+build/scripts/test/ocp/operator-manual-install
+build/scripts/test/ocp/operator-manual-uninstall
+
+build/scripts/test/ocp/operator-olm-install
+build/scripts/test/ocp/argocd-install
+build/scripts/test/ocp/argocd-uninstall
+build/scripts/test/ocp/argocd-oauth-install

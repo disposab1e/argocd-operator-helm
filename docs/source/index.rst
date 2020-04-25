@@ -5,7 +5,7 @@
    :maxdepth: 2
    :hidden:
 
-   quickstarts
+   operatorhub
 
 .. toctree::
    :caption: Guides

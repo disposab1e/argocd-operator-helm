@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -e
+
+# Environment: dev, ci, release
+export ENVIRONMENT=dev
+
+# Distribution: k8s, ocp3, ocp4
+export DISTRIBUTION=ocp3
+
+export MINISHIFT_VERSION=1.34.2
+export OLM_VERSION=0.14.1
+
+export MEMORY=12000

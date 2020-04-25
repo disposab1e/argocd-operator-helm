@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -e
+
+# Environment: dev, ci, release
+export ENVIRONMENT=dev
+
+# Distribution: k8s, ocp3, ocp4
+export DISTRIBUTION=k8s
+
+export MINIKUBE_VERSION=v1.9.2
+
+export MEMORY=16144

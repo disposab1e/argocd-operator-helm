@@ -8,10 +8,10 @@ in an effective, automated and scalable way.
 .. code-block:: bash
 
     oc apply -f \
-    https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.13.0/crds.yaml
+    https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.14.1/crds.yaml
 
     oc apply -f \
-    https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.13.0/olm.yaml
+    https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.14.1/olm.yaml
 
     oc rollout status -w deployment/olm-operator -n olm
     oc rollout status -w deployment/catalog-operator -n olm

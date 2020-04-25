@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -e
+
+if [ "$DISTRIBUTION" == "ocp3" ]; then
+    eval $(minishift oc-env)
+else
+    eval $(crc oc-env)
+fi
+
+echo "======================================================"
+echo "Uninstall operator with manual installation"
+echo "======================================================"
+oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/deployment.yaml
+oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/crd.yaml
+oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/role-binding.yaml
+oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/role.yaml
+oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/service-account.yaml
+oc delete -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/manual/namespace.yaml

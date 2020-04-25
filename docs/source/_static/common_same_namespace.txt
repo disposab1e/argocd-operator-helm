@@ -1,0 +1,1 @@
+.. Note:: The operator manages a single namespace installation of Argo CD. Therefore you have to install the operator and Argo CD in the same namespace. For simplicity we recommend creating a namespace :guilabel:`argocd`.  

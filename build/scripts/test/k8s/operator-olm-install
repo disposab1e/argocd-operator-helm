@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -e
+
+echo "======================================================"
+echo "Install and Test operator with olm installation"
+echo "======================================================"
+kubectl apply -f build/_output/guides/${ENVIRONMENT}/k8s/olm/namespace.yaml
+kubectl apply -f build/_output/guides/${ENVIRONMENT}/k8s/olm/catalog-source.yaml
+echo "Wait 30s"
+sleep 30
+kubectl wait pod -n olm -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=180s
+kubectl apply -f build/_output/guides/${ENVIRONMENT}/k8s/olm/operator-group.yaml
+kubectl apply -f build/_output/guides/${ENVIRONMENT}/k8s/olm/subscription.yaml
+echo "Wait 60s"
+sleep 60
+kubectl wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=180s
+kubectl rollout status -w deployment/argocd-operator-helm -n argocd

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+source build/scripts/envs/ocp4_dev
+
+build/scripts/test/${DISTRIBUTION}/crc-stop
+build/scripts/test/${DISTRIBUTION}/crc-delete

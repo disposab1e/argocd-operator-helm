@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+echo "======================================================"
+echo "Deleting minishift ${MINISHIFT_VERSION}"
+echo "======================================================"
+minishift delete --force

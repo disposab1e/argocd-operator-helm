@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+
+source build/scripts/envs/ocp3_dev
+
+
+build/scripts/test/${DISTRIBUTION}/minishift-stop
+build/scripts/test/${DISTRIBUTION}/minishift-delete

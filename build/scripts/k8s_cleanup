@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+
+source build/scripts/envs/k8s_dev
+
+build/scripts/test/${DISTRIBUTION}/argocd-uninstall
+build/scripts/test/${DISTRIBUTION}/operator-olm-uninstall
+
+build/scripts/test/${DISTRIBUTION}/minikube-stop
+build/scripts/test/${DISTRIBUTION}/minikube-delete

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -e
+
+MARKETPLACE_NAMESPACE=openshift-marketplace
+
+if [ "$DISTRIBUTION" == "ocp3" ]; then
+    eval $(minishift oc-env)
+    MARKETPLACE_NAMESPACE=olm
+else
+    eval $(crc oc-env)
+fi
+
+echo "======================================================"
+echo "Install and Test operator with olm installation"
+echo "======================================================"
+oc apply -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/olm/namespace.yaml
+oc apply -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/olm/catalog-source.yaml
+
+if [ "$DISTRIBUTION" == "ocp3" ]; then
+    # cluser-admin cause bug in openshift
+    oc apply -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/olm/role-binding.yaml
+fi
+
+echo "Wait 40s"
+sleep 40
+oc wait pod -n ${MARKETPLACE_NAMESPACE} -l olm.catalogSource=argocd-catalog --for=condition=Ready --timeout=120s
+oc apply -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/olm/operator-group.yaml
+oc apply -f build/_output/guides/${ENVIRONMENT}/${DISTRIBUTION}/olm/subscription.yaml
+echo "Wait 60s"
+sleep 60
+oc wait pod -n argocd -l name=argocd-operator-helm --for=condition=Ready --timeout=120s
+oc rollout status -w deployment/argocd-operator-helm -n argocd

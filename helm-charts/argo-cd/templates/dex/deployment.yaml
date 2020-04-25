@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/managed-by: {{ .Release.Service }}
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/component: {{ .Values.dex.name }}
-    app.kubernetes.io/version: {{ .Values.dex.image.tag }}    
+    app.kubernetes.io/version: {{ .Values.dex.image.tag }}
 spec:
   selector:
     matchLabels:
@@ -18,6 +18,12 @@ spec:
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
+      {{- if .Values.dex.podAnnotations }}
+      annotations:
+      {{- range $key, $value := .Values.dex.podAnnotations }}
+        {{ $key }}: {{ $value | quote }}
+      {{- end }}
+      {{- end }}
       labels:
         app.kubernetes.io/name: {{ include "argo-cd.name" . }}-{{ .Values.dex.name }}
         helm.sh/chart: {{ include "argo-cd.chart" . }}
@@ -25,17 +31,27 @@ spec:
         app.kubernetes.io/managed-by: {{ .Release.Service }}
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/component: {{ .Values.dex.name }}
-        app.kubernetes.io/version: {{ default .Values.global.image.tag .Values.dex.image.tag }}        
+        app.kubernetes.io/version: {{ .Values.dex.image.tag }}
+        {{- if .Values.dex.podLabels }}
+{{- toYaml .Values.dex.podLabels | nindent 8 }}
+        {{- end }}
     spec:
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.global.securityContext }}
+      securityContext: {{- toYaml .Values.global.securityContext | nindent 8 }}
+      {{- end }}
       initContainers:
       - name: copyutil
         image: {{ default .Values.global.image.repository .Values.dex.initImage.repository }}:{{ default .Values.global.image.tag .Values.dex.initImage.tag }}
         imagePullPolicy: {{ default .Values.global.image.imagePullPolicy .Values.dex.initImage.imagePullPolicy }}
         resources:
-{{- toYaml .Values.dex.resources | nindent 10 }}  
+{{- toYaml .Values.dex.resources | nindent 10 }}
         {{- if .Values.dex.containerSecurityContext }}
         securityContext: {{- toYaml .Values.dex.containerSecurityContext | nindent 10 }}
-        {{- end }}        
+        {{- end }}
         command:
         - cp
         - /usr/local/bin/argocd-util
@@ -52,7 +68,7 @@ spec:
         - rundex
         {{- if .Values.dex.containerSecurityContext }}
         securityContext: {{- toYaml .Values.dex.containerSecurityContext | nindent 10 }}
-        {{- end }}            
+        {{- end }}
         {{- if .Values.dex.env }}
         env:
 {{- toYaml .Values.dex.env | nindent 8 }}
