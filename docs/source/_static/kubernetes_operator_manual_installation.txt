@@ -1,7 +1,8 @@
 Manual
 ------
 
-You can install the operator from local sources without having to install an OLM Catalog.
+You can install the operator from local sources without having to install an OLM Catalog. 
+This can be helpful if your cluster runs in an isolated environment with no direct internet access.
 
 .. Note:: No channel subscription and automatic operator updates available with this method. 
 

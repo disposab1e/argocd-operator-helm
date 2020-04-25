@@ -1,0 +1,7 @@
+Operator Installation
+=====================
+
+It's possible to install the operator using the Operator Lifecycle Manager or manually. 
+
+.. include:: ../_static/common_same_namespace.txt
+

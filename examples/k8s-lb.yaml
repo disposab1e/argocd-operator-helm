@@ -2,7 +2,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: ArgoCD
 metadata:
   name: argocd
-  namespace: argocd
 spec:
   nameOverride: argocd
   fullnameOverride: ""
@@ -813,6 +812,8 @@ spec:
       # argocdServerAdminPassword:
       # Password modification time defaults to current time if not set
       # argocdServerAdminPasswordMtime: "2006-01-02T15:04:05Z"
+      argocdServerAdminPasswordMtime: '2006-01-02T15:04:05Z'
+      argocdServerAdminPassword: $2a$10$tH8CkD0wpAptBqnlp4u.EONVP7b/ae16nhDYewXWSIyGhC7xepYya
 
   ## OpenShift Integration
   openshift:

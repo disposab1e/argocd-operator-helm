@@ -8,34 +8,31 @@ Argo CD CLI and the Guestbook Example in OpenShift 4.x (OCP_, CRC_).
 .. _OCP: https://www.openshift.com/products/container-platform
 .. _CRC: https://github.com/code-ready/crc
 
-.. Note:: 
-   You have to be in the :guilabel:`cluster-admin` ClusterRole to install the operator and Argo CD.
+.. include:: ../_static/common_clusteradmin.txt
 
 
 Prerequisites
 =============
 
-.. image:: https://img.shields.io/badge/ocp-4.2-red.svg
+.. image:: https://img.shields.io/badge/ocp-≥%204.2-red.svg
    :target: https://www.openshift.com/products/container-platform
    :alt: OpenShift Container Platform
-.. image:: https://img.shields.io/badge/crc-1.4.0-red.svg
+.. image:: https://img.shields.io/badge/crc-≥%201.4.0-red.svg
    :target: https://github.com/code-ready/crc
    :alt: CodeReady Containers
 
 As usual you need to have access to an up and running OpenShift 4.x cluster. 
 
 
-Operator Installation
-=====================
+.. include:: ../_static/common_operator_installation.txt
 
-It’s possible to install the operator using the Operator Lifecycle Manager or manually.
 
 Operator Lifecycle Manager
 --------------------------
 
 This installation method installs the operator using an `OLM Catalog`_.
 
-.. _OLM Catalog: https://quay.io/repository/disposab1e/argocd-operator-helm-registry
+.. _OLM Catalog: https://quay.io/repository/disposab1e/argocd-operator-helm-registry-ocp
 
 .. image:: https://img.shields.io/badge/git%20clone-https%3A%2F%2Fgithub.com%2Fdisposab1e%2Fargocd--operator--helm.git-9cf.svg
    :target: https://github.com/disposab1e/argocd-operator-helm
@@ -54,6 +51,7 @@ Manual
 ------
 
 You can install the operator from local sources without having to install an OLM Catalog.
+This can be helpful if your cluster runs in an isolated environment with no direct internet access.
 
 .. Note:: No channel subscription and automatic operator updates available with this method. 
 
@@ -94,7 +92,7 @@ OpenShift OAuth
 
 .. code-block:: bash
    
-    oc apply -f examples/ocp-oauth.yaml
+    oc apply -f examples/ocp-oauth.yaml -n argocd
 
     oc get ArgoCDs argocd -n argocd
 
@@ -113,7 +111,7 @@ Default Authentication
 
 .. code-block:: bash
    
-    oc apply -f examples/ocp.yaml
+    oc apply -f examples/ocp.yaml -n argocd
 
     oc get ArgoCDs argocd -n argocd
 
@@ -169,26 +167,13 @@ Download CLI
     curl --insecure https://argocd-server-argocd.apps-crc.testing/download/argocd-linux-amd64 -o argocd  
 
 
-Change default password
-"""""""""""""""""""""""
-
-Following example changes the default password to ``Password1!``
-
-.. code-block:: bash
-   
-    oc -n argocd patch secret argocd-secret \
-    -p '{"stringData": {
-        "admin.password": "$2a$10$hDj12Tw9xVmvybSahN1Y0.f9DZixxN8oybyA32Uy/eqWklFU4Mo8O",
-        "admin.passwordMtime": "'$(date +%FT%T%Z)'"
-    }}'
-
 
 Login Argo CD
 """""""""""""
 
 .. code-block:: bash
    
-    argocd login --insecure --username admin --password Password1! argocd-server-argocd.apps-crc.testing
+    argocd login --insecure --username admin --password admin argocd-server-argocd.apps-crc.testing
 
 .. include:: ../_static/common_guestbook_example.txt
 
@@ -231,7 +216,7 @@ Operator Marketplace installation
 .. code-block:: bash
 
     oc delete -f guides/ocp4/olm/subscription.yaml
-    oc delete csv argocd-operator-helm.v0.0.4 -n argocd
+    oc delete csv argocd-operator-helm.v0.0.5 -n argocd
     oc delete crd argocds.argoproj.io
     oc delete -f guides/ocp4/olm/catalog-source.yaml
     oc delete -f guides/ocp4/olm/operator-group.yaml

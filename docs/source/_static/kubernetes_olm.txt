@@ -7,7 +7,16 @@ in an effective, automated and scalable way.
 
 .. code-block:: bash
 
-    curl -sL https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.13.0/install.sh | bash -s 0.13.0
+    kubectl apply -f \
+    https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.14.1/crds.yaml
+
+    kubectl apply -f \
+    https://github.com/operator-framework/operator-lifecycle-manager/releases/download/0.14.1/olm.yaml
+
+    kubectl rollout status -w deployment/olm-operator -n olm
+    kubectl rollout status -w deployment/catalog-operator -n olm
+    kubectl rollout status -w deployment/packageserver -n olm
+
 
 .. _Operator Lifecycle Manager (OLM): https://github.com/operator-framework/operator-lifecycle-manager
 

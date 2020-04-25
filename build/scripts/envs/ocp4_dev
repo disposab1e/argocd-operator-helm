@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -e
+
+# Environment: dev, ci, release
+export ENVIRONMENT=dev
+
+# Distribution: k8s, ocp3, ocp4
+export DISTRIBUTION=ocp4
+
+export CRC_VERSION=1.9.0-4.3.10
+
+export MEMORY=24000

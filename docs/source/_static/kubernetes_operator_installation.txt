@@ -1,5 +1,0 @@
-Operator Installation
-=====================
-
-It's possible to install the operator using the Operator Lifecycle Manager or manually. 
-

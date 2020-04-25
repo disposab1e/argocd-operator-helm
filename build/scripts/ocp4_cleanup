@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-# Environment: dev, ci, release
-export ENVIRONMENT=dev
-
-# Distribution: k8s, ocp3, ocp4
-export DISTRIBUTION=ocp4
+source build/scripts/envs/ocp4_dev
 
 build/scripts/test/${DISTRIBUTION}/crc-stop
 build/scripts/test/${DISTRIBUTION}/crc-delete

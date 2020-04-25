@@ -1,15 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-# Environment: dev, ci, release
-export ENVIRONMENT=dev
+source build/scripts/envs/ocp3_dev
 
-# Distribution: k8s, ocp3, ocp4
-export DISTRIBUTION=ocp3
-
-
-build/scripts/test/ocp/argocd-uninstall
-build/scripts/test/ocp/operator-olm-uninstall
 
 build/scripts/test/${DISTRIBUTION}/minishift-stop
 build/scripts/test/${DISTRIBUTION}/minishift-delete

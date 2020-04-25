@@ -2,16 +2,16 @@
 Argo CD Operator (Helm)
 ***********************
 
-.. image:: https://img.shields.io/badge/argocd-1.4.2-green.svg
-   :target: https://github.com/argoproj/argo-cd/releases/tag/v1.4.2
+.. image:: https://img.shields.io/badge/argocd-1.5.2-green.svg
+   :target: https://github.com/argoproj/argo-cd/releases/tag/v1.5.2
    :alt: Argo CD
 .. image:: https://img.shields.io/badge/ocp-3.11-red.svg
    :target: https://www.openshift.com/products/container-platform
    :alt: OpenShift Container Platform
-.. image:: https://img.shields.io/badge/ocp-4.2-red.svg
+.. image:: https://img.shields.io/badge/ocp-≥%204.2-red.svg
    :target: https://www.openshift.com/products/container-platform
    :alt: OpenShift Container Platform
-.. image:: https://img.shields.io/badge/kubernetes-1.14-blue.svg
+.. image:: https://img.shields.io/badge/kubernetes-≥%201.11-blue.svg
    :target: https://kubernetes.io/
    :alt: Kubernetes
 .. image:: https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest
@@ -20,8 +20,8 @@ Argo CD Operator (Helm)
 .. image:: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/master.svg?style=svg
    :target: https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/master
    :alt: Build with CircleCI
-.. image:: https://img.shields.io/badge/latest%20release-0.0.4-yellow.svg
-   :target: https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.4
+.. image:: https://img.shields.io/badge/latest%20release-0.0.5-yellow.svg
+   :target: https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.5
    :alt: Latest Release
 
 The `Argo CD Operator (Helm)`_ is based on the `Argo CD Helm Chart`_ 
@@ -48,34 +48,35 @@ Tested Platforms
 - OpenShift Container Platform 3.11
 - Origin Community Distribution 3.11
 - Minishift v1.34.2
-- OpenShift Container Platform 4.2/4.3
-- ContainerReady Containers 1.4.0-4.2.13
-- Google Cloud Platform (Kubernetes >1.14)
-- Minikube v1.6.2 (Kubernetes >1.14)
-- These are the platforms we currently test the operator with. Other platforms should work fine too!
+- OpenShift Container Platform ≥ 4.2
+- ContainerReady Containers 1.9.0-4.3.10
+- Google Cloud Platform (Kubernetes ≥ 1.14)
+- Minikube v1.9.2 (Kubernetes ≥ 1.14)
 
-.. Attention::
-   This operator supports OpenShift OAuth integration on all supported OpenShift platforms.
+These are the platforms we currently test the operator with. Other platforms should work fine too!
+
 
 Operator Features
 =================
 
 - Easy configuration and installation
-- OpenShift OAuth integration 
 
-.. Note:: This operator shares all `configuration values`_ from the Argo CD Helm Chart.
+.. Note:: Shares all `configuration values`_ from the Argo CD Helm Chart.
+
+.. Attention::
+   Supports OpenShift OAuth integration on all supported OpenShift platforms.
 
 
 Get started
 ===========
 
-`Quickstart`_ or try our comprehensive guides to install this 
-opertor and `Argo CD`_ in `OpenShift 3`_, `OpenShift 4`_, `Minishift`_, `ContainerReady Containers`_, `Google Cloud Platform`_ or `Minikube`_.
+Quickstart with `OperatorHub's`_ or try our comprehensive guides to install this 
+operator and `Argo CD`_ in `OpenShift 3`_, `OpenShift 4`_, `Minishift`_, `ContainerReady Containers`_, `Google Cloud Platform`_ or `Minikube`_.
 
 .. _Argo CD Helm Chart: https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd
 .. _Argo CD Operator (Helm): https://github.com/disposab1e/argocd-operator-helm
 .. _Argo CD: https://argoproj.github.io/argo-cd/
-.. _Quickstart: quickstarts.html
+.. _OperatorHub's: operatorhub.html
 .. _OpenShift 3: ocp/ocp3.html
 .. _OpenShift 4: ocp/ocp4.html
 .. _Minishift: ocp/ocp3.html

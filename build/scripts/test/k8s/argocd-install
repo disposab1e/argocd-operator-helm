@@ -4,7 +4,7 @@ set -e
 echo "======================================================"
 echo "Install and Test Argo CD"
 echo "======================================================"
-kubectl apply -f examples/k8s.yaml
+kubectl apply -f examples/k8s.yaml -n argocd
 echo "Wait 10s"
 sleep 10
 kubectl rollout status -w deployment/argocd-application-controller -n argocd

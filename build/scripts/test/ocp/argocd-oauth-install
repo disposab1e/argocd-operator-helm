@@ -10,7 +10,7 @@ fi
 echo "======================================================"
 echo "Install and Test Argo CD with OAuth integration"
 echo "======================================================"
-oc apply -f examples/ocp-oauth.yaml
+oc apply -f examples/ocp-oauth.yaml -n argocd
 echo "Wait 240s"
 sleep 240
 oc rollout status -w deployment/argocd-application-controller -n argocd

@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-# Environment: dev, ci, release
-export ENVIRONMENT=dev
-
-# Distribution: k8s, ocp3, ocp4
-export DISTRIBUTION=k8s
-
+source build/scripts/envs/k8s_dev
 
 build/scripts/test/${DISTRIBUTION}/argocd-uninstall
 build/scripts/test/${DISTRIBUTION}/operator-olm-uninstall
