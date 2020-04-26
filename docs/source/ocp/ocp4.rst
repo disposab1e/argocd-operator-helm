@@ -205,8 +205,6 @@ The uninstallation process will remove the Argo CD installation (CR) but NOT the
 
     oc delete crd appprojects.argoproj.io
     oc delete crd applications.argoproj.io
-    oc delete crd workflowtemplates.argoproj.io
-    oc delete crd workflows.argoproj.io
 
 
 
