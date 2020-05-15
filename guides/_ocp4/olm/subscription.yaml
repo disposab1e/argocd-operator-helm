@@ -1,0 +1,10 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: argocd-operator-helm
+  namespace: argocd
+spec:
+  channel: alpha
+  name: argocd-operator-helm
+  source: argocd-catalog
+  sourceNamespace: openshift-marketplace

@@ -5,6 +5,6 @@ metadata:
   namespace: openshift-marketplace
 spec:
   sourceType: grpc
-  image: imac.fritz.box:5000/disposab1e/argocd-operator-helm-registry-ocp:0.0.5
+  image: imac.fritz.box:5000/disposab1e/argocd-operator-helm-registry-ocp:0.0.6
   displayName: Argo CD Operators
   publisher: Argo CD

@@ -12,7 +12,7 @@ spec:
   global:
     image:
       repository: argoproj/argocd
-      tag: v1.5.2
+      tag: v1.5.4
       imagePullPolicy: IfNotPresent
     securityContext: {}
     #  runAsUser: 999
@@ -30,7 +30,7 @@ spec:
 
     image:
       repository: # argoproj/argocd
-      tag: # v1.5.2
+      tag: # v1.5.4
       imagePullPolicy: # IfNotPresent
 
     ## Argo controller commandline flags
@@ -321,7 +321,7 @@ spec:
 
     image:
       repository: # argoproj/argocd
-      tag: # v1.5.2
+      tag: # v1.5.4
       imagePullPolicy: # IfNotPresent
 
     ## Additional command line arguments to pass to argocd-server
@@ -575,7 +575,7 @@ spec:
 
     image:
       repository: # argoproj/argocd
-      tag: # v1.5.2
+      tag: # v1.5.4
       imagePullPolicy: # IfNotPresent
 
     ## Additional command line arguments to pass to argocd-repo-server

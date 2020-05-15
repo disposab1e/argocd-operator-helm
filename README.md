@@ -1,8 +1,8 @@
-[![Argo CD](https://img.shields.io/badge/argocd-1.5.2-green.svg)](https://github.com/argoproj/argo-cd/releases/tag/v1.5.2)
-[![Latest Release](https://img.shields.io/badge/latest%20release-0.0.5-yellow.svg)](https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.5)
+[![Argo CD](https://img.shields.io/badge/argocd-1.5.4-green.svg)](https://github.com/argoproj/argo-cd/releases/tag/v1.5.4)
+[![Latest Release](https://img.shields.io/badge/latest%20release-0.0.6-yellow.svg)](https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.6)
 [![Documentation Status](https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest)](https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest)
-[![Travis-CI](https://travis-ci.org/disposab1e/argocd-operator-helm.svg?branch=release-0.0.5)](https://travis-ci.org/disposab1e/argocd-operator-helm)
-[![Github Workflows](https://github.com/disposab1e/argocd-operator-helm/workflows/continuous-integration/badge.svg?branch=release-0.0.5)](https://github.com/disposab1e/argocd-operator-helm/actions?query=workflow%3Acontinuous-integration)
+[![Travis-CI](https://travis-ci.org/disposab1e/argocd-operator-helm.svg?branch=release-0.0.6)](https://travis-ci.org/disposab1e/argocd-operator-helm)
+[![Github Workflows](https://github.com/disposab1e/argocd-operator-helm/workflows/continuous-integration/badge.svg?branch=release-0.0.6)](https://github.com/disposab1e/argocd-operator-helm/actions?query=workflow%3Acontinuous-integration)
 
 # Argo CD Operator (Helm)
 
@@ -17,7 +17,7 @@ This **community maintained** Argo CD Operator is based on the **community maint
 * Easy configuration and installation
 * OpenShift OAuth integration on all supported OpenShift platforms
 
-Shares all [configuration values](https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.5/helm-charts/argo-cd/README.md) from the Argo CD Helm Chart.
+Shares all [configuration values](https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.6/helm-charts/argo-cd/README.md) from the Argo CD Helm Chart.
 
 ## Get started
 
@@ -29,9 +29,9 @@ Quickstart with [OperatorHub's](https://argocd-operator-helm.readthedocs.io/en/l
 * Origin Community Distribution 3.11
 * Minishift v1.34.2
 * OpenShift Container Platform ≥ 4.2
-* ContainerReady Containers 1.9.0-4.3.10
+* ContainerReady Containers 1.10.0-4.4.3
 * Google Cloud Platform (Kubernetes ≥ 1.14)
-* Minikube v1.9.2 (Kubernetes ≥ 1.14)
+* Minikube v1.10.1 (Kubernetes ≥ 1.14)
 
 These are the platforms we currently test the operator with. Other platforms should work fine too!
 
@@ -43,16 +43,16 @@ We use [Travis CI](https://travis-ci.org/github/disposab1e/argocd-operator-helm)
 | --- | :-: | :-: | :-: | :-: | :-: | :-: |
 | Travis CI | 1.11.0 | 3.11.0 | 0.13.0 | | v1.3.2 |  18.04 |
 | | 1.11.0 | 3.11.0 | 0.14.1 | | v1.3.2 | 18.04 |
-|  | 1.14.0 | | 0.13.0 | v1.9.2 | | 18.04 |
-| | 1.16.3 | | 0.14.1 | v1.9.2 | | 18.04 |
-| | 1.17.0 | | 0.14.1 | v1.9.2 | | 18.04 |
-| | 1.18.0 | | 0.14.1 | v1.9.2 | | 18.04 |
-| Github Workflows | 1.14.0 | | 0.13.0 | v1.9.2 | | 18.04 |
-| | 1.16.3 | | 0.14.1 | v1.9.2 | | 18.04 |
-| | 1.17.0 | | 0.14.1 | v1.9.2 | | 18.04 |
-| | 1.18.0 | | 0.14.1 | v1.9.2 | | 18.04 |
+|  | 1.14.0 | | 0.13.0 | v1.10.1 | | 18.04 |
+| | 1.16.3 | | 0.14.1 | v1.10.1 | | 18.04 |
+| | 1.17.0 | | 0.14.1 | v1.10.1 | | 18.04 |
+| | 1.18.0 | | 0.14.1 | v1.10.1 | | 18.04 |
+| Github Workflows | 1.14.0 | | 0.13.0 | v1.10.1 | | 18.04 |
+| | 1.16.3 | | 0.14.1 | v1.10.1 | | 18.04 |
+| | 1.17.0 | | 0.14.1 | v1.10.1 | | 18.04 |
+| | 1.18.0 | | 0.14.1 | v1.10.1 | | 18.04 |
 
-Both services have less than 8GB memory available in their Ubuntu VM's, so it's not possible to use Container Ready Containers. Nevertheless with test the operator with the latest version of Container Ready Containers on Mac OS Catalina in a fully automated process.
+Both services have less than 8GB memory available in their Ubuntu VM's, so it's not possible to use Container Ready Containers. Nevertheless we test the operator with the latest version of Container Ready Containers on Mac OS Catalina in a fully automated process.
 
 We love CI/CD so we additionally test with [CircleCI](https://circleci.com/gh/disposab1e/argocd-operator-helm/tree/circle-ci). Because build time is limited we only test with CircleCI Ubuntu 16.04 Vm's when we merge a release branch to the circle-ci branch.
 
