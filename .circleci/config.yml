@@ -16,17 +16,17 @@ jobs:
             build/scripts/build/build
             build/scripts/build/login
             build/scripts/build/push
-  k8s-v1140-olm-0130-minikube-v192:
+  k8s-v1140-olm-0130-minikube-v1101:
     machine: 
       image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
-          name: Kubernetes v1.14.0 & OLM 0.13.0 (Minikube v1.9.2)
+          name: Kubernetes v1.14.0 & OLM 0.13.0 (Minikube v1.10.1)
           environment:
             ENVIRONMENT: ci
             DISTRIBUTION: k8s
-            MINIKUBE_VERSION: v1.9.2
+            MINIKUBE_VERSION: v1.10.1
             KUBERNETES_VERSION: v1.14.0
             OLM_VERSION: 0.13.0
             MEMORY: "6144"
@@ -45,17 +45,17 @@ jobs:
             build/scripts/test/k8s/operator-olm-uninstall
             build/scripts/test/k8s/minikube-stop
             build/scripts/test/k8s/minikube-delete
-  k8s-v1163-olm-0141-minikube-v192:
+  k8s-v1163-olm-0141-minikube-v1101:
     machine: 
       image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
-          name: Kubernetes v1.16.3 & OLM 0.14.1 (Minikube v1.9.2)
+          name: Kubernetes v1.16.3 & OLM 0.14.1 (Minikube v1.10.1)
           environment:
             ENVIRONMENT: ci
             DISTRIBUTION: k8s
-            MINIKUBE_VERSION: v1.9.2
+            MINIKUBE_VERSION: v1.10.1
             KUBERNETES_VERSION: v1.16.3
             OLM_VERSION: 0.14.1
             MEMORY: "6144"
@@ -74,17 +74,17 @@ jobs:
             build/scripts/test/k8s/operator-olm-uninstall
             build/scripts/test/k8s/minikube-stop
             build/scripts/test/k8s/minikube-delete
-  k8s-v1170-olm-0141-minikube-v192:
+  k8s-v1170-olm-0141-minikube-v1101:
     machine: 
       image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
-          name: Kubernetes v1.17.0 & OLM 0.14.1 (Minikube v1.9.2)
+          name: Kubernetes v1.17.0 & OLM 0.14.1 (Minikube v1.10.1)
           environment:
             ENVIRONMENT: ci
             DISTRIBUTION: k8s
-            MINIKUBE_VERSION: v1.9.2
+            MINIKUBE_VERSION: v1.10.1
             KUBERNETES_VERSION: v1.17.0
             OLM_VERSION: 0.14.1
             MEMORY: "6144"
@@ -103,17 +103,17 @@ jobs:
             build/scripts/test/k8s/operator-olm-uninstall
             build/scripts/test/k8s/minikube-stop
             build/scripts/test/k8s/minikube-delete
-  k8s-v1180-olm-0141-minikube-v192:
+  k8s-v1180-olm-0141-minikube-v1101:
     machine: 
       image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
-          name: Kubernetes v1.18.0 & OLM 0.14.1 (Minikube v1.9.2)
+          name: Kubernetes v1.18.0 & OLM 0.14.1 (Minikube v1.10.1)
           environment:
             ENVIRONMENT: ci
             DISTRIBUTION: k8s
-            MINIKUBE_VERSION: v1.9.2
+            MINIKUBE_VERSION: v1.10.1
             KUBERNETES_VERSION: v1.18.0
             OLM_VERSION: 0.14.1
             MEMORY: "6144"
@@ -142,28 +142,28 @@ workflows:
             branches:
               only: 
                 - circle-ci
-      - k8s-v1140-olm-0130-minikube-v192:
+      - k8s-v1140-olm-0130-minikube-v1101:
           requires:
             - operator-and-bundles
           filters:
             branches:
               only: 
                 - circle-ci
-      - k8s-v1163-olm-0141-minikube-v192:
+      - k8s-v1163-olm-0141-minikube-v1101:
           requires:
             - operator-and-bundles
           filters:
             branches:
               only: 
                 - circle-ci
-      - k8s-v1170-olm-0141-minikube-v192:
+      - k8s-v1170-olm-0141-minikube-v1101:
           requires:
             - operator-and-bundles
           filters:
             branches:
               only: 
                 - circle-ci
-      - k8s-v1180-olm-0141-minikube-v192:
+      - k8s-v1180-olm-0141-minikube-v1101:
           requires:
             - operator-and-bundles
           filters:

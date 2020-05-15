@@ -6,7 +6,7 @@ python:
 
 env:
   global:
-    - RELEASE_BRANCH=release-0.0.5
+    - RELEASE_BRANCH=release-0.0.6
 
 if: |
   branch in (master, env(RELEASE_BRANCH)) AND \
@@ -27,11 +27,11 @@ jobs:
       - build/scripts/build/login
       - build/scripts/build/push
     - stage: test-k8s
-      name: k8s_v1.14.0-olm_0.13.0-minikube_v1.9.2
+      name: k8s_v1.14.0-olm_0.13.0-minikube_v1.10.1
       env: 
         - ENVIRONMENT=ci
         - DISTRIBUTION=k8s
-        - MINIKUBE_VERSION=v1.9.2
+        - MINIKUBE_VERSION=v1.10.1
         - KUBERNETES_VERSION=v1.14.0
         - OLM_VERSION=0.13.0
         - MEMORY=6144
@@ -55,11 +55,11 @@ jobs:
       - build/scripts/test/k8s/minikube-stop
       - build/scripts/test/k8s/minikube-delete
     - stage: test-k8s
-      name: k8s_v1.16.3-olm_0.14.1-minikube_v1.9.2
+      name: k8s_v1.16.3-olm_0.14.1-minikube_v1.10.1
       env: 
         - ENVIRONMENT=ci
         - DISTRIBUTION=k8s
-        - MINIKUBE_VERSION=v1.9.2
+        - MINIKUBE_VERSION=v1.10.1
         - KUBERNETES_VERSION=v1.16.3
         - OLM_VERSION=0.14.1
         - MEMORY=6144
@@ -82,11 +82,11 @@ jobs:
       after_script:
       - build/scripts/test/k8s/minikube-stop
       - build/scripts/test/k8s/minikube-delete
-    - name: k8s_v1.17.0-olm_0.14.1-minikube_v1.9.2
+    - name: k8s_v1.17.0-olm_0.14.1-minikube_v1.10.1
       env: 
         - ENVIRONMENT=ci
         - DISTRIBUTION=k8s
-        - MINIKUBE_VERSION=v1.9.2
+        - MINIKUBE_VERSION=v1.10.1
         - KUBERNETES_VERSION=v1.17.0
         - OLM_VERSION=0.14.1
         - MEMORY=6144
@@ -109,11 +109,11 @@ jobs:
       after_script:
       - build/scripts/test/k8s/minikube-stop
       - build/scripts/test/k8s/minikube-delete
-    - name: k8s_v1.18.0-olm_0.14.1-minikube_v1.9.2
+    - name: k8s_v1.18.0-olm_0.14.1-minikube_v1.10.1
       env: 
         - ENVIRONMENT=ci
         - DISTRIBUTION=k8s
-        - MINIKUBE_VERSION=v1.9.2
+        - MINIKUBE_VERSION=v1.10.1
         - KUBERNETES_VERSION=v1.18.0
         - OLM_VERSION=0.14.1
         - MEMORY=6144
