@@ -34,7 +34,7 @@ Operator Lifecycle Manager installation
 .. code-block:: bash
 
     kubectl delete -f guides/k8s/olm/subscription.yaml
-    kubectl delete csv argocd-operator-helm.v0.0.5 -n argocd
+    kubectl delete csv argocd-operator-helm.v0.0.6 -n argocd
     kubectl delete crd argocds.argoproj.io
     kubectl delete -f guides/k8s/olm/catalog-source.yaml
     kubectl delete -f guides/k8s/olm/operator-group.yaml
