@@ -17,7 +17,7 @@ metadata:
             "global": {
               "image": {
                 "repository": "argoproj/argocd",
-                "tag": "v1.5.3",
+                "tag": "v1.5.4",
                 "imagePullPolicy": "IfNotPresent"
               },
               "securityContext": {
