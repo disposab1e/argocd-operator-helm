@@ -1,4 +1,4 @@
-VERSION = 0.0.5
+VERSION = 0.0.6
 NAME = argocd-operator-helm
 
 REGISTRY_REL = quay.io
@@ -80,6 +80,9 @@ bundle-generate-k8s-ci:
 	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/0.0.5/argocd-operator-helm.v0.0.5.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/0.0.5/_argocd-operator-helm.v0.0.5.clusterserviceversion.yaml
+	rm ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/0.0.5/argocd-operator-helm.v0.0.5.clusterserviceversion.yaml
+	mv ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/0.0.5/_argocd-operator-helm.v0.0.5.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/0.0.5/argocd-operator-helm.v0.0.5.clusterserviceversion.yaml
 	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/ci/k8s/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
@@ -106,6 +109,9 @@ bundle-generate-ocp-ci:
 	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.5/argocd-operator-helm.v0.0.5.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.5/_argocd-operator-helm.v0.0.5.clusterserviceversion.yaml
+	rm ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.5/argocd-operator-helm.v0.0.5.clusterserviceversion.yaml
+	mv ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.5/_argocd-operator-helm.v0.0.5.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/0.0.5/argocd-operator-helm.v0.0.5.clusterserviceversion.yaml
 	sed 's/${REGISTRY_DEV}/${REGISTRY_CI}/g' ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/ci/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
@@ -327,6 +333,9 @@ bundle-generate-k8s-release:
 	sed 's/${REGISTRY_DEV}/${REGISTRY_REL}/g' ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY_REL}/g' ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.5/argocd-operator-helm.v0.0.5.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.5/_argocd-operator-helm.v0.0.5.clusterserviceversion.yaml
+	rm ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.5/argocd-operator-helm.v0.0.5.clusterserviceversion.yaml
+	mv ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.5/_argocd-operator-helm.v0.0.5.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/0.0.5/argocd-operator-helm.v0.0.5.clusterserviceversion.yaml
 	sed 's/${REGISTRY_DEV}/${REGISTRY_REL}/g' ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/release/k8s/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
@@ -354,6 +363,9 @@ bundle-generate-ocp-release:
 	sed 's/${REGISTRY_DEV}/${REGISTRY_REL}/g' ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.4/_argocd-operator-helm.v0.0.4.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.4/argocd-operator-helm.v0.0.4.clusterserviceversion.yaml
+	sed 's/${REGISTRY_DEV}/${REGISTRY_REL}/g' ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.5/argocd-operator-helm.v0.0.5.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.5/_argocd-operator-helm.v0.0.5.clusterserviceversion.yaml
+	rm ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.5/argocd-operator-helm.v0.0.5.clusterserviceversion.yaml
+	mv ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.5/_argocd-operator-helm.v0.0.5.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/0.0.5/argocd-operator-helm.v0.0.5.clusterserviceversion.yaml
 	sed 's/${REGISTRY_DEV}/${REGISTRY_REL}/g' ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml > ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	rm ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml
 	mv ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/${VERSION}/_argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml ${BUNDLE_BUILD_BASE_DIR}/release/ocp/manifests/${NAME}/${VERSION}/argocd-operator-helm.v${VERSION}.clusterserviceversion.yaml

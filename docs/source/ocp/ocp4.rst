@@ -214,7 +214,7 @@ Operator Marketplace installation
 .. code-block:: bash
 
     oc delete -f guides/ocp4/olm/subscription.yaml
-    oc delete csv argocd-operator-helm.v0.0.5 -n argocd
+    oc delete csv argocd-operator-helm.v0.0.6 -n argocd
     oc delete crd argocds.argoproj.io
     oc delete -f guides/ocp4/olm/catalog-source.yaml
     oc delete -f guides/ocp4/olm/operator-group.yaml

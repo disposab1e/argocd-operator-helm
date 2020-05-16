@@ -2,19 +2,19 @@
 Argo CD Operator (Helm)
 ***********************
 
-.. image:: https://img.shields.io/badge/argocd-1.5.2-green.svg
-   :target: https://github.com/argoproj/argo-cd/releases/tag/v1.5.2
+.. image:: https://img.shields.io/badge/argocd-1.5.4-green.svg
+   :target: https://github.com/argoproj/argo-cd/releases/tag/v1.5.4
    :alt: Argo CD
-.. image:: https://img.shields.io/badge/latest%20release-0.0.5-yellow.svg
-   :target: https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.5
+.. image:: https://img.shields.io/badge/latest%20release-0.0.6-yellow.svg
+   :target: https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.6
    :alt: Latest Release
 .. image:: https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest
    :target: https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
-.. image:: https://travis-ci.org/disposab1e/argocd-operator-helm.svg?branch=release-0.0.5
+.. image:: https://travis-ci.org/disposab1e/argocd-operator-helm.svg?branch=release-0.0.6
    :target: https://travis-ci.org/disposab1e/argocd-operator-helm
    :alt: Build with Travis CI
-.. image:: https://github.com/disposab1e/argocd-operator-helm/workflows/continuous-integration/badge.svg?branch=release-0.0.5
+.. image:: https://github.com/disposab1e/argocd-operator-helm/workflows/continuous-integration/badge.svg?branch=release-0.0.6
    :target: https://github.com/disposab1e/argocd-operator-helm/actions?query=workflow%3Acontinuous-integration
    :alt: Build with Github Workflows
 
@@ -72,9 +72,9 @@ Tested Platforms
 - Origin Community Distribution 3.11
 - Minishift v1.34.2
 - OpenShift Container Platform ≥ 4.2
-- ContainerReady Containers 1.9.0-4.3.10
+- ContainerReady Containers 1.10.0-4.4.3
 - Google Cloud Platform (Kubernetes ≥ 1.14)
-- Minikube v1.9.2 (Kubernetes ≥ 1.14)
+- Minikube v1.10.1 (Kubernetes ≥ 1.14)
 
 These are the platforms we currently test the operator with. Other platforms should work fine too!
 
@@ -94,14 +94,14 @@ Travis CI               1.11.0         3.11.0     0.13.0                v1.3.2  
 \                       1.16.3                    0.14.1      v1.9.2                18.04
 \                       1.17.0                    0.14.1      v1.9.2                18.04
 \                       1.18.0                    0.14.1      v1.9.2                18.04
-Github Workflows        1.14.0                    0.13.0      v1.9.2                18.04
-\                       1.16.3                    0.14.1      v1.9.2                18.04
-\                       1.17.0                    0.14.1      v1.9.2                18.04
-\                       1.18.0                    0.14.1      v1.9.2                18.04
+Github Workflows        1.14.0                    0.13.0      v1.10.1                18.04
+\                       1.16.3                    0.14.1      v1.10.1                18.04
+\                       1.17.0                    0.14.1      v1.10.1                18.04
+\                       1.18.0                    0.14.1      v1.10.1                18.04
 =================    ============    ===========  =======   ========== =========== ========
 
 Both services have less than 8GB memory available in their Ubuntu VM's, so it's not possible to use Container Ready Containers. 
-Nevertheless with test the operator with the latest version of Container Ready Containers on Mac OS Catalina in a fully automated process.
+Nevertheless we test the operator with the latest version of Container Ready Containers on Mac OS Catalina in a fully automated process.
 
 We love CI/CD so we additionally test with `CircleCI`_. Because build time is limited we only test with CircleCI 
 Ubuntu 16.04 Vm's when we merge a release branch to the circle-ci branch.

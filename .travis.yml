@@ -6,7 +6,7 @@ python:
 
 env:
   global:
-    - RELEASE_BRANCH=release-0.0.5
+    - RELEASE_BRANCH=release-0.0.6
 
 if: |
   branch in (master, env(RELEASE_BRANCH)) AND \
