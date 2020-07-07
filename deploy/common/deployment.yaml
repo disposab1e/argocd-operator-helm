@@ -16,7 +16,7 @@ spec:
       serviceAccountName: argocd-operator-helm
       containers:
         - name: argocd-operator-helm
-          image: imac.fritz.box:5000/disposab1e/argocd-operator-helm:v0.0.6
+          image: imac.fritz.box:5000/disposab1e/argocd-operator-helm:v0.0.7
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE

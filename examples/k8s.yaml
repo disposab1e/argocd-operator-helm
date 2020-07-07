@@ -11,8 +11,8 @@ spec:
 
   global:
     image:
-      repository: argoproj/argocd
-      tag: v1.5.4
+      repository: docker.io/argoproj/argocd@sha256:0a8fa1fee472568c2ec49dc1a71d3af56613b6b62353560a3682abc24492daee
+  #    tag: v1.6.1
       imagePullPolicy: IfNotPresent
     securityContext: {}
     #  runAsUser: 999
@@ -30,7 +30,7 @@ spec:
 
     image:
       repository: # argoproj/argocd
-      tag: # v1.5.4
+  #    tag: # v1.6.1
       imagePullPolicy: # IfNotPresent
 
     ## Argo controller commandline flags
@@ -115,6 +115,8 @@ spec:
     serviceAccount:
       create: true
       name: argocd-application-controller
+      ## Annotations applied to created service account
+      annotations: {}
 
     ## Server metrics controller configuration
     metrics:
@@ -162,7 +164,7 @@ spec:
       #   additionalLabels: {}
 
     ## Enable Admin ClusterRole resources.
-    ## Enable if you would like to grant rights to ArgoCD to deploy to the local kuberentes cluster.
+    ## Enable if you would like to grant rights to ArgoCD to deploy to the local Kubernetes cluster.
     clusterAdminAccess:
       enabled: true
 
@@ -172,8 +174,8 @@ spec:
     name: dex-server
 
     image:
-      repository: quay.io/dexidp/dex
-      tag: v2.22.0
+      repository: quay.io/dexidp/dex@sha256:01e996b4b60edcc5cc042227c6965dd63ba68764c25d86b481b0d65f6e4da308
+  #    tag: v2.22.0
       imagePullPolicy: IfNotPresent
     initImage:
       repository:
@@ -242,8 +244,8 @@ spec:
     name: redis
 
     image:
-      repository: redis
-      tag: 5.0.3
+      repository: redis@sha256:de935cb5eb1d96a5b75c871cd408a728b89d100712ae4599eb994bb7a41a9336
+  #    tag: 5.0.8
       imagePullPolicy: IfNotPresent
 
     containerPort: 6379
@@ -305,6 +307,8 @@ spec:
       enabled: true
       metrics:
         enabled: true
+    image:
+      tag: 5.0.8-alpine
 
   ## Server
   server:
@@ -321,7 +325,7 @@ spec:
 
     image:
       repository: # argoproj/argocd
-      tag: # v1.5.4
+      tag: # v1.6.1
       imagePullPolicy: # IfNotPresent
 
     ## Additional command line arguments to pass to argocd-server
@@ -406,6 +410,8 @@ spec:
       type: ClusterIP
       servicePortHttp: 80
       servicePortHttps: 443
+      servicePortHttpName: http
+      servicePortHttpsName: https
       loadBalancerIP: ""
       loadBalancerSourceRanges: []
 
@@ -426,6 +432,8 @@ spec:
     serviceAccount:
       create: true
       name: argocd-server
+      ## Annotations applied to created service account
+      annotations: {}
 
     ingress:
       enabled: false
@@ -446,6 +454,38 @@ spec:
         # - secretName: argocd-example-tls
         #   hosts:
         #     - argocd.example.com
+      https: false
+    # dedicated ingess for gRPC as documented at
+    # https://argoproj.github.io/argo-cd/operator-manual/ingress/
+    ingressGrpc:
+      enabled: false
+      annotations: {}
+      labels: {}
+
+      ## Argo Ingress.
+      ## Hostnames must be provided if Ingress is enabled.
+      ## Secrets must be manually created in the namespace
+      ##
+      hosts:
+        []
+        # - argocd.example.com
+      paths:
+        - /
+      tls:
+        []
+        # - secretName: argocd-example-tls
+        #   hosts:
+        #     - argocd.example.com
+      https: false
+
+    # Create a OpenShift Route with SSL passthrough for UI and CLI
+    # Consider setting 'hostname' e.g. https://argocd.apps-crc.testing/ using your Default Ingress Controller Domain
+    # Find your domain with: kubectl describe --namespace=openshift-ingress-operator ingresscontroller/default | grep Domain:
+    # If 'hostname' is an empty string "" OpenShift will create a hostname for you.
+    route:
+      enabled: false
+      hostname: ""
+
 
     ## ArgoCD config
     ## reference https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cm.yaml
@@ -552,13 +592,28 @@ spec:
     #     kind: NetworkPolicy
     #     orphanedResources: {}
     #     roles: []
+    #   namespaceResourceWhitelist:
+    #   - group: 'apps'
+    #     kind: Deployment
+    #   - group: 'apps'
+    #     kind: StatefulSet
     #   orphanedResources: {}
     #   roles: []
 
     ## Enable Admin ClusterRole resources.
-    ## Enable if you would like to grant rights to ArgoCD to deploy to the local kuberentes cluster.
+    ## Enable if you would like to grant rights to ArgoCD to deploy to the local Kubernetes cluster.
     clusterAdminAccess:
       enabled: true
+
+    ## Enable BackendConfig custom resource for Google Kubernetes Engine
+    GKEbackendConfig:
+      enabled: false
+      spec: {}
+    #  spec:
+    #    iap:
+    #      enabled: true
+    #      oauthclientCredentials:
+    #        secretName: argocd-secret
 
   ## Repo Server
   repoServer:
@@ -575,7 +630,7 @@ spec:
 
     image:
       repository: # argoproj/argocd
-      tag: # v1.5.4
+      tag: # v1.6.1
       imagePullPolicy: # IfNotPresent
 
     ## Additional command line arguments to pass to argocd-repo-server
@@ -832,12 +887,12 @@ spec:
 
     oAuth:
       # Enable OpenShift OAuth integration globally.
-      enabled: true
+      enabled: false
       # Automatic configuration.
       config:
         image:
           # Image Repository used for automatic configuration tasks.
-          repository: quay.io/openshift/origin-cli
+          repository: quay.io/openshift/origin-cli@sha256:509e052d0f2d531b666b7da9fa49c5558c76ce5d286456f0859c0a49b16d6bf2
           # Image tag.
           tag: latest
           # Image pull policy.

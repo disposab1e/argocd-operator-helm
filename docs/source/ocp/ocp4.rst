@@ -3,9 +3,10 @@ OpenShift 4
 ***********
 
 A installation guide for Argo CD Operator (Helm), Argo CD, 
-Argo CD CLI and the Guestbook Example in OpenShift 4.x (OCP_, CRC_).
+Argo CD CLI and the Guestbook Example in OpenShift 4.x (OCP_, OKD_, CRC_).
 
 .. _OCP: https://www.openshift.com/products/container-platform
+.. _OKD: https://www.okd.io
 .. _CRC: https://github.com/code-ready/crc
 
 .. include:: ../_static/common_clusteradmin.txt
@@ -17,6 +18,9 @@ Prerequisites
 .. image:: https://img.shields.io/badge/ocp-≥%204.2-red.svg
    :target: https://www.openshift.com/products/container-platform
    :alt: OpenShift Container Platform
+.. image:: https://img.shields.io/badge/okd-≥%204.4.0--beta5-red.svg
+   :target: https://www.okd.io
+   :alt: OKD - The Community Distribution of Kubernetes
 .. image:: https://img.shields.io/badge/crc-≥%201.4.0-red.svg
    :target: https://github.com/code-ready/crc
    :alt: CodeReady Containers
@@ -214,7 +218,7 @@ Operator Marketplace installation
 .. code-block:: bash
 
     oc delete -f guides/ocp4/olm/subscription.yaml
-    oc delete csv argocd-operator-helm.v0.0.6 -n argocd
+    oc delete csv argocd-operator-helm.v0.0.7 -n argocd
     oc delete crd argocds.argoproj.io
     oc delete -f guides/ocp4/olm/catalog-source.yaml
     oc delete -f guides/ocp4/olm/operator-group.yaml

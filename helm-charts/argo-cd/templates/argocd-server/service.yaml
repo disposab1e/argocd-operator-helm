@@ -21,11 +21,11 @@ metadata:
 spec:
   type: {{ .Values.server.service.type }}
   ports:
-  - name: http
+  - name: {{ .Values.server.service.servicePortHttpName }}
     protocol: TCP
     port: {{ .Values.server.service.servicePortHttp }}
     targetPort: {{ .Values.server.name }}
-  - name: https
+  - name: {{ .Values.server.service.servicePortHttpsName }}
     protocol: TCP
     port: {{ .Values.server.service.servicePortHttps }}
     targetPort: {{ .Values.server.name }}
@@ -37,7 +37,7 @@ spec:
   loadBalancerIP: {{ .Values.server.service.loadBalancerIP | quote }}
 {{- end }}
 {{- if .Values.server.service.loadBalancerSourceRanges }}
-  loadBalancerSourceranges:
+  loadBalancerSourceRanges:
 {{ toYaml .Values.server.service.loadBalancerSourceRanges | indent 4 }}
 {{- end }}
 {{- end -}}

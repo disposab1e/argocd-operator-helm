@@ -62,8 +62,8 @@ Helm v3 has removed the `install-crds` hook so CRDs are now populated by files i
 | Parameter | Description | Default |
 |-----|------|---------|
 | global.image.imagePullPolicy | If defined, a imagePullPolicy applied to all ArgoCD deployments. | `"IfNotPresent"` |
-| global.image.repository | If defined, a repository applied to all ArgoCD deployments. | `"argoproj/argocd"` |
-| global.image.tag | If defined, a tag applied to all ArgoCD deployments. | `"v1.5.2"` |
+| global.image.repository | If defined, a repository applied to all ArgoCD deployments. | `"docker.io/argoproj/argocd@sha256:0a8fa1fee472568c2ec49dc1a71d3af56613b6b62353560a3682abc24492daee"` |
+| global.image.tag | If defined, a version annotation applied to all ArgoCD deployments. | `"v1.6.1"` |
 | global.securityContext | Toggle and define securityContext | See [values.yaml](values.yaml) |
 | global.imagePullSecrets | If defined, uses a Secret to pull an image from a private Docker registry or repository. | `[]` |
 | global.hostAliases | Mapping between IP and hostnames that will be injected as entries in the pod's hosts files | `[]` |
@@ -71,7 +71,7 @@ Helm v3 has removed the `install-crds` hook so CRDs are now populated by files i
 | installCRDs | Install CRDs if you are using Helm2. | `true` |
 | configs.knownHosts.data.ssh_known_hosts | Known Hosts | See [values.yaml](values.yaml) |
 | configs.secret.annotations | Annotations for argocd-secret | `{}` |
-| configs.secret.argocdServerAdminPassword | Admin password | `null` |
+| configs.secret.argocdServerAdminPassword | Bcrypt hashed admin password | `null` |
 | configs.secret.argocdServerAdminPasswordMtime | Admin password modification time | `date "2006-01-02T15:04:05Z" now` if configs.secret.argocdServerAdminPassword is set |
 | configs.secret.bitbucketSecret | BitBucket incoming webhook secret | `""` |
 | configs.secret.createSecret | Create the argocd-secret. | `true` |
@@ -93,7 +93,7 @@ Helm v3 has removed the `install-crds` hook so CRDs are now populated by files i
 | controller.env | Environment variables for the controller. | `[]` |
 | controller.image.repository | Repository to use for the controller | `global.image.repository` |
 | controller.image.imagePullPolicy | Image pull policy for the controller | `global.image.imagePullPolicy` |
-| controller.image.tag | Tag to use for the controller | `global.image.tag` |
+| controller.image.tag | Tag to use for the controller version annotation | `global.image.tag` |
 | controller.livenessProbe.failureThreshold | [Kubernetes probe configuration](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) | `3` |
 | controller.livenessProbe.initialDelaySeconds | [Kubernetes probe configuration](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) | `10` |
 | controller.livenessProbe.periodSeconds | [Kubernetes probe configuration](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) | `10` |
@@ -120,6 +120,7 @@ Helm v3 has removed the `install-crds` hook so CRDs are now populated by files i
 | controller.service.annotations | Controller service annotations. | `{}` |
 | controller.service.labels | Controller service labels. | `{}` |
 | controller.service.port | Controller service port. | `8082` |
+| controler.serviceAccount.annotations | Controller service account annotations | `{}` |
 | controller.serviceAccount.create | Create a service account for the controller | `true` |
 | controller.serviceAccount.name | Service account name. | `"argocd-application-controller"` |
 | controller.tolerations | [Tolerations for use with node taints](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) | `[]` |
@@ -141,7 +142,7 @@ Helm v3 has removed the `install-crds` hook so CRDs are now populated by files i
 | repoServer.env | Environment variables for the repo server. | `[]` |
 | repoServer.image.repository | Repository to use for the repo server | `global.image.repository` |
 | repoServer.image.imagePullPolicy | Image pull policy for the repo server | `global.image.imagePullPolicy` |
-| repoServer.image.tag | Tag to use for the repo server | `global.image.tag` |
+| repoServer.image.tag | Tag to use for the repo server version annotation | `global.image.tag` |
 | repoServer.livenessProbe.failureThreshold | [Kubernetes probe configuration](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) | `3` |
 | repoServer.livenessProbe.initialDelaySeconds | [Kubernetes probe configuration](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) | `10` |
 | repoServer.livenessProbe.periodSeconds | [Kubernetes probe configuration](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) | `10` |
@@ -169,6 +170,9 @@ Helm v3 has removed the `install-crds` hook so CRDs are now populated by files i
 | repoServer.service.annotations | Repo server service annotations. | `{}` |
 | repoServer.service.labels | Repo server service labels. | `{}` |
 | repoServer.service.port | Repo server service port. | `8081` |
+| repoServer.serviceAccount.annotations | Repo server service account annotations | `{}` |
+| repoServer.serviceAccount.create | Create repo server service account | `false` |
+| repoServer.serviceAccount.name | Repo server service account name | `"argocd-repo-server"` |
 | repoServer.tolerations | [Tolerations for use with node taints](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) | `[]` |
 | repoServer.volumeMounts | Repo server volume mounts | `[]` |
 | repoServer.volumes | Repo server volumes | `[]` |
@@ -183,6 +187,8 @@ Helm v3 has removed the `install-crds` hook so CRDs are now populated by files i
 | server.autoscaling.maxReplicas | Maximum number of replicas for the server [HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) | `5` |
 | server.autoscaling.targetCPUUtilizationPercentage | Average CPU utilization percentage for the server [HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) | `50` |
 | server.autoscaling.targetMemoryUtilizationPercentage | Average memory utilization percentage for the server [HPA](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/) | `50` |
+| server.GKEbackendConfig.enabled | Enable BackendConfig custom resource for Google Kubernetes Engine. | `false` |
+| server.GKEbackendConfig.spec | [BackendConfigSpec](https://cloud.google.com/kubernetes-engine/docs/concepts/backendconfig#backendconfigspec_v1beta1_cloudgooglecom) | `{}` |
 | server.certificate.additionalHosts | Certificate manager additional hosts | `[]` |
 | server.certificate.domain | Certificate manager domain | `"argocd.example.com"` |
 | server.certificate.enabled | Enables a certificate manager certificate. | `false` |
@@ -194,12 +200,20 @@ Helm v3 has removed the `install-crds` hook so CRDs are now populated by files i
 | server.env | Environment variables for the server. | `[]` |
 | server.image.repository | Repository to use for the server | `global.image.repository` |
 | server.image.imagePullPolicy | Image pull policy for the server | `global.image.imagePullPolicy` |
-| server.image.tag | Tag to use for the server | `global.image.tag` |
+| server.image.tag | Tag to use for the server  version annotation | `global.image.tag` |
 | server.ingress.annotations | Additional ingress annotations | `{}` |
 | server.ingress.enabled | Enable an ingress resource for the server | `false` |
 | server.ingress.hosts | List of ingress hosts | `[]` |
 | server.ingress.labels | Additional ingress labels. | `{}` |
 | server.ingress.tls | Ingress TLS configuration. | `[]` |
+| server.ingress.https | Uses `server.service.servicePortHttps` instead `server.service.servicePortHttp` | `false` |
+| server.ingressGrpc.annotations | Additional ingress annotations for dedicated [gRPC-ingress] | `{}` |
+| server.ingressGrpc.enabled | Enable an ingress resource for the server for dedicated [gRPC-ingress] | `false` |
+| server.ingressGrpc.hosts | List of ingress hosts for dedicated [gRPC-ingress] | `[]` |
+| server.ingressGrpc.labels | Additional ingress labels for dedicated [gRPC-ingress] | `{}` |
+| server.ingressGrpc.tls | Ingress TLS configuration for dedicated [gRPC-ingress] | `[]` |
+| server.route.enabled | Enable a OpenShift route for the server | `false` |
+| server.route.hostname | Hostname of OpenShift route | `""` |
 | server.livenessProbe.failureThreshold | [Kubernetes probe configuration](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) | `3` |
 | server.livenessProbe.initialDelaySeconds | [Kubernetes probe configuration](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) | `10` |
 | server.livenessProbe.periodSeconds | [Kubernetes probe configuration](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes) | `10` |
@@ -229,8 +243,11 @@ Helm v3 has removed the `install-crds` hook so CRDs are now populated by files i
 | server.service.labels | Server service labels | `{}` |
 | server.service.servicePortHttp | Server service http port | `80` |
 | server.service.servicePortHttps | Server service https port | `443` |
+| server.service.servicePortHttpName | Server service http port name, can be used to route traffic via istio | `http` |
+| server.service.servicePortHttpsName | Server service https port name, can be used to route traffic via istio | `https` |
 | server.service.loadBalancerSourceRanges | Source IP ranges to allow access to service from. | `[]` |
 | server.service.type | Server service type | `"ClusterIP"` |
+| server.serviceAccount.annotations | Server service account annotations | `{}` |
 | server.serviceAccount.create | Create server service account | `true` |
 | server.serviceAccount.name | Server service account name | `"argocd-server"` |
 | server.tolerations | [Tolerations for use with node taints](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/) | `[]` |
@@ -246,8 +263,8 @@ Helm v3 has removed the `install-crds` hook so CRDs are now populated by files i
 | dex.containerPortHttp | HTTP container port | `5556` |
 | dex.enabled | Enable dex | `true` |
 | dex.image.imagePullPolicy | Dex imagePullPolicy | `"IfNotPresent"` |
-| dex.image.repository | Dex image repository | `"quay.io/dexidp/dex"` |
-| dex.image.tag | Dex image tag | `"v2.22.0"` |
+| dex.image.repository | Dex image repository | `"quay.io/dexidp/dex@sha256:01e996b4b60edcc5cc042227c6965dd63ba68764c25d86b481b0d65f6e4da308"` |
+| dex.image.tag | Dex  version annotation | `"v2.22.0"` |
 | dex.initImage.repository | Argo CD init image repository. | `global.image.repository` |
 | dex.initImage.imagePullPolicy | Argo CD init image imagePullPolicy | `global.image.imagePullPolicy` |
 | dex.initImage.tag | Argo CD init image tag | `global.image.tag` |
@@ -280,8 +297,8 @@ through `xxx.extraArgs`
 | redis.containerPort | Redis container port | `6379` |
 | redis.enabled | Enable redis | `true` |
 | redis.image.imagePullPolicy | Redis imagePullPolicy | `"IfNotPresent"` |
-| redis.image.repository | Redis repository | `"redis"` |
-| redis.image.tag | Redis tag | `"5.0.3"` |
+| redis.image.repository | Redis repository | `"docker.io/redis@sha256:de935cb5eb1d96a5b75c871cd408a728b89d100712ae4599eb994bb7a41a9336"` |
+| redis.image.tag | Redis version annotation | `"5.0.8"` |
 | redis.name | Redis name | `"redis"` |
 | redis.env | Environment variables for the Redis server. | `[]` |
 | redis.nodeSelector | [Node selector](https://kubernetes.io/docs/user-guide/node-selection/) | `{}` |
@@ -300,6 +317,7 @@ through `xxx.extraArgs`
 | redis-ha.redis.config.save | Will save the DB if both the given number of seconds and the given number of write operations against the DB occurred. `""`  is disabled | `""` |
 | redis-ha.haproxy.enabled | Enabled HAProxy LoadBalancing/Proxy | `true` |
 | redis-ha.haproxy.metrics.enabled | HAProxy enable prometheus metric scraping | `true` |
+| redis-ha.image.tag | Redis tag | `"5.0.8-alpine"` |
 
 ## OpenShift Integration
 
@@ -310,8 +328,7 @@ through `xxx.extraArgs`
 | openshift.route.host | Define hostname for Route. Empty for automatic generation. | `""` |
 | openshift.route.annotations | Route annotations. | `{}` |
 | openshift.oAuth.enabled | Enable OpenShift OAuth integration globally. | `true` |
-| openshift.oAuth.config.image.repository | Image Repository used for automatic configuration tasks. | `quay.io/openshift/origin-cli` |
-| openshift.oAuth.config.image.tag |  Image tag. | `latest` |
+| openshift.oAuth.config.image.repository | Image Repository used for automatic configuration tasks. | `quay.io/openshift/origin-cli@sha256:509e052d0f2d531b666b7da9fa49c5558c76ce5d286456f0859c0a49b16d6bf2` |
 | openshift.oAuth.config.image.imagePullPolicy | Image pull policy. | `IfNotPresent` |
 | openshift.oAuth.config.base.url | ArgoCD URI in format: `"https://<argocd_host>"` or leave this default for automatic discovery (recommended). | `openshiftOAuthConfigBaseUrl` |
 | openshift.oAuth.config.redirect.url | ArgoCD redirect URI in format: `"https://<argocd_host>/api/dex/callback"` or leave this default for automatic discovery (recommended). | `openshiftOAuthConfigRedirectURI` |
