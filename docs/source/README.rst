@@ -2,19 +2,19 @@
 Argo CD Operator (Helm)
 ***********************
 
-.. image:: https://img.shields.io/badge/argocd-1.5.4-green.svg
-   :target: https://github.com/argoproj/argo-cd/releases/tag/v1.5.4
+.. image:: https://img.shields.io/badge/argocd-1.6.1-green.svg
+   :target: https://github.com/argoproj/argo-cd/releases/tag/v1.6.1
    :alt: Argo CD
-.. image:: https://img.shields.io/badge/latest%20release-0.0.6-yellow.svg
-   :target: https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.6
+.. image:: https://img.shields.io/badge/latest%20release-0.0.7-yellow.svg
+   :target: https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.7
    :alt: Latest Release
 .. image:: https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest
    :target: https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
-.. image:: https://travis-ci.org/disposab1e/argocd-operator-helm.svg?branch=release-0.0.6
+.. image:: https://travis-ci.org/disposab1e/argocd-operator-helm.svg?branch=release-0.0.7
    :target: https://travis-ci.org/disposab1e/argocd-operator-helm
    :alt: Build with Travis CI
-.. image:: https://github.com/disposab1e/argocd-operator-helm/workflows/continuous-integration/badge.svg?branch=release-0.0.6
+.. image:: https://github.com/disposab1e/argocd-operator-helm/workflows/continuous-integration/badge.svg?branch=release-0.0.7
    :target: https://github.com/disposab1e/argocd-operator-helm/actions?query=workflow%3Acontinuous-integration
    :alt: Build with Github Workflows
 

@@ -27,6 +27,7 @@ jobs:
             ENVIRONMENT: ci
             DISTRIBUTION: k8s
             MINIKUBE_VERSION: v1.10.1
+            MINUKUBE_DRIVER: docker
             KUBERNETES_VERSION: v1.14.0
             OLM_VERSION: 0.13.0
             MEMORY: "6144"
@@ -56,6 +57,7 @@ jobs:
             ENVIRONMENT: ci
             DISTRIBUTION: k8s
             MINIKUBE_VERSION: v1.10.1
+            MINUKUBE_DRIVER: docker
             KUBERNETES_VERSION: v1.16.3
             OLM_VERSION: 0.14.1
             MEMORY: "6144"
@@ -85,6 +87,7 @@ jobs:
             ENVIRONMENT: ci
             DISTRIBUTION: k8s
             MINIKUBE_VERSION: v1.10.1
+            MINUKUBE_DRIVER: docker
             KUBERNETES_VERSION: v1.17.0
             OLM_VERSION: 0.14.1
             MEMORY: "6144"
@@ -114,6 +117,7 @@ jobs:
             ENVIRONMENT: ci
             DISTRIBUTION: k8s
             MINIKUBE_VERSION: v1.10.1
+            MINUKUBE_DRIVER: docker
             KUBERNETES_VERSION: v1.18.0
             OLM_VERSION: 0.14.1
             MEMORY: "6144"

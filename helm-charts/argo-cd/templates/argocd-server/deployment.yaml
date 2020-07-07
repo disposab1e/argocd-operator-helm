@@ -56,7 +56,7 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        image: {{ .Values.openshift.oAuth.config.image.repository }}:{{ .Values.openshift.oAuth.config.image.tag }}
+        image: {{ .Values.openshift.oAuth.config.image.repository }}
         imagePullPolicy: {{ .Values.openshift.oAuth.config.image.imagePullPolicy }}
         command: 
         - sh
@@ -66,7 +66,7 @@ spec:
       {{- end }}
       containers:
       - name: {{ .Values.server.name }}
-        image: {{ default .Values.global.image.repository .Values.server.image.repository }}:{{ default .Values.global.image.tag .Values.server.image.tag }}
+        image: {{ default .Values.global.image.repository .Values.server.image.repository }}
         imagePullPolicy: {{ default .Values.global.image.imagePullPolicy .Values.server.image.imagePullPolicy }}
         command:
         - argocd-server

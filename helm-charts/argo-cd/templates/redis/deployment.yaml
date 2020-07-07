@@ -51,7 +51,7 @@ spec:
         - ""
         - --appendonly
         - "no"
-        image: {{ .Values.redis.image.repository }}:{{ .Values.redis.image.tag }}
+        image: {{ .Values.redis.image.repository }}
         imagePullPolicy: {{ .Values.redis.image.imagePullPolicy}}
         {{- if .Values.redis.containerSecurityContext }}
         securityContext: {{- toYaml .Values.redis.containerSecurityContext | nindent 10 }}

@@ -7,6 +7,8 @@ export ENVIRONMENT=dev
 # Distribution: k8s, ocp3, ocp4
 export DISTRIBUTION=k8s
 
-export MINIKUBE_VERSION=v1.10.1
+export MINIKUBE_VERSION=v1.11.0
+
+export MINIKUBE_DRIVER=hyperkit
 
 export MEMORY=16144

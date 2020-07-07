@@ -9,5 +9,5 @@ export MINIKUBE_WANTUPDATENOTIFICATION=false
 echo "======================================================"
 echo "Starting minikube ${MINIKUBE_VERSION} with kubernetes ${KUBERNETES_VERSION}"
 echo "======================================================"
-minikube start --memory=${MEMORY} --vm-driver=docker --kubernetes-version="${KUBERNETES_VERSION}" -p argocd --insecure-registry "imac.fritz.box:5000"
+minikube start --memory=${MEMORY} --vm-driver=${MINIKUBE_DRIVER} --kubernetes-version="${KUBERNETES_VERSION}" -p argocd --insecure-registry "imac.fritz.box:5000"
 kubectl config use-context argocd

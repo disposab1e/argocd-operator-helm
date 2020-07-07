@@ -1,8 +1,8 @@
-[![Argo CD](https://img.shields.io/badge/argocd-1.5.4-green.svg)](https://github.com/argoproj/argo-cd/releases/tag/v1.5.4)
-[![Latest Release](https://img.shields.io/badge/latest%20release-0.0.6-yellow.svg)](https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.6)
+[![Argo CD](https://img.shields.io/badge/argocd-1.6.1-green.svg)](https://github.com/argoproj/argo-cd/releases/tag/v1.6.1)
+[![Latest Release](https://img.shields.io/badge/latest%20release-0.0.7-yellow.svg)](https://github.com/disposab1e/argocd-operator-helm/releases/tag/0.0.7)
 [![Documentation Status](https://readthedocs.org/projects/argocd-operator-helm/badge/?version=latest)](https://argocd-operator-helm.readthedocs.io/en/latest/?badge=latest)
-[![Travis-CI](https://travis-ci.org/disposab1e/argocd-operator-helm.svg?branch=release-0.0.6)](https://travis-ci.org/disposab1e/argocd-operator-helm)
-[![Github Workflows](https://github.com/disposab1e/argocd-operator-helm/workflows/continuous-integration/badge.svg?branch=release-0.0.6)](https://github.com/disposab1e/argocd-operator-helm/actions?query=workflow%3Acontinuous-integration)
+[![Travis-CI](https://travis-ci.org/disposab1e/argocd-operator-helm.svg?branch=release-0.0.7)](https://travis-ci.org/disposab1e/argocd-operator-helm)
+[![Github Workflows](https://github.com/disposab1e/argocd-operator-helm/workflows/continuous-integration/badge.svg?branch=release-0.0.7)](https://github.com/disposab1e/argocd-operator-helm/actions?query=workflow%3Acontinuous-integration)
 
 # Argo CD Operator (Helm)
 
@@ -17,7 +17,7 @@ This **community maintained** Argo CD Operator is based on the **community maint
 * Easy configuration and installation
 * OpenShift OAuth integration on all supported OpenShift platforms
 
-Shares all [configuration values](https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.6/helm-charts/argo-cd/README.md) from the Argo CD Helm Chart.
+Shares all [configuration values](https://github.com/disposab1e/argocd-operator-helm/blob/release-0.0.7/helm-charts/argo-cd/README.md) from the Argo CD Helm Chart.
 
 ## Get started
 
