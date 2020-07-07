@@ -21,7 +21,7 @@ Shares all [configuration values](https://github.com/disposab1e/argocd-operator-
 
 ## Get started
 
-Quickstart with [OperatorHub's](https://argocd-operator-helm.readthedocs.io/en/latest/operatorhub.html) or try our comprehensive guides to install this opertor and [Argo CD](https://argoproj.github.io/argo-cd/) in [OpenShift 3](https://argocd-operator-helm.readthedocs.io/en/latest/ocp/ocp3.html), [OpenShift 4](https://argocd-operator-helm.readthedocs.io/en/latest/ocp/ocp4.html), [Minishift](https://argocd-operator-helm.readthedocs.io/en/latest/ocp/ocp3.html), [ContainerReady Containers](https://argocd-operator-helm.readthedocs.io/en/latest/ocp/ocp4.html), [Google Cloud Platform](https://argocd-operator-helm.readthedocs.io/en/latest/k8s/gcp.html) or [Minikube](https://argocd-operator-helm.readthedocs.io/en/latest/k8s/minikube.html).
+Quickstart with [OperatorHub's](https://argocd-operator-helm.readthedocs.io/en/latest/operatorhub.html) or try our comprehensive guides to install this opertor and [Argo CD](https://argoproj.github.io/argo-cd/) in [OpenShift 3](https://argocd-operator-helm.readthedocs.io/en/latest/ocp/ocp3.html), [OpenShift 4](https://argocd-operator-helm.readthedocs.io/en/latest/ocp/ocp4.html), [OKD 4](https://argocd-operator-helm.readthedocs.io/en/latest/ocp/ocp4.html), [Minishift](https://argocd-operator-helm.readthedocs.io/en/latest/ocp/ocp3.html), [ContainerReady Containers](https://argocd-operator-helm.readthedocs.io/en/latest/ocp/ocp4.html), [Google Cloud Platform](https://argocd-operator-helm.readthedocs.io/en/latest/k8s/gcp.html) or [Minikube](https://argocd-operator-helm.readthedocs.io/en/latest/k8s/minikube.html).
 
 ## Tested Platforms
 
@@ -29,6 +29,7 @@ Quickstart with [OperatorHub's](https://argocd-operator-helm.readthedocs.io/en/l
 * Origin Community Distribution 3.11
 * Minishift v1.34.2
 * OpenShift Container Platform ≥ 4.2
+* OKD - The Community Distribution of Kubernetes ≥ 4.4.0 beta5
 * ContainerReady Containers 1.10.0-4.4.3
 * Google Cloud Platform (Kubernetes ≥ 1.14)
 * Minikube v1.10.1 (Kubernetes ≥ 1.14)

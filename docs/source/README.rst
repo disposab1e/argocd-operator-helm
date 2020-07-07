@@ -52,7 +52,7 @@ Get started
 ===========
 
 Quickstart with `OperatorHub's`_ or try our comprehensive guides to install this 
-operator and `Argo CD`_ in `OpenShift 3`_, `OpenShift 4`_, `Minishift`_, `ContainerReady Containers`_, `Google Cloud Platform`_ or `Minikube`_.
+operator and `Argo CD`_ in `OpenShift 3`_, `OpenShift 4`_, `OKD 4`_, `Minishift`_, `ContainerReady Containers`_, `Google Cloud Platform`_ or `Minikube`_.
 
 .. _Argo CD Helm Chart: https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd
 .. _Argo CD Operator (Helm): https://github.com/disposab1e/argocd-operator-helm
@@ -60,6 +60,7 @@ operator and `Argo CD`_ in `OpenShift 3`_, `OpenShift 4`_, `Minishift`_, `Contai
 .. _OperatorHub's: operatorhub.html
 .. _OpenShift 3: ocp/ocp3.html
 .. _OpenShift 4: ocp/ocp4.html
+.. _OKD 4: ocp/ocp4.html
 .. _Minishift: ocp/ocp3.html
 .. _ContainerReady Containers: ocp/ocp4.html
 .. _Google Cloud Platform: k8s/gcp.html
@@ -72,6 +73,7 @@ Tested Platforms
 - Origin Community Distribution 3.11
 - Minishift v1.34.2
 - OpenShift Container Platform ≥ 4.2
+- OKD - The Community Distribution of Kubernetes ≥ 4.4.0 beta5
 - ContainerReady Containers 1.10.0-4.4.3
 - Google Cloud Platform (Kubernetes ≥ 1.14)
 - Minikube v1.10.1 (Kubernetes ≥ 1.14)
