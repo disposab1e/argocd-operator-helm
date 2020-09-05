@@ -952,7 +952,7 @@ openshift:
         # Members of the Administrators group. These users must exist!
         admins:
           - developer
-          - kubedadmin
+          - kubeadmin
           - admin
         # Members of the Developers group. These users must exist!  
         developers: []
