@@ -4,7 +4,7 @@
 [![Travis-CI](https://travis-ci.org/disposab1e/argocd-operator-helm.svg?branch=release-0.0.7)](https://travis-ci.org/disposab1e/argocd-operator-helm)
 [![Github Workflows](https://github.com/disposab1e/argocd-operator-helm/workflows/continuous-integration/badge.svg?branch=release-0.0.7)](https://github.com/disposab1e/argocd-operator-helm/actions?query=workflow%3Acontinuous-integration)
 
-# Argo CD Operator (Helm)
+# [DEPRECATED] Argo CD Operator (Helm)
 
 This **community maintained** Argo CD Operator is based on the **community maintained** [Argo CD Helm Chart](https://github.com/argoproj/argo-helm/tree/master/charts/argo-cd) and currently installs the non-HA version of Argo CD in OpenShift Container Platform and Kubernetes.
 
