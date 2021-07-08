@@ -895,7 +895,7 @@ openshift:
     config:
       image:
         # Image Repository used for automatic configuration tasks.
-        repository: quay.io/openshift/origin-cli@sha256:e7fd8fa8b67db43b667af0eeb33f076b8eb4a0cfbd5be146e0f3900689ba432a
+        repository: quay.io/openshift/origin-cli@sha256:46cce08b8cd43de074118071e3889b5522ead783e8ce73b31bd2bc118e954b0a
         # Image pull policy.
         imagePullPolicy: IfNotPresent
       base:
